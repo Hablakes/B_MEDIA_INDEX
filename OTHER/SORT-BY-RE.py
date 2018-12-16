@@ -6,8 +6,8 @@ media = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-IND
 
 def get_media_years():
     for info in media:
-        media_year = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(info))
-        print(media_year[0])
+        media_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(info))
+        print(media_info[0])
 
 
 get_media_years()
