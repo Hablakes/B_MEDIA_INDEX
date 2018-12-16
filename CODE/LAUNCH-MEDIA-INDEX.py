@@ -19,9 +19,6 @@ tv_show_years_dict = {}
 
 media_index = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
 
-found = []
-found = sorted(found)
-
 
 def movie_search(lower_title_search, movies_dir):
     for movie_result in movies_dir:
@@ -130,6 +127,7 @@ def tv2_listdir():
 
 
 def create_media_index_csv():
+    found = []
     for movie in movie_listdir():
         movie_title = movie.strip()[0:-7]
         movie_year = movie.strip()[-5:-1]
@@ -145,6 +143,7 @@ def create_media_index_csv():
         tv2_year = tv2.strip()[-5:-1]
         found.append(["TV", tv2_title, tv2_year])
 
+    found = sorted(found)
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
         for row in found:
@@ -232,4 +231,3 @@ def launch_media_index():
 
 while True:
     launch_media_index()
-
