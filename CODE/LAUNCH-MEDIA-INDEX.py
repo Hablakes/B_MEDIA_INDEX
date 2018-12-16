@@ -1,15 +1,12 @@
 import csv
-import itertools
 import os
 
 import matplotlib.pylab as plt
 
-movie_p_dir = os.listdir(r"/home/bx/Videos/CHASE/MOVIES/")
-tv_p_dir = os.listdir(r"/home/bx/Videos/CHASE/TV/")
 
-movies_dir = os.listdir(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/")
-tv_dir = os.listdir(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv/TV/")
-tv2_dir = os.listdir(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv-2/TV-2/")
+movies_dir = os.listdir(r"/home/bx/Videos/CHASE/MOVIES/")
+tv_dir = os.listdir(r"/home/bx/Videos/CHASE/TV/")
+#tv2_dir = os.listdir(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv-2/TV-2/")
 
 movie_years_range = range(1900, 2100, 1)
 tv_show_years_range = range(1900, 2100, 1)
@@ -36,12 +33,12 @@ def tv_search(lower_title_search, tv_dir):
             continue
 
 
-def tv2_search(lower_title_search, tv2_dir):
-    for tv_result in tv2_dir:
-        if lower_title_search in tv_result.lower():
-            print(tv_result)
-        else:
-            continue
+#def tv2_search(lower_title_search, tv2_dir):
+#    for tv_result in tv2_dir:
+#        if lower_title_search in tv_result.lower():
+#            print(tv_result)
+#        else:
+#            continue
 
 
 def get_title_ascending():
@@ -89,7 +86,7 @@ def run_base():
     print("TV")
     print()
     tv_search(lower_title_search, sorted(tv_dir))
-    tv2_search(lower_title_search, sorted(tv2_dir))
+#    tv2_search(lower_title_search, sorted(tv2_dir))
 
 
 def run_sort():
@@ -115,15 +112,15 @@ def run_sort():
 
 
 def movie_listdir():
-    return os.listdir(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/")
+    return os.listdir(r"/home/bx/Videos/CHASE/MOVIES/")
 
 
 def tv_listdir():
-    return os.listdir(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv/TV/")
+    return os.listdir(r"/home/bx/Videos/CHASE/TV/")
 
 
-def tv2_listdir():
-    return os.listdir(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv-2/TV-2/")
+#def tv2_listdir():
+#    return os.listdir(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv-2/TV-2/")
 
 
 def create_media_index_csv():
@@ -138,10 +135,10 @@ def create_media_index_csv():
         tv_year = tv.strip()[-5:-1]
         found.append(["TV", tv_title, tv_year])
 
-    for tv2 in tv2_listdir():
-        tv2_title = tv2.strip()[0:-7]
-        tv2_year = tv2.strip()[-5:-1]
-        found.append(["TV", tv2_title, tv2_year])
+#    for tv2 in tv2_listdir():
+#        tv2_title = tv2.strip()[0:-7]
+#        tv2_year = tv2.strip()[-5:-1]
+#        found.append(["TV", tv2_title, tv2_year])
 
     found = sorted(found)
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv", "w", newline="") as f:
@@ -151,7 +148,7 @@ def create_media_index_csv():
 
 
 def get_movie_years_for_dict():
-    for media_movie in movie_p_dir:
+    for media_movie in movies_dir:
         media_movie_year = int(media_movie.strip()[-5:-1])
         if media_movie_year in movie_years_range:
             if media_movie_year not in movie_years_dict:
@@ -160,7 +157,7 @@ def get_movie_years_for_dict():
     media_movie_year_totals = {}
     for movie_year_values, value in sorted(movie_years_dict.items()):
         media_movie_year_totals[movie_year_values] = len(value)
-    # print(media_movie_year_totals)
+#   print(media_movie_year_totals)
     movie_data = sorted(media_movie_year_totals.items())
 
     x, y = zip(*movie_data)
@@ -171,7 +168,7 @@ def get_movie_years_for_dict():
 
 
 def get_tv_years_for_dict():
-    for media_tv in tv_p_dir:
+    for media_tv in tv_dir:
         media_tv_year = int(media_tv.strip()[-5:-1])
         if media_tv_year in tv_show_years_range:
             if media_tv_year not in tv_show_years_dict:
@@ -180,6 +177,7 @@ def get_tv_years_for_dict():
     media_tv_year_totals = {}
     for tv_year_values, value in sorted(tv_show_years_dict.items()):
         media_tv_year_totals[tv_year_values] = len(value)
+#   print(media_tv_year_totals)
     tv_data = sorted(media_tv_year_totals.items())
 
     x, y = zip(*tv_data)
