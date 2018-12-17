@@ -86,9 +86,7 @@ def run_base():
     print("TV")
     print()
     tv_search(lower_title_search, sorted(tv_dir))
-
-
-#    tv2_search(lower_title_search, sorted(tv2_dir))
+    print()
 
 
 def run_sort():
@@ -238,14 +236,20 @@ def get_movie_years_for_dict():
     movie_data = sorted(media_movie_year_totals.items())
     for movie_year_query in movie_data:
         if movie_totals_query_action in movie_year_query:
+            print()
+            print("# OF MOVIES IN THIS YEAR:")
             print(movie_year_query[1])
+            print()
 
 
 def get_movie_titles_amount():
     for counted_movie_title in media_index:
         if movie_string in counted_movie_title:
             movie_amounts_list.append(counted_movie_title)
+    print()
+    print("TOTAL AMOUNT OF MOVIES:")
     print(len(movie_amounts_list))
+    print()
 
 
 def get_tv_years_for_dict():
@@ -266,14 +270,20 @@ def get_tv_years_for_dict():
     tv_data = sorted(media_tv_year_totals.items())
     for tv_year_query in tv_data:
         if tv_totals_query_action in tv_year_query:
+            print()
+            print("# OF TV SHOWS IN THIS YEAR:")
             print(tv_year_query[1])
+            print()
 
 
 def get_tv_titles_amount():
     for counted_tv_title in media_index:
         if tv_string in counted_tv_title:
             tv_amounts_list.append(counted_tv_title)
+    print()
+    print("TOTAL AMOUNT OF TV SHOWS:")
     print(len(tv_amounts_list))
+    print()
 
 
 def launch_media_index():
