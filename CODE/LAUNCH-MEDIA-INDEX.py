@@ -207,9 +207,9 @@ def run_graphs():
 
 
 def launch_media_index():
-    print(" ___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
-    print(" |__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/")
-    print(" |__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
+    print("___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
+    print("|__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/")
+    print("|__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
     print()
     print("1) QUERY INDEX - 2) SORT OPTIONS - 3) GRAPHS - 4) RE-SCAN INDEX - 5) EXIT")
     print()
