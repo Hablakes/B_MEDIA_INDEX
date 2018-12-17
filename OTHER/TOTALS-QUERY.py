@@ -1,10 +1,9 @@
-
 def totals_query():
     print("___     ___ ____ ___ ____ _    ____    ____ _  _ ____ ____ _   _")
     print("|__] __  |  |  |  |  |__| |    [__  __ |  | |  | |___ |__/  \_/ ")
     print("|__]     |  |__|  |  |  | |___ ___]    |_\| |__| |___ |  \   |   ")
     print()
-    print("1) MOVIE BY YEAR - 2) MOVIES TOTAL - 3) TV SHOWS BY YEAR 4) TV SHOWS TOTAL - 5) EXIT")
+    print("1) MOVIES BY YEAR - 2) MOVIES TOTAL - 3) TV SHOWS BY YEAR 4) TV SHOWS TOTAL - 5) EXIT")
     print()
     totals_query_action = input("ENTER #")
     print()
