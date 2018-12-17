@@ -255,7 +255,7 @@ def get_tv_years_for_dict():
         media_tv_year = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(media_tv), flags=0)
         media_tv_year = int(media_tv[2])
         if tv_string in media_tv:
-            if media_tv_year in tv_years_range:
+            if media_tv_year in tv_show_years_range:
                 if media_tv_year not in tv_years_amount_dict:
                     tv_years_amount_dict[media_tv_year] = []
                 tv_years_amount_dict[media_tv_year].append(media_tv)
