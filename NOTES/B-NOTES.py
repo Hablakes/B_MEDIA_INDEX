@@ -8,4 +8,6 @@ matplotlib
 pyfiglet
 
 FOR *-YEARS-GRAPH //  Use Terminal: sudo pacman -S tk (on Arch based systems)
+
+MISC - Install // lolcat, cool-retro-term
 """
