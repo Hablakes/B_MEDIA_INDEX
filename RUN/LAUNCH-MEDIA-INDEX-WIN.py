@@ -44,7 +44,8 @@ tv_string = str("TV")
 def movie_title_search():
     print()
     movie_title_search_action = input("QUERY MOVIES:")
-    movie_title_search_action_lower = movie_title_search_action.lower()
+    movie_title_search_action = movie_title_search_action.lower()
+    print()
     print()
     print("SEARCH RESULTS:")
     print()
@@ -62,14 +63,16 @@ def movie_title_search():
             movie_title_results.append(movie_search_title_info[0])
             movie_year_results.append(movie_search_year_info[0])
     for movie_title_searched in movie_title_results:
-        if movie_title_search_action_lower in movie_title_searched:
+        if movie_title_search_action in movie_title_searched.lower():
             print(movie_title_searched)
+            print()
 
 
 def tv_title_search():
     print()
     tv_title_search_action = input("QUERY TV SHOWS:")
-    tv_title_search_action_lower = tv_title_search_action.lower()
+    tv_title_search_action = tv_title_search_action.lower()
+    print()
     print()
     print("SEARCH RESULTS:")
     print()
@@ -87,8 +90,9 @@ def tv_title_search():
             tv_title_results.append(tv_search_title_info[0])
             tv_year_results.append(tv_search_year_info[0])
     for tv_title_searched in tv_title_results:
-        if tv_title_search_action_lower in tv_title_searched:
+        if tv_title_search_action in tv_title_searched.lower():
             print(tv_title_searched)
+            print()
 
 
 def get_title_ascending():
