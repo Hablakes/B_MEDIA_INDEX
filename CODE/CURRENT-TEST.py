@@ -15,12 +15,27 @@ tv_title_results = []
 tv_year_results = []
 
 
+def run_title_search():
+    print()
+    print("SEARCH TITLES - 1) MOVIES 2) TV SHOWS - 3) EXIT")
+    title_search_type = input("ENTER #")
+    title_search_type_lower = title_search_type.lower()
+    if title_search_type_lower == 1:
+        movie_title_search()
+    elif title_search_type_lower == 2:
+        tv_title_search()
+    elif title_search_type_lower == 3:
+        exit()
+
+
 def movie_title_search():
     print()
     movie_title_search_action = input("QUERY MOVIES:")
     movie_title_search_action_lower = movie_title_search_action.lower()
     print()
     print("SEARCH RESULTS:")
+    print()
+    print("MOVIES:")
     print()
     for movie_search_result in media_index_list:
         if movie_string in movie_search_result[0]:
@@ -38,8 +53,6 @@ def movie_title_search():
     #            movie_year_results_sorted = sorted(movie_year_results)
     for movie_title_searched in movie_title_results:
         if movie_title_search_action_lower in movie_title_searched:
-            print()
-            print("MOVIES:")
             print(movie_title_searched)
 
 
@@ -49,6 +62,8 @@ def tv_title_search():
     tv_title_search_action_lower = tv_title_search_action.lower()
     print()
     print("SEARCH RESULTS:")
+    print()
+    print("TV SHOWS:")
     print()
     for tv_search_result in media_index_list:
         if tv_string in tv_search_result:
@@ -64,24 +79,4 @@ def tv_title_search():
     #            tv_year_results_sorted = sorted(tv_year_results)
     for tv_title_searched in tv_title_results:
         if tv_title_search_action_lower in tv_title_searched:
-            print()
-            print("TV SHOWS:")
             print(tv_title_searched)
-
-
-def run_title_search():
-    print()
-    print("SEARCH TITLES - 1) MOVIES 2) TV SHOWS - 3) EXIT")
-    title_search_type = input("ENTER #")
-    title_search_type_lower = title_search_type.lower()
-    if title_search_type_lower == 1:
-        movie_title_search()
-    elif title_search_type_lower == 2:
-        tv_title_search()
-    elif title_search_type_lower == 3:
-        exit()
-
-
-
-
-run_title_search()
