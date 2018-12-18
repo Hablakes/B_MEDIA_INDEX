@@ -18,6 +18,7 @@ tv_year_results = []
 def run_title_search():
     print()
     print("SEARCH TITLES - 1) MOVIES 2) TV SHOWS - 3) EXIT")
+    print()
     title_search_type = input("ENTER #")
     title_search_type_lower = int(title_search_type)
     if title_search_type_lower == 1:
@@ -51,6 +52,8 @@ def movie_title_search():
     for movie_title_searched in movie_title_results:
         if movie_title_search_action_lower in movie_title_searched:
             print(movie_title_searched)
+            print()
+            print()
 
 
 def tv_title_search():
@@ -63,17 +66,21 @@ def tv_title_search():
     print("TV SHOWS:")
     print()
     for tv_search_result in media_index_list:
-        if tv_string in tv_search_result:
-            tv_search_section_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result[0]), flags=0)
-            tv_search_title_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result[1]), flags=0)
-            tv_search_year_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result[2]), flags=0)
-            print(tv_search_title_info[0])
+        if tv_string in tv_search_result[0]:
+            tv_search_section_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result[0]),
+                                              flags=0)
+            tv_search_title_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result[1]),
+                                            flags=0)
+            tv_search_year_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result[2]),
+                                           flags=0)
             tv_section_results.append(tv_search_section_info[0])
             tv_title_results.append(tv_search_title_info[0])
             tv_year_results.append(tv_search_year_info[0])
     for tv_title_searched in tv_title_results:
         if tv_title_search_action_lower in tv_title_searched:
             print(tv_title_searched)
+            print()
+            print()
 
 
 while True:
