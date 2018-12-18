@@ -31,6 +31,12 @@ tv_title_results = []
 movie_year_results = []
 tv_year_results = []
 
+found_movie_info = []
+found_tv_info = []
+
+found_movie_info_sorted = sorted(found_movie_info)
+found_tv_info_sorted = sorted(found_tv_info)
+
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
@@ -149,31 +155,33 @@ def run_sort():
         launch_media_index()
 
 
-def movie_listdir():
-    return os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/MOVIES/")
+def scrape_movie_info_for_csv():
+    for movie_found in movies_dir:
+        movie_scrape_info = re.search("(.+) \((\d{4})\)", str(movie_found), flags=0)
+        scraped_movie_title = movie_scrape_info[1]
+        scraped_movie_year = movie_scrape_info[2]
+        #       print(movie_scrape_info[1], movie_scrape_info[2])
+        found_movie_info.append(["MOVIE", movie_scrape_info[1], movie_scrape_info[2]])
 
 
-def tv_listdir():
-    return os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/TV/")
+def scrape_tv_info_for_csv():
+    for tv_found in movies_dir:
+        tv_scrape_info = re.search("(.+) \((\d{4})\)", str(tv_found), flags=0)
+        scraped_movie_title = tv_scrape_info[1]
+        scraped_movie_year = tv_scrape_info[2]
+        #       print(tv_scrape_info[1], tv_scrape_info[2])
+        found_movie_info.append(["TV", tv_scrape_info[1], tv_scrape_info[2]])
 
 
 def create_media_index_csv():
-    found = []
-    for movie in movie_listdir():
-        movie_title = movie.strip()[0:-7]
-        movie_year = movie.strip()[-5:-1]
-        found.append(["MOVIE", movie_title, movie_year])
-
-    for tv in tv_listdir():
-        tv_title = tv.strip()[0:-7]
-        tv_year = tv.strip()[-5:-1]
-        found.append(["TV", tv_title, tv_year])
-
-    found = sorted(found)
-    with open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv", "w", newline="") as f:
+    scrape_movie_info_for_csv()
+    scrape_tv_info_for_csv()
+    with open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX-TEST.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
-        for row in found:
-            csv_writer.writerow(row)
+        for movie_row in found_movie_info:
+            csv_writer.writerow(movie_row)
+        for tv_row in found_tv_info:
+            csv_writer.writerow(tv_row)
 
 
 def get_movie_years_for_graph_dict():
