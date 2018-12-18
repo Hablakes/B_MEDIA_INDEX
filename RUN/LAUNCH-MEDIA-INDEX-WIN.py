@@ -4,7 +4,8 @@ import re
 
 import matplotlib.pylab as plt
 
-media_index = list(csv.reader(open(r'C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
+media_index = list(csv.reader(open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv")))
+media_index_list = list(csv.reader(open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv")))
 
 movies_dir = os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/MOVIES/")
 tv_dir = os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/TV/")
@@ -21,24 +22,67 @@ tv_years_amount_dict = {}
 movie_amounts_list = []
 tv_amounts_list = []
 
+movie_section_results = []
+tv_section_results = []
+
+movie_title_results = []
+tv_title_results = []
+
+movie_year_results = []
+tv_year_results = []
+
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
 
-def movie_search(lower_title_search, movies_dir):
-    for movie_result in movies_dir:
-        if lower_title_search in movie_result.lower():
-            print(movie_result)
-        else:
-            continue
+def movie_title_search():
+    print()
+    movie_title_search_action = input("QUERY MOVIES:")
+    movie_title_search_action_lower = movie_title_search_action.lower()
+    print()
+    print("SEARCH RESULTS:")
+    print()
+    print("MOVIES:")
+    print()
+    for movie_search_result in media_index_list:
+        if movie_string in movie_search_result[0]:
+            movie_search_section_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(movie_search_result[0]),
+                                                 flags=0)
+            movie_search_title_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(movie_search_result[1]),
+                                               flags=0)
+            movie_search_year_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(movie_search_result[2]),
+                                              flags=0)
+            movie_section_results.append(movie_search_section_info[0])
+            movie_title_results.append(movie_search_title_info[0])
+            movie_year_results.append(movie_search_year_info[0])
+    for movie_title_searched in movie_title_results:
+        if movie_title_search_action_lower in movie_title_searched:
+            print(movie_title_searched)
 
 
-def tv_search(lower_title_search, tv_dir):
-    for tv_result in tv_dir:
-        if lower_title_search in tv_result.lower():
-            print(tv_result)
-        else:
-            continue
+def tv_title_search():
+    print()
+    tv_title_search_action = input("QUERY TV SHOWS:")
+    tv_title_search_action_lower = tv_title_search_action.lower()
+    print()
+    print("SEARCH RESULTS:")
+    print()
+    print("TV SHOWS:")
+    print()
+    for tv_search_result in media_index_list:
+        if tv_string in tv_search_result[0]:
+            tv_search_section_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result[0]),
+                                              flags=0)
+            tv_search_title_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result[1]),
+                                            flags=0)
+            tv_search_year_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result[2]),
+                                           flags=0)
+            tv_section_results.append(tv_search_section_info[0])
+            tv_title_results.append(tv_search_title_info[0])
+            tv_year_results.append(tv_search_year_info[0])
+    for tv_title_searched in tv_title_results:
+        if tv_title_search_action_lower in tv_title_searched:
+            print(tv_title_searched)
 
 
 def get_title_ascending():
@@ -65,28 +109,22 @@ def get_year_descending():
         print(item)
 
 
-def run_base():
+def run_query():
     print()
     print("___     _  _ ____ ___  _ ____    ____ _  _ ____ ____ _   _")
     print("|__] __ |\/| |___ |  \ | |__| __ |  | |  | |___ |__/  \_/")
     print("|__]    |  | |___ |__/ | |  |    |_\| |__| |___ |  \   |   ")
     print()
-    print("MEDIA SEARCH:")
+    print("SEARCH TITLES - 1) MOVIES - 2) TV SHOWS - 3) EXIT")
     print()
-    title_search = input("QUERY?")
-    if title_search == str("RESTART-INDEX"):
+    title_search_type = input("ENTER #")
+    title_search_type_lower = int(title_search_type)
+    if title_search_type_lower == 1:
+        movie_title_search()
+    elif title_search_type_lower == 2:
+        tv_title_search()
+    elif title_search_type_lower == 3:
         launch_media_index()
-    print()
-    lower_title_search = title_search.lower()
-    print()
-    print("MOVIES")
-    print()
-    movie_search(lower_title_search, sorted(movies_dir))
-    print()
-    print("TV")
-    print()
-    tv_search(lower_title_search, sorted(tv_dir))
-    print()
 
 
 def run_sort():
@@ -132,7 +170,7 @@ def create_media_index_csv():
         found.append(["TV", tv_title, tv_year])
 
     found = sorted(found)
-    with open(r'C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv', "w", newline="") as f:
+    with open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
         for row in found:
             csv_writer.writerow(row)
@@ -297,7 +335,7 @@ def launch_media_index():
     print()
     lmi_action = int(lmi_action)
     if lmi_action == 1:
-        run_base()
+        run_query()
     elif lmi_action == 2:
         run_sort()
     elif lmi_action == 3:
