@@ -28,7 +28,7 @@ def scrape_movie_info_for_csv():
 
 
 def scrape_tv_info_for_csv():
-    for tv_found in movies_dir:
+    for tv_found in tv_dir:
         tv_scrape_info = re.search("(.+) \((\d{4})\)", str(tv_found), flags=0)
         scraped_movie_title = tv_scrape_info[1]
         scraped_movie_year = tv_scrape_info[2]
