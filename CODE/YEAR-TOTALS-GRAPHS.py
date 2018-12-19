@@ -16,7 +16,7 @@ movie_string = str("MOVIE")
 tv_string = str("TV")
 
 
-def get_movie_years_for_dict():
+def get_movie_years_for_dict_and_graph():
     for media_movie in media_index:
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
         media_movie_year_int = int(media_movie_year[0])
@@ -37,12 +37,12 @@ def get_movie_years_for_dict():
     plt.show()
 
 
-def get_tv_years_for_dict():
+def get_tv_years_for_dict_and_graph():
     for media_tv in media_index:
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
         media_tv_year_int = int(media_tv_year[0])
-        if movie_string in media_tv:
-            if media_tv_year_int in movie_years_range:
+        if tv_string in media_tv:
+            if media_tv_year_int in tv_show_years_range:
                 if media_tv_year_int not in tv_years_dict:
                     tv_years_dict[media_tv_year_int] = []
                 tv_years_dict[media_tv_year_int].append(media_tv)
@@ -58,5 +58,5 @@ def get_tv_years_for_dict():
     plt.show()
 
 
-get_movie_years_for_dict()
-get_tv_years_for_dict()
+get_movie_years_for_dict_and_graph()
+get_tv_years_for_dict_and_graph()
