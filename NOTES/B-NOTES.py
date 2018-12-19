@@ -13,13 +13,15 @@ pymediainfo (IF STUCK, making our own version of this is the point)
 
 OS INSTALLS -
 
-Use Terminal: sudo pacman -S tk (on Arch based systems)
+Use Terminal: sudo pacman -S * (on Arch based systems)
 
+* =
 
-
-MISC -
-
-Install // lolcat, cool-retro-term
+cool-retro-term
+libmediainfo
+lolcat
+mediainfo mediainfo-gui
+tk
 
 
 
@@ -38,4 +40,9 @@ media_index_list = list(csv.reader(open(r"C:/Users/botoole/Downloads/B/BPT/B-MED
 
 movies_dir = os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/MOVIES/")
 tv_dir = os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/TV/")
+
+
+
+
+MISC -
 """
