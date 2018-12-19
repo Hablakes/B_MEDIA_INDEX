@@ -14,7 +14,7 @@ movie_years_range = range(1900, 2100, 1)
 tv_show_years_range = range(1900, 2100, 1)
 
 movie_years_dict = {}
-tv_show_years_dict = {}
+tv_years_dict = {}
 
 movie_years_amount_dict = {}
 tv_years_amount_dict = {}
@@ -188,43 +188,45 @@ def create_media_index_csv():
             csv_writer.writerow(tv_row)
 
 
-def get_movie_years_for_graph_dict():
-    for media_movie in movies_dir:
-        media_movie_year = int(media_movie.strip()[-5:-1])
-        if media_movie_year in movie_years_range:
-            if media_movie_year not in movie_years_dict:
-                movie_years_dict[media_movie_year] = []
-            movie_years_dict[media_movie_year].append(media_movie)
+def get_movie_years_for_dict_and_graph():
+    for media_movie in media_index:
+        media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
+        media_movie_year_int = int(media_movie_year[0])
+        if movie_string in media_movie:
+            if media_movie_year_int in movie_years_range:
+                if media_movie_year_int not in movie_years_dict:
+                    movie_years_dict[media_movie_year_int] = []
+                movie_years_dict[media_movie_year_int].append(media_movie)
     media_movie_year_totals = {}
     for movie_year_values, value in sorted(movie_years_dict.items()):
         media_movie_year_totals[movie_year_values] = len(value)
-    #   print(media_movie_year_totals)
     movie_data = sorted(media_movie_year_totals.items())
 
     x, y = zip(*movie_data)
 
     plt.bar(x, y)
-    plt.savefig(r'C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MOVIE-YEAR-RESULTS.png')
+    plt.savefig(r'C:\Users\botoole\Downloads\B\BPT\B-MEDIA-INDEX\FILES\MOVIE-YEAR-RESULTS.png')
     plt.show()
 
 
-def get_tv_years_for_graph_dict():
-    for media_tv in tv_dir:
-        media_tv_year = int(media_tv.strip()[-5:-1])
-        if media_tv_year in tv_show_years_range:
-            if media_tv_year not in tv_show_years_dict:
-                tv_show_years_dict[media_tv_year] = []
-            tv_show_years_dict[media_tv_year].append(media_tv)
+def get_tv_years_for_dict_and_graph():
+    for media_tv in media_index:
+        media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
+        media_tv_year_int = int(media_tv_year[0])
+        if tv_string in media_tv:
+            if media_tv_year_int in tv_show_years_range:
+                if media_tv_year_int not in tv_years_dict:
+                    tv_years_dict[media_tv_year_int] = []
+                tv_years_dict[media_tv_year_int].append(media_tv)
     media_tv_year_totals = {}
-    for tv_year_values, value in sorted(tv_show_years_dict.items()):
+    for tv_year_values, value in sorted(tv_years_dict.items()):
         media_tv_year_totals[tv_year_values] = len(value)
-    #   print(media_tv_year_totals)
     tv_data = sorted(media_tv_year_totals.items())
 
     x, y = zip(*tv_data)
 
     plt.bar(x, y)
-    plt.savefig(r'C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/TV-YEAR-RESULTS.png')
+    plt.savefig(r'C:\Users\botoole\Downloads\B\BPT\B-MEDIA-INDEX\FILES\TV-YEAR-RESULTS.png')
     plt.show()
 
 
@@ -239,9 +241,9 @@ def run_graphs():
     print()
     graph_options = int(graph_options)
     if graph_options == 1:
-        get_movie_years_for_graph_dict()
+        get_movie_years_for_dict_and_graph()
     elif graph_options == 2:
-        get_tv_years_for_graph_dict()
+        get_tv_years_for_dict_and_graph()
     elif graph_options == 3:
         launch_media_index()
 
