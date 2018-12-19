@@ -22,15 +22,6 @@ tv_years_amount_dict = {}
 movie_amounts_list = []
 tv_amounts_list = []
 
-movie_section_results = []
-tv_section_results = []
-
-movie_title_results = []
-tv_title_results = []
-
-movie_year_results = []
-tv_year_results = []
-
 found_movie_info = []
 found_tv_info = []
 
@@ -46,26 +37,16 @@ def movie_title_search():
     movie_title_search_action = input("QUERY MOVIES:")
     movie_title_search_action = movie_title_search_action.lower()
     print()
-    print()
     print("SEARCH RESULTS:")
     print()
     print("MOVIES:")
     print()
     for movie_search_result in media_index_list:
         if movie_string in movie_search_result[0]:
-            movie_search_section_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(movie_search_result[0]),
-                                                 flags=0)
-            movie_search_title_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(movie_search_result[1]),
-                                               flags=0)
-            movie_search_year_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(movie_search_result[2]),
-                                              flags=0)
-            movie_section_results.append(movie_search_section_info[0])
-            movie_title_results.append(movie_search_title_info[0])
-            movie_year_results.append(movie_search_year_info[0])
-    for movie_title_searched in movie_title_results:
-        if movie_title_search_action in movie_title_searched.lower():
-            print(movie_title_searched)
-            print()
+            movie_search_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(movie_search_result), flags=0)
+            #            print(movie_search_info[0])
+            if movie_title_search_action in movie_search_info[0].lower():
+                print(movie_search_info[0])
 
 
 def tv_title_search():
@@ -80,19 +61,10 @@ def tv_title_search():
     print()
     for tv_search_result in media_index_list:
         if tv_string in tv_search_result[0]:
-            tv_search_section_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result[0]),
-                                              flags=0)
-            tv_search_title_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result[1]),
-                                            flags=0)
-            tv_search_year_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result[2]),
-                                           flags=0)
-            tv_section_results.append(tv_search_section_info[0])
-            tv_title_results.append(tv_search_title_info[0])
-            tv_year_results.append(tv_search_year_info[0])
-    for tv_title_searched in tv_title_results:
-        if tv_title_search_action in tv_title_searched.lower():
-            print(tv_title_searched)
-            print()
+            tv_search_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result), flags=0)
+            #            print(movie_search_info[0])
+            if tv_title_search_action in tv_search_info[0].lower():
+                print(tv_search_info[0])
 
 
 def get_title_ascending():
@@ -169,7 +141,7 @@ def scrape_movie_info_for_csv():
 
 
 def scrape_tv_info_for_csv():
-    for tv_found in movies_dir:
+    for tv_found in tv_dir:
         tv_scrape_info = re.search("(.+) \((\d{4})\)", str(tv_found), flags=0)
         scraped_movie_title = tv_scrape_info[1]
         scraped_movie_year = tv_scrape_info[2]
