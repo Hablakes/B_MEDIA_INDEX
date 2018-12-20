@@ -16,8 +16,8 @@ _________________________________________________________________________
 
 MY RE -
 
-^   #| # Title_No_Space
-      (?P<Title_No_Space>\w{0,}\s
+^   #| # Titles_With_Spaces
+      (?P<Titles_With_Spaces>(\w{0,}\s){0,}
       )
     | # Year
       (?P<Year>\(\d{4}\)
