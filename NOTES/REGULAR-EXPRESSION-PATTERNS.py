@@ -44,10 +44,18 @@ MY OWN (In Progress) -
     | # Year
       (?P<Year>\(\d{4}\)
     )
+    | # Old_Resolution
+      (?P<Old_Resolution>\(\d{3,}p\)
+    )
     | # Resolution
       (?P<Resolution>\d+x\d+
     )
-
+    | # HD Style Resolution (Oldest)
+      (?P<HD>\(HD\)
+    )
+    | # Parts
+      (?P<Parts>(Part\s\d{1})
+    )
     | # FileType
       (?P<FileType>\.[a-z0-9]{3,}
     )
