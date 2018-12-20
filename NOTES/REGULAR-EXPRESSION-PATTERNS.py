@@ -41,6 +41,20 @@ MY RE -
       (?<=\.)(?P<FileType>[a-z0-9]{3,}
     )
     |
+
+=========================================================================
+
+^    # Titles
+      (?P<Titles>[^\(]+)[\s.]
+     # Year
+      (\((?P<Year>\d{4})\))?
+     # Resolution
+      (?P<Resolution_Standard>\(\d+x\d+\))?
+     # Old_Resolution_Standard
+      (\((?P<Old_Resolution_Standard>\d{3,}p)\))?
+     # SD_Resolution Style Resolution (Oldest)
+      (?P<SD_Resolution>\(SD\))?
+
 _________________________________________________________________________
 
 YEAR - #\s[0-9][0-9][0-9][0-9]
