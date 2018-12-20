@@ -16,20 +16,23 @@ _________________________________________________________________________
 
 MY RE -
 
-^   #| # Titles_With_Spaces
-      (?P<Titles_With_Spaces>(\w{0,}\s){0,}
+^   #| # Titles
+      (?P<Titles>\w{0,}\s{0,}
       )
     | # Year
       (?P<Year>\(\d{4}\)
     )
-    | # Old_Resolution
-      (?P<Old_Resolution>\(\d{3,}p\)
+    | # Old_Resolution_Standard
+      (?P<Old_Resolution_Standard>\(\d{3,}p\)
     )
-    | # Resolution
-      (?P<Resolution>\d+x\d+
+    | # Resolution_Standard
+      (?P<Resolution_Standard>\d+x\d+
     )
-    | # HD Style Resolution (Oldest)
-      (?P<HD>\(HD\)
+    | # HD_Resolution Style Resolution (Oldest)
+      (?P<HD_Resolution>\(HD\)
+    )
+    | # SD_Resolution Style Resolution (Oldest)
+      (?P<SD_Resolution>\(SD\)
     )
     | # Parts
       (?P<Parts>Part\s\d{1}
