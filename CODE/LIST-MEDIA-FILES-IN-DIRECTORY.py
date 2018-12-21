@@ -51,13 +51,13 @@ def search_movie_folders_items():
         for extension in [".3gp", ".avi", ".divx", ".img", ".iso," ".m4v", ".mkv", ".mov", ".mp4", ".mpeg", ".qt",
                           ".webm", ".wmv", ".xvid", ".srt"]:
             if movie.endswith(extension):
-                movie_year_info = re.match("(\((?P<Year>\d{4})\))", str(movie)),
-                movie_res_info = re.match("(\((?P<Res_Standard>\d+x\d+)\))?", str(movie)),
-                movie_hsd_res_standard = re.match("(\((?P<HD_SD_Res>[A-Z]D)\))?", str(movie)),
-                movie_old_res_standard = re.match("(\((?P<Old_Res_Standard>\d{3,}p)\))?", str(movie)),
-                movie_parts = re.match("(\s(?P<Parts>Part\s\d{1,2}))?", str(movie)),
-                movie_file_type = re.match("((?<=\.)(?P<FileType>[\w]{3,}))", str(movie))
-                results.append([movie, movie_year_info])
+                movie_year_info = re.search("(\((?P<Year>\d{4})\))", str(movie)),
+                movie_res_info = re.search("(\((?P<Res_Standard>\d+x\d+)\))", str(movie)),
+                movie_hsd_res_standard = re.search("(\((?P<HD_SD_Res>[A-Z]D)\))", str(movie)),
+                movie_old_res_standard = re.search("(\((?P<Old_Res_Standard>\d{3,}p)\))", str(movie)),
+                movie_parts = re.search("(\s(?P<Parts>Part\s\d{1,2}))", str(movie)),
+                movie_file_type = re.search("((?<=\.)(?P<FileType>[\w]{3,}))", str(movie))
+                results.append([movie, movie_year_info, movie_res_info])
 
     print(results)
 
