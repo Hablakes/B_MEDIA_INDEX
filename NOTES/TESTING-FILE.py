@@ -19,7 +19,7 @@ regex = r"""
 	      (?<=\.)(?P<FileType>[a-z0-9]{3,}
 	    )"""
 
-movie_test = str((
+movie_test = str([
     "Movie with Super Long Unnecessary Title That Even Has Sp3c!al Characters and 0ther Non-Sense (1990) (1080p).avi",
     "Movie (HD).mp4",
     "Movie (HD) (1991).mp4",
@@ -34,19 +34,18 @@ movie_test = str((
     "Movie Test 4 (2000) (640x480).avi",
     "Movie Test 5 (1990) (1024x768).avi",
     "Movie Test 6 (1996) (960x1600).mp4",
-    "Movie Test 7 (1980) Part 2.xvid"))
+    "Movie Test 7 (1980) Part 2.xvid"])
+
+movies_found = []
 
 matches = re.finditer(regex, movie_test, re.VERBOSE | re.MULTILINE)
 
-for matchNum, match in enumerate(matches):
-    matchNum = matchNum + 1
+for movie_found in movie_test:
+    for extension in [".3gp", ".avi", ".divx", ".img", ".iso," ".m4v", ".mkv", ".mov", ".mp4", ".mpeg", ".qt",
+                      ".webm", ".wmv", ".xvid", ".srt"]:
+        movie_matches = matches
+        movies_found.append([movie_matches])
 
-    print("Match {matchNum} was found at {start}-{end}: {match}".format(matchNum=matchNum, start=match.start(),
-                                                                        end=match.end(), match=match.group()))
 
-    for groupNum in range(0, len(match.groups())):
-        groupNum = groupNum + 1
+print(movies_found)
 
-        print("Group {groupNum} found at {start}-{end}: {group}".format(groupNum=groupNum, start=match.start(groupNum),
-                                                                        end=match.end(groupNum),
-                                                                        group=match.group(groupNum)))
