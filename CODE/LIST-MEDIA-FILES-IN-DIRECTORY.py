@@ -57,7 +57,8 @@ def search_movie_folders_items():
                 movie_old_res_standard = re.search("(\((?P<Old_Res_Standard>\d{3,}p)\))", str(movie)),
                 movie_parts = re.search("(\s(?P<Parts>Part\s\d{1,2}))", str(movie)),
                 movie_file_type = re.search("((?<=\.)(?P<FileType>[\w]{3,}))", str(movie))
-                results.append([movie, movie_year_info, movie_res_info])
+                results.append([movie, movie_year_info, movie_res_info, movie_hsd_res_standard, movie_old_res_standard,
+                                movie_parts, movie_file_type])
 
     print(results)
 
