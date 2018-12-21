@@ -14,26 +14,42 @@ types = {
 }
 _________________________________________________________________________
 
+MY RE -
+
+^     # Titles
+      ((?P<Titles>[^\(]+)[\s.]+)
+    | # Year
+      (\((?P<Year>\d{4})\)
+    )
+    | # Old_Resolution_Standard
+      (\((?P<Old_Resolution_Standard>\d{3,}p)\)
+    )
+    | # Resolution_Standard
+      (?P<Resolution_Standard>\d+x\d+
+    )
+    | # HD_Resolution Style Resolution (Oldest)
+      (\((?P<HD_Resolution>\wD)\)
+    )
+    | # Parts
+      (?P<Parts>Part\s\d{1}
+    )
+    | # FileType
+      (?<=\.)(?P<FileType>[a-z0-9]{3,}
+    )
+
+=========================================================================
+
 ^    # Titles
       (?P<Titles>[^\(]+)[\s.]
      # Year
       (\((?P<Year>\d{4})\))?
-     |# Year After Resolution
-      (\s\((?P<Year_A_R>\d{4})\))?
      # Resolution
-      (\((?P<Res_Standard>\d+x\d+)\))?
-     # Resolution After Year
-      (\s\((?P<Res_A_Y>\d+x\d+)\))?
-     # Old Resolution Standard
-      (\((?P<Old_Res_Standard>\d{3,}p)\))?
-     # HD_SD Resolution Style Resolution
-      (\((?P<HD_SD_Res>[A-Z]D)\))?
-     # HD_SD Resolution Style Resolution After Space
-      (\s\((?P<HD_SD_Res_A_S>[A-Z]D)\))?
-     # Parts
-      (\s(?P<Parts>Part\s\d{1}))?
-     # FileType
-      ((?<=\.)(?P<FileType>[\w]{3,}))?
+      (?P<Resolution_Standard>\(\d+x\d+\))?
+     # Old_Resolution_Standard
+      (\((?P<Old_Resolution_Standard>\d{3,}p)\))?
+     # SD_Resolution Style Resolution (Oldest)
+      (?P<SD_Resolution>\(SD\))?
+
 _________________________________________________________________________
 
 YEAR - #\s[0-9][0-9][0-9][0-9]
