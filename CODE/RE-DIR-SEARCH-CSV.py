@@ -2,30 +2,35 @@ import csv
 import os
 import re
 
-movie_data = os.walk(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/")
+movie_data = os.walk(r"/home/bx/Videos/CHASE/TEST/")
 
+movie_walk = []
 movie_results = []
 
-extensions = (
-    ".3gp", ".avi", ".divx", ".img", ".iso,", ".m4v", ".mkv", ".mov", ".mp4", ".mpeg", ".qt", ".webm", ".wmv", ".xvid",
-    ".srt")
+extensions = [
+    ".3gp", ".avi", ".divx", ".img", ".iso,", ".m4v", ".mkv", ".mov", ".mp4", ".mpeg", ".qt", ".webm", ".wmv", ".xvid"]
 
 
 def search_movie_folders_items():
     for root, dirs, movie in movie_data:
-        for extensions in movie:
-            movie_results.append(movie)
-            movie_year_info = re.findall("\((\d{4})\)", str(movie)),
-            movie_res_info = re.findall("\((\d+x\d+)\)", str(movie)),
-            movie_hsd_res_standard = re.findall("\((\wD)\)", str(movie)),
-            movie_old_res_standard = re.findall("\((\d{3,}p)\)", str(movie)),
-            movie_parts = re.findall("Part\s\d{1,2}", str(movie)),
-            movie_file_type = re.findall("(?<=\.)([\w]{3,})", str(movie))
-            movie_results.append(
-                [movie, movie_year_info, movie_res_info, movie_hsd_res_standard, movie_old_res_standard,
-                 movie_parts, movie_file_type])
-            print(movie, movie_year_info[0], movie_res_info[0], movie_hsd_res_standard[0],
-                  movie_old_res_standard[0], movie_parts[0], movie_file_type)
+        re_ext = re.findall(
+            "(\.3gp)|(\.avi)|(\.divx)|(\.img)|(\.iso)|(\.m4a)|(\.m4v)|(\.mkv)|(\.mov)|(\.mp4)|(\.mpeg)|(\.qt)|"
+            "(\.webm)|(\.wmv)|(\.xvid)", str(movie))
+        movie_walk.append([movie])
+    for movie_match in movie_walk:
+        movie_year_info = re.findall("\((\d{4})\)", str(movie_match)),
+        movie_res_info = re.findall("\((\d+x\d+)\)", str(movie_match)),
+        movie_hsd_res_standard = re.findall("\((\wD)\)", str(movie_match)),
+        movie_old_res_standard = re.findall("\((\d{3,}p)\)", str(movie_match)),
+        movie_parts = re.findall("Part\s\d{1,2}", str(movie_match)),
+        movie_file_type = re.findall(
+            "(\.3gp)|(\.avi)|(\.divx)|(\.img)|(\.iso)|(\.m4a)|(\.m4v)|(\.mkv)|(\.mov)|(\.mp4)|(\.mpeg)|(\.qt)|"
+            "(\.webm)|(\.wmv)|(\.xvid)", str(movie_match))
+        movie_results.append(
+            [movie_match, movie_year_info, movie_res_info, movie_hsd_res_standard, movie_old_res_standard,
+             movie_parts, movie_file_type])
+        print(movie_match, movie_year_info[0], movie_res_info[0], movie_hsd_res_standard[0],
+              movie_old_res_standard[0], movie_parts[0], movie_file_type)
 
 
 def create_media_index_csv():
