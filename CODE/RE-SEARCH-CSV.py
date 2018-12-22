@@ -2,7 +2,7 @@ import csv
 import os
 import re
 
-movie_data = r"C:/Users/botoole/Downloads/B/BTMP/TEST/MOVIES/"
+movie_data = os.listdir(r"/home/bx/Videos/CHASE/TEST/")
 
 movie_test = [
     "Movie 0 with Super Long Unnecessary Title That Even Has Sp3c!al Characters and 0ther Non-Sense (1990) (1080p).3gp",
@@ -29,7 +29,7 @@ movie_results = []
 def search_movie_folders_items():
     for movie in movie_test:
         for extension in [".3gp", ".avi", ".divx", ".img", ".iso", ".m4a", ".m4v", ".mkv", ".mov", ".mp4", ".mpeg",
-                          ".qt", ".webm", ".wmv", ".xvid", ".srt"]:
+                          ".qt", ".webm", ".wmv", ".xvid"]:
             if movie.endswith(extension):
                 movie_year_info = re.findall("\((\d{4})\)", movie),
                 movie_res_info = re.findall("\((\d+x\d+)\)", movie),
