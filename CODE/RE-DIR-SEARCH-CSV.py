@@ -8,7 +8,7 @@ test_data = os.walk(r"/home/bx/Videos/CHASE/TEST/")
 
 movie_walk = []
 movie_results = []
-movie_results_sorted = sorted(movie_results)
+#movie_results_sorted = sorted(movie_results)
 
 
 def search_movie_folders_items():
@@ -36,7 +36,7 @@ def create_media_index_csv():
     search_movie_folders_items()
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX-TEST.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
-        for movie_row in movie_results_sorted:
+        for movie_row in movie_results:
             csv_writer.writerow(movie_row)
 
 
