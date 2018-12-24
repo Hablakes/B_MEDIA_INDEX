@@ -3,18 +3,20 @@ import os
 import re
 
 movie_data = os.walk(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/")
+test_data = os.walk(r"/home/bx/Videos/CHASE/TEST/")
+
 
 movie_walk = []
 movie_results = []
+movie_results_sorted = sorted(movie_results)
 
 
 def search_movie_folders_items():
     for root, dirs, movie in movie_data:
-        re_ext = re.findall(
-            "(\.3gp)|(\.avi)|(\.divx)|(\.img)|(\.iso)|(\.m4a)|(\.m4v)|(\.mkv)|(\.mov)|(\.mp4)|(\.mpeg)|(\.qt)|"
-            "(\.webm)|(\.wmv)|(\.xvid)", str(movie))
-        for found_movie_file in re_ext:
-            movie_walk.append([movie])
+        for found_movie_file in movie:
+            if found_movie_file.endswith(("3gp", "avi", "divx", "img", "iso", "m4a", "m4v", "mkv", "mov", "mp4",
+                                          "mpeg", "qt", "webm", "wmv", "xvid")):
+                movie_walk.append([found_movie_file])
     for movie_match in movie_walk:
         movie_year_info = re.findall("\((\d{4})\)", str(movie_match)),
         movie_res_info = re.findall("\((\d+x\d+)\)", str(movie_match)),
@@ -34,7 +36,7 @@ def create_media_index_csv():
     search_movie_folders_items()
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX-TEST.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
-        for movie_row in movie_results:
+        for movie_row in movie_results_sorted:
             csv_writer.writerow(movie_row)
 
 
