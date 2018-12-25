@@ -374,6 +374,8 @@ def get_movie_years_for_dict():
             print("# OF MOVIES IN THIS YEAR:")
             print(movie_year_query[1])
             print()
+            print("--------------------------------------------------------------------------------------------------")
+            print()
 
 
 def get_movie_titles_amount():
@@ -383,6 +385,8 @@ def get_movie_titles_amount():
     print()
     print("TOTAL AMOUNT OF MOVIES:")
     print(len(movie_amounts_list))
+    print()
+    print("--------------------------------------------------------------------------------------------------")
     print()
 
 
@@ -408,6 +412,8 @@ def get_tv_years_for_dict():
             print("# OF TV SHOWS IN THIS YEAR:")
             print(tv_year_query[1])
             print()
+            print("--------------------------------------------------------------------------------------------------")
+            print()
 
 
 def get_tv_titles_amount():
@@ -417,6 +423,8 @@ def get_tv_titles_amount():
     print()
     print("TOTAL AMOUNT OF TV SHOWS:")
     print(len(tv_amounts_list))
+    print()
+    print("--------------------------------------------------------------------------------------------------")
     print()
 
 
