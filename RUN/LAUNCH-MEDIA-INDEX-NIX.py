@@ -7,11 +7,25 @@ import matplotlib.pylab as plt
 media_index = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
 media_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
 
+media_index_test = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX-TEST.csv'))
+media_index_test_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX-TEST.csv')))
+
 movies_dir = os.listdir(r"/home/bx/Videos/CHASE/MOVIES/")
 tv_dir = os.listdir(r"/home/bx/Videos/CHASE/TV/")
 
+movie_title = media_index_test_list[0]
+movie_year = media_index_test_list[1]
+movie_resolution = media_index_test_list[2]
+movie_resolution_alt_1 = media_index_test_list[3]
+movie_resolution_alt_2 = media_index_test_list[4]
+movie_parts = media_index_test_list[5]
+movie_file_type = media_index_test_list[6]
+
 movie_years_range = range(1900, 2100, 1)
 tv_show_years_range = range(1900, 2100, 1)
+
+movie_string = str("MOVIE")
+tv_string = str("TV")
 
 movie_years_dict = {}
 tv_years_dict = {}
@@ -27,9 +41,6 @@ found_tv_info = []
 
 found_movie_info_sorted = sorted(found_movie_info)
 found_tv_info_sorted = sorted(found_tv_info)
-
-movie_string = str("MOVIE")
-tv_string = str("TV")
 
 
 def movie_title_search():
@@ -312,12 +323,47 @@ def get_tv_titles_amount():
     print()
 
 
+def movie_file_query_and_sort():
+    print("___     ____ _ _    ____    ___  ____ ___ ____    ____ _  _ ____ ____ _   _")
+    print("|__] __ |___ | |    |___ __ |  \ |__|  |  |__| __ |  | |  | |___ |__/  \_/")
+    print("|__]    |    | |___ |___    |__/ |  |  |  |  |    |_\| |__| |___ |  \   |")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    mv_query_action = input("ENTER SEARCH QUERY (MOVIES):")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    mv_query_action_lower = str(mv_query_action.lower())
+    for movie_file in sorted(media_index_test_list):
+        if mv_query_action_lower in movie_file[0].lower():
+            print()
+            print()
+            print("MOVIE TITLE:")
+            print(movie_file[0])
+            print()
+            print("MOVIE YEAR:")
+            print(movie_file[1])
+            print()
+            print("MOVIE RESOLUTION:")
+            print(movie_file[2])
+            print()
+            print("MOVIE PARTS:")
+            print(movie_file[5])
+            print()
+            print("MOVIE FILE TYPE:")
+            print(movie_file[6])
+            print()
+            print()
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+
+
 def launch_media_index():
     print("___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
     print("|__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/")
     print("|__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
     print()
-    print("1) QUERY INDEX - 2) SORT OPTIONS - 3) GRAPHS - 4) TOTALS - 5) RE-SCAN INDEX - 6) EXIT")
+    print("1) QUERIES - 2) SORTING - 3) FILE DATA/INFO - 4) GRAPHS - 5) TOTALS - 6) RE-SCAN INDEX - 0) EXIT")
     print()
     lmi_action = input("ENTER #")
     print()
@@ -327,12 +373,14 @@ def launch_media_index():
     elif lmi_action == 2:
         run_sort()
     elif lmi_action == 3:
-        run_graphs()
+        movie_file_query_and_sort()
     elif lmi_action == 4:
-        totals_query()
+        run_graphs()
     elif lmi_action == 5:
-        create_media_index_csv()
+        totals_query()
     elif lmi_action == 6:
+        create_media_index_csv()
+    elif lmi_action == 0:
         exit()
 
 
