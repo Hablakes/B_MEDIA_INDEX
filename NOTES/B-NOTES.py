@@ -18,10 +18,12 @@ Use Terminal: sudo pacman -S * (on Arch based systems)
 
 * =
 
+babblefish
 cool-retro-term
 libmediainfo
 lolcat
 mediainfo mediainfo-gui
+rebulk
 tk
 
 
