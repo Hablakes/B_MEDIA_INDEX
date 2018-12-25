@@ -354,7 +354,9 @@ def totals_query():
 
 def get_movie_years_for_dict():
     print("ENTER A YEAR:")
+    print()
     movie_totals_query_action = input("ENTER #")
+    print()
     movie_totals_query_action = int(movie_totals_query_action)
     for media_movie in media_index:
         media_movie_year = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(media_movie), flags=0)
@@ -392,7 +394,9 @@ def get_movie_titles_amount():
 
 def get_tv_years_for_dict():
     print("ENTER A YEAR:")
+    print()
     tv_totals_query_action = input("ENTER #")
+    print()
     tv_totals_query_action = int(tv_totals_query_action)
     for media_tv in media_index:
         media_tv_year = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(media_tv), flags=0)
