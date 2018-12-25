@@ -3,12 +3,14 @@ PIP INSTALLS -
 
 UPGRADE **
 
+babblefish
 click
-get-media-files (AddOn for pymediainfo)
+get-media-files
 guessit
 matplotlib
 pyfiglet
-pymediainfo (IF STUCK, making our own version of this is the point)
+pymediainfo
+rebulk
 
 
 
@@ -18,12 +20,10 @@ Use Terminal: sudo pacman -S * (on Arch based systems)
 
 * =
 
-babblefish
 cool-retro-term
 libmediainfo
 lolcat
 mediainfo mediainfo-gui
-rebulk
 tk
 
 
