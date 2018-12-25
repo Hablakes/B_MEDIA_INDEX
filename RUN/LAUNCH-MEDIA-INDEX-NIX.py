@@ -49,10 +49,11 @@ found_tv_info_sorted = sorted(found_tv_info)
 
 
 def movie_title_search():
-    print()
     movie_title_search_action = input("QUERY MOVIES:")
-    movie_title_search_action = movie_title_search_action.lower()
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    movie_title_search_action = movie_title_search_action.lower()
     print("SEARCH RESULTS:")
     print()
     print("MOVIES:")
@@ -63,11 +64,16 @@ def movie_title_search():
             #            print(movie_search_info[0])
             if movie_title_search_action in movie_search_info[0].lower():
                 print(movie_search_info[0])
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
 
 
 def tv_title_search():
-    print()
     tv_title_search_action = input("QUERY TV SHOWS:")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     tv_title_search_action = tv_title_search_action.lower()
     print()
     print()
@@ -81,6 +87,9 @@ def tv_title_search():
             #            print(movie_search_info[0])
             if tv_title_search_action in tv_search_info[0].lower():
                 print(tv_search_info[0])
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
 
 
 def get_title_ascending():
@@ -105,9 +114,6 @@ def get_year_descending():
     sorted_year_r = sorted(media_index, key=lambda y: (y[0], y[2]), reverse=True)
     for item in sorted_year_r:
         print(item)
-
-
-
 
 
 def get_movie_years_for_dict_and_graph():
@@ -157,7 +163,6 @@ def scrape_movie_info_for_csv():
         movie_scrape_info = re.search("(.+) \((\d{4})\)", str(movie_found), flags=0)
         scraped_movie_title = movie_scrape_info[1]
         scraped_movie_year = movie_scrape_info[2]
-        #       print(movie_scrape_info[1], movie_scrape_info[2])
         found_movie_info.append(["MOVIE", movie_scrape_info[1], movie_scrape_info[2]])
 
 
@@ -166,7 +171,6 @@ def scrape_tv_info_for_csv():
         tv_scrape_info = re.search("(.+) \((\d{4})\)", str(tv_found), flags=0)
         scraped_movie_title = tv_scrape_info[1]
         scraped_movie_year = tv_scrape_info[2]
-        #       print(tv_scrape_info[1], tv_scrape_info[2])
         found_movie_info.append(["TV", tv_scrape_info[1], tv_scrape_info[2]])
 
 
@@ -215,9 +219,16 @@ def run_query():
     print("|__] __ |\/| |___ |  \ | |__| __ |  | |  | |___ |__/  \_/")
     print("|__]    |  | |___ |__/ | |  |    |_\| |__| |___ |  \   |   ")
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     print("SEARCH TITLES - 1) MOVIES - 2) TV SHOWS - 3) EXIT")
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     title_search_type = input("ENTER #")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     title_search_type_lower = int(title_search_type)
     if title_search_type_lower == 1:
         movie_title_search()
@@ -232,9 +243,15 @@ def run_sort():
     print("|__] __ |\/| |___ |  \ | |__| __ [__  |  | |__/  |")
     print("|__]    |  | |___ |__/ | |  |    ___] |__| |  \  | ")
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     print("TITLE - 1) ASCENDING 2) DESCENDING - YEAR - 3)ASCENDING 4) DESCENDING - 5) EXIT")
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     sort_options = input("ENTER #")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
     print()
     sort_options = int(sort_options)
     if sort_options == 1:
@@ -259,11 +276,10 @@ def movie_file_query_and_sort():
     mv_query_action = input("ENTER SEARCH QUERY (MOVIES):")
     print()
     print("--------------------------------------------------------------------------------------------------")
+    print()
     mv_query_action_lower = str(mv_query_action.lower())
     for movie_file in sorted(media_index_test_list):
         if mv_query_action_lower in movie_file[0].lower():
-            print()
-            print()
             print("MOVIE TITLE:")
             print(movie_file[0])
             print()
@@ -289,9 +305,15 @@ def run_graphs():
     print("|__] __ | __ |__/ |__| |__] |__| __ |  | |__]  |  | |  | |\ | [__")
     print("|__]    |__] |  \ |  | |    |  |    |__| |     |  | |__| | \| ___]")
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     print("1) MOVIES (TITLES PER YEAR) - 2) TV SHOWS (TITLES PER YEAR) - 3) EXIT")
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     graph_options = input("ENTER #")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
     print()
     graph_options = int(graph_options)
     if graph_options == 1:
@@ -307,9 +329,15 @@ def totals_query():
     print("|__] __  |  |  |  |  |__| |    [__  __ |  | |  | |___ |__/  \_/ ")
     print("|__]     |  |__|  |  |  | |___ ___]    |_\| |__| |___ |  \   |   ")
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     print("1) MOVIES BY YEAR - 2) MOVIES TOTAL - 3) TV SHOWS BY YEAR 4) TV SHOWS TOTAL - 5) EXIT")
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     b_totals_query_action = input("ENTER #")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
     print()
     b_totals_query_action = int(b_totals_query_action)
     if b_totals_query_action == 1:
@@ -321,7 +349,7 @@ def totals_query():
     elif b_totals_query_action == 4:
         get_tv_titles_amount()
     elif b_totals_query_action == 5:
-        exit()
+        launch_media_index()
 
 
 def get_movie_years_for_dict():
@@ -339,7 +367,6 @@ def get_movie_years_for_dict():
     media_movie_year_totals = {}
     for movie_year_values, value in sorted(movie_years_amount_dict.items()):
         media_movie_year_totals[movie_year_values] = len(value)
-    #   print(media_movie_year_totals)
     movie_data = sorted(media_movie_year_totals.items())
     for movie_year_query in movie_data:
         if movie_totals_query_action in movie_year_query:
@@ -374,7 +401,6 @@ def get_tv_years_for_dict():
     media_tv_year_totals = {}
     for tv_year_values, value in sorted(tv_years_amount_dict.items()):
         media_tv_year_totals[tv_year_values] = len(value)
-    #   print(media_tv_year_totals)
     tv_data = sorted(media_tv_year_totals.items())
     for tv_year_query in tv_data:
         if tv_totals_query_action in tv_year_query:
@@ -399,9 +425,15 @@ def create_media_indexes_all():
     print("|__] __ | |\ | |  \ |___  \/  __ |  | |__]  |  | |  | |\ | [__ ")
     print("|__]    | | \| |__/ |___ _/\_    |__| |     |  | |__| | \| ___]")
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     print("1) CREATE NEW MEDIA INDEX FROM DIRECTORIES - 2) CREATE NEW MEDIA INDEX FROM FILES - 3) EXIT")
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     cmi_action = input("ENTER #")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
     print()
     cmi_action = int(cmi_action)
     if cmi_action == 1:
@@ -417,9 +449,15 @@ def launch_media_index():
     print("|__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/")
     print("|__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     print("1) QUERIES - 2) SORTING - 3) FILE DATA/INFO - 4) GRAPHS - 5) TOTALS - 6) INDEXING - 0) EXIT")
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     lmi_action = input("ENTER #")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
     print()
     lmi_action = int(lmi_action)
     if lmi_action == 1:
