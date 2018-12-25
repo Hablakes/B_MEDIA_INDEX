@@ -97,24 +97,36 @@ def get_title_ascending():
     sorted_title = sorted(media_index, key=lambda x: (x[0], x[1]))
     for item in sorted_title:
         print(item)
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        print()
 
 
 def get_title_descending():
     sorted_title_r = sorted(media_index, key=lambda x: (x[0], x[1]), reverse=True)
     for item in sorted_title_r:
         print(item)
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        print()
 
 
 def get_year_ascending():
     sorted_year = sorted(media_index, key=lambda y: (y[0], y[2]))
     for item in sorted_year:
         print(item)
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        print()
 
 
 def get_year_descending():
     sorted_year_r = sorted(media_index, key=lambda y: (y[0], y[2]), reverse=True)
     for item in sorted_year_r:
         print(item)
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        print()
 
 
 def get_movie_years_for_dict_and_graph():
