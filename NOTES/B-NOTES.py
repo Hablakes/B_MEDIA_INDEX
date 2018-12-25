@@ -46,4 +46,12 @@ tv_dir = os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/TV/")
 
 
 MISC -
+
+LAUNCH FROM CMD -
+
+C:\Users\botoole\Downloads\B\BPT\B-MEDIA-INDEX\venv\Scripts\python.exe
+ C:\Users\botoole\Downloads\B\BPT\B-MEDIA-INDEX\RUN\LAUNCH-MEDIA-INDEX-WIN.py
+
+MAKE SURE ABOVE LINE IS ALL IN ONE LINE FOR CMD*
+
 """
