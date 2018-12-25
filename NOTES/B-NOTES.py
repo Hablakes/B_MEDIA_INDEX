@@ -5,6 +5,7 @@ UPGRADE **
 
 click
 get-media-files (AddOn for pymediainfo)
+guessit
 matplotlib
 pyfiglet
 pymediainfo (IF STUCK, making our own version of this is the point)
