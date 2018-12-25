@@ -13,7 +13,8 @@ media_index_test_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-
 movies_dir = os.listdir(r"/home/bx/Videos/CHASE/MOVIES/")
 tv_dir = os.listdir(r"/home/bx/Videos/CHASE/TV/")
 
-movie_data = os.walk(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/")
+movie_walk_data = os.walk(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/")
+tv_walk_data = os.walk(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/")
 
 movie_title = media_index_test_list[0]
 movie_year = media_index_test_list[1]
@@ -186,7 +187,7 @@ def create_media_index_csv():
 
 
 def search_movie_folders_items():
-    for root, dirs, movie in movie_data:
+    for root, dirs, movie in movie_walk_data:
         for found_movie_file in movie:
             if found_movie_file.endswith(("3gp", "avi", "divx", "img", "iso", "m4a", "m4v", "mkv", "mov", "mp4",
                                           "mpeg", "qt", "webm", "wmv", "xvid")):
@@ -374,6 +375,7 @@ def get_movie_years_for_dict():
         if movie_totals_query_action in movie_year_query:
             print()
             print("# OF MOVIES IN THIS YEAR:")
+            print()
             print(movie_year_query[1])
             print()
             print("--------------------------------------------------------------------------------------------------")
@@ -386,6 +388,7 @@ def get_movie_titles_amount():
             movie_amounts_list.append(counted_movie_title)
     print()
     print("TOTAL AMOUNT OF MOVIES:")
+    print()
     print(len(movie_amounts_list))
     print()
     print("--------------------------------------------------------------------------------------------------")
@@ -414,6 +417,7 @@ def get_tv_years_for_dict():
         if tv_totals_query_action in tv_year_query:
             print()
             print("# OF TV SHOWS IN THIS YEAR:")
+            print()
             print(tv_year_query[1])
             print()
             print("--------------------------------------------------------------------------------------------------")
@@ -426,6 +430,7 @@ def get_tv_titles_amount():
             tv_amounts_list.append(counted_tv_title)
     print()
     print("TOTAL AMOUNT OF TV SHOWS:")
+    print()
     print(len(tv_amounts_list))
     print()
     print("--------------------------------------------------------------------------------------------------")
