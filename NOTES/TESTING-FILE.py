@@ -13,11 +13,16 @@ movie_file_type = media_index_test_list[6]
 
 
 def movie_file_query_and_sort():
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     mv_query_action = input("ENTER SEARCH QUERY:")
     print()
+    print("--------------------------------------------------------------------------------------------------")
     mv_query_action_lower = str(mv_query_action.lower())
     for movie_file in sorted(media_index_test_list):
         if mv_query_action_lower in movie_file[0].lower():
+            print()
             print()
             print("MOVIE TITLE:")
             print(movie_file[0])
@@ -34,7 +39,10 @@ def movie_file_query_and_sort():
             print("MOVIE FILE TYPE:")
             print(movie_file[6])
             print()
+            print()
             print("--------------------------------------------------------------------------------------------------")
+            print()
+
 
 
 movie_file_query_and_sort()
