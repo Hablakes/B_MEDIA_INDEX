@@ -14,7 +14,7 @@ movies_dir = os.listdir(r"/home/bx/Videos/CHASE/MOVIES/")
 tv_dir = os.listdir(r"/home/bx/Videos/CHASE/TV/")
 
 movie_walk_data = os.walk(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/")
-tv_walk_data = os.walk(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/")
+tv_walk_data = os.walk(r"")
 
 movie_title = media_index_test_list[0]
 movie_year = media_index_test_list[1]
