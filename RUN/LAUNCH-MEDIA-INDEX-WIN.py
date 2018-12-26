@@ -31,9 +31,6 @@ tv_show_years_range = range(1900, 2100, 1)
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
-movie_years_dict = {}
-tv_years_dict = {}
-
 movie_walk = []
 movie_results = []
 
@@ -125,6 +122,7 @@ def get_year_descending():
 
 
 def get_movie_years_for_dict_and_graph():
+    movie_years_dict = {}
     for media_movie in media_index:
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
         media_movie_year_int = int(media_movie_year[0])
@@ -146,6 +144,7 @@ def get_movie_years_for_dict_and_graph():
 
 
 def get_tv_years_for_dict_and_graph():
+    tv_years_dict = {}
     for media_tv in media_index:
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
         media_tv_year_int = int(media_tv_year[0])
