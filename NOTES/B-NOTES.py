@@ -5,8 +5,10 @@ UPGRADE **
 
 babblefish
 click
+enzyme
 get-media-files
 guessit
+guess-language
 matplotlib
 pyfiglet
 pymediainfo
