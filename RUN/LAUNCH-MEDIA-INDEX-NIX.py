@@ -33,14 +33,8 @@ tv_string = str("TV")
 movie_years_dict = {}
 tv_years_dict = {}
 
-movie_years_amount_dict = {}
-tv_years_amount_dict = {}
-
 movie_walk = []
 movie_results = []
-
-movie_amounts_list = []
-tv_amounts_list = []
 
 found_movie_info = []
 found_tv_info = []
@@ -366,13 +360,13 @@ def totals_query():
 
 
 def get_movie_years_for_dict():
+    movie_years_amount_dict = {}
     print("ENTER A YEAR:")
     print()
     movie_totals_query_action = input("ENTER #")
     print()
     movie_totals_query_action = int(movie_totals_query_action)
     for media_movie in media_index:
-        media_movie_year = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(media_movie), flags=0)
         media_movie_year = int(media_movie[2])
         if movie_string in media_movie:
             if media_movie_year in movie_years_range:
@@ -395,6 +389,7 @@ def get_movie_years_for_dict():
 
 
 def get_movie_titles_amount():
+    movie_amounts_list = []
     for counted_movie_title in media_index:
         if movie_string in counted_movie_title:
             movie_amounts_list.append(counted_movie_title)
@@ -408,13 +403,13 @@ def get_movie_titles_amount():
 
 
 def get_tv_years_for_dict():
+    tv_years_amount_dict = {}
     print("ENTER A YEAR:")
     print()
     tv_totals_query_action = input("ENTER #")
     print()
     tv_totals_query_action = int(tv_totals_query_action)
     for media_tv in media_index:
-        media_tv_year = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(media_tv), flags=0)
         media_tv_year = int(media_tv[2])
         if tv_string in media_tv:
             if media_tv_year in tv_show_years_range:
@@ -437,6 +432,7 @@ def get_tv_years_for_dict():
 
 
 def get_tv_titles_amount():
+    tv_amounts_list = []
     for counted_tv_title in media_index:
         if tv_string in counted_tv_title:
             tv_amounts_list.append(counted_tv_title)
