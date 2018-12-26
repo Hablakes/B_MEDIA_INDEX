@@ -9,7 +9,7 @@ movie_results = []
 
 
 def search_movie_folders_items():
-    for root, dirs, movie in movie_data:
+    for root, dirs, movie in sorted(movie_data):
         for found_movie_file in movie:
             if found_movie_file.endswith(("3gp", "avi", "divx", "img", "iso", "m4a", "m4v", "mkv", "mov", "mp4",
                                           "mpeg", "qt", "webm", "wmv", "xvid")):
