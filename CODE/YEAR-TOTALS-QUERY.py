@@ -10,7 +10,7 @@ tv_dir = os.listdir(r"/home/bx/Videos/CHASE/TV/")
 movie_years_range = range(1900, 2100, 1)
 tv_years_range = range(1900, 2100, 1)
 
-movie_years_amount_dict = {}
+
 tv_years_amount_dict = {}
 
 movie_amounts_list = []
@@ -43,10 +43,11 @@ def totals_query():
 
 
 def get_movie_years_for_dict():
+    movie_years_amount_dict = {}
     movie_totals_query_action = input("ENTER #")
     movie_totals_query_action = int(movie_totals_query_action)
     for media_movie in media_index:
-        media_movie_year = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(media_movie), flags=0)
+#        media_movie_year = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(media_movie), flags=0)
         media_movie_year = int(media_movie[2])
         if movie_string in media_movie:
             if media_movie_year in movie_years_range:
@@ -74,7 +75,7 @@ def get_tv_years_for_dict():
     tv_totals_query_action = input("ENTER #")
     tv_totals_query_action = int(tv_totals_query_action)
     for media_tv in media_index:
-        media_tv_year = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(media_tv), flags=0)
+#        media_tv_year = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(media_tv), flags=0)
         media_tv_year = int(media_tv[2])
         if tv_string in media_tv:
             if media_tv_year in tv_years_range:
