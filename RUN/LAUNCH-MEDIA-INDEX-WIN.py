@@ -54,7 +54,6 @@ def movie_title_search():
     for movie_search_result in media_index_list:
         if movie_string in movie_search_result[0]:
             movie_search_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(movie_search_result), flags=0)
-            #            print(movie_search_info[0])
             if movie_title_search_action in movie_search_info[0].lower():
                 print(movie_search_info[0])
     print()
@@ -77,7 +76,6 @@ def tv_title_search():
     for tv_search_result in media_index_list:
         if tv_string in tv_search_result[0]:
             tv_search_info = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(tv_search_result), flags=0)
-            #            print(movie_search_info[0])
             if tv_title_search_action in tv_search_info[0].lower():
                 print(tv_search_info[0])
     print()
@@ -168,16 +166,12 @@ def get_tv_years_for_dict_and_graph():
 def scrape_movie_info_for_csv():
     for movie_found in movies_dir:
         movie_scrape_info = re.search("(.+) \((\d{4})\)", str(movie_found), flags=0)
-        scraped_movie_title = movie_scrape_info[1]
-        scraped_movie_year = movie_scrape_info[2]
         found_movie_info.append(["MOVIE", movie_scrape_info[1], movie_scrape_info[2]])
 
 
 def scrape_tv_info_for_csv():
     for tv_found in tv_dir:
         tv_scrape_info = re.search("(.+) \((\d{4})\)", str(tv_found), flags=0)
-        scraped_movie_title = tv_scrape_info[1]
-        scraped_movie_year = tv_scrape_info[2]
         found_movie_info.append(["TV", tv_scrape_info[1], tv_scrape_info[2]])
 
 
