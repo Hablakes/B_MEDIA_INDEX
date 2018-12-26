@@ -1,21 +1,9 @@
-import csv
 import os
-from guessit import guessit
 
-media_index = list(csv.reader(open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv")))
-media_index_list = list(csv.reader(open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv")))
+import guessit
 
-media_index_test = csv.reader(open(r'C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX-TEST.csv'))
-media_index_test_list = list(
-    csv.reader(open(r'C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX-TEST.csv')))
-
-movies_dir = os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/MOVIES/")
-tv_dir = os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/TV/")
-
-movie_data = os.walk(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/MOVIES/")
-
-test_m_dir = os.walk(r"C:/Users/botoole/Downloads/B/BTMP/TEST/MOVIES/")
-test_tv_dir = os.walk(r"C:/Users/botoole/Downloads/B/BTMP/TEST/TV/")
+movie_dir = sorted(os.listdir(r"/home/bx/Videos/CHASE/MOVIES/"))
+tv_dir = sorted(os.listdir(r"/home/bx/Videos/CHASE/TV/"))
 
 movie_test = [
     "Movie 0 with Super Long Unnecessary Title That Even Has Sp3c!al Characters and 0ther Non-Sense (1990) (1080p).3gp",
@@ -38,11 +26,13 @@ movie_test = [
 
 
 def run():
-    for movie in test_m_dir:
-        print(guessit(str(movie)))
-    for tv in test_tv_dir:
-        print(guessit(str(tv)))
+    for movie in tv_dir:
+        print(guessit.guessit(str(movie)))
 
 
 run()
 
+## TESTING TO GET GUESSIT OPTIONS TO PUSH TO LIST CATEGORIES FOR LATER SORTING / DISPLAY ##
+
+
+# GET TO IGNORE "Alternate" and "He-", or see as strings, currently show as "Version: Alternate" and "Language: He" #
