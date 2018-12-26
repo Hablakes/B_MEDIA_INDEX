@@ -13,6 +13,7 @@ matplotlib
 pyfiglet
 pymediainfo
 rebulk
+termgraph
 
 
 
