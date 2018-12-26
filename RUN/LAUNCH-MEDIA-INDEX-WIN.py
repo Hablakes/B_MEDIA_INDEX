@@ -246,7 +246,7 @@ def run_sort():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("TITLE - 1) ASCENDING 2) DESCENDING - YEAR - 3)ASCENDING 4) DESCENDING - 5) EXIT")
+    print("TITLE - 1) ASCENDING 2) DESCENDING - YEAR - 3) ASCENDING 4) DESCENDING - 5) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
