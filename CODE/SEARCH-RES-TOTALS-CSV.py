@@ -15,14 +15,13 @@ def search_resolution_totals_movies():
 
         if re.findall("19\d{2}x", res[2]):
             ten_eighty_found_list.append(res)
-        if re.findall("1[0-8]\d{2}x", res[2]):
+        elif re.findall("1[0-8]\d{2}x", res[2]):
             seven_twenty_found_list.append(res)
-        if re.findall("'\d{3}x", res[2]):
+        elif re.findall("'\d{3}x", res[2]):
             standard_def_found_list.append(res)
-        if str("x") not in res[2]:
+        else:
             empty_response_list.append(+1)
-        if str() in res[2]:
-            movies_total_list.append(+1)
+        movies_total_list.append(+1)
 
     print()
     print("-------------------------------------------------------------------------------------------------------")
