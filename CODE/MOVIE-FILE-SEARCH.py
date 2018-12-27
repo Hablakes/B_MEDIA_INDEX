@@ -5,7 +5,7 @@ import re
 movie_data = os.walk(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/")
 
 movie_walk = []
-movie_results = []
+movie_file_results = []
 
 
 def search_movie_folders_items():
@@ -28,7 +28,7 @@ def search_movie_folders_items():
             "(\.3gp)|(\.avi)|(\.divx)|(\.flv)|(\.img)|(\.iso)|(\.m4a)|(\.m4v)|(\.mkv)|(\.mov)|(\.mp4)|(\.mpeg)|(\.qt)|"
             "(\.webm)|(\.wmv)|(\.xvid)", str(movie_match))
         for found_movie_match in movie_file_type:
-            movie_results.append(
+            movie_file_results.append(
                 [movie_match, movie_year_info[0], movie_res_info[0], movie_hsd_res_standard[0],
                  movie_old_res_standard[0], movie_parts[0], [found_movie_match[0]]])
 
@@ -37,7 +37,7 @@ def create_media_index_csv():
     search_movie_folders_items()
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
-        for movie_row in movie_results:
+        for movie_row in movie_file_results:
             csv_writer.writerow(movie_row)
 
 
