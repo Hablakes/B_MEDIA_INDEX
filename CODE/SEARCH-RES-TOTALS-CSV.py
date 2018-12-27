@@ -13,9 +13,9 @@ def search_resolution_totals_movies():
 
         if re.findall("19\d{2}x", res[2]):
             ten_eighty_found_list.append(res)
-        if re.findall("12\d{2}x", res[2]):
+        if re.findall("1[0-8]\d{2}x", res[2]):
             seven_twenty_found_list.append(res)
-        if re.findall("\d{3}x", res[2]):
+        if re.findall("'\d{3}x", res[2]):
             standard_def_found_list.append(res)
 
     print()
