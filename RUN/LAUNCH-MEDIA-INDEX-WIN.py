@@ -17,28 +17,16 @@ tv_dir = os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/TV/")
 movie_walk_data = os.walk(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/MOVIES/")
 tv_walk_data = os.walk(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/TV/")
 
-movie_title = media_index_test_list[0]
-movie_year = media_index_test_list[1]
-movie_resolution = media_index_test_list[2]
-movie_resolution_alt_1 = media_index_test_list[3]
-movie_resolution_alt_2 = media_index_test_list[4]
-movie_parts = media_index_test_list[5]
-movie_file_type = media_index_test_list[6]
-
 movie_years_range = range(1900, 2100, 1)
 tv_show_years_range = range(1900, 2100, 1)
 
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
-movie_walk = []
-movie_results = []
-
 found_movie_info = []
 found_tv_info = []
 
-found_movie_info_sorted = sorted(found_movie_info)
-found_tv_info_sorted = sorted(found_tv_info)
+movie_results = []
 
 
 def movie_title_search():
@@ -172,7 +160,7 @@ def scrape_movie_info_for_csv():
 def scrape_tv_info_for_csv():
     for tv_found in tv_dir:
         tv_scrape_info = re.search("(.+) \((\d{4})\)", str(tv_found), flags=0)
-        found_movie_info.append(["TV", tv_scrape_info[1], tv_scrape_info[2]])
+        found_tv_info.append(["TV", tv_scrape_info[1], tv_scrape_info[2]])
 
 
 def create_media_index_csv():
@@ -187,6 +175,7 @@ def create_media_index_csv():
 
 
 def search_movie_folders_items():
+    movie_walk = []
     for root, dirs, movie in movie_walk_data:
         for found_movie_file in movie:
             if found_movie_file.endswith(("3gp", "avi", "divx", "img", "iso", "m4a", "m4v", "mkv", "mov", "mp4",
@@ -274,6 +263,24 @@ def movie_file_query_and_sort():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
+    print("1) MOVIES - 2) TV SHOWS - 3) EXIT")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    data_query_options = input("ENTER #")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    data_query_options = int(data_query_options)
+    if data_query_options == 1:
+        movie_query_action()
+    elif data_query_options == 2:
+        pass
+    elif data_query_options == 3:
+        launch_media_index()
+
+
+def movie_query_action():
     mv_query_action = input("ENTER SEARCH QUERY (MOVIES):")
     print()
     print("--------------------------------------------------------------------------------------------------")
@@ -281,6 +288,7 @@ def movie_file_query_and_sort():
     mv_query_action_lower = str(mv_query_action.lower())
     for movie_file in sorted(media_index_test_list):
         if mv_query_action_lower in movie_file[0].lower():
+            print()
             print("MOVIE TITLE:")
             print(movie_file[0])
             print()
@@ -298,7 +306,6 @@ def movie_file_query_and_sort():
             print()
             print()
             print("--------------------------------------------------------------------------------------------------")
-            print()
 
 
 def run_graphs():
