@@ -7,9 +7,9 @@ import matplotlib.pylab as plt
 media_index = list(csv.reader(open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv")))
 media_index_list = list(csv.reader(open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv")))
 
-media_index_test = csv.reader(open(r'C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX-TEST.csv'))
-media_index_test_list = list(
-    csv.reader(open(r'C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX-TEST.csv')))
+movie_files_index = csv.reader(open(r'C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv'))
+movie_files_index_list = list(
+    csv.reader(open(r'C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv')))
 
 movies_dir = os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/MOVIES/")
 tv_dir = os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/TV/")
@@ -178,8 +178,12 @@ def search_movie_folders_items():
     movie_walk = []
     for root, dirs, movie in movie_walk_data:
         for found_movie_file in movie:
-            if found_movie_file.endswith(("3gp", "avi", "divx", "img", "iso", "m4a", "m4v", "mkv", "mov", "mp4",
-                                          "mpeg", "qt", "webm", "wmv", "xvid")):
+            if found_movie_file.endswith(
+                    (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
+                     ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv",
+                     ".mov", ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt",
+                     ".rm", ".rmvb", ".srt", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid",
+                     ".webm")):
                 movie_walk.append([found_movie_file])
     for movie_match in movie_walk:
         movie_year_info = re.findall("\((\d{4})\)", str(movie_match)),
@@ -188,7 +192,7 @@ def search_movie_folders_items():
         movie_old_res_standard = re.findall("\((\d{3,}p)\)", str(movie_match)),
         movie_parts = re.findall("Part\s\d{1,2}", str(movie_match)),
         movie_file_type = re.finditer(
-            "(\.3gp)|(\.avi)|(\.divx)|(\.img)|(\.iso)|(\.m4a)|(\.m4v)|(\.mkv)|(\.mov)|(\.mp4)|(\.mpeg)|(\.qt)|"
+            "(\.3gp)|(\.avi)|(\.divx)|(\.flv)|(\.img)|(\.iso)|(\.m4a)|(\.m4v)|(\.mkv)|(\.mov)|(\.mp4)|(\.mpeg)|(\.qt)|"
             "(\.webm)|(\.wmv)|(\.xvid)", str(movie_match))
         for found_movie_match in movie_file_type:
             movie_results.append(
@@ -196,9 +200,9 @@ def search_movie_folders_items():
                  movie_old_res_standard[0], movie_parts[0], [found_movie_match[0]]])
 
 
-def create_media_index_test_csv():
+def create_media_files_index_csv():
     search_movie_folders_items()
-    with open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX-TEST.csv", "w", newline="") as f:
+    with open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
         for movie_row in movie_results:
             csv_writer.writerow(movie_row)
@@ -286,7 +290,7 @@ def movie_query_action():
     print("--------------------------------------------------------------------------------------------------")
     print()
     mv_query_action_lower = str(mv_query_action.lower())
-    for movie_file in sorted(media_index_test_list):
+    for movie_file in sorted(movie_files_index_list):
         if mv_query_action_lower in movie_file[0].lower():
             print()
             print("MOVIE TITLE:")
@@ -465,7 +469,7 @@ def create_media_indexes_all():
     if cmi_action == 1:
         create_media_index_csv()
     elif cmi_action == 2:
-        create_media_index_test_csv()
+        create_media_files_index_csv()
     elif cmi_action == 3:
         launch_media_index()
 
