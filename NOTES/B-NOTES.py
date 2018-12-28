@@ -3,10 +3,14 @@ PIP INSTALLS -
 
 UPGRADE **
 
+aplotter
+asciichart
+asciiplotlib
 babblefish
 click
 enzyme
 get-media-files
+gnuplot
 guessit
 guess-language
 matplotlib
