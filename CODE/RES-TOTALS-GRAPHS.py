@@ -3,7 +3,7 @@ import re
 
 import matplotlib.pyplot as plt
 
-movie_file_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv'))
+movie_file_index = csv.reader(open(r'C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv'))
 
 
 def search_resolution_totals_movies():
@@ -33,28 +33,9 @@ def search_resolution_totals_movies():
             autopct='%1.1f%%', shadow=True, startangle=140)
 
     plt.axis('equal')
+    plt.savefig(r'C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MOVIE-RESOLUTION-RESULTS.png')
     plt.show()
 
 
 search_resolution_totals_movies()
 
-
-
-"""
-# explode = (0.1, 0, 0, 0)  # explode 1st slice (PUT IN plt.pie -> explode=explode,) <- For Above Type
-
-
-
-    labels = ['1080p', '720p', 'SD (Below 720p)', 'NONE']
-    sizes = [float(len(ten_eighty_found_list)), float(len(seven_twenty_found_list)),
-             float(len(standard_def_found_list)), float(len(empty_response_list))]
-    colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
-    patches, texts = plt.pie(sizes, colors=colors, shadow=True, startangle=90)
-    plt.legend(patches, labels, loc="best")
-    plt.axis('equal')
-    plt.tight_layout()
-    plt.show()
-
-
-search_resolution_totals_movies()
-"""
