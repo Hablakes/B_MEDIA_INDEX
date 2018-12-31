@@ -49,6 +49,8 @@ def search_resolution_totals_movies():
 
     ax.set_title("MOVIE-FILE-RESOLUTION-RESULTS")
 
+    plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-RESOLUTION-RESULTS-TEST.png')
+
     plt.show()
 
 
