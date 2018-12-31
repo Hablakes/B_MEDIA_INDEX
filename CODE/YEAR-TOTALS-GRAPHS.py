@@ -3,8 +3,8 @@ import re
 
 import matplotlib.pylab as plt
 
-media_index = list(csv.reader(open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv")))
-media_index_list = list(csv.reader(open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv")))
+media_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv'))
+media_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
 
 movie_years_range = range(1900, 2100, 1)
 tv_show_years_range = range(1900, 2100, 1)
@@ -33,7 +33,7 @@ def get_movie_years_for_dict_and_graph():
     x, y = zip(*movie_data)
 
     plt.bar(x, y)
-    plt.savefig(r'C:\Users\botoole\Downloads\B\BPT\B-MEDIA-INDEX\FILES\MOVIE-YEAR-RESULTS.png')
+    plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-YEAR-RESULTS.png')
     plt.show()
 
 
@@ -54,9 +54,9 @@ def get_tv_years_for_dict_and_graph():
     x, y = zip(*tv_data)
 
     plt.bar(x, y)
-    plt.savefig(r'C:\Users\botoole\Downloads\B\BPT\B-MEDIA-INDEX\FILES\TV-YEAR-RESULTS.png')
+    plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-YEAR-RESULTS.png')
     plt.show()
 
 
-get_movie_years_for_dict_and_graph()
+#get_movie_years_for_dict_and_graph()
 get_tv_years_for_dict_and_graph()
