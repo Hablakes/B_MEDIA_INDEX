@@ -25,7 +25,7 @@ OS INSTALLS -
 
 Use Terminal: sudo pacman -S * (on Arch based systems)
 
-* =
+* = NIX
 
 cool-retro-term
 libmediainfo
@@ -33,6 +33,9 @@ lolcat
 mediainfo mediainfo-gui
 tk
 
+* = WIN
+
+MediaInfo (https://mediaarea.net/en/MediaInfo)
 
 
 DIRS -
