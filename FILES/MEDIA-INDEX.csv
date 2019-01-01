@@ -84,6 +84,7 @@ MOVIE,A History of Violence,2005
 MOVIE,A Hologram for the King,2016
 MOVIE,A Knight's Tale,2001
 MOVIE,A League of Their Own,1992
+MOVIE,A Lesson in Love,1954
 MOVIE,A Man Called Ove,2015
 MOVIE,A Master Builder,2013
 MOVIE,A Mighty Wind,2003
@@ -250,6 +251,7 @@ MOVIE,Antiporno,2016
 MOVIE,Antisocial,2013
 MOVIE,Antisocial 2,2015
 MOVIE,Antitrust,2001
+MOVIE,Antwone Fisher,2002
 MOVIE,Anvil! The Story of Anvil,2008
 MOVIE,Any Given Sunday,1999
 MOVIE,Apocalypse Now,1979
@@ -437,6 +439,7 @@ MOVIE,Black Eagle,1988
 MOVIE,Black Friday,1940
 MOVIE,Black Hawk Down,2001
 MOVIE,Black Mass,2015
+MOVIE,Black Mirror Bandersnatch,2018
 MOVIE,Black Mountain Side,2014
 MOVIE,Black Panther,2018
 MOVIE,Black Rain,1989
@@ -473,6 +476,7 @@ MOVIE,Blue Jasmine,2013
 MOVIE,Blue Ruin,2014
 MOVIE,Blue Valentine,2010
 MOVIE,Blue Velvet,1986
+MOVIE,Bluebeard's Eighth Wife,1938
 MOVIE,Boat Trip,2002
 MOVIE,Bob Lazar - Area 51 and Flying Saucers,2018
 MOVIE,Boiler Room,2000
@@ -537,6 +541,7 @@ MOVIE,Brooklyn,2015
 MOVIE,Brooklyn's Finest,2009
 MOVIE,Brotherhood,2016
 MOVIE,Brothers,2009
+MOVIE,Brothers of the Wind,2015
 MOVIE,Bruce Almighty,2003
 MOVIE,Bruno,2000
 MOVIE,Bubble Boy,2001
@@ -619,6 +624,7 @@ MOVIE,Cheech & Chong Roasted,2008
 MOVIE,Cheech & Chong's Hey Watch This,2010
 MOVIE,Cheech & Chong's Next Movie,1980
 MOVIE,Cheech & Chong's The Corsican Brothers,1984
+MOVIE,Cherry Falls,2000
 MOVIE,Cherrybomb,2009
 MOVIE,Chicken Little,2005
 MOVIE,Child 44,2015
@@ -714,6 +720,7 @@ MOVIE,Convict,2014
 MOVIE,Convoy,1978
 MOVIE,Cool Hand Luke,1967
 MOVIE,Cool Runnings,1993
+MOVIE,Cool World,1992
 MOVIE,Cop Car,2015
 MOVIE,Cop Out,2010
 MOVIE,Copycat,1995
@@ -722,6 +729,7 @@ MOVIE,Couples Retreat,2009
 MOVIE,Courage Under Fire,1996
 MOVIE,Cowboys & Aliens,2011
 MOVIE,Coyote Ugly,2000
+MOVIE,Crack in the World,1965
 MOVIE,Cradle 2 the Grave,2003
 MOVIE,Crank,2006
 MOVIE,Crash,2004
@@ -752,6 +760,7 @@ MOVIE,Cube Zero,2004
 MOVIE,Cube² - Hypercube,2002
 MOVIE,Cujo,1983
 MOVIE,Curse of Chucky,2013
+MOVIE,Curse of the Puppet Master,1998
 MOVIE,Cut Bank,2014
 MOVIE,Cyberbully,2015
 MOVIE,Cypher,2002
@@ -810,6 +819,7 @@ MOVIE,Deadpool,2016
 MOVIE,Deadpool 2,2018
 MOVIE,Dealt,2017
 MOVIE,Dear Basketball,2017
+MOVIE,Dear Santa,2011
 MOVIE,Death Proof,2007
 MOVIE,Death Race,2008
 MOVIE,Death Race 2,2010
@@ -841,6 +851,7 @@ MOVIE,Demon House,2018
 MOVIE,Den of Thieves,2018
 MOVIE,Denial,2016
 MOVIE,Dennis the Menace,1993
+MOVIE,Descent,2007
 MOVIE,Desert Seas,2011
 MOVIE,Desperado,1995
 MOVIE,Despicable Me,2010
@@ -878,6 +889,7 @@ MOVIE,Doctor Dolittle,1967
 MOVIE,Doctor Dolittle,1998
 MOVIE,Doctor Strange,2016
 MOVIE,Doctor Who,1996
+MOVIE,DodgeBall A True Underdog Story,2004
 MOVIE,Dog Day Afternoon,1975
 MOVIE,Dogma,1999
 MOVIE,Dom Hemingway,2013
@@ -1008,7 +1020,9 @@ MOVIE,Everybody's Fine,2009
 MOVIE,Everything Beautiful Is Far Away,2017
 MOVIE,Everything or Nothing,2012
 MOVIE,Evil Dead II,1987
+MOVIE,Evil Toons,1992
 MOVIE,Evils of the Night,1985
+MOVIE,Evilspeak,1981
 MOVIE,Evita,1996
 MOVIE,Evolution,2001
 MOVIE,Ex Machina,2015
@@ -1062,6 +1076,7 @@ MOVIE,Faults,2014
 MOVIE,Fear,1996
 MOVIE,Fear and Loathing in Las Vegas,1998
 MOVIE,Fearless,2006
+MOVIE,Female on the Beach,1955
 MOVIE,Fences,2016
 MOVIE,FernGully - The Last Rainforest,1992
 MOVIE,Ferrari - Race to Immortality,2017
@@ -1152,6 +1167,7 @@ MOVIE,Freelancers,2012
 MOVIE,French Kiss,1995
 MOVIE,Frequencies,2013
 MOVIE,Frequency,2000
+MOVIE,Fresh,1994
 MOVIE,Friday,1995
 MOVIE,Friday After Next,2002
 MOVIE,Friday Night Lights,2004
@@ -1374,6 +1390,7 @@ MOVIE,Hard Candy,2005
 MOVIE,Hard Rain,1998
 MOVIE,Hard Target,1993
 MOVIE,Hard Target 2,2016
+MOVIE,Hard Times,1975
 MOVIE,Hard to Kill,1990
 MOVIE,Hardbodies,1984
 MOVIE,Hardcore Henry,2015
@@ -1390,10 +1407,12 @@ MOVIE,Harry Potter and the Order of the Phoenix,2007
 MOVIE,Harry Potter and the Philosopher's Stone,2001
 MOVIE,Harry Potter and the Prisoner of Azkaban,2004
 MOVIE,Harry and the Hendersons,1987
+MOVIE,Harvest,1937
 MOVIE,Havoc,2005
 MOVIE,He Got Game,1998
 MOVIE,He Never Died,2015
 MOVIE,He-Man and She-Ra - A Christmas Special,1985
+MOVIE,Head in the Clouds,2004
 MOVIE,Heartbreak Ridge,1986
 MOVIE,Heat,1995
 MOVIE,Heathers,1989
@@ -1404,6 +1423,8 @@ MOVIE,Hector and the Search for Happiness,2014
 MOVIE,Hedgehog,2017
 MOVIE,Heist,2015
 MOVIE,Hell Baby,2013
+MOVIE,Hell House LLC,2015
+MOVIE,Hell House LLC II The Abaddon Hotel,2018
 MOVIE,Hell or High Water,2016
 MOVIE,Hellbound - Hellraiser II,1988
 MOVIE,Hellboy,2004
@@ -1533,6 +1554,7 @@ MOVIE,Identity,2003
 MOVIE,Identity Thief,2013
 MOVIE,Idiocracy,2006
 MOVIE,Idle Hands,1999
+MOVIE,If I Had a Million,1932
 MOVIE,Immortal,2004
 MOVIE,Imperium,2016
 MOVIE,In Bruges,2008
@@ -1940,6 +1962,7 @@ MOVIE,Marjorie Prime,2017
 MOVIE,Mark Felt - The Man Who Brought Down the White House,2017
 MOVIE,Marnie,1964
 MOVIE,Mars Attacks!,1996
+MOVIE,Martin,1978
 MOVIE,Mary Poppins,1964
 MOVIE,Mary Shelley's Frankenstein,1994
 MOVIE,Mary and Max,2009
@@ -2029,6 +2052,7 @@ MOVIE,Mission - Impossible II,2000
 MOVIE,Mission - Impossible III,2006
 MOVIE,Mission Control - The Unsung Heroes of Apollo,2017
 MOVIE,Mission to Mars,2000
+MOVIE,Mister Johnson,1990
 MOVIE,Mistress America,2015
 MOVIE,Mitch Hedberg Uncut,1999
 MOVIE,Moana,2016
@@ -2057,6 +2081,7 @@ MOVIE,Moon,2009
 MOVIE,Moonlight,2016
 MOVIE,Moonraker,1979
 MOVIE,Moonrise Kingdom,2012
+MOVIE,Moonstruck,1987
 MOVIE,Moontrap - Target Earth,2017
 MOVIE,Moonwalker,1988
 MOVIE,Moonwalkers,2015
@@ -2099,6 +2124,7 @@ MOVIE,My Blueberry Nights,2007
 MOVIE,My Cousin Rachel,2017
 MOVIE,My Cousin Vinny,1992
 MOVIE,My Friend Dahmer,2017
+MOVIE,My Gal Sal,1942
 MOVIE,My King,2015
 MOVIE,My Life as a Zucchini,2016
 MOVIE,My Little Pony - Equestria Girls,2013
@@ -2155,6 +2181,7 @@ MOVIE,Night at the Museum - Secret of the Tomb,2014
 MOVIE,Night of the Living Dead,1968
 MOVIE,Night of the Living Dead,1990
 MOVIE,Nightcrawler,2014
+MOVIE,Nightmare,1981
 MOVIE,Nim's Island,2008
 MOVIE,Nine to Five,1980
 MOVIE,Nineteen Eighty-Four,1984
@@ -2232,6 +2259,7 @@ MOVIE,Once Upon a Time in Mexico,2003
 MOVIE,Once Upon a Time in the West,1968
 MOVIE,One Eight Seven,1997
 MOVIE,One Flew Over the Cuckoo's Nest,1975
+MOVIE,One Hour with You,1932
 MOVIE,One Hundred and One Dalmatians,1961
 MOVIE,One Point O,2004
 MOVIE,Only God Forgives,2013
@@ -2280,6 +2308,7 @@ MOVIE,Palm Trees in the Snow,2015
 MOVIE,Pan,2015
 MOVIE,Pan's Labyrinth,2006
 MOVIE,Pandemic,2016
+MOVIE,Pandora,2016
 MOVIE,Pandorum,2009
 MOVIE,Panic Room,2002
 MOVIE,Paper Moon,1973
@@ -2822,6 +2851,7 @@ MOVIE,Snowmageddon,2011
 MOVIE,Snowpiercer,2013
 MOVIE,Snowtown,2011
 MOVIE,So I Married an Axe Murderer,1993
+MOVIE,Social Nightmare,2013
 MOVIE,Solace,2015
 MOVIE,Solaris,1972
 MOVIE,Solaris,2002
@@ -2856,6 +2886,7 @@ MOVIE,Space Station 76,2014
 MOVIE,Space Truckers,1996
 MOVIE,Spaceballs,1987
 MOVIE,Spacehunter - Adventures in the Forbidden Zone,1983
+MOVIE,Spanglish,2004
 MOVIE,Sparks,2013
 MOVIE,Spartacus,1960
 MOVIE,Spawn,1997
@@ -2920,6 +2951,7 @@ MOVIE,Starship Troopers,1997
 MOVIE,Starship Troopers - Traitor of Mars,2017
 MOVIE,State of Emergency,2011
 MOVIE,Stay Tuned,1992
+MOVIE,Staying Alive,1983
 MOVIE,Stealing Harvard,2002
 MOVIE,Steel Magnolias,2012
 MOVIE,Step Brothers,2008
@@ -3068,11 +3100,13 @@ MOVIE,The 6th Day,2000
 MOVIE,The 7th Voyage of Sinbad,1958
 MOVIE,The 90th Annual Academy Awards,2017
 MOVIE,The A-Team,2010
+MOVIE,The Absent-Minded Professor,1961
 MOVIE,The Abyss,1989
 MOVIE,The Accountant,2016
 MOVIE,The Act of Killing,2012
 MOVIE,The Addams Family,1991
 MOVIE,The Adjustment Bureau,2011
+MOVIE,The Adventurers,2017
 MOVIE,The Adventures of Baron Munchausen,1988
 MOVIE,The Adventures of Buckaroo Banzai Across the 8th Dimension,1984
 MOVIE,The Adventures of Hajji Baba,1954
@@ -3255,6 +3289,7 @@ MOVIE,The Deer Hunter,1978
 MOVIE,The Delta Force,1986
 MOVIE,The Departed,2006
 MOVIE,The Descent,2005
+MOVIE,The Descent Part 2,2009
 MOVIE,The Devil Inside,2012
 MOVIE,The Devil Wears Prada,2006
 MOVIE,The Devil's Advocate,1997
@@ -3354,6 +3389,7 @@ MOVIE,The Gamma People,1956
 MOVIE,The Gateway,2018
 MOVIE,The Getaway,1972
 MOVIE,The Ghost Beyond,2018
+MOVIE,The Ghost and the Darkness,1996
 MOVIE,The Ghost of Frankenstein,1942
 MOVIE,The Giant Behemoth,1959
 MOVIE,The Gift,2015
@@ -3384,6 +3420,7 @@ MOVIE,The Grand Budapest Hotel,2014
 MOVIE,The Greasy Strangler,2016
 MOVIE,The Great Escape,1963
 MOVIE,The Great Gatsby,2013
+MOVIE,The Great Outdoors,1988
 MOVIE,The Great Scout & Cathouse Thursday,1976
 MOVIE,The Great Wall,2016
 MOVIE,The Greatest Showman,2017
@@ -3445,6 +3482,7 @@ MOVIE,The Iceman Tapes - Conversations with a Killer,1992
 MOVIE,The Illusionist,2006
 MOVIE,The Imaginarium of Doctor Parnassus,2009
 MOVIE,The Imitation Game,2014
+MOVIE,The Immortal Life of Henrietta Lacks,2017
 MOVIE,The Impossible,2012
 MOVIE,The Imposter,2012
 MOVIE,The Inbetweeners 2,2014
@@ -3457,6 +3495,7 @@ MOVIE,The Incredible Shrinking Woman,1981
 MOVIE,The Incredibles,2004
 MOVIE,The Indian in the Cupboard,1995
 MOVIE,The Infiltrator,2016
+MOVIE,The Informant!,2009
 MOVIE,The Innocents,1961
 MOVIE,The Institute,2017
 MOVIE,The Intern,2015
@@ -3471,6 +3510,7 @@ MOVIE,The Invisible Woman,1940
 MOVIE,The Invitation,2015
 MOVIE,The Iron Giant,1999
 MOVIE,The Island,2005
+MOVIE,The Island at the Top of the World,1974
 MOVIE,The Italian Job,2003
 MOVIE,The Jackal,1997
 MOVIE,The Jericho Mile,1980
@@ -3590,6 +3630,7 @@ MOVIE,The Men Who Stare at Goats,2009
 MOVIE,The Mercenary,1968
 MOVIE,The Mermaid,2016
 MOVIE,The Mermaid - Lake of the Dead,2018
+MOVIE,The Merry Gentleman,2008
 MOVIE,The Messengers,2007
 MOVIE,The Meteor Man,1993
 MOVIE,The Mexican,2001
@@ -3599,6 +3640,7 @@ MOVIE,The Mighty Peking Man,1977
 MOVIE,The Mind of Mr. Soames,1970
 MOVIE,The Mind's Eye,2015
 MOVIE,The Mist,2007
+MOVIE,The Mod Squad,1999
 MOVIE,The Money Pit,1986
 MOVIE,The Monkey King,2014
 MOVIE,The Monkey King 2,2016
@@ -3629,6 +3671,7 @@ MOVIE,The Next Karate Kid,1994
 MOVIE,The Next Three Days,2010
 MOVIE,The Nice Guys,2016
 MOVIE,The Night Before,2015
+MOVIE,The Night Strangler,1973
 MOVIE,The Night Witch,2015
 MOVIE,The Night of the Hunter,1955
 MOVIE,The Ninth Configuration,1980
@@ -3735,6 +3778,7 @@ MOVIE,The Road to Wellville,1994
 MOVIE,The Rock,1996
 MOVIE,The Rocker,2008
 MOVIE,The Rocketeer,1991
+MOVIE,The Romantics,2010
 MOVIE,The Room,2003
 MOVIE,The Roommate,2011
 MOVIE,The Rover,2014
@@ -3913,6 +3957,7 @@ MOVIE,Thelma & Louise,1991
 MOVIE,Theory of Obscurity - A Film About the Residents,2015
 MOVIE,There Will Be Blood,2007
 MOVIE,There's Something About Mary,1998
+MOVIE,They Call Me Mister Tibbs!,1970
 MOVIE,They Live,1988
 MOVIE,They Remain,2018
 MOVIE,Thief,1981
@@ -4019,6 +4064,7 @@ MOVIE,Tron,1982
 MOVIE,Tropic Thunder,2008
 MOVIE,Trouble Is My Business,2018
 MOVIE,Troy,2004
+MOVIE,True Confessions,1981
 MOVIE,True Grit,1969
 MOVIE,True Lies,1994
 MOVIE,True Romance,1993
@@ -4041,6 +4087,7 @@ MOVIE,Twelve O'Clock High,1949
 MOVIE,Twilight,2008
 MOVIE,Twilight Zone - The Movie,1983
 MOVIE,Twin Peaks - Fire Walk with Me,1992
+MOVIE,"Twinkle, Twinkle, Lucky Stars",1985
 MOVIE,Twins,1988
 MOVIE,Twister,1996
 MOVIE,"Two Days, One Night",2014
@@ -4055,8 +4102,10 @@ MOVIE,Unauthorized Access,1994
 MOVIE,Unbreakable,2000
 MOVIE,Unbroken,2014
 MOVIE,Uncanny,2015
+MOVIE,Under Fire,1983
 MOVIE,Under Siege,1992
 MOVIE,Under Siege 2 - Dark Territory,1995
+MOVIE,Under the Cherry Moon,1986
 MOVIE,Under the Electric Sky,2014
 MOVIE,Under the Hawthorn Tree,2010
 MOVIE,Under the Shadow,2016
@@ -4089,6 +4138,7 @@ MOVIE,Up in Smoke,1978
 MOVIE,Upgrade,2018
 MOVIE,Upstream Color,2013
 MOVIE,Urban Cowboy,1980
+MOVIE,Utopia,1951
 MOVIE,V for Vendetta,2006
 MOVIE,VHS,2012
 MOVIE,VHS Massacre - Cult Films and the Decline of Physical Media,2016
@@ -4129,6 +4179,7 @@ MOVIE,Volunteers,1985
 MOVIE,W.,2008
 MOVIE,WALL·E,2008
 MOVIE,Wag the Dog,1997
+MOVIE,Waiting Women,1952
 MOVIE,Waiting for Immortality,2016
 MOVIE,Waiting...,2005
 MOVIE,Waking Life,2001
@@ -4156,6 +4207,7 @@ MOVIE,Warning Shot,2018
 MOVIE,Wasabi,2001
 MOVIE,Watch Your Back,2015
 MOVIE,Watchmen,2009
+MOVIE,Watchtower,2012
 MOVIE,Waterworld,1995
 MOVIE,Way Out West,1937
 MOVIE,Wayne's World,1992
@@ -4192,7 +4244,9 @@ MOVIE,What Planet Are You From,2000
 MOVIE,What We Do in the Shadows,2014
 MOVIE,What Women Want,2000
 MOVIE,What's Eating Gilbert Grape,1993
+MOVIE,When A Stranger Calls Back,1993
 MOVIE,When Marnie Was There,2014
+MOVIE,When a Stranger Calls,1979
 MOVIE,When the Wind Blows,1986
 MOVIE,Where in the World Is Osama Bin Laden,2008
 MOVIE,Where the Wild Things Are,2009
@@ -4248,6 +4302,8 @@ MOVIE,Worth,2018
 MOVIE,Wrath of the Titans,2012
 MOVIE,Wreck-It Ralph,2012
 MOVIE,Wrecked,2011
+MOVIE,Wrong,2012
+MOVIE,Wrong Is Right,1982
 MOVIE,Wrong Turn,2003
 MOVIE,X+Y,2015
 MOVIE,X-Men,2000
@@ -4347,6 +4403,7 @@ TV,American Justice,1992
 TV,Ancient Aliens,2010
 TV,Ancient Civilizations,2017
 TV,Ancient Earth,2017
+TV,Ancient Invisible Cities,2018
 TV,Ancient MegaStructures,2011
 TV,Andromeda,2000
 TV,Andy Richter Controls the Universe,2002
@@ -4424,6 +4481,7 @@ TV,Black Lightning,2018
 TV,Black Market,2016
 TV,Black Market Dispatches,2016
 TV,Black Mirror,2011
+TV,Black Monday,2018
 TV,Black Sails,2014
 TV,Blackadder,1983
 TV,Blackout,2006
@@ -4543,6 +4601,7 @@ TV,Cybergeddon,2016
 TV,Cyberwar,2016
 TV,DC's Legends of Tomorrow,2016
 TV,DONG,2015
+TV,DRYVRS,2015
 TV,Da Ali G Show,2000
 TV,Dark Matter,2015
 TV,Dark Matters,2011
@@ -4557,6 +4616,7 @@ TV,Dead Set,2008
 TV,Deadliest Catch,2005
 TV,Deadliest Tech,2012
 TV,Deadly 60 on a Mission,2011
+TV,Deadly Class,2018
 TV,Deadly Rich,2018
 TV,Deadwood,2004
 TV,Deception,2018
@@ -5251,6 +5311,7 @@ TV,The 1990s The Deadliest Decade,2018
 TV,The 4400,2004
 TV,The 8 Bit Guy,2007
 TV,The A-Team,1983
+TV,The ABC Murders,2018
 TV,The Addams Family,1964
 TV,"The Adventures of Brisco County, Jr.",1993
 TV,The Adventures of Pete & Pete,1993
