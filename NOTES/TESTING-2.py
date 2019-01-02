@@ -20,8 +20,9 @@ def scrape_file_info_from_list():
         tv_file_height.append(track.height)
         tv_file_file_extension.append(track.file_extension)
 
-    tv_file_results.append([tv_file_other_file_name[0], tv_file_width[1], tv_file_height[1], tv_file_file_extension[0]])
-    print(tv_file_results)
+    tv_file_results.append(
+        [tv_file_other_file_name[0], [tv_file_width[1], tv_file_height[1]], [tv_file_file_extension[0]]])
+    print(tv_file_results[0])
 
 
 scrape_file_info_from_list()
