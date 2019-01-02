@@ -9,14 +9,13 @@ test = pymediainfo.MediaInfo.parse(
 
 def scrape_file_info_from_list():
     tv_file_results = []
+    tv_file_other_file_name = []
+    tv_file_file_extension = []
+    tv_file_width = []
+    tv_file_height = []
 
     for track in test.tracks:
-        tv_file_results.append([track.sampled_width]+[track.sampled_height])
-
-    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS-TEST.csv", "w", newline="") as f:
-        csv_writer = csv.writer(f)
-        for tv_row in tv_file_results:
-            csv_writer.writerow(tv_row)
+        track.to_data()
 
 
 scrape_file_info_from_list()
