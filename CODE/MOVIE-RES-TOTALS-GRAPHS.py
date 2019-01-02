@@ -40,7 +40,7 @@ def search_resolution_totals_movies():
     colors = ['skyblue', 'cyan', 'yellowgreen', 'magenta']
 
     wedges, texts, autotexts = ax.pie(data, autopct=lambda pct: format_movie_data(pct, data),
-                                      colors=colors, textprops=dict(color="black"))
+                                      shadow=True, colors=colors, textprops=dict(color="black"))
 
     ax.legend(wedges, labels,
               title="RESOLUTIONS",
