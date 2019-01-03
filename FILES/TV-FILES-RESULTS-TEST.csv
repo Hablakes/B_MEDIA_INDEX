@@ -7,3 +7,6 @@
 "[MatchesDict([('title', 'Test Show'), ('year', 2000), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[None, None]",['mp4']
 "[MatchesDict([('title', 'Test Show'), ('year', 2000), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[1280, 720]",[None]
 "[MatchesDict([('title', 'Test Show'), ('year', 2000), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[None, None]",[None]
+"[MatchesDict([('title', 'Sciencephile The Ai'), ('year', 2016), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[None, None]",['mp4']
+"[MatchesDict([('title', 'Sciencephile The Ai'), ('year', 2016), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[1280, 720]",[None]
+"[MatchesDict([('title', 'Sciencephile The Ai'), ('year', 2016), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[None, None]",[None]
