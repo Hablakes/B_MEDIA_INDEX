@@ -1,12 +1,3 @@
-"[MatchesDict([('title', 'Honest Game Trailers'), ('year', 2012), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[None, None]",['mp4']
-"[MatchesDict([('title', 'Honest Game Trailers'), ('year', 2012), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[1280, 720]",[None]
-"[MatchesDict([('title', 'Honest Game Trailers'), ('year', 2012), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[None, None]",[None]
-"[MatchesDict([('title', 'Honest Trailers'), ('year', 2012), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[None, None]",['mp4']
-"[MatchesDict([('title', 'Honest Trailers'), ('year', 2012), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[1280, 720]",[None]
-"[MatchesDict([('title', 'Honest Trailers'), ('year', 2012), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[None, None]",[None]
-"[MatchesDict([('title', 'Test Show'), ('year', 2000), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[None, None]",['mp4']
-"[MatchesDict([('title', 'Test Show'), ('year', 2000), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[1280, 720]",[None]
-"[MatchesDict([('title', 'Test Show'), ('year', 2000), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[None, None]",[None]
-"[MatchesDict([('title', 'Sciencephile The Ai'), ('year', 2016), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[None, None]",['mp4']
-"[MatchesDict([('title', 'Sciencephile The Ai'), ('year', 2016), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[1280, 720]",[None]
-"[MatchesDict([('title', 'Sciencephile The Ai'), ('year', 2016), ('container', 'mp4'), ('mimetype', 'video/mp4'), ('type', 'movie')])]","[None, None]",[None]
+Honest Game Trailers,Game Test,8,1,1280x720,2012,mp4
+Honest Trailers,Venom,8,1,1280x720,2012,mp4
+Test Show,Title,2,2,1280x720,2000,mp4
