@@ -12,13 +12,15 @@ def scrape_file_info_from_list():
 
     for tv_file in tv_index:
 
-        title = guessit.guessit(tv_file[0])
+        title = guessit.guessit(tv_file[0], options={'type': 'episode'})
 
         test = pymediainfo.MediaInfo.parse(tv_file[0])
 
         for track in test.tracks:
-            tv_file_results.append(
-                [[title], [track.width, track.height], [track.file_extension]])
+            if track.track_type == 'Video':
+                tv_file_results.append(
+                    [title['title'], title['season'], str(track.width) + 'x' + str(track.height), title['year'],
+                     title['container']])
 
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS-TEST.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
