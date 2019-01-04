@@ -267,14 +267,14 @@ def run_sort():
         launch_media_index()
 
 
-def movie_file_query_and_sort():
+def file_query_and_sort():
     print("___     ____ _ _    ____    ___  ____ ___ ____    ____ _  _ ____ ____ _   _")
     print("|__] __ |___ | |    |___ __ |  \ |__|  |  |__| __ |  | |  | |___ |__/  \_/")
     print("|__]    |    | |___ |___    |__/ |  |  |  |  |    |_\| |__| |___ |  \   |")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("1) MOVIES - 2) TV SHOWS                                                              - 3) EXIT")
+    print("SEARCH TITLES - 1) MOVIES - 2) TV SHOWS                                              - 3) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -554,7 +554,7 @@ def launch_media_index():
     elif lmi_action == 2:
         run_sort()
     elif lmi_action == 3:
-        movie_file_query_and_sort()
+        file_query_and_sort()
     elif lmi_action == 4:
         run_graphs()
     elif lmi_action == 5:
