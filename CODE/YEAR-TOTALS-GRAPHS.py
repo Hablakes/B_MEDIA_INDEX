@@ -34,7 +34,7 @@ def get_movie_years_for_dict_and_graph():
 
     plt.bar(x, y)
     plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-YEAR-RESULTS.png')
-    plt.show()
+#    plt.show()
 
 
 def get_tv_years_for_dict_and_graph():
@@ -55,8 +55,16 @@ def get_tv_years_for_dict_and_graph():
 
     plt.bar(x, y)
     plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-YEAR-RESULTS.png')
-    plt.show()
+#    plt.show()
 
 
-get_movie_years_for_dict_and_graph()
-get_tv_years_for_dict_and_graph()
+
+def run():
+
+    get_movie_years_for_dict_and_graph()
+    get_tv_years_for_dict_and_graph()
+
+
+
+while True:
+    run()
