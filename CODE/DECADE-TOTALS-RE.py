@@ -20,12 +20,17 @@ def get_movie_years_decades_totals():
                 if media_movie_year_int not in movie_years_decades_dict:
                     movie_years_decades_dict[media_movie_year_int] = []
                 movie_years_decades_dict[media_movie_year_int].append(media_movie)
-    media_movie_years_decade_totals = {}
+    media_movie_years_decades_totals = {}
 
     for movie_year_values, value in sorted(movie_years_decades_dict.items()):
-        media_movie_years_decade_totals[movie_year_values] = len(value)
-
-    print(media_movie_years_decade_totals)
+        media_movie_years_decades_totals[movie_year_values] = len(value)
+    print()
+    print("# OF MOVIES BY DECADE:")
+    print()
+    print(media_movie_years_decades_totals)
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
 
 
 def get_tv_years_decades_totals():
@@ -42,8 +47,13 @@ def get_tv_years_decades_totals():
 
     for tv_year_values, value in sorted(tv_years_decades_amount_dict.items()):
         media_tv_years_decades_totals[tv_year_values] = len(value)
-
+    print()
+    print("# OF TV SHOWS BY DECADE:")
+    print()
     print(media_tv_years_decades_totals)
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
 
 
 get_movie_years_decades_totals()
