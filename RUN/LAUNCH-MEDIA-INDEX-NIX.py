@@ -214,7 +214,7 @@ def run_query():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("SEARCH TITLES - 1) MOVIES - 2) TV SHOWS - 3) EXIT")
+    print("SEARCH TITLES - 1) MOVIES - 2) TV SHOWS                                              - 3) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -238,7 +238,7 @@ def run_sort():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("TITLE - 1) ASCENDING 2) DESCENDING - YEAR - 3) ASCENDING 4) DESCENDING - 5) EXIT")
+    print("TITLE - 1) ASCENDING - 2) DESCENDING - YEAR - 3) ASCENDING - 4) DESCENDING           - 5) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -266,7 +266,7 @@ def movie_file_query_and_sort():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("1) MOVIES - 2) TV SHOWS - 3) EXIT")
+    print("1) MOVIES - 2) TV SHOWS                                                              - 3) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -318,7 +318,7 @@ def run_graphs():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("1) MOVIES (TITLES PER YEAR) - 2) TV SHOWS (TITLES PER YEAR) - 3) EXIT")
+    print("1) MOVIES (TITLES PER YEAR) - 2) TV SHOWS (TITLES PER YEAR)                          - 3) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -342,7 +342,9 @@ def totals_query():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("1) MOVIES BY YEAR - 2) MOVIES TOTAL - 3) TV SHOWS BY YEAR 4) TV SHOWS TOTAL - 5) EXIT")
+    print("1) MOVIES BY YEAR   - 2) MOVIES BY DECADE   - 3) MOVIES TOTAL")
+    print()
+    print("4) TV SHOWS BY YEAR - 5) TV SHOWS BY DECADE - 6) TV SHOWS TOTALS                     - 7) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -354,12 +356,16 @@ def totals_query():
     if b_totals_query_action == 1:
         get_movie_years_for_dict()
     elif b_totals_query_action == 2:
-        get_movie_titles_amount()
+        get_movie_years_decades_totals()
     elif b_totals_query_action == 3:
-        get_tv_years_for_dict()
+        get_movie_titles_amount()
     elif b_totals_query_action == 4:
-        get_tv_titles_amount()
+        get_tv_years_for_dict()
     elif b_totals_query_action == 5:
+        get_tv_years_decades_totals()
+    elif b_totals_query_action == 6:
+        get_tv_titles_amount()
+    elif b_totals_query_action == 7:
         launch_media_index()
 
 
@@ -390,6 +396,29 @@ def get_movie_years_for_dict():
             print()
             print("--------------------------------------------------------------------------------------------------")
             print()
+
+
+def get_movie_years_decades_totals():
+    movie_years_decades_dict = {}
+    for media_movie in media_index:
+        media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
+        media_movie_year_int = int(media_movie_year[0][:-1] + '0')
+        if movie_string in media_movie:
+            if media_movie_year_int in movie_years_range:
+                if media_movie_year_int not in movie_years_decades_dict:
+                    movie_years_decades_dict[media_movie_year_int] = []
+                movie_years_decades_dict[media_movie_year_int].append(media_movie)
+    media_movie_years_decades_totals = {}
+
+    for movie_year_values, value in sorted(movie_years_decades_dict.items()):
+        media_movie_years_decades_totals[movie_year_values] = len(value)
+    print()
+    print("# OF MOVIES BY DECADE:")
+    print()
+    print(media_movie_years_decades_totals)
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
 
 
 def get_movie_titles_amount():
@@ -435,6 +464,29 @@ def get_tv_years_for_dict():
             print()
 
 
+def get_tv_years_decades_totals():
+    tv_years_decades_amount_dict = {}
+    for media_tv in media_index:
+        media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
+        media_tv_year_int = int(media_tv_year[0][:-1] + '0')
+        if tv_string in media_tv:
+            if media_tv_year_int in tv_show_years_range:
+                if media_tv_year_int not in tv_years_decades_amount_dict:
+                    tv_years_decades_amount_dict[media_tv_year_int] = []
+                tv_years_decades_amount_dict[media_tv_year_int].append(media_tv)
+    media_tv_years_decades_totals = {}
+
+    for tv_year_values, value in sorted(tv_years_decades_amount_dict.items()):
+        media_tv_years_decades_totals[tv_year_values] = len(value)
+    print()
+    print("# OF TV SHOWS BY DECADE:")
+    print()
+    print(media_tv_years_decades_totals)
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+
+
 def get_tv_titles_amount():
     tv_amounts_list = []
     for counted_tv_title in media_index:
@@ -456,7 +508,7 @@ def create_media_indexes_all():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("1) CREATE NEW MEDIA INDEX FROM DIRECTORIES - 2) CREATE NEW MEDIA INDEX FROM FILES - 3) EXIT")
+    print("1) CREATE NEW MEDIA INDEX FROM DIRECTORIES - 2) CREATE NEW MEDIA INDEX FROM FILES    - 3) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -480,7 +532,7 @@ def launch_media_index():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("1) QUERIES - 2) SORTING - 3) FILE DATA/INFO - 4) GRAPHS - 5) TOTALS - 6) INDEXING - 0) EXIT")
+    print("1) QUERIES - 2) SORTING - 3) FILE DATA/INFO - 4) GRAPHS - 5) TOTALS - 6) INDEXING    - 0) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
