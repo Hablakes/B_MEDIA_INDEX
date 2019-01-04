@@ -4,11 +4,14 @@ import re
 
 import matplotlib.pylab as plt
 
-media_index = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
+media_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv'))
 media_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
 
 movie_files_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv'))
 movie_files_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv')))
+
+#tv_files_index = csv.reader(open(r''))
+#tv_files_index_list = list(csv.reader(open(r'')))
 
 movies_dir = os.listdir(r"/home/bx/Videos/CHASE/MOVIES/")
 tv_dir = os.listdir(r"/home/bx/Videos/CHASE/TV/")
@@ -26,6 +29,7 @@ found_movie_info = []
 found_tv_info = []
 
 movie_file_results = []
+#tv_show_file_results = []
 
 
 def movie_title_search():
@@ -199,6 +203,10 @@ def search_movie_folders_items():
                  movie_old_res_standard[0], movie_parts[0], [found_movie_match[0]]])
 
 
+#def search_tv_show_folders_items():
+#    tv_show_walk = []
+
+
 def create_media_files_index_csv():
     search_movie_folders_items()
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv", "w", newline="") as f:
@@ -342,9 +350,9 @@ def totals_query():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("1) MOVIES BY YEAR   - 2) MOVIES BY DECADE   - 3) MOVIES TOTAL")
+    print("1) MOVIES BY YEAR        - 2) MOVIES BY DECADE        - 3) MOVIES TOTAL")
     print()
-    print("4) TV SHOWS BY YEAR - 5) TV SHOWS BY DECADE - 6) TV SHOWS TOTALS                     - 7) EXIT")
+    print("4) TV SHOWS BY YEAR      - 5) TV SHOWS BY DECADE      - 6) TV SHOWS TOTALS           - 7) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
