@@ -345,7 +345,7 @@ def file_query_and_sort():
     if data_query_options == 1:
         movie_query_action()
     elif data_query_options == 2:
-        pass
+        tv_shows_query_action()
     elif data_query_options == 3:
         launch_media_index()
 
@@ -370,6 +370,40 @@ def movie_query_action():
             print()
             print("MOVIE FILE TYPE:")
             print(movie_file[3])
+            print()
+            print()
+            print("--------------------------------------------------------------------------------------------------")
+
+
+def tv_shows_query_action():
+    tv_show_query_action = input("ENTER SEARCH QUERY (TV SHOWS):")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    tv_show_query_action_lower = str(tv_show_query_action.lower())
+    for tv_file in sorted(tv_files_results_list):
+        if tv_show_query_action_lower in tv_file[0].lower():
+            print()
+            print("TV SHOW TITLE:")
+            print(tv_file[0])
+            print()
+            print("TV SHOW EPISODE TITLE:")
+            print(tv_file[1])
+            print()
+            print("TV SHOW SEASON #:")
+            print(tv_file[2])
+            print()
+            print("TV SHOW EPISODE #:")
+            print(tv_file[3])
+            print()
+            print("TV SHOW YEAR:")
+            print(tv_file[4])
+            print()
+            print("TV SHOW RESOLUTION:")
+            print(tv_file[5])
+            print()
+            print("TV SHOW FILE-TYPE:")
+            print(tv_file[6])
             print()
             print()
             print("--------------------------------------------------------------------------------------------------")
