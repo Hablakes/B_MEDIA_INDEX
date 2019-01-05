@@ -37,7 +37,7 @@ def search_resolution_totals_tv_shows():
         absolute = int(pct / 100. * np.sum(allvals))
         return "{:.1f}%\n({:d})".format(pct, absolute)
 
-    colors = ['skyblue', 'cyan', 'magenta']
+    colors = ['#85c1e9', '#a569bd', '#808b96']
 
     wedges, texts, autotexts = ax.pie(data, autopct=lambda pct: format_movie_data(pct, data),
                                       shadow=True, colors=colors, textprops=dict(color="black"))
