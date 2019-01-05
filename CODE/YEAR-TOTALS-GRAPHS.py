@@ -9,15 +9,13 @@ media_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX
 movie_years_range = range(1900, 2100, 1)
 tv_show_years_range = range(1900, 2100, 1)
 
-movie_years_dict = {}
-tv_years_dict = {}
-
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
 
 def get_movie_years_for_dict_and_graph():
-    for media_movie in media_index:
+    movie_years_dict = {}
+    for media_movie in media_index_list:
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
         media_movie_year_int = int(media_movie_year[0])
         if movie_string in media_movie:
@@ -34,11 +32,12 @@ def get_movie_years_for_dict_and_graph():
 
     plt.bar(x, y)
     plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-YEAR-RESULTS.png')
-#    plt.show()
+    plt.show()
 
 
 def get_tv_years_for_dict_and_graph():
-    for media_tv in media_index:
+    tv_years_dict = {}
+    for media_tv in media_index_list:
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
         media_tv_year_int = int(media_tv_year[0])
         if tv_string in media_tv:
@@ -55,16 +54,8 @@ def get_tv_years_for_dict_and_graph():
 
     plt.bar(x, y)
     plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-YEAR-RESULTS.png')
-#    plt.show()
-
-
-
-def run():
-
-    get_movie_years_for_dict_and_graph()
-    get_tv_years_for_dict_and_graph()
-
+    plt.show()
 
 
 while True:
-    run()
+    get_tv_years_for_dict_and_graph()
