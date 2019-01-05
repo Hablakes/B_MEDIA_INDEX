@@ -4,10 +4,10 @@ import re
 import numpy as np
 import matplotlib.pyplot as plt
 
-movie_file_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv'))
+tv_files_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv'))
 
 
-def search_resolution_totals_movies():
+def search_resolution_totals_tv_shows():
     fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect="equal"))
 
     ten_eighty_found_list = []
@@ -16,13 +16,13 @@ def search_resolution_totals_movies():
     empty_response_list = []
     movies_total_list = []
 
-    for res in movie_file_index:
+    for res in tv_files_index:
 
-        if re.findall("19\d{2}x", res[2]):
+        if re.findall("19\d{2}x", res[5]):
             ten_eighty_found_list.append(res)
-        elif re.findall("1[0-8]\d{2}x", res[2]):
+        elif re.findall("1[0-8]\d{2}x", res[5]):
             seven_twenty_found_list.append(res)
-        elif re.findall("\d{3}x", res[2]):
+        elif re.findall("\d{3}x", res[5]):
             standard_def_found_list.append(res)
         else:
             empty_response_list.append(+1)
@@ -48,9 +48,9 @@ def search_resolution_totals_movies():
               bbox_to_anchor=(1, 0, 0.5, 1))
 
     plt.setp(autotexts, size=9, weight='bold')
-    ax.set_title("MOVIE-RESOLUTION-RESULTS")
-    plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-RESOLUTION-RESULTS.png')
+    ax.set_title("TV-SHOW-RESOLUTION-RESULTS")
+    plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-SHOW-RESOLUTION-RESULTS.png')
     plt.show()
 
 
-search_resolution_totals_movies()
+search_resolution_totals_tv_shows()
