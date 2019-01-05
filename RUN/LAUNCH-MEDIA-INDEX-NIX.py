@@ -131,7 +131,7 @@ def get_year_descending():
 
 def get_movie_years_for_dict_and_graph():
     movie_years_dict = {}
-    for media_movie in media_index:
+    for media_movie in media_index_list:
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
         media_movie_year_int = int(media_movie_year[0])
         if movie_string in media_movie:
@@ -153,7 +153,7 @@ def get_movie_years_for_dict_and_graph():
 
 def get_tv_years_for_dict_and_graph():
     tv_years_dict = {}
-    for media_tv in media_index:
+    for media_tv in media_index_list:
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
         media_tv_year_int = int(media_tv_year[0])
         if tv_string in media_tv:
@@ -175,7 +175,7 @@ def get_tv_years_for_dict_and_graph():
 
 def get_movie_years_decades_totals_graphs():
     movie_years_decades_dict = {}
-    for media_movie in media_index:
+    for media_movie in media_index_list:
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
         media_movie_year_int = int(media_movie_year[0][:-1] + '0')
         if movie_string in media_movie:
@@ -197,7 +197,7 @@ def get_movie_years_decades_totals_graphs():
 
 def get_tv_years_decades_totals_graphs():
     tv_years_decades_amount_dict = {}
-    for media_tv in media_index:
+    for media_tv in media_index_list:
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
         media_tv_year_int = int(media_tv_year[0][:-1] + '0')
         if tv_string in media_tv:
@@ -226,7 +226,7 @@ def search_resolution_totals_movies():
     empty_response_list = []
     movies_total_list = []
 
-    for res in movie_files_results:
+    for res in movie_files_results_list:
 
         if re.findall("19\d{2}x", res[2]):
             ten_eighty_found_list.append(res)
@@ -272,7 +272,7 @@ def search_resolution_totals_tv_shows():
     empty_response_list = []
     movies_total_list = []
 
-    for res in tv_files_results:
+    for res in tv_files_results_list:
 
         if re.findall("19\d{2}x", res[5]):
             ten_eighty_found_list.append(res)
