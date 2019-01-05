@@ -13,6 +13,13 @@ movie_files_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA
 tv_files_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv'))
 tv_files_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv')))
 
+movie_files_results = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv'))
+movie_files_results_list = list(
+    csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv')))
+
+tv_files_results = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv'))
+tv_files_results_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv')))
+
 movie_dir = r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/"
 tv_dir = r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv/TV/"
 alt_dir = r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv-2/TV-2/"
@@ -349,7 +356,7 @@ def movie_query_action():
     print("--------------------------------------------------------------------------------------------------")
     print()
     mv_query_action_lower = str(mv_query_action.lower())
-    for movie_file in sorted(movie_files_index_list):
+    for movie_file in sorted(movie_files_results_list):
         if mv_query_action_lower in movie_file[0].lower():
             print()
             print("MOVIE TITLE:")
@@ -361,11 +368,8 @@ def movie_query_action():
             print("MOVIE RESOLUTION:")
             print(movie_file[2])
             print()
-            print("MOVIE PARTS:")
-            print(movie_file[5])
-            print()
             print("MOVIE FILE TYPE:")
-            print(movie_file[6])
+            print(movie_file[3])
             print()
             print()
             print("--------------------------------------------------------------------------------------------------")
