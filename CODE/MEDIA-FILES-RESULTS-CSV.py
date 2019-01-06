@@ -53,7 +53,7 @@ def get_tv_show_index_results():
 
 def create_media_files_index_results_csv():
     get_movie_index_results()
-    # get_tv_show_index_results()
+    get_tv_show_index_results()
 
 
 create_media_files_index_results_csv()
