@@ -46,9 +46,6 @@ tv_show_years_range = range(1900, 2100, 1)
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
-found_movie_info = []
-found_tv_info = []
-
 
 def movie_title_search():
     movie_title_search_action = input("QUERY MOVIES:")
@@ -308,13 +305,14 @@ def search_resolution_totals_tv_shows():
     plt.show()
 
 
-def scrape_movie_info_for_csv():
+def scrape_media_info_for_csv():
+    found_movie_info = []
+    found_tv_info = []
+
     for movie_found in movie_dir_list:
         movie_scrape_info = re.search("(.+) \((\d{4})\)", str(movie_found), flags=0)
         found_movie_info.append(["MOVIE", movie_scrape_info[1], movie_scrape_info[2]])
 
-
-def scrape_tv_info_for_csv():
     for tv_found in tv_dir_list:
         tv_scrape_info = re.search("(.+) \((\d{4})\)", str(tv_found), flags=0)
         found_tv_info.append(["TV", tv_scrape_info[1], tv_scrape_info[2]])
@@ -323,14 +321,13 @@ def scrape_tv_info_for_csv():
         alt_scrape_info = re.search("(.+) \((\d{4})\)", str(alt_found), flags=0)
         found_tv_info.append(["TV", alt_scrape_info[1], alt_scrape_info[2]])
 
-
-def create_media_index_csv():
-    scrape_movie_info_for_csv()
-    scrape_tv_info_for_csv()
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
         for movie_row in sorted(found_movie_info):
             csv_writer.writerow(movie_row)
+
+    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv", "w", newline="") as f:
+        csv_writer = csv.writer(f)
         for tv_row in sorted(found_tv_info):
             csv_writer.writerow(tv_row)
 
@@ -344,7 +341,7 @@ def search_movie_folders_items():
 
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
-        for movie_row in movie_file_results:
+        for movie_row in sorted(movie_file_results):
             csv_writer.writerow(movie_row)
 
 
@@ -362,7 +359,7 @@ def search_tv_show_folders_items():
 
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
-        for tv_row in tv_show_file_results:
+        for tv_row in sorted(tv_show_file_results):
             csv_writer.writerow(tv_row)
 
 
@@ -771,7 +768,7 @@ def create_media_indexes_all():
     print()
     cmi_action = int(cmi_action)
     if cmi_action == 1:
-        create_media_index_csv()
+        scrape_media_info_for_csv()
     elif cmi_action == 2:
         create_media_files_index_results_csv()
     elif cmi_action == 3:

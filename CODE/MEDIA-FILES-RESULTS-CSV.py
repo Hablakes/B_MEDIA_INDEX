@@ -58,3 +58,6 @@ def create_media_files_index_results_csv():
     get_tv_show_index_results()
 
 
+create_media_files_index_results_csv()
+
+

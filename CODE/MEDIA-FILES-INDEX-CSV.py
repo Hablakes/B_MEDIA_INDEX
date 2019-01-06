@@ -20,6 +20,11 @@ def search_movie_folders_items():
             if movie_file.endswith(extensions):
                 movie_file_results.append([root + '/' + movie_file])
 
+    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv", "w", newline="") as f:
+        csv_writer = csv.writer(f)
+        for movie_row in sorted(movie_file_results):
+            csv_writer.writerow(movie_row)
+
 
 def search_tv_show_folders_items():
     for root, dirs, files in os.walk(tv_dir):
@@ -32,19 +37,11 @@ def search_tv_show_folders_items():
             if alt_file.endswith(extensions):
                 tv_show_file_results.append([root + '/' + alt_file])
 
-
-def create_media_files_indices():
-    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv", "w", newline="") as f:
-        csv_writer = csv.writer(f)
-        for movie_row in movie_file_results:
-            csv_writer.writerow(movie_row)
-
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
-        for tv_row in tv_show_file_results:
+        for tv_row in sorted(tv_show_file_results):
             csv_writer.writerow(tv_row)
 
 
-search_movie_folders_items()
+# search_movie_folders_items()
 search_tv_show_folders_items()
-create_media_files_indices()
