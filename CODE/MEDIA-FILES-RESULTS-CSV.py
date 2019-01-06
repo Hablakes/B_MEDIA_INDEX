@@ -35,7 +35,7 @@ def get_tv_show_index_results():
 
     for tv_file in tv_index:
 
-        title = guessit.guessit(tv_file[0], options={'type': 'episode'})
+        title = guessit.guessit(tv_file[0], options={'type': 'episode', 'episode-prefer-number': True})
 
         test = pymediainfo.MediaInfo.parse(tv_file[0])
 
@@ -53,7 +53,8 @@ def get_tv_show_index_results():
             csv_writer.writerow(tv_row)
 
 
-get_movie_index_results()
-get_tv_show_index_results()
+def create_media_files_index_results_csv():
+    get_movie_index_results()
+    get_tv_show_index_results()
 
 
