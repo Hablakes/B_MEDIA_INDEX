@@ -11,19 +11,17 @@ media_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MED
 media_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
 
 movie_files_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv'))
-movie_files_index_list = sorted(
-    list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv'))))
+movie_files_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv')))
 
 tv_files_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv'))
-tv_files_index_list = sorted(list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv'))))
+tv_files_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv')))
 
 movie_files_results = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv'))
-movie_files_results_list = sorted(list(
-    csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv'))))
+movie_files_results_list = list(
+    csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv')))
 
 tv_files_results = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv'))
-tv_files_results_list = sorted(
-    list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv'))))
+tv_files_results_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv')))
 
 movie_dir = r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/"
 tv_dir = r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv/TV/"
@@ -377,7 +375,7 @@ def get_movie_index_results():
 
         for track in test.tracks:
 
-            if track.track_type == 'Video':
+            if track.track_type == 'Video' and track not in movie_files_results_list:
                 movie_index_file_results.append(
                     [title.get('title'), title.get('year'), str(track.width) + 'x' + str(track.height),
                      title.get('container')])
@@ -400,7 +398,7 @@ def get_tv_show_index_results():
 
         for track in test.tracks:
 
-            if track.track_type == 'Video':
+            if track.track_type == 'Video' and track not in tv_files_results_list:
                 tv_index_file_results.append(
                     [title.get('title'), title.get('episode_title'), title.get('season'), title.get('episode'),
                      title.get('year'), str(track.width) + 'x' + str(track.height), title.get('container')])

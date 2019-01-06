@@ -7,8 +7,7 @@ movie_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/IND
 tv_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/INDEX-TEST.csv"))
 
 files_results = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/FILES-RESULTS-TEST.csv'))
-files_results_list = sorted(
-    list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/FILES-RESULTS-TEST.csv'))))
+files_results_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/FILES-RESULTS-TEST.csv')))
 
 
 def get_tv_show_index_results():

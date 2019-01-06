@@ -3,8 +3,13 @@ import csv
 import guessit
 import pymediainfo
 
-movie_index = sorted(csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv")))
-tv_index = sorted(csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv")))
+movie_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv"))
+tv_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv"))
+
+movie_files_results_list = list(
+    csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv')))
+
+tv_files_results_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv')))
 
 
 def get_movie_index_results():
@@ -18,8 +23,7 @@ def get_movie_index_results():
 
         for track in test.tracks:
 
-            if track.track_type == 'Video':
-
+            if track.track_type == 'Video' and track not in movie_files_results_list:
                 movie_index_file_results.append(
                     [title.get('title'), title.get('year'), str(track.width) + 'x' + str(track.height),
                      title.get('container')])
@@ -41,8 +45,7 @@ def get_tv_show_index_results():
 
         for track in test.tracks:
 
-            if track.track_type == 'Video':
-
+            if track.track_type == 'Video' and track not in tv_files_results_list:
                 tv_index_file_results.append(
                     [title.get('title'), title.get('episode_title'), title.get('season'), title.get('episode'),
                      title.get('year'), str(track.width) + 'x' + str(track.height), title.get('container')])
@@ -55,9 +58,7 @@ def get_tv_show_index_results():
 
 def create_media_files_index_results_csv():
     get_movie_index_results()
-    #get_tv_show_index_results()
+    # get_tv_show_index_results()
 
 
 create_media_files_index_results_csv()
-
-
