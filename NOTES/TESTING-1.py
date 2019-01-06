@@ -12,7 +12,7 @@ def get_tv_show_index_results():
 
     for tv_file in index_test_2:
 
-        title = guessit.guessit(tv_file[0], options={'type': 'episode', 'episode-prefer-number': True})
+        title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
 
         test = pymediainfo.MediaInfo.parse(tv_file[0])
 
