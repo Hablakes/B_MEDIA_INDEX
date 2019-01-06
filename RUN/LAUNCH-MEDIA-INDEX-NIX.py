@@ -11,16 +11,12 @@ media_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MED
 media_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
 
 movie_files_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv'))
-movie_files_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv')))
 
 tv_files_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv'))
-tv_files_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv')))
 
-movie_files_results = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv'))
 movie_files_results_list = list(
     csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv')))
 
-tv_files_results = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv'))
 tv_files_results_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv')))
 
 movie_dir = r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/"
@@ -30,10 +26,6 @@ alt_dir = r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv-2/TV-2/"
 movie_dir_list = os.listdir(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/")
 tv_dir_list = os.listdir(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv/TV/")
 alt_dir_list = os.listdir(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv-2/TV-2/")
-
-movie_walk_data = os.walk(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies/MOVIES/")
-tv_walk_data = os.walk(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv/TV/")
-alt_walk_data = os.walk(r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv-2/TV-2/")
 
 extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
               ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
@@ -214,7 +206,7 @@ def get_tv_years_decades_totals_graphs():
 
 
 def search_resolution_totals_movies():
-    fig, ax = plt.subplots(figsize=(18, 9), subplot_kw=dict(aspect="equal"))
+    fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect="equal"))
 
     ten_eighty_found_list = []
     seven_twenty_found_list = []
@@ -260,7 +252,7 @@ def search_resolution_totals_movies():
 
 
 def search_resolution_totals_tv_shows():
-    fig, ax = plt.subplots(figsize=(18, 9), subplot_kw=dict(aspect="equal"))
+    fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect="equal"))
 
     ten_eighty_found_list = []
     seven_twenty_found_list = []
