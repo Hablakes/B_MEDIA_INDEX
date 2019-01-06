@@ -38,24 +38,6 @@ tk
 MediaInfo (https://mediaarea.net/en/MediaInfo)
 
 
-DIRS -
-
-NIX
-media_index = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
-media_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
-
-movies_dir = os.listdir(r"/home/bx/Videos/CHASE/MOVIES/")
-tv_dir = os.listdir(r"/home/bx/Videos/CHASE/TV/")
-
-WIN
-media_index = list(csv.reader(open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv")))
-media_index_list = list(csv.reader(open(r"C:/Users/botoole/Downloads/B/BPT/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv")))
-
-movies_dir = os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/MOVIES/")
-tv_dir = os.listdir(r"C:/Users/botoole/Downloads/B/BTMP/CHASE/TV/")
-
-
-
 
 MISC -
 

@@ -3,7 +3,7 @@ import re
 
 import matplotlib.pylab as plt
 
-media_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv'))
+media_index = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
 
 movie_years_range = range(1900, 2100, 1)
 tv_show_years_range = range(1900, 2100, 1)
@@ -29,7 +29,7 @@ def get_movie_years_decades_totals():
 
     x, y = zip(*media_movie_years_decades_totals.items())
 
-    plt.bar(x, y)
+    plt.bar(x, y, width=5)
     plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-DECADE-RESULTS.png')
     plt.show()
 
@@ -51,10 +51,10 @@ def get_tv_years_decades_totals():
 
     x, y = zip(*media_tv_years_decades_totals.items())
 
-    plt.bar(x, y)
+    plt.bar(x, y, width=5)
     plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-DECADE-RESULTS.png')
     plt.show()
 
 
-#get_movie_years_decades_totals()
-get_tv_years_decades_totals()
+get_movie_years_decades_totals()
+#get_tv_years_decades_totals()

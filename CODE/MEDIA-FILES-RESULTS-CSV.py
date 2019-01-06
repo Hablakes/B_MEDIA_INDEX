@@ -6,24 +6,19 @@ import pymediainfo
 movie_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv"))
 tv_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv"))
 
-movie_files_results_list = list(
-    csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv')))
-
-tv_files_results_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv')))
-
 
 def get_movie_index_results():
     movie_index_file_results = []
 
     for movie_file in movie_index:
 
-        title = guessit.guessit(movie_file[0], options={'type': 'episode'})
+        title = guessit.guessit(movie_file[0])
 
         test = pymediainfo.MediaInfo.parse(movie_file[0])
 
         for track in test.tracks:
 
-            if track.track_type == 'Video' and track not in movie_files_results_list:
+            if track.track_type == 'Video':
                 movie_index_file_results.append(
                     [title.get('title'), title.get('year'), str(track.width) + 'x' + str(track.height),
                      title.get('container')])
@@ -45,7 +40,7 @@ def get_tv_show_index_results():
 
         for track in test.tracks:
 
-            if track.track_type == 'Video' and track not in tv_files_results_list:
+            if track.track_type == 'Video':
                 tv_index_file_results.append(
                     [title.get('title'), title.get('episode_title'), title.get('season'), title.get('episode'),
                      title.get('year'), str(track.width) + 'x' + str(track.height), title.get('container')])

@@ -186,7 +186,7 @@ def get_movie_years_decades_totals_graphs():
 
     x, y = zip(*media_movie_years_decades_totals.items())
 
-    plt.bar(x, y)
+    plt.bar(x, y, width=5)
     plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-DECADE-RESULTS.png')
     plt.show()
 
@@ -208,13 +208,13 @@ def get_tv_years_decades_totals_graphs():
 
     x, y = zip(*media_tv_years_decades_totals.items())
 
-    plt.bar(x, y)
+    plt.bar(x, y, width=5)
     plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-DECADE-RESULTS.png')
     plt.show()
 
 
 def search_resolution_totals_movies():
-    fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect="equal"))
+    fig, ax = plt.subplots(figsize=(18, 9), subplot_kw=dict(aspect="equal"))
 
     ten_eighty_found_list = []
     seven_twenty_found_list = []
@@ -260,7 +260,7 @@ def search_resolution_totals_movies():
 
 
 def search_resolution_totals_tv_shows():
-    fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect="equal"))
+    fig, ax = plt.subplots(figsize=(18, 9), subplot_kw=dict(aspect="equal"))
 
     ten_eighty_found_list = []
     seven_twenty_found_list = []
@@ -306,30 +306,24 @@ def search_resolution_totals_tv_shows():
 
 
 def scrape_media_info_for_csv():
-    found_movie_info = []
-    found_tv_info = []
+    found_file_info = []
 
     for movie_found in movie_dir_list:
         movie_scrape_info = re.search("(.+) \((\d{4})\)", str(movie_found), flags=0)
-        found_movie_info.append(["MOVIE", movie_scrape_info[1], movie_scrape_info[2]])
+        found_file_info.append(["MOVIE", movie_scrape_info[1], movie_scrape_info[2]])
 
     for tv_found in tv_dir_list:
         tv_scrape_info = re.search("(.+) \((\d{4})\)", str(tv_found), flags=0)
-        found_tv_info.append(["TV", tv_scrape_info[1], tv_scrape_info[2]])
+        found_file_info.append(["TV", tv_scrape_info[1], tv_scrape_info[2]])
 
     for alt_found in alt_dir_list:
         alt_scrape_info = re.search("(.+) \((\d{4})\)", str(alt_found), flags=0)
-        found_tv_info.append(["TV", alt_scrape_info[1], alt_scrape_info[2]])
+        found_file_info.append(["TV", alt_scrape_info[1], alt_scrape_info[2]])
 
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
-        for movie_row in sorted(found_movie_info):
-            csv_writer.writerow(movie_row)
-
-    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv", "w", newline="") as f:
-        csv_writer = csv.writer(f)
-        for tv_row in sorted(found_tv_info):
-            csv_writer.writerow(tv_row)
+        for file_row in sorted(found_file_info):
+            csv_writer.writerow(file_row)
 
 
 def search_movie_folders_items():
@@ -369,7 +363,7 @@ def get_movie_index_results():
 
     for movie_file in movie_files_index:
 
-        title = guessit.guessit(movie_file[0], options={'type': 'episode'})
+        title = guessit.guessit(movie_file[0])
 
         test = pymediainfo.MediaInfo.parse(movie_file[0])
 
@@ -751,7 +745,7 @@ def get_tv_titles_amount():
     print()
 
 
-def create_media_indexes_all():
+def create_media_indices_all():
     print("___     _ _  _ ___  ____ _  _    ____ ___  ___ _ ____ _  _ ____")
     print("|__] __ | |\ | |  \ |___  \/  __ |  | |__]  |  | |  | |\ | [__ ")
     print("|__]    | | \| |__/ |___ _/\_    |__| |     |  | |__| | \| ___]")
@@ -802,7 +796,7 @@ def launch_media_index():
     elif lmi_action == 5:
         totals_query()
     elif lmi_action == 6:
-        create_media_indexes_all()
+        create_media_indices_all()
     elif lmi_action == 0:
         exit()
 
