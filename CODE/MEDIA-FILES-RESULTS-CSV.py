@@ -3,8 +3,8 @@ import csv
 import guessit
 import pymediainfo
 
-movie_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv"))
-tv_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv"))
+movie_index = sorted(csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv")))
+tv_index = sorted(csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv")))
 
 
 def get_movie_index_results():
@@ -55,7 +55,7 @@ def get_tv_show_index_results():
 
 def create_media_files_index_results_csv():
     get_movie_index_results()
-    get_tv_show_index_results()
+    #get_tv_show_index_results()
 
 
 create_media_files_index_results_csv()
