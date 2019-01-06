@@ -2,8 +2,10 @@ import csv
 import os
 import re
 
+import guessit
 import matplotlib.pylab as plt
 import numpy as np
+import pymediainfo
 
 media_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv'))
 media_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
@@ -46,9 +48,6 @@ tv_string = str("TV")
 
 found_movie_info = []
 found_tv_info = []
-
-movie_file_results = []
-tv_show_file_results = []
 
 
 def movie_title_search():
@@ -337,13 +336,20 @@ def create_media_index_csv():
 
 
 def search_movie_folders_items():
+    movie_file_results = []
     for root, dirs, files in os.walk(movie_dir):
         for movie_file in sorted(files):
             if movie_file.endswith(extensions):
                 movie_file_results.append([root + '/' + movie_file])
 
+    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv", "w", newline="") as f:
+        csv_writer = csv.writer(f)
+        for movie_row in movie_file_results:
+            csv_writer.writerow(movie_row)
+
 
 def search_tv_show_folders_items():
+    tv_show_file_results = []
     for root, dirs, files in os.walk(tv_dir):
         for tv_file in sorted(files):
             if tv_file.endswith(extensions):
@@ -354,17 +360,61 @@ def search_tv_show_folders_items():
             if alt_file.endswith(extensions):
                 tv_show_file_results.append([root + '/' + alt_file])
 
-
-def create_media_files_indices():
-    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv", "w", newline="") as f:
-        csv_writer = csv.writer(f)
-        for movie_row in movie_file_results:
-            csv_writer.writerow(movie_row)
-
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
         for tv_row in tv_show_file_results:
             csv_writer.writerow(tv_row)
+
+
+def get_movie_index_results():
+    search_movie_folders_items()
+    movie_index_file_results = []
+
+    for movie_file in movie_files_index:
+
+        title = guessit.guessit(movie_file[0], options={'type': 'episode'})
+
+        test = pymediainfo.MediaInfo.parse(movie_file[0])
+
+        for track in test.tracks:
+
+            if track.track_type == 'Video':
+                movie_index_file_results.append(
+                    [title.get('title'), title.get('year'), str(track.width) + 'x' + str(track.height),
+                     title.get('container')])
+
+    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv", "w", newline="") as f:
+        csv_writer = csv.writer(f)
+        for movie_row in movie_index_file_results:
+            csv_writer.writerow(movie_row)
+
+
+def get_tv_show_index_results():
+    search_tv_show_folders_items()
+    tv_index_file_results = []
+
+    for tv_file in tv_files_index:
+
+        title = guessit.guessit(tv_file[0], options={'type': 'episode', 'episode-prefer-number': True})
+
+        test = pymediainfo.MediaInfo.parse(tv_file[0])
+
+        for track in test.tracks:
+
+            if track.track_type == 'Video':
+                tv_index_file_results.append(
+                    [title.get('title'), title.get('episode_title'), title.get('season'), title.get('episode'),
+                     title.get('year'), str(track.width) + 'x' + str(track.height), title.get('container')])
+
+    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv", "w", newline="") as f:
+        csv_writer = csv.writer(f)
+        for tv_row in tv_index_file_results:
+            csv_writer.writerow(tv_row)
+
+
+def create_media_files_index_results_csv():
+    get_movie_index_results()
+    get_tv_show_index_results()
 
 
 def run_query():
@@ -723,7 +773,7 @@ def create_media_indexes_all():
     if cmi_action == 1:
         create_media_index_csv()
     elif cmi_action == 2:
-        create_media_files_indices()
+        create_media_files_index_results_csv()
     elif cmi_action == 3:
         launch_media_index()
 
