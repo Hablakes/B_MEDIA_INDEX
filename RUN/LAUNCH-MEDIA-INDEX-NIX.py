@@ -385,7 +385,7 @@ def get_movie_index_results():
 
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
-        for movie_row in movie_index_file_results:
+        for movie_row in sorted(movie_index_file_results):
             csv_writer.writerow(movie_row)
 
 
@@ -408,7 +408,7 @@ def get_tv_show_index_results():
 
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
-        for tv_row in tv_index_file_results:
+        for tv_row in sorted(tv_index_file_results):
             csv_writer.writerow(tv_row)
 
 
