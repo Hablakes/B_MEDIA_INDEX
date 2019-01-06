@@ -3,17 +3,14 @@ import csv
 import guessit
 import pymediainfo
 
-movie_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/INDEX-TEST.csv"))
-tv_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/INDEX-TEST.csv"))
-
-files_results = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/FILES-RESULTS-TEST.csv'))
-files_results_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/FILES-RESULTS-TEST.csv')))
+index_test = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/INDEX-TEST.csv"))
+index_test_2 = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/INDEX-TEST-2.csv"))
 
 
 def get_tv_show_index_results():
     tv_index_file_results = []
 
-    for tv_file in tv_index:
+    for tv_file in index_test_2:
 
         title = guessit.guessit(tv_file[0], options={'type': 'episode', 'episode-prefer-number': True})
 
@@ -21,7 +18,7 @@ def get_tv_show_index_results():
 
         for track in test.tracks:
 
-            if track.track_type == 'Video' and track not in files_results_list:
+            if track.track_type == 'Video':
                 tv_index_file_results.append(
                     [title.get('title'), title.get('episode_title'), title.get('season'), title.get('episode'),
                      title.get('year'), str(track.width) + 'x' + str(track.height), title.get('container')])
