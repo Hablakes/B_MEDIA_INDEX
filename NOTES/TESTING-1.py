@@ -14,6 +14,14 @@ def get_tv_show_index_results():
 
         title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
 
+        title_and_year = (tv_file[0].rsplit('/')[-2])
+
+        print(title_and_year[-5:-1])
+
+
+get_tv_show_index_results()
+
+"""
         test = pymediainfo.MediaInfo.parse(tv_file[0])
 
         for track in test.tracks:
@@ -30,3 +38,4 @@ def get_tv_show_index_results():
 
 
 get_tv_show_index_results()
+"""
