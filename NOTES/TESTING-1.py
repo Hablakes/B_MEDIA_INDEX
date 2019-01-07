@@ -10,7 +10,7 @@ index_test_2 = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/IN
 def get_tv_show_index_results():
     tv_index_file_results = []
 
-    for tv_file in index_test_2:
+    for tv_file in index_test:
 
         title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
 
@@ -26,8 +26,7 @@ def get_tv_show_index_results():
 
             if track.track_type == 'Video':
                 tv_index_file_results.append(
-                    [ty_title, title.get('episode_title'), title.get('season'), title.get('episode'),
-                     ty_year, str(track.width) + 'x' + str(track.height), title.get('container')])
+                    [ty_title, title.get('year'), str(track.width) + 'x' + str(track.height), title.get('container')])
 
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/FILES-RESULTS-TEST.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
