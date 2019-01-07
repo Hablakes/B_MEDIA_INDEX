@@ -5,6 +5,7 @@ UPGRADE **
 
 aplotter
 asciichart
+ascii-graph
 asciiplotlib
 babblefish
 bashplotlib
