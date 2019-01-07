@@ -7,6 +7,7 @@ aplotter
 asciichart
 asciiplotlib
 babblefish
+bashplotlib
 click
 enzyme
 get-media-files
@@ -27,10 +28,12 @@ Use Terminal: sudo pacman -S * (on Arch based systems)
 
 * = NIX
 
+bashplotlib
 cool-retro-term
+gnuplot, gnuplot-git
 libmediainfo
 lolcat
-mediainfo mediainfo-gui
+mediainfo, mediainfo-gui
 tk
 
 * = WIN
