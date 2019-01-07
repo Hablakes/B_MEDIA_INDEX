@@ -16,20 +16,18 @@ def get_tv_show_index_results():
 
         title_and_year = (tv_file[0].rsplit('/')[-2])
 
-        print(title_and_year[-5:-1])
+        ty_year = (title_and_year[-5:-1])
 
+        ty_title = (title_and_year[0:-7])
 
-get_tv_show_index_results()
-
-"""
         test = pymediainfo.MediaInfo.parse(tv_file[0])
 
         for track in test.tracks:
 
             if track.track_type == 'Video':
                 tv_index_file_results.append(
-                    [title.get('title'), title.get('episode_title'), title.get('season'), title.get('episode'),
-                     title.get('year'), str(track.width) + 'x' + str(track.height), title.get('container')])
+                    [ty_title, title.get('episode_title'), title.get('season'), title.get('episode'),
+                     ty_year, str(track.width) + 'x' + str(track.height), title.get('container')])
 
     with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/NOTES/FILES-RESULTS-TEST.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
@@ -38,4 +36,3 @@ get_tv_show_index_results()
 
 
 get_tv_show_index_results()
-"""
