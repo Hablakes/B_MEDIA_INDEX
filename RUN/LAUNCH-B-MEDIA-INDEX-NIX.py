@@ -622,7 +622,7 @@ def get_movie_years_for_dict():
     movie_totals_query_action = input("ENTER #")
     print()
     movie_totals_query_action = int(movie_totals_query_action)
-    for media_movie in media_index:
+    for media_movie in media_index_list:
         media_movie_year = int(media_movie[2])
         if movie_string in media_movie:
             if media_movie_year in movie_years_range:
@@ -646,7 +646,7 @@ def get_movie_years_for_dict():
 
 def get_movie_years_decades_totals():
     movie_years_decades_dict = {}
-    for media_movie in media_index:
+    for media_movie in media_index_list:
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
         media_movie_year_int = int(media_movie_year[0][:-1] + '0')
         if movie_string in media_movie:
@@ -669,7 +669,7 @@ def get_movie_years_decades_totals():
 
 def get_movie_titles_amount():
     movie_amounts_list = []
-    for counted_movie_title in media_index:
+    for counted_movie_title in media_index_list:
         if movie_string in counted_movie_title:
             movie_amounts_list.append(counted_movie_title)
     print()
@@ -688,7 +688,7 @@ def get_tv_years_for_dict():
     tv_totals_query_action = input("ENTER #")
     print()
     tv_totals_query_action = int(tv_totals_query_action)
-    for media_tv in media_index:
+    for media_tv in media_index_list:
         media_tv_year = int(media_tv[2])
         if tv_string in media_tv:
             if media_tv_year in tv_show_years_range:
@@ -712,7 +712,7 @@ def get_tv_years_for_dict():
 
 def get_tv_years_decades_totals():
     tv_years_decades_amount_dict = {}
-    for media_tv in media_index:
+    for media_tv in media_index_list:
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
         media_tv_year_int = int(media_tv_year[0][:-1] + '0')
         if tv_string in media_tv:
@@ -735,7 +735,7 @@ def get_tv_years_decades_totals():
 
 def get_tv_titles_amount():
     tv_amounts_list = []
-    for counted_tv_title in media_index:
+    for counted_tv_title in media_index_list:
         if tv_string in counted_tv_title:
             tv_amounts_list.append(counted_tv_title)
     print()
