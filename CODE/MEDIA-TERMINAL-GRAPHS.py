@@ -338,6 +338,9 @@ def get_movie_years_for_dict_and_graph_terminal():
     graph = Pyasciigraph()
     for line in graph.graph('MOVIES: YEAR AMOUNTS', movie_years_terminal_graph_list):
         print(line)
+        print("--------------------------------------------------------------------------------------------------")
+    print()
+    print()
 
 
 def get_tv_years_for_dict_and_graph_terminal():
@@ -363,6 +366,9 @@ def get_tv_years_for_dict_and_graph_terminal():
     graph = Pyasciigraph()
     for line in graph.graph('TV SHOWS: YEAR AMOUNTS', tv_years_terminal_graph_list):
         print(line)
+        print("--------------------------------------------------------------------------------------------------")
+    print()
+    print()
 
 
 def get_movie_years_decades_totals_graphs_terminal():
@@ -388,6 +394,9 @@ def get_movie_years_decades_totals_graphs_terminal():
     graph = Pyasciigraph()
     for line in graph.graph('MOVIES: DECADE AMOUNTS', movie_decades_terminal_graph_list):
         print(line)
+        print("--------------------------------------------------------------------------------------------------")
+    print()
+    print()
 
 
 def get_tv_years_decades_totals_graphs_terminal():
@@ -413,6 +422,9 @@ def get_tv_years_decades_totals_graphs_terminal():
     graph = Pyasciigraph()
     for line in graph.graph('TV SHOWS: DECADE AMOUNTS', tv_decades_terminal_graph_list):
         print(line)
+        print("--------------------------------------------------------------------------------------------------")
+    print()
+    print()
 
 
 def search_resolution_totals_movies_terminal():
@@ -441,6 +453,9 @@ def search_resolution_totals_movies_terminal():
     graph = Pyasciigraph()
     for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES', movies_graph_terminal_results):
         print(line)
+        print("--------------------------------------------------------------------------------------------------")
+    print()
+    print()
 
 
 def search_resolution_totals_tv_shows_terminal():
@@ -469,6 +484,9 @@ def search_resolution_totals_tv_shows_terminal():
     graph = Pyasciigraph()
     for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES', tv_shows_graph_terminal_results):
         print(line)
+        print("--------------------------------------------------------------------------------------------------")
+    print()
+    print()
 
 
 while True:
