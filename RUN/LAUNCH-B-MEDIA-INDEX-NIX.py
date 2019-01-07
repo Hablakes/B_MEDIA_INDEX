@@ -544,6 +544,32 @@ def tv_shows_query_action():
             print()
             print("--------------------------------------------------------------------------------------------------")
 
+        elif tv_show_query_action_lower in tv_file[1].lower():
+            print()
+            print("TV SHOW TITLE:")
+            print(tv_file[0])
+            print()
+            print("TV SHOW EPISODE TITLE:")
+            print(tv_file[1])
+            print()
+            print("TV SHOW SEASON #:")
+            print(tv_file[2])
+            print()
+            print("TV SHOW EPISODE #:")
+            print(tv_file[3])
+            print()
+            print("TV SHOW YEAR:")
+            print(tv_file[4])
+            print()
+            print("TV SHOW RESOLUTION:")
+            print(tv_file[5])
+            print()
+            print("TV SHOW FILE-TYPE:")
+            print(tv_file[6])
+            print()
+            print()
+            print("--------------------------------------------------------------------------------------------------")
+
 
 def run_graphs():
     print("___     ____ ____ ____ ___  _  _    ____ ___  ___ _ ____ _  _ ____")
