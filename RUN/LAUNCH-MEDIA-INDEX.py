@@ -164,16 +164,16 @@ def first_launch_dirs():
     print()
     print("OK, THAT'S ALL WE NEED FOR NOW, THIS MAY TAKE AWHILE (DEPENDING ON THE SIZE OF YOUR LIBRARY)")
     print()
-    first_launch_action = input("PROCEED?   -   Y / N")
+    print("PROCEED?   -   1) YES - 2) NO")
+    first_launch_action = input()
     first_launch_action_lower = first_launch_action.lower()
-    if first_launch_action_lower == str('y'):
+    if first_launch_action_lower == 1:
         scrape_media_info_for_csv()
         create_media_files_index_results_csv()
+    elif first_launch_action_lower == 2:
+        pass
     else:
         pass
-
-
-first_launch_dirs()
 
 
 def movie_title_search():
@@ -1116,5 +1116,26 @@ def launch_media_index():
         exit()
 
 
-while True:
-    launch_media_index()
+def first_launch_media_index():
+    print("____ ___ ____ ____ ___    ___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
+    print("[__   |  |__| |__/  |  __ |__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/ ")
+    print("___]  |  |  | |  \  |     |__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    print("IS THIS THE FIRST TIME RUNNING THE INDEX ON THIS DB?   -   1) YES - 2) NO            - 3) EXIT")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    first_lmi_input_action = input("ENTER #")
+    first_lmi_input_action_lower = int(first_lmi_input_action.lower())
+    print()
+    if first_lmi_input_action_lower == 1:
+        first_launch_dirs()
+    elif first_lmi_input_action_lower == 2:
+        launch_media_index()
+    elif first_lmi_input_action_lower == 3:
+        exit()
+
+
+first_launch_media_index()
