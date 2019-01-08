@@ -70,8 +70,8 @@ def search_tv_show_folders_items():
 
 
 def get_movie_index_results():
-    movie_files_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv'))
     search_movie_folders_items()
+    movie_files_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv'))
     movie_index_file_results = []
 
     for movie_file in movie_files_index:
@@ -94,8 +94,8 @@ def get_movie_index_results():
 
 
 def get_tv_show_index_results():
-    tv_files_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-INDEX.csv'))
     search_tv_show_folders_items()
+    tv_files_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-INDEX.csv'))
     tv_index_file_results = []
 
     for tv_file in tv_files_index:
