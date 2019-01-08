@@ -167,6 +167,7 @@ def first_launch_dirs():
     first_launch_action = input("PROCEED?   -   Y / N")
     first_launch_action_lower = first_launch_action.lower()
     if first_launch_action_lower == str('y'):
+        scrape_media_info_for_csv()
         create_media_files_index_results_csv()
     else:
         pass
