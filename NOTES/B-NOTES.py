@@ -1,5 +1,7 @@
 """
+----------------------------------------------------------------------------------
 PIP INSTALLS -
+----------------------------------------------------------------------------------
 
 UPGRADE **
 
@@ -24,9 +26,9 @@ guess-language
 rebulk
 termgraph
 
-
-
+----------------------------------------------------------------------------------
 OS INSTALLS -
+----------------------------------------------------------------------------------
 
 Use Terminal: sudo pacman -S * (on Arch based systems)
 
@@ -34,19 +36,23 @@ Use Terminal: sudo pacman -S * (on Arch based systems)
 
 bashplotlib
 cool-retro-term
+cmatrix
 gnuplot, gnuplot-git
 libmediainfo
 lolcat
 mediainfo, mediainfo-gui
 tk
+tmux
+
+----------------------------------------------------------------------------------
 
 * = WIN
 
 MediaInfo (https://mediaarea.net/en/MediaInfo)
 
-
-
+----------------------------------------------------------------------------------
 MISC -
+----------------------------------------------------------------------------------
 
 LAUNCH FROM CMD -
 
@@ -54,5 +60,5 @@ C:\Users\botoole\Downloads\B\BPT\B-MEDIA-INDEX\venv\Scripts\python.exe
  C:\Users\botoole\Downloads\B\BPT\B-MEDIA-INDEX\RUN\LAUNCH-MEDIA-INDEX-WIN.py
 
 MAKE SURE ABOVE LINE IS ALL IN ONE LINE FOR CMD*
-
+----------------------------------------------------------------------------------
 """
