@@ -15,7 +15,7 @@ tv_dir_input = []
 
 
 def first_launch_username():
-    user_name_input_action = username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE)"))
+    user_name_input_action = username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE):"))
 
     os.makedirs(r'/home/' + username_input[0] + '/MEDIA-INDEX/', exist_ok=True)
 
@@ -32,8 +32,18 @@ def first_launch_username():
 
 
 def first_launch_dirs():
-    movie_dir = movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY:"))
-    tv_dir = tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY:"))
+    movie_dir = movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
+    tv_dir = tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    print("OK, THAT'S ALL WE NEED FOR NOW, THIS MAY TAKE AWHILE (DEPENDING ON THE SIZE OF YOUR LIBRARY)")
+    print()
+    first_launch_action = input("PROCEED?   -   Y / N")
+    if first_launch_action == str('Y'):
+        create_media_files_index_results_csv()
+    else:
+        pass
 
 
 first_launch_username()
