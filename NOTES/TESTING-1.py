@@ -8,43 +8,51 @@ import matplotlib.pylab as plt
 import numpy as np
 import pymediainfo
 
+username_input = []
 
-def start_up_for_first_launch():
-    user_name_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE)")
+movie_dir_input = []
+tv_dir_input = []
 
-    os.makedirs(r'/home/' + user_name_input + '/MEDIA-INDEX/', exist_ok=True)
 
-    with open(r'/home/' + user_name_input + '/MEDIA-INDEX.csv', 'w') as media_index_csv:
+def first_launch_username():
+    user_name_input_action = username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE)"))
+
+    os.makedirs(r'/home/' + username_input[0] + '/MEDIA-INDEX/', exist_ok=True)
+
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv', 'w') as media_index_csv:
         pass
-    with open(r'/home/' + user_name_input + '/MOVIE-FILES-INDEX.csv', 'w') as movie_files_index_csv:
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'w') as movie_files_index_csv:
         pass
-    with open(r'/home/' + user_name_input + '/TV-FILES-INDEX.csv', 'w') as tv_files_index_csv:
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-INDEX.csv', 'w') as tv_files_index_csv:
         pass
-    with open(r'/home/' + user_name_input + '/MOVIE-FILES-RESULTS.csv', 'w') as movie_files_results_csv:
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', 'w') as movie_files_results_csv:
         pass
-    with open(r'/home/' + user_name_input + '/TV-FILES-RESULTS.csv', 'w') as tv_files_results_csv:
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv', 'w') as tv_files_results_csv:
         pass
 
 
-media_index = csv.reader(open(r'/home/bx/MEDIA-INDEX/MEDIA-INDEX.csv'))
-media_index_list = list(csv.reader(open(r'/home/bx/MEDIA-INDEX/MEDIA-INDEX.csv')))
+def first_launch_dirs():
+    movie_dir = movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY:"))
+    tv_dir = tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY:"))
 
-movie_files_index = csv.reader(open(r'/home/bx/MEDIA-INDEX/MOVIE-FILES-INDEX.csv'))
 
-tv_files_index = csv.reader(open(r'/home/bx/MEDIA-INDEX/TV-FILES-INDEX.csv'))
+first_launch_username()
+first_launch_dirs()
+
+media_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv'))
+media_index_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
+
+movie_files_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv'))
+
+tv_files_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-INDEX.csv'))
 
 movie_files_results_list = list(
-    csv.reader(open(r'/home/bx/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
+    csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
 
-tv_files_results_list = list(csv.reader(open(r'/home/bx/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+tv_files_results_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
 
-movie_dir = input("ENTER PATH OF MOVIES DIRECTORY:")
-tv_dir = input("ENTER PATH OF MOVIES DIRECTORY:")
-
-
-movie_dir_list = os.listdir(movie_dir)
-tv_dir_list = os.listdir(tv_dir)
-
+movie_dir_list = os.listdir(movie_dir_input[0])
+tv_dir_list = os.listdir(tv_dir_input[0])
 
 extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
               ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
@@ -154,7 +162,7 @@ def get_movie_years_for_dict_and_graph():
     x, y = zip(*movie_data)
 
     plt.bar(x, y)
-    plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-YEAR-RESULTS.png')
+    plt.savefig(r'/home/' + username_input[0] + '/MEDIA-INDEX/FILES/MOVIE-YEAR-RESULTS.png')
     plt.show()
 
 
@@ -176,7 +184,7 @@ def get_tv_years_for_dict_and_graph():
     x, y = zip(*tv_data)
 
     plt.bar(x, y)
-    plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-YEAR-RESULTS.png')
+    plt.savefig(r'/home/' + username_input[0] + '/MEDIA-INDEX/FILES/TV-YEAR-RESULTS.png')
     plt.show()
 
 
@@ -198,7 +206,7 @@ def get_movie_years_decades_totals_graphs():
     x, y = zip(*media_movie_years_decades_totals.items())
 
     plt.bar(x, y, width=5)
-    plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-DECADE-RESULTS.png')
+    plt.savefig(r'/home/' + username_input[0] + '/MEDIA-INDEX/FILES/MOVIE-DECADE-RESULTS.png')
     plt.show()
 
 
@@ -220,7 +228,7 @@ def get_tv_years_decades_totals_graphs():
     x, y = zip(*media_tv_years_decades_totals.items())
 
     plt.bar(x, y, width=5)
-    plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-DECADE-RESULTS.png')
+    plt.savefig(r'/home/' + username_input[0] + '/MEDIA-INDEX/FILES/TV-DECADE-RESULTS.png')
     plt.show()
 
 
@@ -266,7 +274,7 @@ def search_resolution_totals_movies():
 
     plt.setp(autotexts, size=9, weight='bold')
     ax.set_title("MOVIE-RESOLUTION-RESULTS")
-    plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-RESOLUTION-RESULTS.png')
+    plt.savefig(r'/home/' + username_input[0] + '/MEDIA-INDEX/FILES/MOVIE-RESOLUTION-RESULTS.png')
     plt.show()
 
 
@@ -312,7 +320,7 @@ def search_resolution_totals_tv_shows():
 
     plt.setp(autotexts, size=9, weight='bold')
     ax.set_title("TV-SHOW-RESOLUTION-RESULTS")
-    plt.savefig(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-SHOW-RESOLUTION-RESULTS.png')
+    plt.savefig(r'/home/' + username_input[0] + '/MEDIA-INDEX/FILES/TV-SHOW-RESOLUTION-RESULTS.png')
     plt.show()
 
 
@@ -501,8 +509,7 @@ def scrape_media_info_for_csv():
         tv_scrape_info = re.search("(.+) \((\d{4})\)", str(tv_found), flags=0)
         found_file_info.append(["TV", tv_scrape_info[1], tv_scrape_info[2]])
 
-
-    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv", "w", newline="") as f:
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/FILES/MEDIA-INDEX.csv', "w", newline="") as f:
         csv_writer = csv.writer(f)
         for file_row in sorted(found_file_info):
             csv_writer.writerow(file_row)
@@ -510,12 +517,12 @@ def scrape_media_info_for_csv():
 
 def search_movie_folders_items():
     movie_file_results = []
-    for root, dirs, files in os.walk(movie_dir):
+    for root, dirs, files in os.walk(movie_dir_input[0]):
         for movie_file in sorted(files):
             if movie_file.endswith(extensions):
                 movie_file_results.append([root + '/' + movie_file])
 
-    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv", "w", newline="") as f:
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv', "w", newline="") as f:
         csv_writer = csv.writer(f)
         for movie_row in sorted(movie_file_results):
             csv_writer.writerow(movie_row)
@@ -523,13 +530,12 @@ def search_movie_folders_items():
 
 def search_tv_show_folders_items():
     tv_show_file_results = []
-    for root, dirs, files in os.walk(tv_dir):
+    for root, dirs, files in os.walk(tv_dir_input[0]):
         for tv_file in sorted(files):
             if tv_file.endswith(extensions):
                 tv_show_file_results.append([root + '/' + tv_file])
 
-
-    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv", "w", newline="") as f:
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/FILES/TV-FILES-INDEX.csv', "w", newline="") as f:
         csv_writer = csv.writer(f)
         for tv_row in sorted(tv_show_file_results):
             csv_writer.writerow(tv_row)
@@ -556,7 +562,7 @@ def get_movie_index_results():
                     [mv_title, title.get('year'), str(track.width) + 'x' + str(track.height),
                      title.get('container')])
 
-    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv", "w", newline="") as f:
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv', "w", newline="") as f:
         csv_writer = csv.writer(f)
         for movie_row in movie_index_file_results:
             csv_writer.writerow(movie_row)
@@ -585,7 +591,7 @@ def get_tv_show_index_results():
                     [tv_title, title.get('episode_title'), title.get('season'), title.get('episode'),
                      tv_year, str(track.width) + 'x' + str(track.height), title.get('container')])
 
-    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv", "w", newline="") as f:
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv', "w", newline="") as f:
         csv_writer = csv.writer(f)
         for tv_row in tv_index_file_results:
             csv_writer.writerow(tv_row)
