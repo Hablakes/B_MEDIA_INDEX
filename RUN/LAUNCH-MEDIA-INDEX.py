@@ -166,7 +166,7 @@ def first_launch_dirs():
     print()
     print("PROCEED?   -   1) YES - 2) NO")
     first_launch_action = input()
-    first_launch_action_lower = first_launch_action.lower()
+    first_launch_action_lower = int(first_launch_action.lower())
     if first_launch_action_lower == 1:
         scrape_media_info_for_csv()
         create_media_files_index_results_csv()
