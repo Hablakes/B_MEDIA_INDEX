@@ -24,49 +24,6 @@ movie_string = str("MOVIE")
 tv_string = str("TV")
 
 
-def first_launch_username():
-    print("____ ___ ____ ____ ___    ___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
-    print("[__   |  |__| |__/  |  __ |__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/ ")
-    print("___]  |  |  | |  \  |     |__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
-    user_name_input_action = username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE):"))
-
-    os.makedirs(r'/home/' + username_input[0] + '/MEDIA-INDEX/', exist_ok=True)
-
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv', 'w') as media_index_csv:
-        pass
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'w') as movie_files_index_csv:
-        pass
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-INDEX.csv', 'w') as tv_files_index_csv:
-        pass
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', 'w') as movie_files_results_csv:
-        pass
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv', 'w') as tv_files_results_csv:
-        pass
-
-
-def first_launch_dirs():
-    first_launch_username()
-    movie_dir = movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
-    tv_dir = tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
-    print("OK, THAT'S ALL WE NEED FOR NOW, THIS MAY TAKE AWHILE (DEPENDING ON THE SIZE OF YOUR LIBRARY)")
-    print()
-    first_launch_action = input("PROCEED?   -   Y / N")
-    first_launch_action_lower = first_launch_action.lower()
-    if first_launch_action_lower == str('y'):
-        create_media_files_index_results_csv()
-    else:
-        pass
-
-
-first_launch_dirs()
-
-
 def scrape_media_info_for_csv():
     movie_dir_list = os.listdir(movie_dir_input[0])
     tv_dir_list = os.listdir(tv_dir_input[0])
@@ -173,6 +130,49 @@ def get_tv_show_index_results():
 def create_media_files_index_results_csv():
     get_movie_index_results()
     get_tv_show_index_results()
+
+
+def first_launch_username():
+    print("____ ___ ____ ____ ___    ___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
+    print("[__   |  |__| |__/  |  __ |__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/ ")
+    print("___]  |  |  | |  \  |     |__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    user_name_input_action = username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE):"))
+
+    os.makedirs(r'/home/' + username_input[0] + '/MEDIA-INDEX/', exist_ok=True)
+
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv', 'w') as media_index_csv:
+        pass
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'w') as movie_files_index_csv:
+        pass
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-INDEX.csv', 'w') as tv_files_index_csv:
+        pass
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', 'w') as movie_files_results_csv:
+        pass
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv', 'w') as tv_files_results_csv:
+        pass
+
+
+def first_launch_dirs():
+    first_launch_username()
+    movie_dir = movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
+    tv_dir = tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    print("OK, THAT'S ALL WE NEED FOR NOW, THIS MAY TAKE AWHILE (DEPENDING ON THE SIZE OF YOUR LIBRARY)")
+    print()
+    first_launch_action = input("PROCEED?   -   Y / N")
+    first_launch_action_lower = first_launch_action.lower()
+    if first_launch_action_lower == str('y'):
+        create_media_files_index_results_csv()
+    else:
+        pass
+
+
+first_launch_dirs()
 
 
 def movie_title_search():
