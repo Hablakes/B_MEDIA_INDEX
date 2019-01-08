@@ -1149,3 +1149,5 @@ def first_launch_media_index():
 
 
 first_launch_media_index()
+while True:
+    launch_media_index()
