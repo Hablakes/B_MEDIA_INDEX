@@ -559,7 +559,7 @@ def get_movie_index_results():
 
             if track.track_type == 'Video':
                 movie_index_file_results.append(
-                    [mv_title, title.get('year'), str(track.width) + 'x' + str(track.height),
+                    [title.get('title'), title.get('year'), str(track.width) + 'x' + str(track.height),
                      title.get('container')])
 
     with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "w", newline="") as f:
@@ -588,8 +588,8 @@ def get_tv_show_index_results():
 
             if track.track_type == 'Video':
                 tv_index_file_results.append(
-                    [tv_title, title.get('episode_title'), title.get('season'), title.get('episode'),
-                     tv_year, str(track.width) + 'x' + str(track.height), title.get('container')])
+                    [title.get('title'), title.get('episode_title'), title.get('season'), title.get('episode'),
+                     title.get('year'), str(track.width) + 'x' + str(track.height), title.get('container')])
 
     with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv', "w", newline="") as f:
         csv_writer = csv.writer(f)
