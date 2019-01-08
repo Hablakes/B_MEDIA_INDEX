@@ -9,9 +9,34 @@ import numpy as np
 import pymediainfo
 
 username_input = []
-
 movie_dir_input = []
 tv_dir_input = []
+
+media_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv'))
+media_index_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
+
+movie_files_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv'))
+
+tv_files_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-INDEX.csv'))
+
+movie_files_results_list = list(
+    csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
+
+tv_files_results_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+
+movie_dir_list = os.listdir(movie_dir_input[0])
+tv_dir_list = os.listdir(tv_dir_input[0])
+
+extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
+              ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
+              ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm", ".rmvb",
+              ".srt", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
+
+movie_years_range = range(1900, 2100, 1)
+tv_show_years_range = range(1900, 2100, 1)
+
+movie_string = str("MOVIE")
+tv_string = str("TV")
 
 
 def first_launch_username():
@@ -158,32 +183,6 @@ def first_launch_dirs():
 
 first_launch_username()
 first_launch_dirs()
-
-media_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv'))
-media_index_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
-
-movie_files_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv'))
-
-tv_files_index = csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-INDEX.csv'))
-
-movie_files_results_list = list(
-    csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
-
-tv_files_results_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
-
-movie_dir_list = os.listdir(movie_dir_input[0])
-tv_dir_list = os.listdir(tv_dir_input[0])
-
-extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
-              ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
-              ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm", ".rmvb",
-              ".srt", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
-
-movie_years_range = range(1900, 2100, 1)
-tv_show_years_range = range(1900, 2100, 1)
-
-movie_string = str("MOVIE")
-tv_string = str("TV")
 
 
 def movie_title_search():
