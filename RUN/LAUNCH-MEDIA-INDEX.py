@@ -167,13 +167,31 @@ def first_launch_dirs():
     print("PROCEED?   -   1) YES - 2) NO")
     first_launch_action = input()
     first_launch_action_lower = int(first_launch_action.lower())
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     if first_launch_action_lower == 1:
         scrape_media_info_for_csv()
         create_media_files_index_results_csv()
+        launch_media_index()
     elif first_launch_action_lower == 2:
-        pass
-    else:
-        pass
+        exit()
+
+
+def second_launch_lmi():
+    print("____ ___ ____ ____ ___    ___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
+    print("[__   |  |__| |__/  |  __ |__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/ ")
+    print("___]  |  |  | |  \  |     |__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    user_name_input_action = username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE):"))
+    movie_dir = movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
+    tv_dir = tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    launch_media_index()
 
 
 def movie_title_search():
@@ -1130,10 +1148,12 @@ def first_launch_media_index():
     first_lmi_input_action = input("ENTER #")
     first_lmi_input_action_lower = int(first_lmi_input_action.lower())
     print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     if first_lmi_input_action_lower == 1:
         first_launch_dirs()
     elif first_lmi_input_action_lower == 2:
-        launch_media_index()
+        second_launch_lmi()
     elif first_lmi_input_action_lower == 3:
         exit()
 
