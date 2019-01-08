@@ -78,10 +78,6 @@ def get_movie_index_results():
 
         title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1])
 
-        title_and_year = (movie_file[0].rsplit('/')[-2])
-
-        mv_title = (title_and_year[0:-7])
-
         test = pymediainfo.MediaInfo.parse(movie_file[0])
 
         for track in test.tracks:
@@ -105,12 +101,6 @@ def get_tv_show_index_results():
     for tv_file in tv_files_index:
 
         title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
-
-        title_and_year = (tv_file[0].rsplit('/')[-2])
-
-        tv_year = (title_and_year[-5:-1])
-
-        tv_title = (title_and_year[0:-7])
 
         test = pymediainfo.MediaInfo.parse(tv_file[0])
 
@@ -139,7 +129,7 @@ def first_launch_username():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    user_name_input_action = username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE):"))
+    username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE):"))
 
     os.makedirs(r'/home/' + username_input[0] + '/MEDIA-INDEX/', exist_ok=True)
 
@@ -157,8 +147,8 @@ def first_launch_username():
 
 def first_launch_dirs():
     first_launch_username()
-    movie_dir = movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
-    tv_dir = tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
+    movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
+    tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -185,9 +175,9 @@ def second_launch_lmi():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    user_name_input_action = username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE):"))
-    movie_dir = movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
-    tv_dir = tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
+    username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE):"))
+    movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
+    tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
