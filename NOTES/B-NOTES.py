@@ -3,9 +3,16 @@ PIP INSTALLS -
 
 UPGRADE **
 
+ascii-graph
+guessit
+matplotlib
+pyfiglet
+pymediainfo
+
+----------------------------------------------------------------------------------
+
 aplotter
 asciichart
-ascii-graph
 asciiplotlib
 babblefish
 bashplotlib
@@ -13,11 +20,7 @@ click
 enzyme
 get-media-files
 gnuplot
-guessit
 guess-language
-matplotlib
-pyfiglet
-pymediainfo
 rebulk
 termgraph
 
