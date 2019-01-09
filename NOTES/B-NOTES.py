@@ -41,6 +41,8 @@ gnuplot, gnuplot-git
 libmediainfo
 lolcat
 mediainfo, mediainfo-gui
+neofetch
+screenfetch
 tk
 tmux
 
