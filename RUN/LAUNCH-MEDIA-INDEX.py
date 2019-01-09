@@ -30,12 +30,12 @@ def scrape_media_info_for_csv():
     found_file_info = []
 
     for movie_found in movie_dir_list:
-        movie_scrape_info = re.search("(.+) \((\d{4})\)", str(movie_found), flags=0)
-        found_file_info.append(["MOVIE", movie_scrape_info[1], movie_scrape_info[2]])
+        movie_scrape_info = guessit.guessit(movie_found[0])
+        found_file_info.append(["MOVIE", movie_scrape_info.get('title')])
 
     for tv_found in tv_dir_list:
-        tv_scrape_info = re.search("(.+) \((\d{4})\)", str(tv_found), flags=0)
-        found_file_info.append(["TV", tv_scrape_info[1], tv_scrape_info[2]])
+        tv_scrape_info = guessit.guessit(tv_found[0])
+        found_file_info.append(["TV", tv_scrape_info.get('title')])
 
     with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv', "w", newline="") as f:
         csv_writer = csv.writer(f)
