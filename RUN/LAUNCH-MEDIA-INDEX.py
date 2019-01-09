@@ -29,17 +29,17 @@ def scrape_media_info_for_csv():
     tv_dir_list = os.listdir(tv_dir_input[0])
     found_file_info = []
 
-    for movie_found in movie_dir_list:
-        movie_scrape_info = guessit.guessit(movie_found[0])
-        found_file_info.append(["MOVIE", movie_scrape_info.get('title')])
+    for movie_found in sorted(movie_dir_list):
+        movie_scrape_info = guessit.guessit(movie_found)
+        found_file_info.append(["MOVIE", movie_scrape_info.get('title'), movie_scrape_info.get('year')])
 
-    for tv_found in tv_dir_list:
-        tv_scrape_info = guessit.guessit(tv_found[0])
-        found_file_info.append(["TV", tv_scrape_info.get('title')])
+    for tv_found in sorted(tv_dir_list):
+        tv_scrape_info = guessit.guessit(tv_found)
+        found_file_info.append(["TV", tv_scrape_info.get('title'), tv_scrape_info.get('year')])
 
     with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv', "w", newline="") as f:
         csv_writer = csv.writer(f)
-        for file_row in sorted(found_file_info):
+        for file_row in found_file_info:
             csv_writer.writerow(file_row)
 
 
