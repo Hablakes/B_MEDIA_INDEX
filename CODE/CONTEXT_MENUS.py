@@ -1,12 +1,5 @@
-import csv
 import os
-import re
 
-from ascii_graph import Pyasciigraph
-import guessit
-import matplotlib.pylab as plt
-import numpy as np
-import pymediainfo
 
 username_input = []
 movie_dir_input = []
@@ -39,9 +32,9 @@ def first_launch_media_index():
     print("--------------------------------------------------------------------------------------------------")
     print()
     if first_lmi_input_action_lower == 1:
-        pass
+        first_launch_dirs()
     elif first_lmi_input_action_lower == 2:
-        pass
+        second_launch_lmi()
     elif first_lmi_input_action_lower == 3:
         exit()
 
@@ -71,25 +64,15 @@ def first_launch_username():
 
 def first_launch_dirs():
     first_launch_username()
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
     tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("OK, THAT'S ALL WE NEED FOR NOW, THIS MAY TAKE AWHILE (DEPENDING ON THE SIZE OF YOUR LIBRARY)")
-    print()
-    print("PROCEED?   -   1) YES - 2) NO")
-    first_launch_action = input()
-    first_launch_action_lower = int(first_launch_action.lower())
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
-    if first_launch_action_lower == 1:
-        pass
-        pass
-        launch_media_index()
-    elif first_launch_action_lower == 2:
-        exit()
+    launch_media_index()
 
 
 def second_launch_lmi():
@@ -100,6 +83,9 @@ def second_launch_lmi():
     print("--------------------------------------------------------------------------------------------------")
     print()
     username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE):"))
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
     movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
     tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
     print()
@@ -368,3 +354,6 @@ def create_media_indices_all():
         pass
     elif cmi_action == 3:
         launch_media_index()
+
+
+first_launch_media_index()
