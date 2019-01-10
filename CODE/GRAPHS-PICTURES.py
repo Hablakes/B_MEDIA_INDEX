@@ -1,9 +1,7 @@
 import csv
 import re
 
-from ascii_graph import Pyasciigraph
 import matplotlib.pylab as plt
-import numpy as np
 
 years_range = range(1900, 2100, 1)
 movie_string = str("MOVIE")
