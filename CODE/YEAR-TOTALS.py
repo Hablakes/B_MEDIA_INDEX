@@ -1,50 +1,26 @@
 import csv
 import os
-import re
 
-media_index = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
-
-movies_dir = os.listdir(r"/home/bx/Videos/CHASE/MOVIES/")
-tv_dir = os.listdir(r"/home/bx/Videos/CHASE/TV/")
-
-movie_years_range = range(1900, 2100, 1)
-tv_years_range = range(1900, 2100, 1)
+years_range = range(1900, 2100, 1)
 
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
+username_input = [input("ENTER YOUR USERNAME (CASE-SENSITIVE):")]
 
-def totals_query():
-    print("___     ___ ____ ___ ____ _    ____    ____ _  _ ____ ____ _   _")
-    print("|__] __  |  |  |  |  |__| |    [__  __ |  | |  | |___ |__/  \_/ ")
-    print("|__]     |  |__|  |  |  | |___ ___]    |_\| |__| |___ |  \   |   ")
-    print()
-    print("1) MOVIES BY YEAR - 2) MOVIES TOTAL - 3) TV SHOWS BY YEAR 4) TV SHOWS TOTAL - 5) EXIT")
-    print()
-    b_totals_query_action = input("ENTER #")
-    print()
-    b_totals_query_action = int(b_totals_query_action)
-    if b_totals_query_action == 1:
-        get_movie_years_for_dict()
-    elif b_totals_query_action == 2:
-        get_movie_titles_amount()
-    elif b_totals_query_action == 3:
-        get_tv_years_for_dict()
-    elif b_totals_query_action == 4:
-        get_tv_titles_amount()
-    elif b_totals_query_action == 5:
-        exit()
+movies_dir = os.listdir(r"/home/bx/Videos/CHASE/MOVIES/")
+tv_dir = os.listdir(r"/home/bx/Videos/CHASE/TV/")
 
 
 def get_movie_years_for_dict():
+    media_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
     movie_years_amount_dict = {}
     movie_totals_query_action = input("ENTER #")
     movie_totals_query_action = int(movie_totals_query_action)
-    for media_movie in media_index:
-        #        media_movie_year = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(media_movie), flags=0)
+    for media_movie in media_index_list:
         media_movie_year = int(media_movie[2])
         if movie_string in media_movie:
-            if media_movie_year in movie_years_range:
+            if media_movie_year in years_range:
                 if media_movie_year not in movie_years_amount_dict:
                     movie_years_amount_dict[media_movie_year] = []
                 movie_years_amount_dict[media_movie_year].append(media_movie)
@@ -58,22 +34,23 @@ def get_movie_years_for_dict():
 
 
 def get_movie_titles_amount():
+    media_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
     movie_amounts_list = []
-    for counted_movie_title in media_index:
+    for counted_movie_title in media_index_list:
         if movie_string in counted_movie_title:
             movie_amounts_list.append(counted_movie_title)
     print(len(movie_amounts_list))
 
 
 def get_tv_years_for_dict():
+    media_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
     tv_years_amount_dict = {}
     tv_totals_query_action = input("ENTER #")
     tv_totals_query_action = int(tv_totals_query_action)
-    for media_tv in media_index:
-        #        media_tv_year = re.split("(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)", str(media_tv), flags=0)
+    for media_tv in media_index_list:
         media_tv_year = int(media_tv[2])
         if tv_string in media_tv:
-            if media_tv_year in tv_years_range:
+            if media_tv_year in years_range:
                 if media_tv_year not in tv_years_amount_dict:
                     tv_years_amount_dict[media_tv_year] = []
                 tv_years_amount_dict[media_tv_year].append(media_tv)
@@ -87,12 +64,9 @@ def get_tv_years_for_dict():
 
 
 def get_tv_titles_amount():
+    media_index_list = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX.csv')))
     tv_amounts_list = []
-    for counted_tv_title in media_index:
+    for counted_tv_title in media_index_list:
         if tv_string in counted_tv_title:
             tv_amounts_list.append(counted_tv_title)
     print(len(tv_amounts_list))
-
-
-while True:
-    totals_query()
