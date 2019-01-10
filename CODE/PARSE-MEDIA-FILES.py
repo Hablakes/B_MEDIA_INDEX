@@ -3,11 +3,9 @@ import csv
 import guessit
 import pymediainfo
 
-movie_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv"))
-tv_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv"))
-
 
 def get_movie_index_results():
+    movie_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv"))
     movie_index_file_results = []
 
     for movie_file in movie_index:
@@ -36,6 +34,7 @@ def get_movie_index_results():
 
 
 def get_tv_show_index_results():
+    tv_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv"))
     tv_index_file_results = []
 
     for tv_file in tv_index:
