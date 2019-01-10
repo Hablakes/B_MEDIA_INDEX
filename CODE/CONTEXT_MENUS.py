@@ -4,26 +4,12 @@ from CODE import GRAPHS_BAR
 from CODE import GRAPHS_PIE
 from CODE import GRAPHS_TERMINAL
 from CODE import MEDIA_FILE_PATHS_INDEX
-from CODE import PARSE_MEDIA_FILES
 from CODE import QUERY_MEDIA_FILES_INDICES
 from CODE import QUERY_MEDIA_FOLDERS_INDEX
+from CODE import PARSE_MEDIA_FILES
 from CODE import SCRAPE_MEDIA_FOLDERS_INDEX
 from CODE import SORT_OPTIONS
 from CODE import YEAR_TOTALS
-
-
-username_input = []
-movie_dir_input = []
-tv_dir_input = []
-
-extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
-              ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
-              ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm", ".rmvb",
-              ".srt", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
-
-years_range = range(1900, 2100, 1)
-movie_string = str("MOVIE")
-tv_string = str("TV")
 
 
 def first_launch_media_index():
@@ -50,7 +36,10 @@ def first_launch_media_index():
         exit()
 
 
-def first_launch_username():
+def first_launch_dirs():
+    username_input = []
+    movie_dir_input = []
+    tv_dir_input = []
     print("____ ___ ____ ____ ___    ___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
     print("[__   |  |__| |__/  |  __ |__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/ ")
     print("___]  |  |  | |  \  |     |__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
@@ -58,6 +47,14 @@ def first_launch_username():
     print("--------------------------------------------------------------------------------------------------")
     print()
     username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE):"))
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
+    movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
+    tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
 
     os.makedirs(r'/home/' + username_input[0] + '/MEDIA-INDEX/', exist_ok=True)
 
@@ -71,22 +68,13 @@ def first_launch_username():
         pass
     with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv', 'w') as tv_files_results_csv:
         pass
-
-
-def first_launch_dirs():
-    first_launch_username()
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
-    movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
-    tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
     launch_media_index()
 
 
 def second_launch_lmi():
+    username_input = []
+    movie_dir_input = []
+    tv_dir_input = []
     print("____ ___ ____ ____ ___    ___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
     print("[__   |  |__| |__/  |  __ |__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/ ")
     print("___]  |  |  | |  \  |     |__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
@@ -116,11 +104,11 @@ def launch_media_index():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    lmi_action = input("ENTER #")
+    lmi_input = input("ENTER #")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    lmi_action = int(lmi_action)
+    lmi_action = int(lmi_input)
     if lmi_action == 1:
         run_query()
     elif lmi_action == 2:
@@ -172,11 +160,11 @@ def run_sort():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    sort_options = input("ENTER #")
+    sort_input = input("ENTER #")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    sort_options = int(sort_options)
+    sort_options = int(sort_input)
     if sort_options == 1:
         SORT_OPTIONS.get_title_ascending()
     elif sort_options == 2:
@@ -200,11 +188,11 @@ def file_query_and_sort():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    data_query_options = input("ENTER #")
+    data_query_input = input("ENTER #")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    data_query_options = int(data_query_options)
+    data_query_options = int(data_query_input)
     if data_query_options == 1:
         QUERY_MEDIA_FILES_INDICES.movie_files_info_query()
     elif data_query_options == 2:
@@ -228,14 +216,14 @@ def run_graphs():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    graph_options = int(graph_options)
-    if graph_options == 1:
+    graph_options_int = int(graph_options)
+    if graph_options_int == 1:
         GRAPHS_BAR.bar_graph_options_base()
         GRAPHS_PIE.pie_chart_options_base()
-    elif graph_options == 2:
+    elif graph_options_int == 2:
         GRAPHS_TERMINAL.terminal_graph_options_base_0()
         GRAPHS_TERMINAL.terminal_graph_options_base_1()
-    elif graph_options == 3:
+    elif graph_options_int == 3:
         launch_media_index()
 
 
@@ -258,20 +246,20 @@ def run_picture_graphs():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    graph_options = int(graph_options)
-    if graph_options == 1:
+    graph_options_int = int(graph_options)
+    if graph_options_int == 1:
         pass
-    elif graph_options == 2:
+    elif graph_options_int == 2:
         pass
-    elif graph_options == 3:
+    elif graph_options_int == 3:
         pass
-    elif graph_options == 4:
+    elif graph_options_int == 4:
         pass
-    elif graph_options == 5:
+    elif graph_options_int == 5:
         pass
-    elif graph_options == 6:
+    elif graph_options_int == 6:
         pass
-    elif graph_options == 7:
+    elif graph_options_int == 7:
         launch_media_index()
 
 
@@ -294,20 +282,20 @@ def run_terminal_graphs():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    graph_options = int(graph_options)
-    if graph_options == 1:
+    graph_options_int = int(graph_options)
+    if graph_options_int == 1:
         pass
-    elif graph_options == 2:
+    elif graph_options_int == 2:
         pass
-    elif graph_options == 3:
+    elif graph_options_int == 3:
         pass
-    elif graph_options == 4:
+    elif graph_options_int == 4:
         pass
-    elif graph_options == 5:
+    elif graph_options_int == 5:
         pass
-    elif graph_options == 6:
+    elif graph_options_int == 6:
         pass
-    elif graph_options == 7:
+    elif graph_options_int == 7:
         launch_media_index()
 
 
@@ -324,11 +312,11 @@ def totals_query():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    b_totals_query_action = input("ENTER #")
+    b_totals_query_input = input("ENTER #")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    b_totals_query_action = int(b_totals_query_action)
+    b_totals_query_action = int(b_totals_query_input)
     if b_totals_query_action == 1:
         YEAR_TOTALS.movie_year_totals()
     elif b_totals_query_action == 2:
@@ -360,11 +348,11 @@ def create_media_indices_all():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    cmi_action = input("ENTER #")
+    cmi_input = input("ENTER #")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    cmi_action = int(cmi_action)
+    cmi_action = int(cmi_input)
     if cmi_action == 1:
         MEDIA_FILE_PATHS_INDEX.search_folder_items_and_save_file_paths()
     elif cmi_action == 2:

@@ -39,7 +39,7 @@ def search_tv_folders_items():
 
 
 def create_media_files_index():
-    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MEDIA-INDEX-RE.csv", "w", newline="") as f:
+    with open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/ALT-MEDIA-INDEX.csv", "w", newline="") as f:
         csv_writer = csv.writer(f)
         for movie_row in movie_file_results:
             csv_writer.writerow(movie_row)

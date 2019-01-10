@@ -6,13 +6,12 @@ extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", 
               ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm", ".rmvb",
               ".srt", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
 
-username_input = [input("ENTER YOUR USERNAME (CASE-SENSITIVE):")]
-
-movie_dir_input = [(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))]
-tv_dir_input = [(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))]
+username_input = []
 
 
 def search_folder_items_and_save_file_paths():
+    movie_dir_input = [(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))]
+    tv_dir_input = [(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))]
     movie_file_results = []
     for root, dirs, files in os.walk(movie_dir_input[0]):
         for movie_file in sorted(files):

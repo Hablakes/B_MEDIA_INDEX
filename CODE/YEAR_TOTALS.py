@@ -1,5 +1,4 @@
 import csv
-import os
 import re
 
 years_range = range(1900, 2100, 1)
@@ -7,10 +6,7 @@ years_range = range(1900, 2100, 1)
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
-username_input = [input("ENTER YOUR USERNAME (CASE-SENSITIVE):")]
-
-movies_dir = os.listdir(r"/home/bx/Videos/CHASE/MOVIES/")
-tv_dir = os.listdir(r"/home/bx/Videos/CHASE/TV/")
+username_input = []
 
 
 def movie_year_totals():

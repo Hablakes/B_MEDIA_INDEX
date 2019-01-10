@@ -4,7 +4,7 @@ import re
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
-username_input = [input("ENTER YOUR USERNAME (CASE-SENSITIVE):")]
+username_input = []
 
 
 def movie_title_search():

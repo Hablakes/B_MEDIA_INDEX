@@ -135,6 +135,7 @@ MOVIE,Ace Ventura - Pet Detective,1994
 MOVIE,Ace Ventura - When Nature Calls,1995
 MOVIE,Across the Universe,2007
 MOVIE,Act of Valor,2012
+MOVIE,Acts of Violence,2018
 MOVIE,Addams Family Values,1993
 MOVIE,Adore,2013
 MOVIE,Adrift in Tokyo,2007
@@ -252,6 +253,7 @@ MOVIE,Antisocial,2013
 MOVIE,Antisocial 2,2015
 MOVIE,Antitrust,2001
 MOVIE,Antwone Fisher,2002
+MOVIE,Anunnaki,2018
 MOVIE,Anvil! The Story of Anvil,2008
 MOVIE,Any Given Sunday,1999
 MOVIE,Apocalypse Now,1979
@@ -427,6 +429,7 @@ MOVIE,Bill & Ted's Excellent Adventure,1989
 MOVIE,Bill Cosby - Himself,1983
 MOVIE,Billion Dollar Brain,1967
 MOVIE,Billy Madison,1995
+MOVIE,Bird Box,2018
 MOVIE,Birdboy - The Forgotten Children,2015
 MOVIE,Birdman,2014
 MOVIE,Bitcoin Heist,2016
@@ -815,6 +818,9 @@ MOVIE,Dead Ringer,1964
 MOVIE,Dead Ringer,2018
 MOVIE,Dead Ringers,1988
 MOVIE,Dead Snow,2009
+MOVIE,Deadliest Prey,2013
+MOVIE,Deadly Hero,1975
+MOVIE,Deadly Prey,1987
 MOVIE,Deadpool,2016
 MOVIE,Deadpool 2,2018
 MOVIE,Dealt,2017
@@ -1530,6 +1536,7 @@ MOVIE,I Am Number Four,2011
 MOVIE,I Don't Feel at Home in This World Anymore,2017
 MOVIE,I Kill Giants,2018
 MOVIE,I Know What You Did Last Summer,1997
+MOVIE,I Know Who Killed Me,2007
 MOVIE,I Know You're in There,2016
 MOVIE,"I Love You, Man",2009
 MOVIE,I Origins,2014
@@ -1704,8 +1711,10 @@ MOVIE,Jungle Book,1942
 MOVIE,Junior,1994
 MOVIE,Juno,2007
 MOVIE,Jupiter Ascending,2015
+MOVIE,Jurassic City,2014
 MOVIE,Jurassic Park,1993
 MOVIE,Jurassic Park III,2001
+MOVIE,Jurassic Prey,2015
 MOVIE,Jurassic World,2015
 MOVIE,Jurassic World - Fallen Kingdom,2018
 MOVIE,Just My Luck,2006
@@ -1839,6 +1848,7 @@ MOVIE,Leprechaun 4 - In Space,1996
 MOVIE,Leprechaun in the Hood,2000
 MOVIE,Les Misérables,2012
 MOVIE,Let It Be,1970
+MOVIE,Let Us Prey,2014
 MOVIE,Let the Right One In,2008
 MOVIE,Let's Be Evil,2016
 MOVIE,Lethal Weapon,1987
@@ -1896,6 +1906,7 @@ MOVIE,Look Who's Talking,1989
 MOVIE,Look Who's Talking Now!,1993
 MOVIE,Look Who's Talking Too,1990
 MOVIE,Looper,2012
+MOVIE,Loophole,2019
 MOVIE,Loose Change,2005
 MOVIE,Lord of Illusions,1995
 MOVIE,Lord of War,2005
@@ -2394,6 +2405,7 @@ MOVIE,Planet 51,2009
 MOVIE,Planet Terror,2007
 MOVIE,Planet of the Vampires,1965
 MOVIE,Platoon,1986
+MOVIE,Play Dirty,1969
 MOVIE,Play Misty for Me,1971
 MOVIE,Point Blank,1967
 MOVIE,Point Break,1991
@@ -2475,6 +2487,7 @@ MOVIE,Puppet Master - The Littlest Reich,2018
 MOVIE,Puppet Master 4,1993
 MOVIE,Puppet Master II,1990
 MOVIE,Puppet Master III Toulon's Revenge,1991
+MOVIE,Purple Rain,1984
 MOVIE,Push,2009
 MOVIE,Pyewacket,2017
 MOVIE,Quantum of Solace,2008
@@ -2857,6 +2870,7 @@ MOVIE,Solaris,1972
 MOVIE,Solaris,2002
 MOVIE,Soldier,1998
 MOVIE,Sole Proprietor,2016
+MOVIE,Solis,2018
 MOVIE,Sollers Point,2017
 MOVIE,Solo - A Star Wars Story,2018
 MOVIE,Solomon Kane,2009
@@ -2878,6 +2892,7 @@ MOVIE,Soul Men,2008
 MOVIE,Source Code,2011
 MOVIE,Soylent Green,1973
 MOVIE,Space Amoeba,1970
+MOVIE,Space Battleship Yamato,2010
 MOVIE,Space Cop,2016
 MOVIE,Space Cowboys,2000
 MOVIE,Space Jam,1996
@@ -2907,6 +2922,7 @@ MOVIE,Spider-Man 3,2007
 MOVIE,Spielberg,2017
 MOVIE,Spinning Man,2018
 MOVIE,Spirited Away,2001
+MOVIE,"Spirits of the Air, Gremlins of the Clouds",1989
 MOVIE,Splash,1984
 MOVIE,Splice,2009
 MOVIE,Splinter,2008
@@ -3282,6 +3298,7 @@ MOVIE,The Day the Earth Stood Still,2008
 MOVIE,The Dead Girl,2006
 MOVIE,The Dead Pool,1988
 MOVIE,The Dead Zone,1983
+MOVIE,The Deadly Invention,1958
 MOVIE,The Death of Stalin,2017
 MOVIE,The Death of Superman,2018
 MOVIE,The Death of the Incredible Hulk,1990
@@ -3297,6 +3314,8 @@ MOVIE,The Devil's Backbone,2001
 MOVIE,The Devil's Rejects,2005
 MOVIE,The Diary of a Teenage Girl,2015
 MOVIE,The Dictator,2012
+MOVIE,The Dirty Dozen The Deadly Mission,1987
+MOVIE,The Dirty Dozen The Fatal Mission,1988
 MOVIE,The Discovery,2017
 MOVIE,The Do-Over,2016
 MOVIE,The Doctor,1991
@@ -3310,6 +3329,7 @@ MOVIE,The Dreamers,2003
 MOVIE,The Dressmaker,2015
 MOVIE,The Driver,1978
 MOVIE,The Drop,2014
+MOVIE,The Drowning,2016
 MOVIE,The Duel,1971
 MOVIE,The Duellists,1977
 MOVIE,The Dukes of Hazzard,2005
@@ -3528,6 +3548,7 @@ MOVIE,The Killing of a Sacred Deer,2017
 MOVIE,The Kindergarten Teacher,2018
 MOVIE,The King of Kong - A Fistful of Quarters,2007
 MOVIE,The King's Choice,2016
+MOVIE,The King's Speech,2010
 MOVIE,The Kingdom,2007
 MOVIE,The Lake House,2006
 MOVIE,The Land Before Time,1988
@@ -3991,6 +4012,7 @@ MOVIE,Thunderball,1965
 MOVIE,Thursday,1998
 MOVIE,Ticking Clock,2011
 MOVIE,Tilt,2017
+MOVIE,Time Freak,2018
 MOVIE,Time Jumpers,2018
 MOVIE,Time Lapse,2014
 MOVIE,Time Trap,2017
@@ -4254,6 +4276,7 @@ MOVIE,While You Were Sleeping,1995
 MOVIE,Whiplash,2014
 MOVIE,Whiskey Tango Foxtrot,2016
 MOVIE,Whisper of the Heart,1995
+MOVIE,White Bird in a Blizzard,2014
 MOVIE,White Christmas,1954
 MOVIE,White Ghost,1988
 MOVIE,White God,2014
@@ -4366,6 +4389,7 @@ TV,3rd Rock from the Sun,1996
 TV,60 Minutes,1968
 TV,90's House,2017
 TV,AFV,1989
+TV,AI and Games,2014
 TV,ALF,1986
 TV,Abandoned Engineering,2017
 TV,Action Team,2018
@@ -5148,6 +5172,7 @@ TV,Rick and Morty,2013
 TV,Ridddle,2016
 TV,Rise of the Teenage Mutant Ninja Turtles,2018
 TV,Rising Rebuilding Ground Zero,2011
+TV,Robert Miles,2017
 TV,Robot Chicken,2005
 TV,Robot Wars,2016
 TV,Robot Wars Extreme Warriors,2001

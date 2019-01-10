@@ -7,7 +7,7 @@ years_range = range(1900, 2100, 1)
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
-username_input = [input("ENTER YOUR USERNAME (CASE-SENSITIVE):")]
+username_input = []
 
 
 def bar_graph_options_base():

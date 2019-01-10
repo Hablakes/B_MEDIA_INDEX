@@ -3,10 +3,7 @@ import os
 
 import guessit
 
-username_input = ['bx']
-
-movie_string = str("MOVIE")
-tv_string = str("TV")
+username_input = []
 
 
 def scrape_media_folders_info_for_csv():

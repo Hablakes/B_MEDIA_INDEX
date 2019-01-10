@@ -1,6 +1,6 @@
 import csv
 
-username_input = [input("USERNAME:")]
+username_input = []
 
 
 def sort_function_base():

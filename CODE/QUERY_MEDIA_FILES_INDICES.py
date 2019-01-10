@@ -1,15 +1,6 @@
 import csv
 
-extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
-              ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
-              ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm", ".rmvb",
-              ".srt", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
-
-years_range = range(1900, 2100, 1)
-movie_string = str("MOVIE")
-tv_string = str("TV")
-
-username_input = [input("ENTER YOUR USERNAME (CASE-SENSITIVE):")]
+username_input = []
 
 
 def movie_files_info_query():
