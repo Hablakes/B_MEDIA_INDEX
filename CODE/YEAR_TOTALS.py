@@ -13,7 +13,7 @@ movies_dir = os.listdir(r"/home/bx/Videos/CHASE/MOVIES/")
 tv_dir = os.listdir(r"/home/bx/Videos/CHASE/TV/")
 
 
-def get_movie_years_for_dict():
+def movie_year_totals():
     media_index_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
     movie_years_amount_dict = {}
     print("ENTER A YEAR:")
@@ -43,7 +43,7 @@ def get_movie_years_for_dict():
             print()
 
 
-def get_movie_years_decades_totals():
+def movie_decades_totals():
     media_index_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
     movie_years_decades_dict = {}
     for media_movie in media_index_list:
@@ -67,7 +67,7 @@ def get_movie_years_decades_totals():
     print()
 
 
-def get_movie_titles_amount():
+def movie_titles_amount():
     media_index_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
     movie_amounts_list = []
     for counted_movie_title in media_index_list:
@@ -82,7 +82,7 @@ def get_movie_titles_amount():
     print()
 
 
-def get_tv_years_for_dict():
+def tv_year_totals():
     media_index_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
     tv_years_amount_dict = {}
     print("ENTER A YEAR:")
@@ -112,7 +112,7 @@ def get_tv_years_for_dict():
             print()
 
 
-def get_tv_years_decades_totals():
+def tv_decades_totals():
     media_index_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
     tv_years_decades_amount_dict = {}
     for media_tv in media_index_list:
@@ -136,7 +136,7 @@ def get_tv_years_decades_totals():
     print()
 
 
-def get_tv_titles_amount():
+def tv_titles_amount():
     media_index_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
     tv_amounts_list = []
     for counted_tv_title in media_index_list:

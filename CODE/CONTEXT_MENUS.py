@@ -1,5 +1,16 @@
 import os
 
+from CODE import GRAPHS_BAR
+from CODE import GRAPHS_PIE
+from CODE import GRAPHS_TERMINAL
+from CODE import MEDIA_FILE_PATHS_INDEX
+from CODE import PARSE_MEDIA_FILES
+from CODE import QUERY_MEDIA_FILES_INDICES
+from CODE import QUERY_MEDIA_FOLDERS_INDEX
+from CODE import SCRAPE_MEDIA_FOLDERS_INDEX
+from CODE import SORT_OPTIONS
+from CODE import YEAR_TOTALS
+
 
 username_input = []
 movie_dir_input = []
@@ -111,17 +122,17 @@ def launch_media_index():
     print()
     lmi_action = int(lmi_action)
     if lmi_action == 1:
-        pass
+        run_query()
     elif lmi_action == 2:
-        pass
+        run_sort()
     elif lmi_action == 3:
-        pass
+        run_query()
     elif lmi_action == 4:
-        pass
+        run_graphs()
     elif lmi_action == 5:
-        pass
+        totals_query()
     elif lmi_action == 6:
-        pass
+        create_media_indices_all()
     elif lmi_action == 0:
         exit()
 
@@ -143,9 +154,9 @@ def run_query():
     print()
     title_search_type_lower = int(title_search_type)
     if title_search_type_lower == 1:
-        pass
+        QUERY_MEDIA_FOLDERS_INDEX.movie_title_search()
     elif title_search_type_lower == 2:
-        pass
+        QUERY_MEDIA_FOLDERS_INDEX.tv_title_search()
     elif title_search_type_lower == 3:
         launch_media_index()
 
@@ -167,13 +178,13 @@ def run_sort():
     print()
     sort_options = int(sort_options)
     if sort_options == 1:
-        pass
+        SORT_OPTIONS.get_title_ascending()
     elif sort_options == 2:
-        pass
+        SORT_OPTIONS.get_title_descending()
     elif sort_options == 3:
-        pass
+        SORT_OPTIONS.get_year_ascending()
     elif sort_options == 4:
-        pass
+        SORT_OPTIONS.get_year_descending()
     elif sort_options == 5:
         launch_media_index()
 
@@ -195,9 +206,9 @@ def file_query_and_sort():
     print()
     data_query_options = int(data_query_options)
     if data_query_options == 1:
-        pass
+        QUERY_MEDIA_FILES_INDICES.movie_files_info_query()
     elif data_query_options == 2:
-        pass
+        QUERY_MEDIA_FILES_INDICES.tv_files_info_query()
     elif data_query_options == 3:
         launch_media_index()
 
@@ -219,9 +230,11 @@ def run_graphs():
     print()
     graph_options = int(graph_options)
     if graph_options == 1:
-        pass
+        GRAPHS_BAR.bar_graph_options_base()
+        GRAPHS_PIE.pie_chart_options_base()
     elif graph_options == 2:
-        pass
+        GRAPHS_TERMINAL.terminal_graph_options_base_0()
+        GRAPHS_TERMINAL.terminal_graph_options_base_1()
     elif graph_options == 3:
         launch_media_index()
 
@@ -317,17 +330,17 @@ def totals_query():
     print()
     b_totals_query_action = int(b_totals_query_action)
     if b_totals_query_action == 1:
-        pass
+        YEAR_TOTALS.movie_year_totals()
     elif b_totals_query_action == 2:
-        pass
+        YEAR_TOTALS.movie_decades_totals()
     elif b_totals_query_action == 3:
-        pass
+        YEAR_TOTALS.movie_titles_amount()
     elif b_totals_query_action == 4:
-        pass
+        YEAR_TOTALS.tv_year_totals()
     elif b_totals_query_action == 5:
-        pass
+        YEAR_TOTALS.tv_decades_totals()
     elif b_totals_query_action == 6:
-        pass
+        YEAR_TOTALS.tv_titles_amount()
     elif b_totals_query_action == 7:
         launch_media_index()
 
@@ -339,7 +352,11 @@ def create_media_indices_all():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("1) CREATE NEW MEDIA INDEX FROM DIRECTORIES - 2) CREATE NEW MEDIA INDEX FROM FILES    - 3) EXIT")
+    print("1) CREATE NEW MEDIA INDEX FROM FOLDERS   -  2) CREATE NEW MEDIA INDEX FROM FILES")
+    print()
+    print("3) CREATE NEW MOVIE PARSE-RESULTS INDEX  -  4) CREATE NEW TV-SHOWS PARSE-RESULTS INDEX")
+    print()
+    print("5) CREATE ALL NEW INDICES                -  6) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -349,10 +366,18 @@ def create_media_indices_all():
     print()
     cmi_action = int(cmi_action)
     if cmi_action == 1:
-        pass
+        MEDIA_FILE_PATHS_INDEX.search_folder_items_and_save_file_paths()
     elif cmi_action == 2:
-        pass
+        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv()
     elif cmi_action == 3:
+        PARSE_MEDIA_FILES.movie_index_results()
+    elif cmi_action == 4:
+        PARSE_MEDIA_FILES.tv_show_index_results()
+    elif cmi_action == 6:
+        MEDIA_FILE_PATHS_INDEX.search_folder_items_and_save_file_paths()
+        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv()
+        PARSE_MEDIA_FILES.create_media_files_index_results_csv()
+    elif cmi_action == 6:
         launch_media_index()
 
 

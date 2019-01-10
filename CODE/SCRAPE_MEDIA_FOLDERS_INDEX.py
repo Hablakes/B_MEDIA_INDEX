@@ -39,7 +39,7 @@ def scrape_media_folders_info_for_csv():
 
         tv_title_items.append(title_item_check)
 
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-FOLDERS-INDEX.csv', "w", newline="") as f:
+    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv', "w", newline="") as f:
         csv_writer = csv.writer(f)
         for file_row in movie_title_items:
             csv_writer.writerow(file_row)

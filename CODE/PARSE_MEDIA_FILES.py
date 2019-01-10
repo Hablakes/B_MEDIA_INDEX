@@ -4,7 +4,7 @@ import guessit
 import pymediainfo
 
 
-def get_movie_index_results():
+def movie_index_results():
     movie_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv"))
     movie_index_file_results = []
 
@@ -33,7 +33,7 @@ def get_movie_index_results():
             csv_writer.writerow(movie_row)
 
 
-def get_tv_show_index_results():
+def tv_show_index_results():
     tv_index = csv.reader(open(r"/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-INDEX.csv"))
     tv_index_file_results = []
 
@@ -64,8 +64,8 @@ def get_tv_show_index_results():
 
 
 def create_media_files_index_results_csv():
-    get_movie_index_results()
-    get_tv_show_index_results()
+    movie_index_results()
+    tv_show_index_results()
 
 
 create_media_files_index_results_csv()

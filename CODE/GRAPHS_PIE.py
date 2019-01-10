@@ -11,7 +11,7 @@ tv_string = str("TV")
 username_input = [input("ENTER YOUR USERNAME (CASE-SENSITIVE):")]
 
 
-def resolution_totals_graphs():
+def pie_chart_options_base():
     movie_files_results_list = list(
         csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
     tv_files_results_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
@@ -97,4 +97,4 @@ def resolution_totals_graphs():
     plt.show()
 
 
-resolution_totals_graphs()
+pie_chart_options_base()
