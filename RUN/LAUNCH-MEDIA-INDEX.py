@@ -17,9 +17,7 @@ extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", 
               ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm", ".rmvb",
               ".srt", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
 
-movie_years_range = range(1900, 2100, 1)
-tv_show_years_range = range(1900, 2100, 1)
-
+years_range = range(1900, 2100, 1)
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
@@ -293,7 +291,7 @@ def get_movie_years_for_dict_and_graph():
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
         media_movie_year_int = int(media_movie_year[0])
         if movie_string in media_movie:
-            if media_movie_year_int in movie_years_range:
+            if media_movie_year_int in years_range:
                 if media_movie_year_int not in movie_years_dict:
                     movie_years_dict[media_movie_year_int] = []
                 movie_years_dict[media_movie_year_int].append(media_movie)
@@ -316,7 +314,7 @@ def get_tv_years_for_dict_and_graph():
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
         media_tv_year_int = int(media_tv_year[0])
         if tv_string in media_tv:
-            if media_tv_year_int in tv_show_years_range:
+            if media_tv_year_int in years_range:
                 if media_tv_year_int not in tv_years_dict:
                     tv_years_dict[media_tv_year_int] = []
                 tv_years_dict[media_tv_year_int].append(media_tv)
@@ -339,7 +337,7 @@ def get_movie_years_decades_totals_graphs():
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
         media_movie_year_int = int(media_movie_year[0][:-1] + '0')
         if movie_string in media_movie:
-            if media_movie_year_int in movie_years_range:
+            if media_movie_year_int in years_range:
                 if media_movie_year_int not in movie_years_decades_dict:
                     movie_years_decades_dict[media_movie_year_int] = []
                 movie_years_decades_dict[media_movie_year_int].append(media_movie)
@@ -362,7 +360,7 @@ def get_tv_years_decades_totals_graphs():
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
         media_tv_year_int = int(media_tv_year[0][:-1] + '0')
         if tv_string in media_tv:
-            if media_tv_year_int in tv_show_years_range:
+            if media_tv_year_int in years_range:
                 if media_tv_year_int not in tv_years_decades_amount_dict:
                     tv_years_decades_amount_dict[media_tv_year_int] = []
                 tv_years_decades_amount_dict[media_tv_year_int].append(media_tv)
@@ -480,7 +478,7 @@ def get_movie_years_for_dict_and_graph_terminal():
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
         media_movie_year_int = int(media_movie_year[0])
         if movie_string in media_movie:
-            if media_movie_year_int in movie_years_range:
+            if media_movie_year_int in years_range:
                 if media_movie_year_int not in movie_years_dict:
                     movie_years_dict[media_movie_year_int] = []
                 movie_years_dict[media_movie_year_int].append(media_movie)
@@ -509,7 +507,7 @@ def get_tv_years_for_dict_and_graph_terminal():
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
         media_tv_year_int = int(media_tv_year[0])
         if tv_string in media_tv:
-            if media_tv_year_int in tv_show_years_range:
+            if media_tv_year_int in years_range:
                 if media_tv_year_int not in tv_years_dict:
                     tv_years_dict[media_tv_year_int] = []
                 tv_years_dict[media_tv_year_int].append(media_tv)
@@ -538,7 +536,7 @@ def get_movie_years_decades_totals_graphs_terminal():
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
         media_movie_year_int = int(media_movie_year[0][:-1] + '0')
         if movie_string in media_movie:
-            if media_movie_year_int in movie_years_range:
+            if media_movie_year_int in years_range:
                 if media_movie_year_int not in movie_years_decades_dict:
                     movie_years_decades_dict[media_movie_year_int] = []
                 movie_years_decades_dict[media_movie_year_int].append(media_movie)
@@ -567,7 +565,7 @@ def get_tv_years_decades_totals_graphs_terminal():
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
         media_tv_year_int = int(media_tv_year[0][:-1] + '0')
         if tv_string in media_tv:
-            if media_tv_year_int in tv_show_years_range:
+            if media_tv_year_int in years_range:
                 if media_tv_year_int not in tv_years_decades_amount_dict:
                     tv_years_decades_amount_dict[media_tv_year_int] = []
                 tv_years_decades_amount_dict[media_tv_year_int].append(media_tv)
@@ -959,7 +957,7 @@ def get_movie_years_for_dict():
     for media_movie in media_index_list:
         media_movie_year = int(media_movie[2])
         if movie_string in media_movie:
-            if media_movie_year in movie_years_range:
+            if media_movie_year in years_range:
                 if media_movie_year not in movie_years_amount_dict:
                     movie_years_amount_dict[media_movie_year] = []
                 movie_years_amount_dict[media_movie_year].append(media_movie)
@@ -985,7 +983,7 @@ def get_movie_years_decades_totals():
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
         media_movie_year_int = int(media_movie_year[0][:-1] + '0')
         if movie_string in media_movie:
-            if media_movie_year_int in movie_years_range:
+            if media_movie_year_int in years_range:
                 if media_movie_year_int not in movie_years_decades_dict:
                     movie_years_decades_dict[media_movie_year_int] = []
                 movie_years_decades_dict[media_movie_year_int].append(media_movie)
@@ -1028,7 +1026,7 @@ def get_tv_years_for_dict():
     for media_tv in media_index_list:
         media_tv_year = int(media_tv[2])
         if tv_string in media_tv:
-            if media_tv_year in tv_show_years_range:
+            if media_tv_year in years_range:
                 if media_tv_year not in tv_years_amount_dict:
                     tv_years_amount_dict[media_tv_year] = []
                 tv_years_amount_dict[media_tv_year].append(media_tv)
@@ -1054,7 +1052,7 @@ def get_tv_years_decades_totals():
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
         media_tv_year_int = int(media_tv_year[0][:-1] + '0')
         if tv_string in media_tv:
-            if media_tv_year_int in tv_show_years_range:
+            if media_tv_year_int in years_range:
                 if media_tv_year_int not in tv_years_decades_amount_dict:
                     tv_years_decades_amount_dict[media_tv_year_int] = []
                 tv_years_decades_amount_dict[media_tv_year_int].append(media_tv)
