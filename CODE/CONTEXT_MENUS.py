@@ -368,5 +368,3 @@ def create_media_indices_all():
     elif cmi_action == 6:
         launch_media_index()
 
-
-first_launch_media_index()
