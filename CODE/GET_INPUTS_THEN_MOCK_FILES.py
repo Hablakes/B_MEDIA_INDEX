@@ -26,7 +26,3 @@ def first_launch_username():
 def first_launch_dirs():
     movie_dir = movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY:"))
     tv_dir = tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY:"))
-
-
-first_launch_username()
-first_launch_dirs()

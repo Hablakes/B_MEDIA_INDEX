@@ -4,7 +4,7 @@ import re
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
-username_input = []
+username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
 
 def movie_title_search():
@@ -49,7 +49,3 @@ def tv_title_search():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-
-
-movie_title_search()
-tv_title_search()

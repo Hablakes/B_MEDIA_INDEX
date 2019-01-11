@@ -6,7 +6,7 @@ years_range = range(1900, 2100, 1)
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
-username_input = []
+username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
 
 def movie_year_totals():

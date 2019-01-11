@@ -8,7 +8,7 @@ years_range = range(1900, 2100, 1)
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
-username_input = []
+username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
 
 def pie_chart_options_base():
@@ -95,6 +95,3 @@ def pie_chart_options_base():
     ax.set_title("TV-SHOW-RESOLUTION-RESULTS")
     plt.savefig(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-SHOW-RESOLUTION-RESULTS.png')
     plt.show()
-
-
-pie_chart_options_base()

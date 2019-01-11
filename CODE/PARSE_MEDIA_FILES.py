@@ -3,7 +3,7 @@ import csv
 import guessit
 import pymediainfo
 
-username_input = []
+username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
 
 def movie_index_results():
@@ -68,6 +68,3 @@ def tv_show_index_results():
 def create_media_files_index_results_csv():
     movie_index_results()
     tv_show_index_results()
-
-
-create_media_files_index_results_csv()

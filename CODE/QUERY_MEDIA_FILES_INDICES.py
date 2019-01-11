@@ -1,6 +1,6 @@
 import csv
 
-username_input = []
+username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
 
 def movie_files_info_query():
@@ -89,7 +89,3 @@ def tv_files_info_query():
             print()
             print()
             print("--------------------------------------------------------------------------------------------------")
-
-
-movie_files_info_query()
-tv_files_info_query()

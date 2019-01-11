@@ -1,6 +1,6 @@
 import csv
 
-username_input = []
+username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
 
 def sort_function_base():

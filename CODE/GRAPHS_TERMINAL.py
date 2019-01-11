@@ -7,7 +7,7 @@ years_range = range(1900, 2100, 1)
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
-username_input = []
+username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
 
 def terminal_graph_options_base_0():
@@ -167,7 +167,3 @@ def terminal_graph_options_base_1():
         print("--------------------------------------------------------------------------------------------------")
     print()
     print()
-
-
-terminal_graph_options_base_0()
-terminal_graph_options_base_1()

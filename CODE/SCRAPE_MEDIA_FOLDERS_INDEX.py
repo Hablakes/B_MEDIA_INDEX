@@ -3,7 +3,7 @@ import os
 
 import guessit
 
-username_input = []
+username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
 
 def scrape_media_folders_info_for_csv():
@@ -42,6 +42,3 @@ def scrape_media_folders_info_for_csv():
             csv_writer.writerow(file_row)
         for file_row in tv_title_items:
             csv_writer.writerow(file_row)
-
-
-scrape_media_folders_info_for_csv()

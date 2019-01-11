@@ -56,6 +56,3 @@ def search_resolution_totals_movies():
     print(len(movies_total_list))
     print()
     print("-------------------------------------------------------------------------------------------------------")
-
-
-search_resolution_totals_movies()

@@ -6,7 +6,7 @@ extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", 
               ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm", ".rmvb",
               ".srt", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
 
-username_input = []
+username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
 
 def search_folder_items_and_save_file_paths():
@@ -33,6 +33,3 @@ def search_folder_items_and_save_file_paths():
         csv_writer = csv.writer(f)
         for tv_row in sorted(tv_show_file_results):
             csv_writer.writerow(tv_row)
-
-
-search_folder_items_and_save_file_paths()
