@@ -3,10 +3,8 @@ import os
 
 import guessit
 
-username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
-
-def scrape_media_folders_info_for_csv():
+def scrape_media_folders_info_for_csv(username_input):
 
     movie_dir_list = os.listdir(r'/home/bx/Videos/CHASE/MOVIES')
     tv_dir_list = os.listdir(r'/home/bx/Videos/CHASE/TV')
@@ -36,7 +34,7 @@ def scrape_media_folders_info_for_csv():
 
         tv_title_items.append(title_item_check)
 
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv', "w", newline="") as f:
+    with open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv', "w", newline="") as f:
         csv_writer = csv.writer(f)
         for file_row in movie_title_items:
             csv_writer.writerow(file_row)

@@ -7,11 +7,9 @@ years_range = range(1900, 2100, 1)
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
-username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
-
-def terminal_graph_options_base_0():
-    media_index_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
+def terminal_graph_options_base_0(username_input):
+    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
 
     movie_years_dict = {}
     movie_decades_dict = {}
@@ -106,10 +104,10 @@ def terminal_graph_options_base_0():
     print()
 
 
-def terminal_graph_options_base_1():
+def terminal_graph_options_base_1(username_input):
     movie_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
-    tv_files_results_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
+    tv_files_results_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
 
     m_ten_eighty_found_list = []
     m_seven_twenty_found_list = []

@@ -8,13 +8,11 @@ years_range = range(1900, 2100, 1)
 movie_string = str("MOVIE")
 tv_string = str("TV")
 
-username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
-
-def pie_chart_options_base():
+def pie_chart_options_base(username_input):
     movie_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
-    tv_files_results_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
+    tv_files_results_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
 
     m_ten_eighty_found_list = []
     m_seven_twenty_found_list = []
@@ -78,7 +76,7 @@ def pie_chart_options_base():
 
     plt.setp(autotexts, size=9, weight='bold')
     ax.set_title("MOVIE-RESOLUTION-RESULTS")
-    plt.savefig(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-RESOLUTION-RESULTS.png')
+    plt.savefig(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-RESOLUTION-RESULTS.png')
     plt.show()
 
     fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect="equal"))
@@ -93,5 +91,5 @@ def pie_chart_options_base():
 
     plt.setp(autotexts, size=9, weight='bold')
     ax.set_title("TV-SHOW-RESOLUTION-RESULTS")
-    plt.savefig(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-SHOW-RESOLUTION-RESULTS.png')
+    plt.savefig(r'/home/' + username_input + '/MEDIA-INDEX/TV-SHOW-RESOLUTION-RESULTS.png')
     plt.show()

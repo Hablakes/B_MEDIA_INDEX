@@ -1,11 +1,10 @@
 import csv
 
-username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
 
-def movie_files_info_query():
+def movie_files_info_query(username_input):
     movie_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
     mv_query_action = input("ENTER SEARCH QUERY (MOVIES):")
     print()
     print("--------------------------------------------------------------------------------------------------")
@@ -30,8 +29,8 @@ def movie_files_info_query():
             print("--------------------------------------------------------------------------------------------------")
 
 
-def tv_files_info_query():
-    tv_files_results_list = list(csv.reader(open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+def tv_files_info_query(username_input):
+    tv_files_results_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
     tv_show_query_action = input("ENTER SEARCH QUERY (TV SHOWS):")
     print()
     print("--------------------------------------------------------------------------------------------------")

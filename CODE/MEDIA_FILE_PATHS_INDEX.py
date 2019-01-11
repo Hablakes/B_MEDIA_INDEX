@@ -6,10 +6,9 @@ extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", 
               ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm", ".rmvb",
               ".srt", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
 
-username_input = [input("ENTER USERNAME (CASE SENSITIVE):")]
 
 
-def search_folder_items_and_save_file_paths():
+def search_folder_items_and_save_file_paths(username_input):
     movie_dir_input = [(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))]
     tv_dir_input = [(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))]
     movie_file_results = []
@@ -18,7 +17,7 @@ def search_folder_items_and_save_file_paths():
             if movie_file.endswith(extensions):
                 movie_file_results.append([root + '/' + movie_file])
 
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv', "w", newline="") as f:
+    with open(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv', "w", newline="") as f:
         csv_writer = csv.writer(f)
         for movie_row in sorted(movie_file_results):
             csv_writer.writerow(movie_row)
@@ -29,7 +28,7 @@ def search_folder_items_and_save_file_paths():
             if tv_file.endswith(extensions):
                 tv_show_file_results.append([root + '/' + tv_file])
 
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-INDEX.csv', "w", newline="") as f:
+    with open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-INDEX.csv', "w", newline="") as f:
         csv_writer = csv.writer(f)
         for tv_row in sorted(tv_show_file_results):
             csv_writer.writerow(tv_row)

@@ -11,6 +11,8 @@ from CODE import SCRAPE_MEDIA_FOLDERS_INDEX
 from CODE import SORT_OPTIONS
 from CODE import YEAR_TOTALS
 
+username_input = None
+
 
 def first_launch_media_index():
     print("____ ___ ____ ____ ___    ___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
@@ -37,21 +39,20 @@ def first_launch_media_index():
 
 
 def first_launch_dirs():
-    username_input = []
-    movie_dir_input = []
-    tv_dir_input = []
     print("____ ___ ____ ____ ___    ___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
     print("[__   |  |__| |__/  |  __ |__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/ ")
     print("___]  |  |  | |  \  |     |__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE):"))
+    global username_input
+    username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
-    tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
+    global movie_dir_input, tv_dir_input
+    movie_dir_input = input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):")
+    tv_dir_input = input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -72,21 +73,20 @@ def first_launch_dirs():
 
 
 def second_launch_lmi():
-    username_input = []
-    movie_dir_input = []
-    tv_dir_input = []
     print("____ ___ ____ ____ ___    ___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
     print("[__   |  |__| |__/  |  __ |__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/ ")
     print("___]  |  |  | |  \  |     |__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    username_input.append(input("ENTER YOUR USERNAME (CASE-SENSITIVE):"))
+    global username_input
+    username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    movie_dir_input.append(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))
-    tv_dir_input.append(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))
+    global movie_dir_input, tv_dir_input
+    movie_dir_input = input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):")
+    tv_dir_input = input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -142,9 +142,9 @@ def run_query():
     print()
     title_search_type_lower = int(title_search_type)
     if title_search_type_lower == 1:
-        QUERY_MEDIA_FOLDERS_INDEX.movie_title_search()
+        QUERY_MEDIA_FOLDERS_INDEX.movie_title_search(username_input)
     elif title_search_type_lower == 2:
-        QUERY_MEDIA_FOLDERS_INDEX.tv_title_search()
+        QUERY_MEDIA_FOLDERS_INDEX.tv_title_search(username_input)
     elif title_search_type_lower == 3:
         launch_media_index()
 
@@ -166,13 +166,13 @@ def run_sort():
     print()
     sort_options = int(sort_input)
     if sort_options == 1:
-        SORT_OPTIONS.get_title_ascending()
+        SORT_OPTIONS.get_title_ascending(username_input)
     elif sort_options == 2:
-        SORT_OPTIONS.get_title_descending()
+        SORT_OPTIONS.get_title_descending(username_input)
     elif sort_options == 3:
-        SORT_OPTIONS.get_year_ascending()
+        SORT_OPTIONS.get_year_ascending(username_input)
     elif sort_options == 4:
-        SORT_OPTIONS.get_year_descending()
+        SORT_OPTIONS.get_year_descending(username_input)
     elif sort_options == 5:
         launch_media_index()
 
@@ -194,9 +194,9 @@ def file_query_and_sort():
     print()
     data_query_options = int(data_query_input)
     if data_query_options == 1:
-        QUERY_MEDIA_FILES_INDICES.movie_files_info_query()
+        QUERY_MEDIA_FILES_INDICES.movie_files_info_query(username_input)
     elif data_query_options == 2:
-        QUERY_MEDIA_FILES_INDICES.tv_files_info_query()
+        QUERY_MEDIA_FILES_INDICES.tv_files_info_query(username_input)
     elif data_query_options == 3:
         launch_media_index()
 
@@ -218,11 +218,11 @@ def run_graphs():
     print()
     graph_options_int = int(graph_options)
     if graph_options_int == 1:
-        GRAPHS_BAR.bar_graph_options_base()
-        GRAPHS_PIE.pie_chart_options_base()
+        GRAPHS_BAR.bar_graph_options_base(username_input)
+        GRAPHS_PIE.pie_chart_options_base(username_input)
     elif graph_options_int == 2:
-        GRAPHS_TERMINAL.terminal_graph_options_base_0()
-        GRAPHS_TERMINAL.terminal_graph_options_base_1()
+        GRAPHS_TERMINAL.terminal_graph_options_base_0(username_input)
+        GRAPHS_TERMINAL.terminal_graph_options_base_1(username_input)
     elif graph_options_int == 3:
         launch_media_index()
 
@@ -318,17 +318,17 @@ def totals_query():
     print()
     b_totals_query_action = int(b_totals_query_input)
     if b_totals_query_action == 1:
-        YEAR_TOTALS.movie_year_totals()
+        YEAR_TOTALS.movie_year_totals(username_input)
     elif b_totals_query_action == 2:
-        YEAR_TOTALS.movie_decades_totals()
+        YEAR_TOTALS.movie_decades_totals(username_input)
     elif b_totals_query_action == 3:
-        YEAR_TOTALS.movie_titles_amount()
+        YEAR_TOTALS.movie_titles_amount(username_input)
     elif b_totals_query_action == 4:
-        YEAR_TOTALS.tv_year_totals()
+        YEAR_TOTALS.tv_year_totals(username_input)
     elif b_totals_query_action == 5:
-        YEAR_TOTALS.tv_decades_totals()
+        YEAR_TOTALS.tv_decades_totals(username_input)
     elif b_totals_query_action == 6:
-        YEAR_TOTALS.tv_titles_amount()
+        YEAR_TOTALS.tv_titles_amount(username_input)
     elif b_totals_query_action == 7:
         launch_media_index()
 
@@ -354,17 +354,17 @@ def create_media_indices_all():
     print()
     cmi_action = int(cmi_input)
     if cmi_action == 1:
-        MEDIA_FILE_PATHS_INDEX.search_folder_items_and_save_file_paths()
+        MEDIA_FILE_PATHS_INDEX.search_folder_items_and_save_file_paths(username_input)
     elif cmi_action == 2:
-        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv()
+        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input)
     elif cmi_action == 3:
-        PARSE_MEDIA_FILES.movie_index_results()
+        PARSE_MEDIA_FILES.movie_index_results(username_input)
     elif cmi_action == 4:
-        PARSE_MEDIA_FILES.tv_show_index_results()
+        PARSE_MEDIA_FILES.tv_show_index_results(username_input)
     elif cmi_action == 6:
-        MEDIA_FILE_PATHS_INDEX.search_folder_items_and_save_file_paths()
-        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv()
-        PARSE_MEDIA_FILES.create_media_files_index_results_csv()
+        MEDIA_FILE_PATHS_INDEX.search_folder_items_and_save_file_paths(username_input)
+        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input)
+        PARSE_MEDIA_FILES.create_media_files_index_results_csv(username_input)
     elif cmi_action == 6:
         launch_media_index()
 
