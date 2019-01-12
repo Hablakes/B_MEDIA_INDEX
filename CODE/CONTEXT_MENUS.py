@@ -1,5 +1,6 @@
 import os
 
+from CODE import FILE_TYPE_TOTALS
 from CODE import GRAPHS_BAR
 from CODE import GRAPHS_PIE
 from CODE import GRAPHS_TERMINAL
@@ -237,7 +238,9 @@ def run_picture_graphs():
     print()
     print("3) MOVIES (TITLES PER DECADE)       - 4) TV SHOWS (TITLES PER DECADE)")
     print()
-    print("5) MOVIES (RESOLUTIONS PERCENTAGES) - 6) TV SHOWS (RESOLUTIONS PERCENTAGES)          - 7) EXIT")
+    print("5) MOVIES (RESOLUTIONS PERCENTAGES) - 6) TV SHOWS (RESOLUTIONS PERCENTAGES)")
+    print()
+    print("7) MOVIES (FILE-TYPE AMOUNTS)       - 8) TV SHOWS (FILE-TYPE AMOUNTS)                - 9) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -260,6 +263,12 @@ def run_picture_graphs():
     elif picture_graph_options_int == 6:
         GRAPHS_PIE.pie_chart_options_base(username_input, picture_graph_options_int=6)
     elif picture_graph_options_int == 7:
+        FILE_TYPE_TOTALS.search_file_type_totals_movies(username_input, picture_graph_options_int=7,
+                                                        terminal_graph_options_int='', b_totals_query_input_int='')
+    elif picture_graph_options_int == 8:
+        FILE_TYPE_TOTALS.search_file_type_totals_tv(username_input, picture_graph_options_int=8,
+                                                    terminal_graph_options_int='', b_totals_query_input_int='')
+    elif picture_graph_options_int == 9:
         launch_media_index()
 
 
@@ -274,7 +283,9 @@ def run_terminal_graphs():
     print()
     print("3) MOVIES (TITLES PER DECADE)       - 4) TV SHOWS (TITLES PER DECADE)")
     print()
-    print("5) MOVIES (RESOLUTIONS PERCENTAGES) - 6) TV SHOWS (RESOLUTIONS PERCENTAGES)          - 7) EXIT")
+    print("5) MOVIES (RESOLUTIONS PERCENTAGES) - 6) TV SHOWS (RESOLUTIONS PERCENTAGES)")
+    print()
+    print("7) MOVIES (FILE-TYPE AMOUNTS)       - 8) TV SHOWS (FILE-TYPE AMOUNTS)                - 9) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -297,6 +308,12 @@ def run_terminal_graphs():
     elif terminal_graph_options_int == 6:
         GRAPHS_TERMINAL.terminal_graph_options_base_1(username_input, terminal_graph_options_int=6)
     elif terminal_graph_options_int == 7:
+        FILE_TYPE_TOTALS.search_file_type_totals_movies(username_input, terminal_graph_options_int=7,
+                                                        picture_graph_options_int='', b_totals_query_input_int='')
+    elif terminal_graph_options_int == 8:
+        FILE_TYPE_TOTALS.search_file_type_totals_tv(username_input, terminal_graph_options_int=8,
+                                                    picture_graph_options_int='', b_totals_query_input_int='')
+    elif terminal_graph_options_int == 9:
         launch_media_index()
 
 
@@ -307,9 +324,11 @@ def totals_query():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("1) MOVIES BY YEAR        - 2) MOVIES BY DECADE        - 3) MOVIES TOTAL")
+    print("1) MOVIES BY YEAR        - 2) TV SHOWS BY YEAR        - 3) MOVIES TOTAL")
     print()
-    print("4) TV SHOWS BY YEAR      - 5) TV SHOWS BY DECADE      - 6) TV SHOWS TOTALS           - 7) EXIT")
+    print("4) TV SHOWS TOTAL        - 5) MOVIES BY DECADE        - 6) TV SHOWS BY DECADE")
+    print()
+    print("7) MOVIE FILE-TYPES      - 8) TV SHOWS FILE-TYPES                                    - 9) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -317,20 +336,27 @@ def totals_query():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    b_totals_query_action = int(b_totals_query_input)
-    if b_totals_query_action == 1:
+    global b_totals_query_input_int
+    b_totals_query_input_int = int(b_totals_query_input)
+    if b_totals_query_input_int == 1:
         YEAR_TOTALS.movie_year_totals(username_input)
-    elif b_totals_query_action == 2:
-        YEAR_TOTALS.movie_decades_totals(username_input)
-    elif b_totals_query_action == 3:
-        YEAR_TOTALS.movie_titles_amount(username_input)
-    elif b_totals_query_action == 4:
+    elif b_totals_query_input_int == 2:
         YEAR_TOTALS.tv_year_totals(username_input)
-    elif b_totals_query_action == 5:
-        YEAR_TOTALS.tv_decades_totals(username_input)
-    elif b_totals_query_action == 6:
+    elif b_totals_query_input_int == 3:
+        YEAR_TOTALS.movie_titles_amount(username_input)
+    elif b_totals_query_input_int == 4:
         YEAR_TOTALS.tv_titles_amount(username_input)
-    elif b_totals_query_action == 7:
+    elif b_totals_query_input_int == 5:
+        YEAR_TOTALS.movie_decades_totals(username_input)
+    elif b_totals_query_input_int == 6:
+        YEAR_TOTALS.tv_decades_totals(username_input)
+    elif b_totals_query_input_int == 7:
+        FILE_TYPE_TOTALS.search_file_type_totals_movies(username_input, b_totals_query_input_int=7,
+                                                        picture_graph_options_int='', terminal_graph_options_int='')
+    elif b_totals_query_input_int == 8:
+        FILE_TYPE_TOTALS.search_file_type_totals_tv(username_input, b_totals_query_input_int=8,
+                                                    picture_graph_options_int='', terminal_graph_options_int='')
+    elif b_totals_query_input_int == 9:
         launch_media_index()
 
 
@@ -355,16 +381,16 @@ def create_media_indices_all():
     print()
     cmi_action = int(cmi_input)
     if cmi_action == 1:
-        MEDIA_FILE_PATHS_INDEX.search_folder_items_and_save_file_paths(username_input)
+        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input)
     elif cmi_action == 2:
-        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input)
+        MEDIA_FILE_PATHS_INDEX.search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input)
     elif cmi_action == 3:
         PARSE_MEDIA_FILES.movie_index_results(username_input)
     elif cmi_action == 4:
         PARSE_MEDIA_FILES.tv_show_index_results(username_input)
     elif cmi_action == 6:
-        MEDIA_FILE_PATHS_INDEX.search_folder_items_and_save_file_paths(username_input)
-        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input)
+        MEDIA_FILE_PATHS_INDEX.search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input)
+        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input)
         PARSE_MEDIA_FILES.create_media_files_index_results_csv(username_input)
     elif cmi_action == 6:
         launch_media_index()

@@ -7,12 +7,9 @@ extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", 
               ".srt", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
 
 
-
-def search_folder_items_and_save_file_paths(username_input):
-    movie_dir_input = [(input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):"))]
-    tv_dir_input = [(input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):"))]
+def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input):
     movie_file_results = []
-    for root, dirs, files in os.walk(movie_dir_input[0]):
+    for root, dirs, files in os.walk(movie_dir_input):
         for movie_file in sorted(files):
             if movie_file.endswith(extensions):
                 movie_file_results.append([root + '/' + movie_file])
@@ -23,7 +20,7 @@ def search_folder_items_and_save_file_paths(username_input):
             csv_writer.writerow(movie_row)
 
     tv_show_file_results = []
-    for root, dirs, files in os.walk(tv_dir_input[0]):
+    for root, dirs, files in os.walk(tv_dir_input):
         for tv_file in sorted(files):
             if tv_file.endswith(extensions):
                 tv_show_file_results.append([root + '/' + tv_file])

@@ -7,7 +7,6 @@ movie_string = str("MOVIE")
 tv_string = str("TV")
 
 
-
 def movie_year_totals(username_input):
     media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
     movie_years_amount_dict = {}

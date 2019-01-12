@@ -10,7 +10,7 @@ def movie_index_results(username_input):
 
     for movie_file in movie_index:
 
-        title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1])
+        title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
 
         title_and_year = (movie_file[0].rsplit('/')[-2])
 

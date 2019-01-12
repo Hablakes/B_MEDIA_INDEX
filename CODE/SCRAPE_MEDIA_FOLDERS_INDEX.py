@@ -4,10 +4,10 @@ import os
 import guessit
 
 
-def scrape_media_folders_info_for_csv(username_input):
+def scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input):
 
-    movie_dir_list = os.listdir(r'/home/bx/Videos/CHASE/MOVIES')
-    tv_dir_list = os.listdir(r'/home/bx/Videos/CHASE/TV')
+    movie_dir_list = os.listdir(movie_dir_input)
+    tv_dir_list = os.listdir(tv_dir_input)
 
     movie_title_items = []
     tv_title_items = []
