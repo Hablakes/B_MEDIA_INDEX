@@ -51,9 +51,11 @@ def first_launch_dirs():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    global movie_dir_input, tv_dir_input
+    global movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
     movie_dir_input = input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):")
     tv_dir_input = input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):")
+    movie_alt_dir_input = input("ENTER PATH OF ANY ALTERNATE MOVIE DIRECTORIES, LEAVE BLANK IF NONE (CASE SENSITIVE):")
+    tv_alt_dir_input = input("ENTER PATH OF ANY ALTERNATE MOVIE DIRECTORIES, LEAVE BLANK IF NONE (CASE SENSITIVE):")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -82,12 +84,6 @@ def second_launch_lmi():
     print()
     global username_input
     username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
-    global movie_dir_input, tv_dir_input
-    movie_dir_input = input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):")
-    tv_dir_input = input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
