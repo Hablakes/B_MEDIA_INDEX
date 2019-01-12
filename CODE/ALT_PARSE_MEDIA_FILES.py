@@ -11,6 +11,8 @@ def movie_index_results():
 
     for movie_file in index:
 
+        print(movie_file[0])
+
         title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1])
 
         title_to_year = guessit.guessit(movie_file[0].rsplit('/')[-2])
@@ -24,7 +26,17 @@ def movie_index_results():
         test = pymediainfo.MediaInfo.parse(movie_file[0])
 
         for track in test.tracks:
-            print(track.to_data())
+
+            if track.track_type == 'Video':
+                index_file_results.append(
+                    [title.get('title'), title.get('year'), str(track.width) + 'x' + str(track.height),
+                     title.get('container')])
+
+        with open(r'/home/bx/MEDIA-INDEX/ALT-FILES-RESULTS.csv', "w", newline="") as f:
+            csv_writer = csv.writer(f)
+            for row in index_file_results:
+                csv_writer.writerow(row)
 
 
 movie_index_results()
+
