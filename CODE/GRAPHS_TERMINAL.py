@@ -8,7 +8,7 @@ movie_string = str("MOVIE")
 tv_string = str("TV")
 
 
-def terminal_graph_options_base_0(username_input):
+def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
     media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
 
     movie_years_dict = {}
@@ -40,71 +40,79 @@ def terminal_graph_options_base_0(username_input):
                     tv_decades_amount_dict[title_item_decade_int] = []
                 tv_decades_amount_dict[title_item_decade_int].append(title_item)
 
-    for movie_year_values, value in sorted(movie_years_dict.items()):
-        movie_year_totals[movie_year_values] = len(value)
-    movie_data = sorted(movie_year_totals.items())
+    if terminal_graph_options_int == 1:
 
-    movie_years_terminal_graph_list = []
+        for movie_year_values, value in sorted(movie_years_dict.items()):
+            movie_year_totals[movie_year_values] = len(value)
+        movie_data = sorted(movie_year_totals.items())
 
-    for key, value in movie_data:
-        movie_years_terminal_graph_list.append((str(key), value))
+        movie_years_terminal_graph_list = []
 
-    graph = Pyasciigraph()
+        for key, value in movie_data:
+            movie_years_terminal_graph_list.append((str(key), value))
 
-    for line in graph.graph('MOVIES: YEAR AMOUNTS', movie_years_terminal_graph_list):
-        print(line)
-        print("--------------------------------------------------------------------------------------------------")
-    print()
-    print()
+        graph = Pyasciigraph()
 
-    for tv_year_values, value in sorted(tv_years_dict.items()):
-        tv_year_totals[tv_year_values] = len(value)
-    tv_data = sorted(tv_year_totals.items())
+        for line in graph.graph('MOVIES: YEAR AMOUNTS', movie_years_terminal_graph_list):
+            print(line)
+            print("--------------------------------------------------------------------------------------------------")
+        print()
+        print()
 
-    tv_years_terminal_graph_list = []
+    if terminal_graph_options_int == 2:
 
-    for key, value in tv_data:
-        tv_years_terminal_graph_list.append((str(key), value))
+        for tv_year_values, value in sorted(tv_years_dict.items()):
+            tv_year_totals[tv_year_values] = len(value)
+        tv_data = sorted(tv_year_totals.items())
 
-    graph = Pyasciigraph()
-    for line in graph.graph('TV SHOWS: YEAR AMOUNTS', tv_years_terminal_graph_list):
-        print(line)
-        print("--------------------------------------------------------------------------------------------------")
-    print()
-    print()
+        tv_years_terminal_graph_list = []
 
-    for movie_year_values, value in sorted(movie_decades_dict.items()):
-        movie_decades_totals[movie_year_values] = len(value)
+        for key, value in tv_data:
+            tv_years_terminal_graph_list.append((str(key), value))
 
-    movie_decades_terminal_graph_list = []
+        graph = Pyasciigraph()
+        for line in graph.graph('TV SHOWS: YEAR AMOUNTS', tv_years_terminal_graph_list):
+            print(line)
+            print("--------------------------------------------------------------------------------------------------")
+        print()
+        print()
 
-    for key, value in movie_decades_totals.items():
-        movie_decades_terminal_graph_list.append((str(key), value))
+    if terminal_graph_options_int == 3:
 
-    graph = Pyasciigraph()
-    for line in graph.graph('MOVIES: DECADE AMOUNTS', movie_decades_terminal_graph_list):
-        print(line)
-        print("--------------------------------------------------------------------------------------------------")
-    print()
-    print()
+        for movie_year_values, value in sorted(movie_decades_dict.items()):
+            movie_decades_totals[movie_year_values] = len(value)
 
-    for tv_year_values, value in sorted(tv_decades_amount_dict.items()):
-        tv_decades_totals[tv_year_values] = len(value)
+        movie_decades_terminal_graph_list = []
 
-    tv_decades_terminal_graph_list = []
+        for key, value in movie_decades_totals.items():
+            movie_decades_terminal_graph_list.append((str(key), value))
 
-    for key, value in tv_decades_totals.items():
-        tv_decades_terminal_graph_list.append((str(key), value))
+        graph = Pyasciigraph()
+        for line in graph.graph('MOVIES: DECADE AMOUNTS', movie_decades_terminal_graph_list):
+            print(line)
+            print("--------------------------------------------------------------------------------------------------")
+        print()
+        print()
 
-    graph = Pyasciigraph()
-    for line in graph.graph('TV SHOWS: DECADE AMOUNTS', tv_decades_terminal_graph_list):
-        print(line)
-        print("--------------------------------------------------------------------------------------------------")
-    print()
-    print()
+    if terminal_graph_options_int == 4:
+
+        for tv_year_values, value in sorted(tv_decades_amount_dict.items()):
+            tv_decades_totals[tv_year_values] = len(value)
+
+        tv_decades_terminal_graph_list = []
+
+        for key, value in tv_decades_totals.items():
+            tv_decades_terminal_graph_list.append((str(key), value))
+
+        graph = Pyasciigraph()
+        for line in graph.graph('TV SHOWS: DECADE AMOUNTS', tv_decades_terminal_graph_list):
+            print(line)
+            print("--------------------------------------------------------------------------------------------------")
+        print()
+        print()
 
 
-def terminal_graph_options_base_1(username_input):
+def terminal_graph_options_base_1(username_input, terminal_graph_options_int):
     movie_files_results_list = list(
         csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
     tv_files_results_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
@@ -152,16 +160,20 @@ def terminal_graph_options_base_1(username_input):
                                        ('720p', float(len(tv_seven_twenty_found_list))),
                                        ('SD (Below 720p)', float(len(tv_standard_def_found_list)))]
 
-    graph = Pyasciigraph()
-    for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES', movies_graph_terminal_results):
-        print(line)
-        print("--------------------------------------------------------------------------------------------------")
-    print()
-    print()
+    if terminal_graph_options_int == 5:
 
-    graph = Pyasciigraph()
-    for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES', tv_shows_graph_terminal_results):
-        print(line)
-        print("--------------------------------------------------------------------------------------------------")
-    print()
-    print()
+        graph = Pyasciigraph()
+        for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES', movies_graph_terminal_results):
+            print(line)
+            print("--------------------------------------------------------------------------------------------------")
+        print()
+        print()
+
+    if terminal_graph_options_int == 6:
+
+        graph = Pyasciigraph()
+        for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES', tv_shows_graph_terminal_results):
+            print(line)
+            print("--------------------------------------------------------------------------------------------------")
+        print()
+        print()

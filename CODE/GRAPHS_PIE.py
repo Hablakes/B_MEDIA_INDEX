@@ -9,7 +9,7 @@ movie_string = str("MOVIE")
 tv_string = str("TV")
 
 
-def pie_chart_options_base(username_input):
+def pie_chart_options_base(username_input, picture_graph_options_int):
     movie_files_results_list = list(
         csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
     tv_files_results_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
@@ -64,32 +64,36 @@ def pie_chart_options_base(username_input):
 
     colors = ['#85c1e9', '#a569bd', '#808b96']
 
-    fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect="equal"))
+    if picture_graph_options_int == 5:
 
-    wedges, texts, autotexts = ax.pie(movie_data, autopct=lambda pct: format_data(pct, movie_data),
-                                      shadow=True, colors=colors, textprops=dict(color="black"))
+        fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect="equal"))
 
-    ax.legend(wedges, labels,
-              title="RESOLUTIONS",
-              loc="center left",
-              bbox_to_anchor=(1, 0, 0.5, 1))
+        wedges, texts, autotexts = ax.pie(movie_data, autopct=lambda pct: format_data(pct, movie_data),
+                                          shadow=True, colors=colors, textprops=dict(color="black"))
 
-    plt.setp(autotexts, size=9, weight='bold')
-    ax.set_title("MOVIE-RESOLUTION-RESULTS")
-    plt.savefig(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-RESOLUTION-RESULTS.png')
-    plt.show()
+        ax.legend(wedges, labels,
+                  title="RESOLUTIONS",
+                  loc="center left",
+                  bbox_to_anchor=(1, 0, 0.5, 1))
 
-    fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect="equal"))
+        plt.setp(autotexts, size=9, weight='bold')
+        ax.set_title("MOVIE-RESOLUTION-RESULTS")
+        plt.savefig(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-RESOLUTION-RESULTS.png')
+        plt.show()
 
-    wedges, texts, autotexts = ax.pie(tv_data, autopct=lambda pct: format_data(pct, tv_data),
-                                      shadow=True, colors=colors, textprops=dict(color="black"))
+    if picture_graph_options_int == 6:
 
-    ax.legend(wedges, labels,
-              title="RESOLUTIONS",
-              loc="center left",
-              bbox_to_anchor=(1, 0, 0.5, 1))
+        fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect="equal"))
 
-    plt.setp(autotexts, size=9, weight='bold')
-    ax.set_title("TV-SHOW-RESOLUTION-RESULTS")
-    plt.savefig(r'/home/' + username_input + '/MEDIA-INDEX/TV-SHOW-RESOLUTION-RESULTS.png')
-    plt.show()
+        wedges, texts, autotexts = ax.pie(tv_data, autopct=lambda pct: format_data(pct, tv_data),
+                                          shadow=True, colors=colors, textprops=dict(color="black"))
+
+        ax.legend(wedges, labels,
+                  title="RESOLUTIONS",
+                  loc="center left",
+                  bbox_to_anchor=(1, 0, 0.5, 1))
+
+        plt.setp(autotexts, size=9, weight='bold')
+        ax.set_title("TV-SHOW-RESOLUTION-RESULTS")
+        plt.savefig(r'/home/' + username_input + '/MEDIA-INDEX/TV-SHOW-RESOLUTION-RESULTS.png')
+        plt.show()

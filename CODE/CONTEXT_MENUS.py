@@ -57,17 +57,17 @@ def first_launch_dirs():
     print("--------------------------------------------------------------------------------------------------")
     print()
 
-    os.makedirs(r'/home/' + username_input[0] + '/MEDIA-INDEX/', exist_ok=True)
+    os.makedirs(r'/home/' + username_input + '/MEDIA-INDEX/', exist_ok=True)
 
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MEDIA-INDEX.csv', 'w') as media_index_csv:
+    with open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv', 'w'):
         pass
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'w') as movie_files_index_csv:
+    with open(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'w'):
         pass
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-INDEX.csv', 'w') as tv_files_index_csv:
+    with open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-INDEX.csv', 'w'):
         pass
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', 'w') as movie_files_results_csv:
+    with open(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', 'w'):
         pass
-    with open(r'/home/' + username_input[0] + '/MEDIA-INDEX/TV-FILES-RESULTS.csv', 'w') as tv_files_results_csv:
+    with open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-RESULTS.csv', 'w'):
         pass
     launch_media_index()
 
@@ -114,7 +114,7 @@ def launch_media_index():
     elif lmi_action == 2:
         run_sort()
     elif lmi_action == 3:
-        run_query()
+        run_file_query_and_sort()
     elif lmi_action == 4:
         run_graphs()
     elif lmi_action == 5:
@@ -164,20 +164,21 @@ def run_sort():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    sort_options = int(sort_input)
-    if sort_options == 1:
-        SORT_OPTIONS.get_title_ascending(username_input)
-    elif sort_options == 2:
-        SORT_OPTIONS.get_title_descending(username_input)
-    elif sort_options == 3:
-        SORT_OPTIONS.get_year_ascending(username_input)
-    elif sort_options == 4:
-        SORT_OPTIONS.get_year_descending(username_input)
-    elif sort_options == 5:
+    global sort_options_int
+    sort_options_int = int(sort_input)
+    if sort_options_int == 1:
+        SORT_OPTIONS.sort_function_base(username_input, sort_options_int=1)
+    elif sort_options_int == 2:
+        SORT_OPTIONS.sort_function_base(username_input, sort_options_int=2)
+    elif sort_options_int == 3:
+        SORT_OPTIONS.sort_function_base(username_input, sort_options_int=3)
+    elif sort_options_int == 4:
+        SORT_OPTIONS.sort_function_base(username_input, sort_options_int=4)
+    elif sort_options_int == 5:
         launch_media_index()
 
 
-def file_query_and_sort():
+def run_file_query_and_sort():
     print("___     ____ _ _    ____    ___  ____ ___ ____    ____ _  _ ____ ____ _   _")
     print("|__] __ |___ | |    |___ __ |  \ |__|  |  |__| __ |  | |  | |___ |__/  \_/")
     print("|__]    |    | |___ |___    |__/ |  |  |  |  |    |_\| |__| |___ |  \   |")
@@ -192,12 +193,12 @@ def file_query_and_sort():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    data_query_options = int(data_query_input)
-    if data_query_options == 1:
+    data_query_int = int(data_query_input)
+    if data_query_int == 1:
         QUERY_MEDIA_FILES_INDICES.movie_files_info_query(username_input)
-    elif data_query_options == 2:
+    elif data_query_int == 2:
         QUERY_MEDIA_FILES_INDICES.tv_files_info_query(username_input)
-    elif data_query_options == 3:
+    elif data_query_int == 3:
         launch_media_index()
 
 
@@ -218,11 +219,9 @@ def run_graphs():
     print()
     graph_options_int = int(graph_options)
     if graph_options_int == 1:
-        GRAPHS_BAR.bar_graph_options_base(username_input)
-        GRAPHS_PIE.pie_chart_options_base(username_input)
+        run_picture_graphs()
     elif graph_options_int == 2:
-        GRAPHS_TERMINAL.terminal_graph_options_base_0(username_input)
-        GRAPHS_TERMINAL.terminal_graph_options_base_1(username_input)
+        run_terminal_graphs()
     elif graph_options_int == 3:
         launch_media_index()
 
@@ -242,24 +241,25 @@ def run_picture_graphs():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    graph_options = input("ENTER #")
+    picture_graph_options = input("ENTER #")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    graph_options_int = int(graph_options)
-    if graph_options_int == 1:
-        pass
-    elif graph_options_int == 2:
-        pass
-    elif graph_options_int == 3:
-        pass
-    elif graph_options_int == 4:
-        pass
-    elif graph_options_int == 5:
-        pass
-    elif graph_options_int == 6:
-        pass
-    elif graph_options_int == 7:
+    global picture_graph_options_int
+    picture_graph_options_int = int(picture_graph_options)
+    if picture_graph_options_int == 1:
+        GRAPHS_BAR.bar_graph_options_base(username_input, picture_graph_options_int=1)
+    elif picture_graph_options_int == 2:
+        GRAPHS_BAR.bar_graph_options_base(username_input, picture_graph_options_int=2)
+    elif picture_graph_options_int == 3:
+        GRAPHS_BAR.bar_graph_options_base(username_input, picture_graph_options_int=3)
+    elif picture_graph_options_int == 4:
+        GRAPHS_BAR.bar_graph_options_base(username_input, picture_graph_options_int=4)
+    elif picture_graph_options_int == 5:
+        GRAPHS_PIE.pie_chart_options_base(username_input, picture_graph_options_int=5)
+    elif picture_graph_options_int == 6:
+        GRAPHS_PIE.pie_chart_options_base(username_input, picture_graph_options_int=6)
+    elif picture_graph_options_int == 7:
         launch_media_index()
 
 
@@ -278,24 +278,25 @@ def run_terminal_graphs():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    graph_options = input("ENTER #")
+    terminal_graph_options = input("ENTER #")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    graph_options_int = int(graph_options)
-    if graph_options_int == 1:
-        pass
-    elif graph_options_int == 2:
-        pass
-    elif graph_options_int == 3:
-        pass
-    elif graph_options_int == 4:
-        pass
-    elif graph_options_int == 5:
-        pass
-    elif graph_options_int == 6:
-        pass
-    elif graph_options_int == 7:
+    global terminal_graph_options_int
+    terminal_graph_options_int = int(terminal_graph_options)
+    if terminal_graph_options_int == 1:
+        GRAPHS_TERMINAL.terminal_graph_options_base_0(username_input, terminal_graph_options_int=1)
+    elif terminal_graph_options_int == 2:
+        GRAPHS_TERMINAL.terminal_graph_options_base_0(username_input, terminal_graph_options_int=2)
+    elif terminal_graph_options_int == 3:
+        GRAPHS_TERMINAL.terminal_graph_options_base_0(username_input, terminal_graph_options_int=3)
+    elif terminal_graph_options_int == 4:
+        GRAPHS_TERMINAL.terminal_graph_options_base_0(username_input, terminal_graph_options_int=4)
+    elif terminal_graph_options_int == 5:
+        GRAPHS_TERMINAL.terminal_graph_options_base_1(username_input, terminal_graph_options_int=5)
+    elif terminal_graph_options_int == 6:
+        GRAPHS_TERMINAL.terminal_graph_options_base_1(username_input, terminal_graph_options_int=6)
+    elif terminal_graph_options_int == 7:
         launch_media_index()
 
 
@@ -367,4 +368,3 @@ def create_media_indices_all():
         PARSE_MEDIA_FILES.create_media_files_index_results_csv(username_input)
     elif cmi_action == 6:
         launch_media_index()
-
