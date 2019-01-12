@@ -55,7 +55,7 @@ def first_launch_dirs():
     movie_dir_input = input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):")
     tv_dir_input = input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):")
     movie_alt_dir_input = input("ENTER PATH OF ANY ALTERNATE MOVIE DIRECTORIES, LEAVE BLANK IF NONE (CASE SENSITIVE):")
-    tv_alt_dir_input = input("ENTER PATH OF ANY ALTERNATE MOVIE DIRECTORIES, LEAVE BLANK IF NONE (CASE SENSITIVE):")
+    tv_alt_dir_input = input("ENTER PATH OF ANY ALTERNATE TV SHOW DIRECTORIES, LEAVE BLANK IF NONE (CASE SENSITIVE):")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
