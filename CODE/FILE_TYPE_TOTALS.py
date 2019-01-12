@@ -11,9 +11,9 @@ extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", 
 
 def search_file_type_totals_movies(username_input, b_totals_query_input_int, picture_graph_options_int,
                                    terminal_graph_options_int):
-    movie_file_index = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-RESULTS.csv')))
+    movie_file_index = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
     extensions_dict = {}
-    extensions_totals_list = []
+    extensions_totals = {}
 
     for file_type in movie_file_index:
         if str(',') not in file_type[3]:
@@ -46,12 +46,12 @@ def search_file_type_totals_movies(username_input, b_totals_query_input_int, pic
 
     if terminal_graph_options_int == 7:
 
-        for file_type_values, value in sorted(movie_file_type_totals.items()):
-            extensions_totals_list[file_type_values] = len(value)
+        for file_type_values, value in sorted(extensions_dict.items()):
+            extensions_totals[file_type_values] = len(value)
 
         file_type_totals_terminal_graph_list = []
 
-        for key, value in movie_file_type_totals.items():
+        for key, value in extensions_totals.items():
             file_type_totals_terminal_graph_list.append((str(key), value))
 
         graph = Pyasciigraph()
@@ -64,9 +64,9 @@ def search_file_type_totals_movies(username_input, b_totals_query_input_int, pic
 
 def search_file_type_totals_tv(username_input, b_totals_query_input_int, picture_graph_options_int,
                                terminal_graph_options_int):
-    tv_file_index = list(csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/TV-FILES-RESULTS.csv')))
+    tv_file_index = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
     extensions_dict = {}
-    extensions_totals_list = []
+    extensions_totals = {}
 
     for file_type in tv_file_index:
         if str(',') not in file_type[6]:
@@ -99,12 +99,12 @@ def search_file_type_totals_tv(username_input, b_totals_query_input_int, picture
 
     if terminal_graph_options_int == 8:
 
-        for file_type_values, value in sorted(tv_file_type_totals.items()):
-            extensions_totals_list[file_type_values] = len(value)
+        for file_type_values, value in sorted(extensions_dict.items()):
+            extensions_totals[file_type_values] = len(value)
 
         file_type_totals_terminal_graph_list = []
 
-        for key, value in tv_file_type_totals.items():
+        for key, value in extensions_totals.items():
             file_type_totals_terminal_graph_list.append((str(key), value))
 
         graph = Pyasciigraph()
