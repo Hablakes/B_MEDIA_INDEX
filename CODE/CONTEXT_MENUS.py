@@ -1,6 +1,7 @@
 import os
 
 from ALT_CODE import ALT_CONTEXT_MENUS
+from CODE import FILE_TOTALS
 from CODE import FILE_TYPE_TOTALS
 from CODE import GRAPHS_BAR
 from CODE import GRAPHS_PIE
@@ -333,9 +334,11 @@ def totals_query():
     print()
     print("1) MOVIES BY YEAR        - 2) TV SHOWS BY YEAR        - 3) MOVIES TOTAL")
     print()
-    print("4) TV SHOWS TOTAL        - 5) MOVIES BY DECADE        - 6) TV SHOWS BY DECADE")
+    print("4) TV SHOWS TOTALS       - 5) MOVIES BY DECADE        - 6) TV SHOWS BY DECADE")
     print()
-    print("7) MOVIE FILE-TYPES      - 8) TV SHOWS FILE-TYPES                                    - 9) EXIT")
+    print("7) MOVIE FILE-TYPES      - 8) TV SHOWS FILE-TYPES     - 9) EPISODES TOTAL IN A TV SHOW")
+    print()
+    print("10) LIBRARY TOTAL                                                                   - 11) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -350,9 +353,9 @@ def totals_query():
     elif b_totals_query_input_int == 2:
         YEAR_TOTALS.tv_year_totals(username_input)
     elif b_totals_query_input_int == 3:
-        YEAR_TOTALS.movie_titles_amount(username_input)
+        FILE_TOTALS.movie_titles_amount(username_input)
     elif b_totals_query_input_int == 4:
-        YEAR_TOTALS.tv_titles_amount(username_input)
+        FILE_TOTALS.tv_titles_amount(username_input)
     elif b_totals_query_input_int == 5:
         YEAR_TOTALS.movie_decades_totals(username_input)
     elif b_totals_query_input_int == 6:
@@ -364,6 +367,10 @@ def totals_query():
         FILE_TYPE_TOTALS.search_file_type_totals_tv(username_input, b_totals_query_input_int=8,
                                                     picture_graph_options_int='', terminal_graph_options_int='')
     elif b_totals_query_input_int == 9:
+        FILE_TOTALS.total_tv_episodes_in_show_title(username_input)
+    elif b_totals_query_input_int == 10:
+        FILE_TOTALS.library_total_amount(username_input)
+    elif b_totals_query_input_int == 11:
         launch_media_index()
 
 

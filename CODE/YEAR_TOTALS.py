@@ -61,21 +61,6 @@ def movie_decades_totals(username_input):
     print()
 
 
-def movie_titles_amount(username_input):
-    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
-    movie_amounts_list = []
-    for counted_movie_title in media_index_list:
-        if movie_string in counted_movie_title:
-            movie_amounts_list.append(counted_movie_title)
-    print()
-    print("TOTAL AMOUNT OF MOVIES:")
-    print()
-    print(len(movie_amounts_list))
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
-
-
 def tv_year_totals(username_input):
     media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
     tv_years_amount_dict = {}
@@ -125,33 +110,6 @@ def tv_decades_totals(username_input):
     print("# OF TV SHOWS BY DECADE:")
     print()
     print(media_tv_years_decades_totals)
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
-
-
-def tv_titles_amount(username_input):
-    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
-    tv_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-INDEX.csv')))
-    tv_amounts_list = []
-    episode_amounts_list = []
-    for counted_tv_title in media_index_list:
-        if tv_string in counted_tv_title:
-            tv_amounts_list.append(counted_tv_title)
-
-    for counted_episode_title in tv_index_list:
-        episode_amounts_list.append(+1)
-    print()
-    print("TOTAL AMOUNT OF TV SHOWS:")
-    print()
-    print(len(tv_amounts_list))
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
-    print()
-    print("TOTAL AMOUNT OF TV EPISODES:")
-    print()
-    print(len(episode_amounts_list))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
