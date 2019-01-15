@@ -41,7 +41,7 @@ def search_file_type_totals_movies(username_input, b_totals_query_input_int, pic
 
         x, y = zip(*sorted(movie_file_type_totals.items()))
         plt.bar(x, y)
-        plt.savefig(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILETYPE-RESULTS.png')
+        plt.savefig(r'/home/' + username_input + '/MEDIA-INDEX/FILES/MOVIE-FILETYPE-RESULTS.png')
         plt.show()
 
     if terminal_graph_options_int == 7:
@@ -94,7 +94,7 @@ def search_file_type_totals_tv(username_input, b_totals_query_input_int, picture
 
         x, y = zip(*sorted(tv_file_type_totals.items()))
         plt.bar(x, y)
-        plt.savefig(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILETYPE-RESULTS.png')
+        plt.savefig(r'/home/' + username_input + '/MEDIA-INDEX/FILES/TV-FILETYPE-RESULTS.png')
         plt.show()
 
     if terminal_graph_options_int == 8:
