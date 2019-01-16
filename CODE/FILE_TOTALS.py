@@ -97,9 +97,10 @@ def total_tv_episodes_in_show_title(username_input):
     tv_results_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
     tv_amounts = []
     tv_show_episodes_found = []
+    tv_show_found = {}
 
     print()
-    tv_total_query_action = input("ENTER TV SHOW SERIES / TITLE NAME:")
+    tv_total_query_action = input("ENTER TV SHOW TITLE:")
     print()
     print("--------------------------------------------------------------------------------------------------")
     tv_total_query_action_lower = tv_total_query_action.lower()
@@ -108,16 +109,11 @@ def total_tv_episodes_in_show_title(username_input):
     for found_tv_title in tv_amounts:
         if tv_total_query_action_lower in found_tv_title.lower():
             tv_show_episodes_found.append(found_tv_title)
+            tv_show_found[found_tv_title] = tv_show_episodes_found.count(found_tv_title)
     print()
-    print("SERIES / TITLE NAME:")
+    print("TITLE NAME: # OF EPISODES")
     print()
-    print(tv_show_episodes_found[0])
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
-    print("# OF EPISODES:")
-    print()
-    print(len(tv_show_episodes_found))
+    print(tv_show_found)
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
