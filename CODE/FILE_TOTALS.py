@@ -110,10 +110,11 @@ def total_tv_episodes_in_show_title(username_input):
         if tv_total_query_action_lower in found_tv_title.lower():
             tv_show_episodes_found.append(found_tv_title)
             tv_show_found[found_tv_title] = tv_show_episodes_found.count(found_tv_title)
-    print()
-    print("TITLE NAME: # OF EPISODES")
-    print()
-    print(tv_show_found)
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
+    for item in tv_show_found.items():
+        print()
+        print("TITLE NAME: # OF EPISODES")
+        print()
+        print(item)
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        print()
