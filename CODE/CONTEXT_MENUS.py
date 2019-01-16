@@ -165,7 +165,13 @@ def run_sort():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("TITLE - 1) ASCENDING - 2) DESCENDING - YEAR - 3) ASCENDING - 4) DESCENDING           - 5) EXIT")
+    print("MOVIES & TV SHOWS TITLES  -   TITLE - 1) ASCENDING - 2) DESCENDING")
+    print()
+    print("MOVIES & TV SHOWS TITLES  -    YEAR - 3) ASCENDING - 4) DESCENDING")
+    print()
+    print("TV SHOW - EPISODES -          TITLE - 5) ASCENDING - 6) DESCENDING")
+    print()
+    print("TV SHOW - EPISODES -       EPISODES - 7) ASCENDING - 8) DESCENDING                   - 9) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -184,6 +190,14 @@ def run_sort():
     elif sort_options_int == 4:
         SORT_OPTIONS.sort_function_base(username_input, sort_options_int=4)
     elif sort_options_int == 5:
+        SORT_OPTIONS.total_tv_episodes_sort_function_base(username_input, sort_options_int=5)
+    elif sort_options_int == 6:
+        SORT_OPTIONS.total_tv_episodes_sort_function_base(username_input, sort_options_int=6)
+    elif sort_options_int == 7:
+        SORT_OPTIONS.total_tv_episodes_sort_function_base(username_input, sort_options_int=7)
+    elif sort_options_int == 8:
+        SORT_OPTIONS.total_tv_episodes_sort_function_base(username_input, sort_options_int=8)
+    elif sort_options_int == 9:
         launch_media_index()
 
 
