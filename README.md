@@ -23,7 +23,7 @@ PYTHON 3 - PIP DEPENDENCIES:
 
 B-MEDIA-INDEX USAGE(S):
 -------------------------------------------------------------------------------------------------
-1) /RUN/B-MEDIA-INDEX.py
+1) /RUN/B_MEDIA_INDEX.py
 2) Enter username
 3) Enter Directories for Movies and TV Show Library's
 4) Enter any alternate directories for Movies and TV Shows
