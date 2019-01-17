@@ -11,9 +11,9 @@ tv_string = str("TV")
 
 def pie_chart_options_base(username_input, picture_graph_options_int):
     movie_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
     tv_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv')))
 
     m_ten_eighty_found_list = []
     m_seven_twenty_found_list = []
@@ -79,7 +79,7 @@ def pie_chart_options_base(username_input, picture_graph_options_int):
         plt.setp(autotexts, size=9, weight='bold')
         ax.set_title("MOVIE-RESOLUTION-RESULTS")
         plt.savefig(
-            r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/FILES/MOVIE-RESOLUTION-RESULTS.png')
+            r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/FILES/MOVIE-RESOLUTION-RESULTS.png')
         plt.show()
 
     if picture_graph_options_int == 6:
@@ -96,5 +96,5 @@ def pie_chart_options_base(username_input, picture_graph_options_int):
         plt.setp(autotexts, size=9, weight='bold')
         ax.set_title("TV-SHOW-RESOLUTION-RESULTS")
         plt.savefig(
-            r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/FILES/TV-SHOW-RESOLUTION-RESULTS.png')
+            r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/FILES/TV-SHOW-RESOLUTION-RESULTS.png')
         plt.show()

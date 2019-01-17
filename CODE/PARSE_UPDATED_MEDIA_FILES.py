@@ -7,7 +7,7 @@ import pymediainfo
 
 def movie_index_results(username_input):
     movie_index = csv.reader(
-        open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/UPDATES-TO-MOVIE-FILES-INDEX.csv'))
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-MOVIE-FILES-INDEX.csv'))
     movie_index_file_results = []
 
     for movie_file in movie_index:
@@ -29,7 +29,7 @@ def movie_index_results(username_input):
                     [title.get('title'), title.get('year'), str(track.width) + 'x' + str(track.height),
                      title.get('container')])
 
-    with open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "a",
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "a",
               newline="") as f:
         csv_writer = csv.writer(f)
         for movie_row in movie_index_file_results:
@@ -38,7 +38,7 @@ def movie_index_results(username_input):
 
 def tv_show_index_results(username_input):
     tv_index = csv.reader(
-        open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/UPDATES-TO-TV-FILES-INDEX.csv'))
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-TV-FILES-INDEX.csv'))
     tv_index_file_results = []
 
     for tv_file in tv_index:
@@ -61,7 +61,7 @@ def tv_show_index_results(username_input):
                      title.get('episode'), title('year'), str(track.width) + 'x' + str(track.height),
                      title.get('container')])
 
-    with open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-RESULTS.csv', "a",
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv', "a",
               newline="") as f:
         csv_writer = csv.writer(f)
         for tv_row in tv_index_file_results:
@@ -70,10 +70,10 @@ def tv_show_index_results(username_input):
 
 def re_sort_csv_indices(username_input):
     movie_results = csv.reader(
-        open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "r"))
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "r"))
     sorted_movie_results = sorted(movie_results, key=lambda row: row[0])
     tv_results = csv.reader(
-        open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-RESULTS.csv', "r"))
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv', "r"))
     sorted_tv_results = sorted(tv_results, key=lambda row: row[0])
     movie_results_file = []
     tv_results_file = []
@@ -81,7 +81,7 @@ def re_sort_csv_indices(username_input):
     for line in sorted_movie_results:
         movie_results_file.append(line)
 
-    with open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "w",
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "w",
               newline="") as f:
         csv_writer = csv.writer(f)
         for movie_row in movie_results_file:
@@ -90,7 +90,7 @@ def re_sort_csv_indices(username_input):
     for line in sorted_tv_results:
         tv_results_file.append(line)
 
-    with open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-RESULTS.csv', "w",
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv', "w",
               newline="") as f:
         csv_writer = csv.writer(f)
         for tv_row in tv_results_file:
@@ -101,7 +101,7 @@ def create_media_files_index_results_csv(username_input):
     movie_index_results(username_input)
     tv_show_index_results(username_input)
     re_sort_csv_indices(username_input)
-    os.remove(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/OLD-MOVIE-FILES-INDEX.csv')
-    os.remove(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/UPDATES-TO-MOVIE-FILES-INDEX.csv')
-    os.remove(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/OLD-TV-FILES-INDEX.csv')
-    os.remove(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/UPDATES-TO-TV-FILES-INDEX.csv')
+    os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-MOVIE-FILES-INDEX.csv')
+    os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-MOVIE-FILES-INDEX.csv')
+    os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-TV-FILES-INDEX.csv')
+    os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-TV-FILES-INDEX.csv')

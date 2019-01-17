@@ -14,7 +14,7 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
             if movie_file.endswith(extensions):
                 movie_file_results.append([root + '/' + movie_file])
 
-    with open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MOVIE-FILES-INDEX.csv', "w",
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv', "w",
               newline="") as f:
         csv_writer = csv.writer(f)
         for movie_row in sorted(movie_file_results):
@@ -26,7 +26,7 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
             if tv_file.endswith(extensions):
                 tv_show_file_results.append([root + '/' + tv_file])
 
-    with open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-INDEX.csv', "w",
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', "w",
               newline="") as f:
         csv_writer = csv.writer(f)
         for tv_row in sorted(tv_show_file_results):

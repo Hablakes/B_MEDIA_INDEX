@@ -3,7 +3,7 @@ import csv
 
 def movie_files_info_query(username_input):
     movie_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
     mv_query_action = input("ENTER SEARCH QUERY (MOVIES):")
     print()
     print("--------------------------------------------------------------------------------------------------")
@@ -30,7 +30,7 @@ def movie_files_info_query(username_input):
 
 def tv_files_info_query(username_input):
     tv_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv')))
     tv_show_query_action = input("ENTER SEARCH QUERY (TV SHOWS):")
     print()
     print("--------------------------------------------------------------------------------------------------")

@@ -6,7 +6,7 @@ import pymediainfo
 
 def movie_index_results(username_input):
     movie_index = csv.reader(
-        open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MOVIE-FILES-INDEX.csv'))
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv'))
     movie_index_file_results = []
 
     for movie_file in movie_index:
@@ -28,7 +28,7 @@ def movie_index_results(username_input):
                     [title.get('title'), title.get('year'), str(track.width) + 'x' + str(track.height),
                      title.get('container')])
 
-    with open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "w",
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "w",
               newline="") as f:
         csv_writer = csv.writer(f)
         for movie_row in movie_index_file_results:
@@ -36,7 +36,7 @@ def movie_index_results(username_input):
 
 
 def tv_show_index_results(username_input):
-    tv_index = csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-INDEX.csv'))
+    tv_index = csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv'))
     tv_index_file_results = []
 
     for tv_file in tv_index:
@@ -59,7 +59,7 @@ def tv_show_index_results(username_input):
                      title.get('episode'), title.get('year'), str(track.width) + 'x' + str(track.height),
                      title.get('container')])
 
-    with open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-RESULTS.csv', "w",
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv', "w",
               newline="") as f:
         csv_writer = csv.writer(f)
         for tv_row in tv_index_file_results:
