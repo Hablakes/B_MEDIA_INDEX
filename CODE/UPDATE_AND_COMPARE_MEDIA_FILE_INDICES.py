@@ -17,12 +17,20 @@ def rename_existing_movie_and_tv_indices_for_update_search(username_input):
                       r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + 'OLD-' + index_file)
 
 
-def update_search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input):
+def update_search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
+                                                   tv_alt_dir_input):
     movie_file_results = []
     for root, dirs, files in os.walk(movie_dir_input):
         for movie_file in sorted(files):
             if movie_file.endswith(extensions):
                 movie_file_results.append([root + '/' + movie_file])
+
+    if movie_alt_dir_input is not str(''):
+
+        for root, dirs, files in os.walk(movie_alt_dir_input):
+            for movie_file in sorted(files):
+                if movie_file.endswith(extensions):
+                    movie_file_results.append([root + '/' + movie_file])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv', "w",
               newline="") as f:
@@ -36,6 +44,13 @@ def update_search_folder_items_and_save_file_paths(username_input, movie_dir_inp
             if tv_file.endswith(extensions):
                 tv_show_file_results.append([root + '/' + tv_file])
 
+    if tv_alt_dir_input is not str(''):
+
+        for root, dirs, files in os.walk(tv_alt_dir_input):
+            for alt_file in sorted(files):
+                if alt_file.endswith(extensions):
+                    tv_show_file_results.append([root + '/' + alt_file])
+
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', "w",
               newline="") as f:
         csv_writer = csv.writer(f)
@@ -43,13 +58,15 @@ def update_search_folder_items_and_save_file_paths(username_input, movie_dir_inp
             csv_writer.writerow(tv_row)
 
 
-def compare_old_and_updated_indices_and_create_differences_files(username_input, movie_dir_input, tv_dir_input):
+def compare_old_and_updated_indices_and_create_differences_files(username_input, movie_dir_input, tv_dir_input,
+                                                                 movie_alt_dir_input, tv_alt_dir_input):
     rename_existing_movie_and_tv_indices_for_update_search(username_input)
-    update_search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input)
+    update_search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
+                                                   tv_alt_dir_input)
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-MOVIE-FILES-INDEX.csv',
               'r') as mi_0, open(
-            r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'r') as mi_1:
+        r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'r') as mi_1:
         old_movie_index = mi_0.readlines()
         new_movie_index = mi_1.readlines()
 
@@ -61,7 +78,7 @@ def compare_old_and_updated_indices_and_create_differences_files(username_input,
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-TV-FILES-INDEX.csv',
               'r') as ti_0, open(
-            r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', 'r') as ti_1:
+        r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', 'r') as ti_1:
         old_tv_index = ti_0.readlines()
         new_tv_index = ti_1.readlines()
 

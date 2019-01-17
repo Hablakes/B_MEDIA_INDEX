@@ -1,6 +1,5 @@
 import os
 
-from ALT_CODE import ALT_CONTEXT_MENUS
 from CODE import FILE_TOTALS
 from CODE import FILE_TYPE_TOTALS
 from CODE import GRAPHS_BAR
@@ -12,7 +11,7 @@ from CODE import QUERY_MEDIA_FOLDERS_INDEX
 from CODE import PARSE_MEDIA_FILES
 from CODE import PARSE_UPDATED_MEDIA_FILES
 from CODE import RE_SORT_CSV_INDICES
-from CODE import SCRAPE_MEDIA_FOLDERS_INDEX
+from CODE import MEDIA_FOLDERS_INDEX
 from CODE import SORT_OPTIONS
 from CODE import UPDATE_AND_COMPARE_MEDIA_FILE_INDICES
 from CODE import YEAR_TOTALS
@@ -36,9 +35,7 @@ def first_launch_media_index():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    if first_lmi_input_action_lower == 'bx':
-        ALT_CONTEXT_MENUS.alt_context_menus()
-    elif int(first_lmi_input_action_lower) == 1:
+    if int(first_lmi_input_action_lower) == 1:
         first_launch_dirs()
     elif int(first_lmi_input_action_lower) == 2:
         second_launch_lmi()
@@ -409,24 +406,29 @@ def create_media_indices_all():
     print()
     cmi_action = int(cmi_input)
     if cmi_action == 1:
-        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input)
-        MEDIA_FILE_INDEX.search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input)
+        MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input,
+                                                              movie_alt_dir_input, tv_alt_dir_input)
+        MEDIA_FILE_INDEX.search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input,
+                                                                 movie_alt_dir_input, tv_alt_dir_input)
     elif cmi_action == 2:
         UPDATE_AND_COMPARE_MEDIA_FILE_INDICES.compare_old_and_updated_indices_and_create_differences_files(
-            username_input, movie_dir_input, tv_dir_input)
+            username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
     elif cmi_action == 3:
         PARSE_MEDIA_FILES.create_media_files_index_results_csv(username_input)
     elif cmi_action == 4:
         PARSE_UPDATED_MEDIA_FILES.create_media_files_index_results_csv(username_input)
         RE_SORT_CSV_INDICES.re_sort_csv_indices(username_input)
     elif cmi_action == 5:
-        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input)
-        MEDIA_FILE_INDEX.search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input)
+        MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input,
+                                                              movie_alt_dir_input, tv_alt_dir_input)
+        MEDIA_FILE_INDEX.search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input,
+                                                                 movie_alt_dir_input, tv_alt_dir_input)
         PARSE_MEDIA_FILES.create_media_files_index_results_csv(username_input)
     elif cmi_action == 6:
-        SCRAPE_MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input)
+        MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input,
+                                                              movie_alt_dir_input, tv_alt_dir_input)
         UPDATE_AND_COMPARE_MEDIA_FILE_INDICES.compare_old_and_updated_indices_and_create_differences_files(
-            username_input, movie_dir_input, tv_dir_input)
+            username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
         PARSE_UPDATED_MEDIA_FILES.create_media_files_index_results_csv(username_input)
         RE_SORT_CSV_INDICES.re_sort_csv_indices(username_input)
     elif cmi_action == 7:

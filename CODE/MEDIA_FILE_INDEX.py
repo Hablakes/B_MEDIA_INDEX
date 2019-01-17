@@ -7,12 +7,20 @@ extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", 
               ".srt", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
 
 
-def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input):
+def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
+                                            tv_alt_dir_input):
     movie_file_results = []
     for root, dirs, files in os.walk(movie_dir_input):
         for movie_file in sorted(files):
             if movie_file.endswith(extensions):
                 movie_file_results.append([root + '/' + movie_file])
+
+    if movie_alt_dir_input is not str(''):
+
+        for root, dirs, files in os.walk(movie_alt_dir_input):
+            for movie_file in sorted(files):
+                if movie_file.endswith(extensions):
+                    movie_file_results.append([root + '/' + movie_file])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv', "w",
               newline="") as f:
@@ -25,6 +33,13 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
         for tv_file in sorted(files):
             if tv_file.endswith(extensions):
                 tv_show_file_results.append([root + '/' + tv_file])
+
+    if tv_alt_dir_input is not str(''):
+
+        for root, dirs, files in os.walk(tv_alt_dir_input):
+            for alt_file in sorted(files):
+                if alt_file.endswith(extensions):
+                    tv_show_file_results.append([root + '/' + alt_file])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', "w",
               newline="") as f:
