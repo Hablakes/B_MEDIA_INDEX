@@ -36,7 +36,7 @@ def tv_files_info_query(username_input):
     print("--------------------------------------------------------------------------------------------------")
     print()
     tv_show_query_action_lower = str(tv_show_query_action.lower())
-    for tv_file in sorted(tv_files_results_list):
+    for tv_file in sorted(tv_files_results_list, key=lambda x: (x[1], x[3], x[4])):
         if tv_show_query_action_lower in tv_file[0].lower():
             print()
             print("TV SHOW TITLE:")

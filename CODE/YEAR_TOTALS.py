@@ -112,7 +112,6 @@ def tv_decades_totals(username_input):
     print()
     print("# OF TV SHOWS BY DECADE:")
     for item in media_tv_years_decades_totals.items():
-
         print()
         print(item)
         print()
