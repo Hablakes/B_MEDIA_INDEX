@@ -1,3 +1,4 @@
+import csv
 import os
 
 from CODE import FILE_TOTALS
@@ -50,12 +51,11 @@ def first_launch_dirs():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    global username_input
+    global username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
     username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    global movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
     movie_dir_input = input("ENTER PATH OF MOVIES DIRECTORY (CASE SENSITIVE):")
     tv_dir_input = input("ENTER PATH OF TV DIRECTORY (CASE SENSITIVE):")
     movie_alt_dir_input = input("ENTER PATH OF ANY ALTERNATE MOVIE DIRECTORIES, LEAVE BLANK IF NONE (CASE SENSITIVE):")
@@ -63,6 +63,16 @@ def first_launch_dirs():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
+
+    user_info = {'user:': username_input, 'movie_dir:': movie_dir_input, 'tv_dir:': tv_dir_input,
+                 'movie_alt_dir:': movie_alt_dir_input, 'tv_alt_dir:': tv_alt_dir_input}
+
+    with open(
+            r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + username_input + '-USER-INFO.csv',
+            'w') as f:
+        csv_writer = csv.writer(f)
+        for row in user_info.items():
+            csv_writer.writerow(row)
 
     os.makedirs(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/', exist_ok=True)
     os.makedirs(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/FILES', exist_ok=True)
@@ -87,11 +97,18 @@ def second_launch_lmi():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    global username_input
+    global username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
     username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
+    user_info = list(csv.reader(open(
+        r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + username_input + '-USER-INFO.csv')))
+    if username_input == user_info[0][1]:
+        movie_dir_input = user_info[1][1]
+        tv_dir_input = user_info[2][1]
+        movie_alt_dir_input = user_info[3][1]
+        tv_alt_dir_input = user_info[4][1]
     launch_media_index()
 
 
