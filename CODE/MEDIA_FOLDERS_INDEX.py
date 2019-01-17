@@ -8,9 +8,6 @@ def scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_in
                                       tv_alt_dir_input):
     movie_dir_list = os.listdir(movie_dir_input)
     tv_dir_list = os.listdir(tv_dir_input)
-    movie_alt_dir_list = os.listdir(movie_alt_dir_input)
-    tv_alt_dir_list = os.listdir(tv_alt_dir_input)
-
     movie_title_items = []
     tv_title_items = []
 
@@ -23,7 +20,10 @@ def scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_in
             title_item_check.append(title_item_check[2][-5:-1])
             title_item_check.remove(title_item_check[2])
 
+        movie_title_items.append(title_item_check)
+
     if movie_alt_dir_input is not str(''):
+        movie_alt_dir_list = os.listdir(movie_alt_dir_input)
 
         for movie_found in sorted(movie_alt_dir_list):
             movie_scrape_info = guessit.guessit(movie_found)
@@ -45,7 +45,10 @@ def scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_in
             title_item_check.append(title_item_check[2][-5:-1])
             title_item_check.remove(title_item_check[2])
 
+        tv_title_items.append(title_item_check)
+
     if tv_alt_dir_input is not str(''):
+        tv_alt_dir_list = os.listdir(tv_alt_dir_input)
 
         for tv_found in sorted(tv_alt_dir_list):
             tv_scrape_info = guessit.guessit(tv_found)
