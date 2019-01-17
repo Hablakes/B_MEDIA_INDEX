@@ -10,11 +10,11 @@ extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", 
 def rename_existing_movie_and_tv_indices_for_update_search(username_input):
     for index_file in os.listdir(r'/home/' + username_input + '/MEDIA-INDEX/'):
         if index_file.startswith('MOVIE-FILES-I'):
-            os.rename(r'/home/' + username_input + '/MEDIA-INDEX/' + index_file,
-                      r'/home/' + username_input + '/MEDIA-INDEX/' + 'OLD-' + index_file)
+            os.rename(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + index_file,
+                      r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + 'OLD-' + index_file)
         if index_file.startswith('TV-FILES-I'):
-            os.rename(r'/home/' + username_input + '/MEDIA-INDEX/' + index_file,
-                      r'/home/' + username_input + '/MEDIA-INDEX/' + 'OLD-' + index_file)
+            os.rename(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + index_file,
+                      r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + 'OLD-' + index_file)
 
 
 def update_search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input):
@@ -24,7 +24,8 @@ def update_search_folder_items_and_save_file_paths(username_input, movie_dir_inp
             if movie_file.endswith(extensions):
                 movie_file_results.append([root + '/' + movie_file])
 
-    with open(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv', "w", newline="") as f:
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv', "w",
+              newline="") as f:
         csv_writer = csv.writer(f)
         for movie_row in sorted(movie_file_results):
             csv_writer.writerow(movie_row)
@@ -35,7 +36,8 @@ def update_search_folder_items_and_save_file_paths(username_input, movie_dir_inp
             if tv_file.endswith(extensions):
                 tv_show_file_results.append([root + '/' + tv_file])
 
-    with open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-INDEX.csv', "w", newline="") as f:
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', "w",
+              newline="") as f:
         csv_writer = csv.writer(f)
         for tv_row in sorted(tv_show_file_results):
             csv_writer.writerow(tv_row)
@@ -45,22 +47,26 @@ def compare_old_and_updated_indices_and_create_differences_files(username_input,
     rename_existing_movie_and_tv_indices_for_update_search(username_input)
     update_search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input)
 
-    with open(r'/home/' + username_input + '/MEDIA-INDEX/OLD-MOVIE-FILES-INDEX.csv', 'r') as mi_0, open(
-              r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'r') as mi_1:
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-MOVIE-FILES-INDEX.csv',
+              'r') as mi_0, open(
+            r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'r') as mi_1:
         old_movie_index = mi_0.readlines()
         new_movie_index = mi_1.readlines()
 
-    with open(r'/home/' + username_input + '/MEDIA-INDEX/UPDATES-TO-MOVIE-FILES-INDEX.csv','w') as outFile:
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-MOVIE-FILES-INDEX.csv',
+              'w') as outFile:
         for line in new_movie_index:
             if line not in old_movie_index:
                 outFile.write(line)
 
-    with open(r'/home/' + username_input + '/MEDIA-INDEX/OLD-TV-FILES-INDEX.csv', 'r') as ti_0, open(
-            r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-INDEX.csv', 'r') as ti_1:
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-TV-FILES-INDEX.csv',
+              'r') as ti_0, open(
+            r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', 'r') as ti_1:
         old_tv_index = ti_0.readlines()
         new_tv_index = ti_1.readlines()
 
-    with open(r'/home/' + username_input + '/MEDIA-INDEX/UPDATES-TO-TV-FILES-INDEX.csv', 'w') as outFile:
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-TV-FILES-INDEX.csv',
+              'w') as outFile:
         for line in new_tv_index:
             if line not in old_tv_index:
                 outFile.write(line)

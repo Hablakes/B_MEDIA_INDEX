@@ -11,8 +11,9 @@ tv_string = str("TV")
 
 def pie_chart_options_base(username_input, picture_graph_options_int):
     movie_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
-    tv_files_results_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
+    tv_files_results_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
 
     m_ten_eighty_found_list = []
     m_seven_twenty_found_list = []
@@ -54,7 +55,7 @@ def pie_chart_options_base(username_input, picture_graph_options_int):
         tv_total_list.append(+1)
 
     tv_data = [float(len(tv_ten_eighty_found_list)), float(len(tv_seven_twenty_found_list)),
-            float(len(tv_standard_def_found_list))]
+               float(len(tv_standard_def_found_list))]
 
     def format_data(pct, allvals):
         absolute = int(pct / 100. * np.sum(allvals))
@@ -65,7 +66,6 @@ def pie_chart_options_base(username_input, picture_graph_options_int):
     colors = ['#85c1e9', '#a569bd', '#808b96']
 
     if picture_graph_options_int == 5:
-
         fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect="equal"))
 
         wedges, texts, autotexts = ax.pie(movie_data, autopct=lambda pct: format_data(pct, movie_data),
@@ -78,11 +78,11 @@ def pie_chart_options_base(username_input, picture_graph_options_int):
 
         plt.setp(autotexts, size=9, weight='bold')
         ax.set_title("MOVIE-RESOLUTION-RESULTS")
-        plt.savefig(r'/home/' + username_input + '/MEDIA-INDEX/FILES/MOVIE-RESOLUTION-RESULTS.png')
+        plt.savefig(
+            r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/FILES/MOVIE-RESOLUTION-RESULTS.png')
         plt.show()
 
     if picture_graph_options_int == 6:
-
         fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect="equal"))
 
         wedges, texts, autotexts = ax.pie(tv_data, autopct=lambda pct: format_data(pct, tv_data),
@@ -95,5 +95,6 @@ def pie_chart_options_base(username_input, picture_graph_options_int):
 
         plt.setp(autotexts, size=9, weight='bold')
         ax.set_title("TV-SHOW-RESOLUTION-RESULTS")
-        plt.savefig(r'/home/' + username_input + '/MEDIA-INDEX/FILES/TV-SHOW-RESOLUTION-RESULTS.png')
+        plt.savefig(
+            r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/FILES/TV-SHOW-RESOLUTION-RESULTS.png')
         plt.show()

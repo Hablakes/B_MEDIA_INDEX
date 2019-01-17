@@ -8,7 +8,8 @@ tv_string = str("TV")
 
 
 def movie_titles_amount(username_input):
-    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
+    media_index_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MEDIA-INDEX.csv')))
     movie_amounts_list = []
     for counted_movie_title in media_index_list:
         if movie_string in counted_movie_title:
@@ -23,8 +24,10 @@ def movie_titles_amount(username_input):
 
 
 def tv_titles_amount(username_input):
-    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
-    tv_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-INDEX.csv')))
+    media_index_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MEDIA-INDEX.csv')))
+    tv_index_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-INDEX.csv')))
     tv_amounts_list = []
     episode_amounts_list = []
     for counted_tv_title in media_index_list:
@@ -50,8 +53,10 @@ def tv_titles_amount(username_input):
 
 
 def library_total_amount(username_input):
-    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
-    tv_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-INDEX.csv')))
+    media_index_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MEDIA-INDEX.csv')))
+    tv_index_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-INDEX.csv')))
     tv_amounts_list = []
     episode_amounts_list = []
     movie_amounts_list = []
@@ -94,7 +99,8 @@ def library_total_amount(username_input):
 
 
 def total_tv_episodes_in_show_title(username_input):
-    tv_results_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+    tv_results_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
     tv_amounts = []
     tv_show_episodes_found = []
     tv_show_found = {}

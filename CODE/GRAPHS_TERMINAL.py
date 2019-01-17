@@ -9,7 +9,8 @@ tv_string = str("TV")
 
 
 def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
-    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
+    media_index_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MEDIA-INDEX.csv')))
 
     movie_years_dict = {}
     movie_decades_dict = {}
@@ -114,8 +115,9 @@ def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
 
 def terminal_graph_options_base_1(username_input, terminal_graph_options_int):
     movie_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
-    tv_files_results_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
+    tv_files_results_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/TV-FILES-RESULTS.csv')))
 
     m_ten_eighty_found_list = []
     m_seven_twenty_found_list = []

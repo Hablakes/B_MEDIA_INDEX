@@ -8,7 +8,8 @@ tv_string = str("TV")
 
 
 def movie_year_totals(username_input):
-    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
+    media_index_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MEDIA-INDEX.csv')))
     movie_years_amount_dict = {}
     print("ENTER A YEAR:")
     print()
@@ -38,7 +39,8 @@ def movie_year_totals(username_input):
 
 
 def movie_decades_totals(username_input):
-    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
+    media_index_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MEDIA-INDEX.csv')))
     movie_years_decades_dict = {}
     for media_movie in media_index_list:
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
@@ -62,7 +64,8 @@ def movie_decades_totals(username_input):
 
 
 def tv_year_totals(username_input):
-    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
+    media_index_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MEDIA-INDEX.csv')))
     tv_years_amount_dict = {}
     print("ENTER A YEAR:")
     print()
@@ -92,7 +95,8 @@ def tv_year_totals(username_input):
 
 
 def tv_decades_totals(username_input):
-    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
+    media_index_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MEDIA-INDEX.csv')))
     tv_years_decades_amount_dict = {}
     for media_tv in media_index_list:
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)

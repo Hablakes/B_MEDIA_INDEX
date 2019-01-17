@@ -1,10 +1,10 @@
 import csv
 import re
 
-movie_file_index = csv.reader(open(r'/home/bx/PycharmProjects/B-MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv'))
 
-
-def search_resolution_totals_movies():
+def search_resolution_totals_movies(username_input):
+    movie_file_index = csv.reader(
+        open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/FILES/MOVIE-FILES-INDEX.csv'))
     ten_eighty_found_list = []
     seven_twenty_found_list = []
     standard_def_found_list = []

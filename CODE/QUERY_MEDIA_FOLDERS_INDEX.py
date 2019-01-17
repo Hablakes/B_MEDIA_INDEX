@@ -6,7 +6,8 @@ tv_string = str("TV")
 
 
 def movie_title_search(username_input):
-    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
+    media_index_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MEDIA-INDEX.csv')))
     movie_title_search_action = input("QUERY MOVIES:")
     print()
     print("--------------------------------------------------------------------------------------------------")
@@ -27,7 +28,8 @@ def movie_title_search(username_input):
 
 
 def tv_title_search(username_input):
-    media_index_list = list(csv.reader(open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv')))
+    media_index_list = list(
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MEDIA-INDEX.csv')))
     tv_title_search_action = input("QUERY TV SHOWS:")
     print()
     print("--------------------------------------------------------------------------------------------------")

@@ -5,7 +5,6 @@ import guessit
 
 
 def scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input):
-
     movie_dir_list = os.listdir(movie_dir_input)
     tv_dir_list = os.listdir(tv_dir_input)
 
@@ -34,7 +33,8 @@ def scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_in
 
         tv_title_items.append(title_item_check)
 
-    with open(r'/home/' + username_input + '/MEDIA-INDEX/MEDIA-INDEX.csv', "w", newline="") as f:
+    with open(r'/home/' + username_input + '/' + username_input + '-/MEDIA-INDEX/MEDIA-INDEX.csv', "w",
+              newline="") as f:
         csv_writer = csv.writer(f)
         for file_row in movie_title_items:
             csv_writer.writerow(file_row)
