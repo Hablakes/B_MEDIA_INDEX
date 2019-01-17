@@ -54,13 +54,14 @@ def movie_decades_totals(username_input):
 
     for movie_year_values, value in sorted(movie_years_decades_dict.items()):
         media_movie_years_decades_totals[movie_year_values] = len(value)
-    print()
-    print("# OF MOVIES BY DECADE:")
-    print()
-    print(media_movie_years_decades_totals)
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
+    for item in media_movie_years_decades_totals.items():
+        print()
+        print("# OF MOVIES BY DECADE:")
+        print()
+        print(item)
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        print()
 
 
 def tv_year_totals(username_input):
@@ -110,10 +111,12 @@ def tv_decades_totals(username_input):
 
     for tv_year_values, value in sorted(tv_years_decades_amount_dict.items()):
         media_tv_years_decades_totals[tv_year_values] = len(value)
-    print()
-    print("# OF TV SHOWS BY DECADE:")
-    print()
-    print(media_tv_years_decades_totals)
-    print()
-    print("--------------------------------------------------------------------------------------------------")
-    print()
+
+    for item in media_tv_years_decades_totals.items():
+        print()
+        print("# OF TV SHOWS BY DECADE:")
+        print()
+        print(item)
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        print()
