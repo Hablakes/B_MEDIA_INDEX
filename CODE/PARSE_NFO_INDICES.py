@@ -7,8 +7,9 @@ def movie_nfo_search_plot_results(username_input):
     movie_nfo_files_results = []
     movie_nfo_result = []
 
+    print("SEARCH FOR MOVIE PLOT DESCRIPTION:")
     print()
-    nfo_file = input("SEARCH:")
+    nfo_file = input("ENTER TITLE:")
     print()
 
     for nfo_files_index in movie_nfos:
