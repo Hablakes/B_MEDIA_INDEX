@@ -1,7 +1,7 @@
 import csv
 
 
-def movie_index_results(username_input):
+def movie_nfo_search_plot_results(username_input):
     movie_nfos = csv.reader(
         open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-NFO-FILES-INDEX.csv'))
     movie_nfo_files_results = []
@@ -36,7 +36,7 @@ def movie_index_results(username_input):
         print("--------------------------------------------------------------------------------------------------")
         print()
         if int(sa_input) == 1:
-            movie_index_results(username_input)
+            movie_nfo_search_plot_results(username_input)
         else:
             pass
 
@@ -52,7 +52,7 @@ def movie_index_results(username_input):
         print("--------------------------------------------------------------------------------------------------")
         print()
         if int(sa_input) == 1:
-            movie_index_results(username_input)
+            movie_nfo_search_plot_results(username_input)
         else:
             pass
 
@@ -65,4 +65,4 @@ def movie_index_results(username_input):
         print("REFINE SEARCH WITH ABOVE RESULTS: SINGLE MATCH NEEDED TO PROCEED")
         print()
         print("--------------------------------------------------------------------------------------------------")
-        movie_index_results(username_input)
+        movie_nfo_search_plot_results(username_input)
