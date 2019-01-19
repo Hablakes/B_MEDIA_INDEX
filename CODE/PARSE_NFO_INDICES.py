@@ -24,6 +24,7 @@ def movie_nfo_search_plot_results(username_input):
                     movie_nfo_result.append(line.split('.'))
         print("------------------------------------------------------------------------------------------------------"
               "------------------------------------------------------------------------------------------------------")
+        print()
         for line in movie_nfo_result[0]:
             print(line + '.')
         print()
@@ -32,7 +33,7 @@ def movie_nfo_search_plot_results(username_input):
         print()
         print("SEARCH AGAIN?   -   1) YES - 2) NO")
         print()
-        sa_input = int(input('ENTER #:'))
+        sa_input = int(input('ENTER #'))
         print()
         print("--------------------------------------------------------------------------------------------------")
         print()
@@ -48,7 +49,7 @@ def movie_nfo_search_plot_results(username_input):
         print()
         print("SEARCH AGAIN?   -   1) YES - 2) NO")
         print()
-        sa_input = int(input('ENTER #:'))
+        sa_input = int(input('ENTER #'))
         print()
         print("--------------------------------------------------------------------------------------------------")
         print()

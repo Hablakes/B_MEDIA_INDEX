@@ -7,11 +7,14 @@ from CODE import GRAPHS_BAR
 from CODE import GRAPHS_PIE
 from CODE import GRAPHS_TERMINAL
 from CODE import MEDIA_FILE_INDEX
+from CODE import NFO_INDICES
 from CODE import QUERY_MEDIA_FILES_INDICES
 from CODE import QUERY_MEDIA_FOLDERS_INDEX
 from CODE import PARSE_MEDIA_FILES
+from CODE import PARSE_NFO_INDICES
 from CODE import PARSE_UPDATED_MEDIA_FILES
 from CODE import RE_SORT_CSV_INDICES
+from CODE import RESULTS_DIFFERENCES
 from CODE import MEDIA_FOLDERS_INDEX
 from CODE import SORT_OPTIONS
 from CODE import UPDATE_AND_COMPARE_MEDIA_FILE_INDICES
@@ -60,15 +63,19 @@ def first_launch_dirs():
         os.makedirs(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/', exist_ok=True)
         os.makedirs(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/FILES', exist_ok=True)
 
-        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MEDIA-INDEX.csv', 'w') as mi:
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MEDIA-INDEX.csv', 'w'):
             pass
-        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'w') as mi:
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'w'):
             pass
-        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', 'w') as ti:
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', 'w'):
             pass
-        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', 'w') as m:
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-NFO-FILES-INDEX.csv'):
             pass
-        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv', 'w') as t:
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-NFO-FILES-INDEX.csv'):
+            pass
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', 'w'):
+            pass
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv', 'w'):
             pass
 
 
@@ -111,7 +118,9 @@ def run_query():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("SEARCH TITLES - 1) MOVIES - 2) TV SHOWS                                              - 3) EXIT")
+    print("SEARCH TITLES         -   1) MOVIES - 2) TV SHOW SERIES")
+    print()
+    print("SEARCH FOR PLOTS OF   -   3) MOVIES - 4) TV SHOW SERIES & EPISODES                   - 5) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -125,6 +134,10 @@ def run_query():
     elif title_search_type_lower == 2:
         QUERY_MEDIA_FOLDERS_INDEX.tv_title_search(username_input)
     elif title_search_type_lower == 3:
+        PARSE_NFO_INDICES.movie_nfo_search_plot_results(username_input)
+    elif title_search_type_lower == 4:
+        pass
+    elif title_search_type_lower == 5:
         launch_media_index()
 
 
@@ -367,9 +380,13 @@ def create_media_indices_all():
     print()
     print("1) CREATE NEW MEDIA INDEX                -  2) UPDATE MEDIA INDEX")
     print()
-    print("3) CREATE NEW PARSE-RESULTS INDICES      -  4) UPDATE PARSE-RESULTS INDICES")
+    print("3) CREATE NEW NFO INDICES                -  4) UPDATE PARSE-RESULTS INDICES")
     print()
-    print("5) CREATE ALL NEW INDICES                -  6) UPDATE ALL INDICES                    - 7) EXIT")
+    print("5) CREATE NEW PARSE-RESULTS INDICES      -  6) UPDATE ALL INDICES")
+    print()
+    print("7) CREATE ALL NEW INDICES                -  8) COMPARE AGAINST ANOTHER RESULTS FILE")
+    print()
+    print("9) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -387,15 +404,12 @@ def create_media_indices_all():
         UPDATE_AND_COMPARE_MEDIA_FILE_INDICES.compare_old_and_updated_indices_and_create_differences_files(
             username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
     elif cmi_action == 3:
-        PARSE_MEDIA_FILES.create_media_files_index_results_csv(username_input)
+        NFO_INDICES.search_folder_nfos_and_save_file_paths(username_input, movie_dir_input, tv_dir_input,
+                                                           movie_alt_dir_input, tv_alt_dir_input)
     elif cmi_action == 4:
         PARSE_UPDATED_MEDIA_FILES.create_media_files_index_results_csv(username_input)
         RE_SORT_CSV_INDICES.re_sort_csv_indices(username_input)
     elif cmi_action == 5:
-        MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input,
-                                                              movie_alt_dir_input, tv_alt_dir_input)
-        MEDIA_FILE_INDEX.search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input,
-                                                                 movie_alt_dir_input, tv_alt_dir_input)
         PARSE_MEDIA_FILES.create_media_files_index_results_csv(username_input)
     elif cmi_action == 6:
         MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input,
@@ -405,4 +419,15 @@ def create_media_indices_all():
         PARSE_UPDATED_MEDIA_FILES.create_media_files_index_results_csv(username_input)
         RE_SORT_CSV_INDICES.re_sort_csv_indices(username_input)
     elif cmi_action == 7:
+        MEDIA_FOLDERS_INDEX.scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input,
+                                                              movie_alt_dir_input, tv_alt_dir_input)
+        NFO_INDICES.search_folder_nfos_and_save_file_paths(username_input, movie_dir_input, tv_dir_input,
+                                                           movie_alt_dir_input, tv_alt_dir_input)
+        MEDIA_FILE_INDEX.search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input,
+                                                                 movie_alt_dir_input, tv_alt_dir_input)
+        PARSE_MEDIA_FILES.create_media_files_index_results_csv(username_input)
+    elif cmi_action == 8:
+        RESULTS_DIFFERENCES.compare_movie_results_file_and_create_differences_files(username_input)
+        RESULTS_DIFFERENCES.compare_tv_results_file_and_create_differences_files(username_input)
+    elif cmi_action == 9:
         launch_media_index()

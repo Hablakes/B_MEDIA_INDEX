@@ -43,12 +43,3 @@ def search_folder_nfos_and_save_file_paths(username_input, movie_dir_input, tv_d
         csv_writer = csv.writer(f)
         for tv_row in sorted(tv_show_file_results):
             csv_writer.writerow(tv_row)
-
-
-search_folder_nfos_and_save_file_paths(username_input='bx',
-                                       movie_dir_input=r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-movies"
-                                                       r"/MOVIES",
-                                       tv_dir_input=r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv/TV",
-                                       movie_alt_dir_input='',
-                                       tv_alt_dir_input=r"/run/user/1000/gvfs/smb-share:server=10.0.0.3,share=bx-tv-2"
-                                                        r"/TV-2")
