@@ -16,14 +16,37 @@ def movie_index_results(username_input):
             if nfo_file.lower() in nfo_files.lower():
                 movie_nfo_files_results.append(nfo_files)
 
-    if int(len(movie_nfo_files_results)) == 0:
+    if int(len(movie_nfo_files_results)) == 1:
+        with open(movie_nfo_files_results[0]) as f:
+            for line in f.readlines():
+                if '<plot>' in line:
+                    movie_nfo_result.append(line.split('.'))
+        print("------------------------------------------------------------------------------------------------------"
+              "------------------------------------------------------------------------------------------------------")
+        for line in movie_nfo_result[0]:
+            print(line + '.')
+        print()
+        print("------------------------------------------------------------------------------------------------------"
+              "------------------------------------------------------------------------------------------------------")
+        print()
+
+    elif int(len(movie_nfo_files_results)) == 0:
         print("NO MATCHES")
         print()
         print("--------------------------------------------------------------------------------------------------")
         print()
-        exit()
+        print("SEARCH AGAIN?   -   1) YES - 2) NO ")
+        print()
+        sa_input = int(input(':'))
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        print()
+        if int(sa_input) == 1:
+            movie_index_results(username_input)
+        else:
+            pass
 
-    if int(len(movie_nfo_files_results)) > 1:
+    elif int(len(movie_nfo_files_results)) > 1:
         for line in movie_nfo_files_results:
             print(line)
             print()
@@ -32,21 +55,4 @@ def movie_index_results(username_input):
         print("REFINE SEARCH WITH ABOVE RESULTS: SINGLE MATCH NEEDED TO PROCEED")
         print()
         print("--------------------------------------------------------------------------------------------------")
-        print()
         movie_index_results(username_input)
-    else:
-        with open(movie_nfo_files_results[0]) as f:
-            for line in f.readlines():
-                if '<plot>' in line:
-                    movie_nfo_result.append(line.split('.'))
-    print("-----------------------------------------------------------------------------------------------------------"
-          "-----------------------------------------------------------------------------------------------------------")
-    for line in movie_nfo_result[0]:
-        print(line + '.')
-    print()
-    print("-----------------------------------------------------------------------------------------------------------"
-          "-----------------------------------------------------------------------------------------------------------")
-    print()
-
-
-movie_index_results(username_input='bx')
