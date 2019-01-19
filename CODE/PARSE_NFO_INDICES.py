@@ -29,15 +29,25 @@ def movie_index_results(username_input):
         print("------------------------------------------------------------------------------------------------------"
               "------------------------------------------------------------------------------------------------------")
         print()
+        print("SEARCH AGAIN?   -   1) YES - 2) NO")
+        print()
+        sa_input = int(input('ENTER #:'))
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        print()
+        if int(sa_input) == 1:
+            movie_index_results(username_input)
+        else:
+            pass
 
     elif int(len(movie_nfo_files_results)) == 0:
         print("NO MATCHES")
         print()
         print("--------------------------------------------------------------------------------------------------")
         print()
-        print("SEARCH AGAIN?   -   1) YES - 2) NO ")
+        print("SEARCH AGAIN?   -   1) YES - 2) NO")
         print()
-        sa_input = int(input(':'))
+        sa_input = int(input('ENTER #:'))
         print()
         print("--------------------------------------------------------------------------------------------------")
         print()
