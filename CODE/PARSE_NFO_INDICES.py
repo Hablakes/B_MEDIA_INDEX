@@ -3,7 +3,7 @@ import csv
 
 def movie_nfo_search_plot_results(username_input):
     movie_nfos = csv.reader(
-        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-NFO-FILES-INDEX.csv'))
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-NFO-INDEX.csv'))
     movie_nfo_files_results = []
     movie_nfo_result = []
 
