@@ -42,10 +42,10 @@ def movie_index_all_results(username_input):
             with open(movie_file[0]) as f:
                 for line in f.readlines():
                     if '<plot>' in line:
-                        movie_index_file_results[title_key].append([line.split('.')])
+                        movie_index_file_results[title_key].insert(1, [line.split('.')])
 
         elif movie_file[0].endswith(srt_extensions):
-            movie_index_file_results[title_key].append(["SRT AVAILABLE"])
+            movie_index_file_results[title_key].insert(2, ["SRT AVAILABLE"])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv', "w",
               newline="") as f:
@@ -83,14 +83,14 @@ def tv_index_all_results(username_input):
                          title.get('episode'), title.get('year'), str(track.width) + 'x' + str(track.height),
                          title.get('container')])
 
-        elif tv_file[0].endswith(srt_extensions):
-            tv_index_file_results[title_key].append(["SRT AVAILABLE"])
-
         elif tv_file[0].endswith(nfo_extensions):
             with open(tv_file[0]) as f:
                 for line in f.readlines():
                     if '<plot>' in line:
-                        tv_index_file_results[title_key].append([line.split('.')])
+                        tv_index_file_results[title_key].insert(1, [line.split('.')])
+
+        elif tv_file[0].endswith(srt_extensions):
+            tv_index_file_results[title_key].insert(2, ["SRT AVAILABLE"])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv', "w",
               newline="") as f:
@@ -99,5 +99,5 @@ def tv_index_all_results(username_input):
             csv_writer.writerow(tv_row)
 
 
-#movie_index_all_results(username_input='bx')
-tv_index_all_results(username_input='bx')
+movie_index_all_results(username_input='bx')
+#tv_index_all_results(username_input='bx')
