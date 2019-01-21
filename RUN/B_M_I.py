@@ -143,7 +143,7 @@ def run_query():
     elif title_search_type_lower == 2:
         tv_title_search(username_input)
     elif title_search_type_lower == 3:
-        pass
+        movie_nfo_search_plot_results(username_input)
     elif title_search_type_lower == 4:
         pass
     elif title_search_type_lower == 5:
@@ -195,6 +195,74 @@ def tv_title_search(username_input):
     print("--------------------------------------------------------------------------------------------------")
     print()
 
+
+def movie_nfo_search_plot_results(username_input):
+    movie_nfos = csv.reader(
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-NFO-INDEX.csv'))
+    movie_nfo_files_results = []
+    movie_nfo_result = []
+
+    print("SEARCH FOR MOVIE PLOT DESCRIPTION:")
+    print()
+    nfo_file = input("ENTER TITLE:")
+    print()
+
+    for nfo_files_index in movie_nfos:
+        for nfo_files in nfo_files_index:
+            if nfo_file.lower() in nfo_files.lower():
+                movie_nfo_files_results.append(nfo_files)
+
+    if int(len(movie_nfo_files_results)) == 1:
+        with open(movie_nfo_files_results[0]) as f:
+            for line in f.readlines():
+                if '<plot>' in line:
+                    movie_nfo_result.append(line.split('.'))
+        print("------------------------------------------------------------------------------------------------------"
+              "------------------------------------------------------------------------------------------------------")
+        print()
+        for line in movie_nfo_result[0]:
+            print(line + '.')
+        print()
+        print("------------------------------------------------------------------------------------------------------"
+              "------------------------------------------------------------------------------------------------------")
+        print()
+        print("SEARCH AGAIN?   -   1) YES - 2) NO")
+        print()
+        sa_input = int(input('ENTER #'))
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        print()
+        if int(sa_input) == 1:
+            movie_nfo_search_plot_results(username_input)
+        else:
+            pass
+
+    elif int(len(movie_nfo_files_results)) == 0:
+        print("NO MATCHES")
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        print()
+        print("SEARCH AGAIN?   -   1) YES - 2) NO")
+        print()
+        sa_input = int(input('ENTER #'))
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        print()
+        if int(sa_input) == 1:
+            movie_nfo_search_plot_results(username_input)
+        else:
+            pass
+
+    elif int(len(movie_nfo_files_results)) > 1:
+        for line in movie_nfo_files_results:
+            print(line)
+            print()
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+        print("REFINE SEARCH WITH ABOVE RESULTS: SINGLE MATCH NEEDED TO PROCEED")
+        print()
+        print("--------------------------------------------------------------------------------------------------")
+        movie_nfo_search_plot_results(username_input)
 
 
 def run_sort():
@@ -1781,3 +1849,9 @@ def compare_results(results_u, results_a):
             output.append('DO NOT HAVE: ' + line)
 
     return output
+
+
+first_launch_dirs()
+
+while True:
+    launch_media_index()
