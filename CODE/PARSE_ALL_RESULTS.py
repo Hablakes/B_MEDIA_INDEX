@@ -39,19 +39,20 @@ def movie_index_all_results(username_input):
             with open(movie_file[0]) as f:
                 for line in f.readlines():
                     if '<plot>' in line:
-                        movie_nfo_results.append([movie_file[0].rsplit('/')[-2], line.split('.')])
+                        movie_nfo_results.append([movie_file[0].rsplit('/')[-2], '', '', '', '', '', '', '', '', '',
+                                                  line.split('.')])
 
         elif movie_file[0].endswith(srt_extensions):
-            movie_srt_results.append([movie_file[0].rsplit('/')[-2], "SRT AVAILABLE"])
+            movie_srt_results.append([movie_file[0].rsplit('/')[-2], '', '', '', '', '', '', '', '', "SRT AVAILABLE"])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv', "w",
               newline="") as f:
         csv_writer = csv.writer(f)
-        for movie_row in sorted(movie_index_file_results):
+        for movie_row in movie_index_file_results:
             csv_writer.writerow(movie_row)
-        for movie_row in sorted(movie_nfo_results):
+        for movie_row in movie_nfo_results:
             csv_writer.writerow(movie_row)
-        for movie_row in sorted(movie_srt_results):
+        for movie_row in movie_srt_results:
             csv_writer.writerow(movie_row)
 
 
@@ -85,10 +86,11 @@ def tv_index_all_results(username_input):
             with open(tv_file[0]) as f:
                 for line in f.readlines():
                     if '<plot>' in line:
-                        tv_nfo_results.append([tv_file[0].rsplit('/')[-2], line.split('.')])
+                        tv_nfo_results.append([tv_file[0].rsplit('/')[-2], '', '', '', '', '', '', '', '', '',
+                                                  line.split('.')])
 
         elif tv_file[0].endswith(srt_extensions):
-            tv_srt_results.append([tv_file[0].rsplit('/')[-2], "SRT AVAILABLE"])
+            tv_srt_results.append([tv_file[0].rsplit('/')[-2], '', '', '', '', '', '', '', '', "SRT AVAILABLE"])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv', "w",
               newline="") as f:
@@ -102,4 +104,4 @@ def tv_index_all_results(username_input):
 
 
 movie_index_all_results(username_input='bx')
-tv_index_all_results(username_input='bx')
+#tv_index_all_results(username_input='bx')
