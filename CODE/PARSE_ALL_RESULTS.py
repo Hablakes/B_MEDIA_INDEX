@@ -22,7 +22,7 @@ def movie_index_all_results(username_input):
 
         title_key = movie_file[0].rsplit('/')[-2]
 
-        if movie_file[0].endswith(extensions):
+        if movie_file[0].lower().endswith(extensions):
 
             title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
 
@@ -38,7 +38,9 @@ def movie_index_all_results(username_input):
                         [title.get('title'), title.get('year'), str(track.width) + 'x' + str(track.height),
                          title.get('container')])
 
-        elif movie_file[0].endswith(nfo_extensions):
+        elif movie_file[0].lower().endswith(nfo_extensions):
+            if title_key not in movie_index_file_results:
+                movie_index_file_results[title_key] = []
             with open(movie_file[0]) as f:
                 for line in f.readlines():
                     if '<plot>' in line:
@@ -61,7 +63,7 @@ def tv_index_all_results(username_input):
 
         title_key = tv_file[0].rsplit('/')[-2]
 
-        if tv_file[0].endswith(extensions):
+        if tv_file[0].lower().endswith(extensions):
 
             title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
 
@@ -80,7 +82,9 @@ def tv_index_all_results(username_input):
                          title.get('episode'), title.get('year'), str(track.width) + 'x' + str(track.height),
                          title.get('container')])
 
-        elif tv_file[0].endswith(nfo_extensions):
+        elif tv_file[0].lower().endswith(nfo_extensions):
+            if title_key not in tv_index_file_results:
+                tv_index_file_results[title_key] = []
             with open(tv_file[0]) as f:
                 for line in f.readlines():
                     if '<plot>' in line:
