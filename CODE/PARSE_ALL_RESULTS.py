@@ -34,7 +34,7 @@ def movie_index_all_results(username_input):
 
                     if title_key not in movie_index_file_results:
                         movie_index_file_results[title_key] = []
-                    movie_index_file_results[title_key].append(
+                    movie_index_file_results[str(title_key)].append(
                         [title.get('title'), title.get('year'), str(track.width) + 'x' + str(track.height),
                          title.get('container')])
 
@@ -42,10 +42,7 @@ def movie_index_all_results(username_input):
             with open(movie_file[0]) as f:
                 for line in f.readlines():
                     if '<plot>' in line:
-                        movie_index_file_results[title_key].insert(1, [line.split('.')])
-
-        elif movie_file[0].endswith(srt_extensions):
-            movie_index_file_results[title_key].insert(2, ["SRT AVAILABLE"])
+                        movie_index_file_results[str(title_key)].insert(1, [line.split('.')])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv', "w",
               newline="") as f:
@@ -88,9 +85,6 @@ def tv_index_all_results(username_input):
                 for line in f.readlines():
                     if '<plot>' in line:
                         tv_index_file_results[title_key].insert(1, [line.split('.')])
-
-        elif tv_file[0].endswith(srt_extensions):
-            tv_index_file_results[title_key].insert(2, ["SRT AVAILABLE"])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv', "w",
               newline="") as f:

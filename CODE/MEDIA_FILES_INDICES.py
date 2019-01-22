@@ -23,26 +23,26 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
     m_srt_file_results = []
     for root, dirs, files in os.walk(movie_dir_input):
         for movie_file in sorted(files):
-            if movie_file.endswith(all_extens):
+            if movie_file.lower().endswith(all_extens):
                 movie_all_results.append([root + '/' + movie_file])
-            if movie_file.endswith(extensions):
+            if movie_file.lower().endswith(extensions):
                 movie_file_results.append([root + '/' + movie_file])
-            if movie_file.endswith(nfo_extensions):
+            if movie_file.lower().endswith(nfo_extensions.lower()):
                 m_nfo_file_results.append([root + '/' + movie_file])
-            if movie_file.endswith(srt_extensions):
+            if movie_file.lower().endswith(srt_extensions.lower()):
                 m_srt_file_results.append([root + '/' + movie_file])
 
     if movie_alt_dir_input is not str(''):
 
         for root, dirs, files in os.walk(movie_alt_dir_input):
             for alt_file in sorted(files):
-                if alt_file.endswith(all_extens):
+                if alt_file.lower().endswith(all_extens):
                     movie_all_results.append([root + '/' + alt_file])
-                if alt_file.endswith(extensions):
+                if alt_file.lower().endswith(extensions):
                     movie_file_results.append([root + '/' + alt_file])
-                if alt_file.endswith(nfo_extensions):
+                if alt_file.lower().endswith(nfo_extensions):
                     m_nfo_file_results.append([root + '/' + alt_file])
-                if alt_file.endswith(srt_extensions):
+                if alt_file.lower().endswith(srt_extensions):
                     m_srt_file_results.append([root + '/' + alt_file])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-INDEX.csv', "w",
@@ -75,26 +75,26 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
     t_srt_file_results = []
     for root, dirs, files in os.walk(tv_dir_input):
         for tv_file in sorted(files):
-            if tv_file.endswith(all_extens):
+            if tv_file.lower().endswith(all_extens):
                 tv_show_all_results.append([root + '/' + tv_file])
-            if tv_file.endswith(extensions):
+            if tv_file.lower().endswith(extensions):
                 tv_show_file_results.append([root + '/' + tv_file])
-            if tv_file.endswith(nfo_extensions):
+            if tv_file.lower().endswith(nfo_extensions):
                 t_nfo_file_results.append([root + '/' + tv_file])
-            if tv_file.endswith(srt_extensions):
+            if tv_file.lower().endswith(srt_extensions):
                 t_srt_file_results.append([root + '/' + tv_file])
 
     if tv_alt_dir_input is not str(''):
 
         for root, dirs, files in os.walk(tv_alt_dir_input):
             for alt_file in sorted(files):
-                if alt_file.endswith(all_extens):
+                if alt_file.lower().endswith(all_extens):
                     tv_show_all_results.append([root + '/' + alt_file])
-                if alt_file.endswith(extensions):
+                if alt_file.lower().endswith(extensions):
                     tv_show_file_results.append([root + '/' + alt_file])
-                if alt_file.endswith(nfo_extensions):
+                if alt_file.lower().endswith(nfo_extensions):
                     t_nfo_file_results.append([root + '/' + alt_file])
-                if alt_file.endswith(srt_extensions):
+                if alt_file.lower().endswith(srt_extensions):
                     t_srt_file_results.append([root + '/' + alt_file])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-INDEX.csv', "w",
