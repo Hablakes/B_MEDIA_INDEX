@@ -87,9 +87,8 @@ def tv_index_all_results(username_input):
                     tv_index_file_results[title_key]["EPISODE NUMBER"] = title.get('episode')
                     tv_index_file_results[title_key]["RESOLUTION"] = str(track.width) + 'x' + str(track.height)
                     tv_index_file_results[title_key]["FILE TYPE"] = title.get('container')
-                    tv_index_file_results[title_key]["PLOT"] = []
 
-        if tv_file[0].lower().endswith(nfo_extensions) and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
+        elif tv_file[0].lower().endswith(nfo_extensions) and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
 
             if title_key not in tv_index_file_results:
                 tv_index_file_results[title_key] = {}
@@ -100,12 +99,17 @@ def tv_index_all_results(username_input):
                         tv_index_file_results[title_key].update({"PLOT": line})
 
         for items in tv_index_file_results.items():
-            tv_file_results.append(items)
+            print(items)
 
-    for stuff in tv_file_results:
-        print(stuff)
+
+movie_index_all_results(username_input='bx')
+#tv_index_all_results(username_input='bx')
+
 
 """
+        for items in tv_index_file_results.items():
+            tv_file_results.append(items)
+
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv', "w",
               newline="") as f:
         csv_writer = csv.writer(f, ["DIRECTORY", "TITLE", "YEAR", "EPISODE TITLE", "SEASON", "EPISODE NUMBER",
@@ -113,7 +117,3 @@ def tv_index_all_results(username_input):
         for tv_row in tv_file_results:
             csv_writer.writerow(tv_row)
 """
-
-
-# movie_index_all_results(username_input='bx')
-tv_index_all_results(username_input='bx')
