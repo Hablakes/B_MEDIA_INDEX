@@ -29,6 +29,8 @@ hd_sd_res_standard = re.split("(\((?P<HD_SD_Res>[A-Z]D)\))?", movie_data)
 hd_sd_res_standard_as = re.split("(\s\((?P<HD_SD_Res_A_S>[A-Z]D)\))?", movie_data)
 parts = re.split("(\s(?P<Parts>Part\s\d{1,2}))?", movie_data)
 file_type = re.split("((?<=\.)(?P<FileType>[\w]{3,}))", movie_data)
+
+plot = <plot>(.*?), \\'</plot>
 ______________________________________________________________________________________________________________________
 
 YEAR - #\s[0-9][0-9][0-9][0-9]
