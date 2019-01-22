@@ -61,11 +61,13 @@ def tv_index_all_results(username_input):
 
     for tv_file in sorted(tv_index):
 
-        title_key = tv_file[0].rsplit('/')[-2]
+        title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
+
+        folder_title = tv_file[0].rsplit('/')[-2]
 
         tv_index_file_results = {}
 
-        if tv_file[0].lower().endswith(extensions):
+        if tv_file[0].lower().endswith(extensions) and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
 
             if title_key not in tv_index_file_results:
                 tv_index_file_results[title_key] = {}
@@ -77,7 +79,7 @@ def tv_index_all_results(username_input):
             for track in test.tracks:
 
                 if track.track_type == 'Video':
-                    tv_index_file_results[title_key]["DIRECTORY"] = title_key
+                    tv_index_file_results[title_key]["DIRECTORY"] = folder_title
                     tv_index_file_results[title_key]["TITLE"] = title.get('title')
                     tv_index_file_results[title_key]["YEAR"] = title.get('year')
                     tv_index_file_results[title_key]["EPISODE TITLE"] = title.get('episode_title')
@@ -85,24 +87,32 @@ def tv_index_all_results(username_input):
                     tv_index_file_results[title_key]["EPISODE NUMBER"] = title.get('episode')
                     tv_index_file_results[title_key]["RESOLUTION"] = str(track.width) + 'x' + str(track.height)
                     tv_index_file_results[title_key]["FILE TYPE"] = title.get('container')
+                    tv_index_file_results[title_key]["PLOT"] = []
 
-        if tv_file[0].lower().endswith(nfo_extensions) and tv_file[0].rsplit('/', 1)[-1].lower() != "tvshow.nfo":
+        if tv_file[0].lower().endswith(nfo_extensions) and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
+
             if title_key not in tv_index_file_results:
                 tv_index_file_results[title_key] = {}
+
             with open(tv_file[0]) as f:
                 for line in f.readlines():
                     if '<plot>' in line:
-                        tv_index_file_results[title_key]["PLOT"] = line
+                        tv_index_file_results[title_key].update({"PLOT": line})
 
         for items in tv_index_file_results.items():
             tv_file_results.append(items)
 
+    for stuff in tv_file_results:
+        print(stuff)
+
+"""
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv', "w",
               newline="") as f:
         csv_writer = csv.writer(f, ["DIRECTORY", "TITLE", "YEAR", "EPISODE TITLE", "SEASON", "EPISODE NUMBER",
                                     "RESOLUTION", "FILE TYPE", "PLOT"])
         for tv_row in tv_file_results:
             csv_writer.writerow(tv_row)
+"""
 
 
 # movie_index_all_results(username_input='bx')
