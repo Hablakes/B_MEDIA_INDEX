@@ -23,12 +23,22 @@ PYTHON 3 - PIP DEPENDENCIES:
 
 B-MEDIA-INDEX USAGE(S):
 -------------------------------------------------------------------------------------------------
-1) /RUN/B_MEDIA_INDEX.py
-2) Enter username
+
+* IF FIRST TIME RUNNING
+
+1) /RUN/B_M_I.py
+2) Enter Username
 3) Enter Directories for Movies and TV Show Library's
-4) Enter any alternate directories for Movies and TV Shows
-5) Allow the program to create a new index from the folders
-6) You should now be at the main screen of the program, hit option #6 (INDEXING)
-7) Hit option #5 (CREATE ALL NEW INDICES) ** THIS WILL TAKE AWHILE IF YOU HAVE A LARGE LIBRARY **
+4) Enter any alternate Directories for Movies and TV Shows
+5) Allow the Program to create a new Folders Index (Quick)
+6) MAIN SCREEN, Option #6 - INDEXING
+7) Option #5 - CREATE ALL NEW INDICES (** THIS WILL TAKE AWHILE IF YOU HAVE A LARGE LIBRARY **)
 8) When step 7 is complete, you will have full functionality for the MEDIA-INDEX.
+
+* IF NOT FIRST TIME RUNNING
+
+1) /RUN/B_M_I.py
+2) Enter Username
+3) MAIN SCREEN
+
 -------------------------------------------------------------------------------------------------
