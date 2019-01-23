@@ -266,7 +266,7 @@ def sort_function_base(username_input, sort_options_int):
 
 def total_tv_episodes_sort_function_base(username_input, sort_options_int):
     tv_results_list = list(
-        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv')))
     tv_amounts = []
     tv_show_episodes_found = []
     tv_show_found = {}
@@ -699,9 +699,9 @@ def bar_graph_options_base(username_input, picture_graph_options_int):
 
 def pie_chart_options_base(username_input, picture_graph_options_int):
     movie_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv')))
     tv_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv')))
 
     m_ten_eighty_found_list = []
     m_seven_twenty_found_list = []
@@ -791,7 +791,7 @@ def pie_chart_options_base(username_input, picture_graph_options_int):
 def search_file_type_totals_movies(username_input, b_totals_query_input_int, picture_graph_options_int,
                                    terminal_graph_options_int):
     movie_file_index = list(
-        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv')))
     extensions_dict = {}
     extensions_totals = {}
 
@@ -822,7 +822,7 @@ def search_file_type_totals_movies(username_input, b_totals_query_input_int, pic
         x, y = zip(*sorted(movie_file_type_totals.items()))
         plt.bar(x, y)
         plt.savefig(
-            r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/FILES/MOVIE-FILETYPE-RESULTS.png')
+            r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/FILES/MOVIE-FILE-TYPE-RESULTS.png')
         plt.show()
 
     if terminal_graph_options_int == 7:
@@ -846,7 +846,7 @@ def search_file_type_totals_movies(username_input, b_totals_query_input_int, pic
 def search_file_type_totals_tv(username_input, b_totals_query_input_int, picture_graph_options_int,
                                terminal_graph_options_int):
     tv_file_index = list(
-        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv')))
     extensions_dict = {}
     extensions_totals = {}
 
@@ -876,7 +876,7 @@ def search_file_type_totals_tv(username_input, b_totals_query_input_int, picture
 
         x, y = zip(*sorted(tv_file_type_totals.items()))
         plt.bar(x, y)
-        plt.savefig(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/FILES/TV-FILETYPE-RESULTS.png')
+        plt.savefig(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/FILES/TV-FILE-TYPE-RESULTS.png')
         plt.show()
 
     if terminal_graph_options_int == 8:
@@ -1049,9 +1049,9 @@ def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
 
 def terminal_graph_options_base_1(username_input, terminal_graph_options_int):
     movie_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv')))
     tv_files_results_list = list(
-        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv')))
 
     m_ten_eighty_found_list = []
     m_seven_twenty_found_list = []
@@ -1257,7 +1257,7 @@ def library_total_amount(username_input):
 
 def total_tv_episodes_in_show_title(username_input):
     tv_results_list = list(
-        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv')))
+        csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv')))
     tv_amounts = []
     tv_show_episodes_found = []
     tv_show_found = {}
