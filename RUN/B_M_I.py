@@ -11,10 +11,11 @@ import numpy as np
 
 from ascii_graph import Pyasciigraph
 
-all_extens = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
-              ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
-              ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm", ".rmvb",
-              ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm", ".nfo", ".srt")
+all_extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
+                  ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
+                  ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm",
+                  ".rmvb", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm", ".nfo",
+                  ".srt")
 
 extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
               ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
@@ -75,6 +76,10 @@ def first_launch_dirs():
 
         with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MEDIA-INDEX.csv', 'w'):
             pass
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-INDEX.csv', 'w'):
+            pass
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-INDEX.csv', 'w'):
+            pass
         with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'w'):
             pass
         with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', 'w'):
@@ -83,9 +88,13 @@ def first_launch_dirs():
             pass
         with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-NFO-FILES-INDEX.csv'):
             pass
-        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', 'w'):
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-SRT-INDEX.csv', 'w'):
             pass
-        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv', 'w'):
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-SRT-INDEX.csv', 'w'):
+            pass
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv', 'w'):
+            pass
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv', 'w'):
             pass
 
 
@@ -128,9 +137,7 @@ def run_query():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("SEARCH TITLES         -   1) MOVIES - 2) TV SHOW SERIES")
-    print()
-    print("SEARCH FOR PLOTS OF   -   3) MOVIES - 4) TV SHOW SERIES & EPISODES                   - 5) EXIT")
+    print("SEARCH TITLES OF   -   1) MOVIES - 2) TV SHOWS SERIES                                - 5) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -144,10 +151,6 @@ def run_query():
     elif title_search_type_lower == 2:
         tv_title_search(username_input)
     elif title_search_type_lower == 3:
-        movie_nfo_search_plot_results(username_input)
-    elif title_search_type_lower == 4:
-        pass
-    elif title_search_type_lower == 5:
         launch_media_index()
 
 
@@ -195,75 +198,6 @@ def tv_title_search(username_input):
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-
-
-def movie_nfo_search_plot_results(username_input):
-    movie_nfos = csv.reader(
-        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-NFO-INDEX.csv'))
-    movie_nfo_files_results = []
-    movie_nfo_result = []
-
-    print("SEARCH FOR MOVIE PLOT DESCRIPTION:")
-    print()
-    nfo_file = input("ENTER TITLE:")
-    print()
-
-    for nfo_files_index in movie_nfos:
-        for nfo_files in nfo_files_index:
-            if nfo_file.lower() in nfo_files.lower():
-                movie_nfo_files_results.append(nfo_files)
-
-    if int(len(movie_nfo_files_results)) == 1:
-        with open(movie_nfo_files_results[0]) as f:
-            for line in f.readlines():
-                if '<plot>' in line:
-                    movie_nfo_result.append(line.split('.'))
-        print("------------------------------------------------------------------------------------------------------"
-              "------------------------------------------------------------------------------------------------------")
-        print()
-        for line in movie_nfo_result[0]:
-            print(line + '.')
-        print()
-        print("------------------------------------------------------------------------------------------------------"
-              "------------------------------------------------------------------------------------------------------")
-        print()
-        print("SEARCH AGAIN?   -   1) YES - 2) NO")
-        print()
-        sa_input = int(input('ENTER #'))
-        print()
-        print("--------------------------------------------------------------------------------------------------")
-        print()
-        if int(sa_input) == 1:
-            movie_nfo_search_plot_results(username_input)
-        else:
-            pass
-
-    elif int(len(movie_nfo_files_results)) == 0:
-        print("NO MATCHES")
-        print()
-        print("--------------------------------------------------------------------------------------------------")
-        print()
-        print("SEARCH AGAIN?   -   1) YES - 2) NO")
-        print()
-        sa_input = int(input('ENTER #'))
-        print()
-        print("--------------------------------------------------------------------------------------------------")
-        print()
-        if int(sa_input) == 1:
-            movie_nfo_search_plot_results(username_input)
-        else:
-            pass
-
-    elif int(len(movie_nfo_files_results)) > 1:
-        for line in movie_nfo_files_results:
-            print(line)
-            print()
-            print("--------------------------------------------------------------------------------------------------")
-            print()
-        print("REFINE SEARCH WITH ABOVE RESULTS: SINGLE MATCH NEEDED TO PROCEED")
-        print()
-        print("--------------------------------------------------------------------------------------------------")
-        movie_nfo_search_plot_results(username_input)
 
 
 def run_sort():
@@ -1590,26 +1524,26 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
     m_srt_file_results = []
     for root, dirs, files in os.walk(movie_dir_input):
         for movie_file in sorted(files):
-            if movie_file.endswith(all_extens):
+            if movie_file.lower().endswith(all_extensions):
                 movie_all_results.append([root + '/' + movie_file])
-            if movie_file.endswith(extensions):
+            if movie_file.lower().endswith(extensions):
                 movie_file_results.append([root + '/' + movie_file])
-            if movie_file.endswith(nfo_extensions):
+            if movie_file.lower().endswith(nfo_extensions.lower()):
                 m_nfo_file_results.append([root + '/' + movie_file])
-            if movie_file.endswith(srt_extensions):
+            if movie_file.lower().endswith(srt_extensions.lower()):
                 m_srt_file_results.append([root + '/' + movie_file])
 
     if movie_alt_dir_input is not str(''):
 
         for root, dirs, files in os.walk(movie_alt_dir_input):
             for alt_file in sorted(files):
-                if alt_file.endswith(all_extens):
+                if alt_file.lower().endswith(all_extensions):
                     movie_all_results.append([root + '/' + alt_file])
-                if alt_file.endswith(extensions):
+                if alt_file.lower().endswith(extensions):
                     movie_file_results.append([root + '/' + alt_file])
-                if alt_file.endswith(nfo_extensions):
+                if alt_file.lower().endswith(nfo_extensions):
                     m_nfo_file_results.append([root + '/' + alt_file])
-                if alt_file.endswith(srt_extensions):
+                if alt_file.lower().endswith(srt_extensions):
                     m_srt_file_results.append([root + '/' + alt_file])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-INDEX.csv', "w",
@@ -1642,26 +1576,26 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
     t_srt_file_results = []
     for root, dirs, files in os.walk(tv_dir_input):
         for tv_file in sorted(files):
-            if tv_file.endswith(all_extens):
+            if tv_file.lower().endswith(all_extensions):
                 tv_show_all_results.append([root + '/' + tv_file])
-            if tv_file.endswith(extensions):
+            if tv_file.lower().endswith(extensions):
                 tv_show_file_results.append([root + '/' + tv_file])
-            if tv_file.endswith(nfo_extensions):
+            if tv_file.lower().endswith(nfo_extensions):
                 t_nfo_file_results.append([root + '/' + tv_file])
-            if tv_file.endswith(srt_extensions):
+            if tv_file.lower().endswith(srt_extensions):
                 t_srt_file_results.append([root + '/' + tv_file])
 
     if tv_alt_dir_input is not str(''):
 
         for root, dirs, files in os.walk(tv_alt_dir_input):
             for alt_file in sorted(files):
-                if alt_file.endswith(all_extens):
+                if alt_file.lower().endswith(all_extensions):
                     tv_show_all_results.append([root + '/' + alt_file])
-                if alt_file.endswith(extensions):
+                if alt_file.lower().endswith(extensions):
                     tv_show_file_results.append([root + '/' + alt_file])
-                if alt_file.endswith(nfo_extensions):
+                if alt_file.lower().endswith(nfo_extensions):
                     t_nfo_file_results.append([root + '/' + alt_file])
-                if alt_file.endswith(srt_extensions):
+                if alt_file.lower().endswith(srt_extensions):
                     t_srt_file_results.append([root + '/' + alt_file])
 
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-INDEX.csv', "w",
@@ -1689,142 +1623,227 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
             csv_writer.writerow(tv_row)
 
 
-def movie_index_results(username_input):
+def movie_index_all_results(username_input):
     movie_index = csv.reader(
-        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv'))
-    movie_index_file_results = []
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-INDEX.csv'))
 
-    for movie_file in movie_index:
+    movie_index_file_results = {}
 
-        title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
+    for movie_file in sorted(movie_index):
 
-        title_and_year = (movie_file[0].rsplit('/')[-2])
+        title_key = movie_file[0].rsplit('/')[-2]
 
-        mv_year = (title_and_year[-5:-1])
+        if title_key not in movie_index_file_results:
+            movie_index_file_results[title_key] = {}
 
-        mv_title = (title_and_year[0:-7])
+        if movie_file[0].lower().endswith(extensions):
 
-        test = pymediainfo.MediaInfo.parse(movie_file[0])
+            title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
 
-        for track in test.tracks:
+            test = pymediainfo.MediaInfo.parse(movie_file[0])
 
-            if track.track_type == 'Video':
-                movie_index_file_results.append(
-                    [title.get('title'), title.get('year'), str(track.width) + 'x' + str(track.height),
-                     title.get('container')])
+            for track in test.tracks:
 
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "w",
+                if track.track_type == 'Video':
+                    movie_index_file_results[title_key]["DIRECTORY"] = title_key
+                    movie_index_file_results[title_key]["TITLE"] = title.get('title')
+                    movie_index_file_results[title_key]["YEAR"] = title.get('year')
+                    movie_index_file_results[title_key]["RESOLUTION"] = str(track.width) + 'x' + str(track.height)
+                    movie_index_file_results[title_key]["FILE-TYPE"] = title.get('container')
+
+        elif movie_file[0].lower().endswith(nfo_extensions):
+            with open(movie_file[0]) as f:
+                for line in f.readlines():
+                    if '<plot>' in line:
+                        movie_index_file_results[title_key]["PLOT"] = line
+
+                    if '<rating>' in line:
+                        movie_index_file_results[title_key]["RATING"] = line
+
+                    if '<runtime>' in line:
+                        movie_index_file_results[title_key]["RUN-TIME"] = line
+
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv', "w",
               newline="") as f:
-        csv_writer = csv.writer(f)
-        for movie_row in movie_index_file_results:
+        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "RESOLUTION", "FILE-TYPE", "PLOT", "RATING",
+                                        "RUN-TIME"])
+        for movie_row in movie_index_file_results.values():
             csv_writer.writerow(movie_row)
 
 
-def tv_show_index_results(username_input):
-    tv_index = csv.reader(open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv'))
-    tv_index_file_results = []
+def tv_index_all_results(username_input):
+    tv_index = csv.reader(
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-INDEX.csv'))
 
-    for tv_file in tv_index:
+    tv_index_file_results = {}
 
-        title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
+    for tv_file in sorted(tv_index):
 
-        title_and_year = (tv_file[0].rsplit('/')[-2])
+        title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
 
-        tv_year = (title_and_year[-5:-1])
+        folder_title = tv_file[0].rsplit('/')[-2]
 
-        tv_title = (title_and_year[0:-7])
+        if tv_file[0].lower().endswith(extensions) and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
 
-        test = pymediainfo.MediaInfo.parse(tv_file[0])
+            if title_key not in tv_index_file_results:
+                tv_index_file_results[title_key] = {}
 
-        for track in test.tracks:
+            title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
 
-            if track.track_type == 'Video':
-                tv_index_file_results.append(
-                    [title_and_year, title.get('title'), title.get('episode_title'), title.get('season'),
-                     title.get('episode'), title.get('year'), str(track.width) + 'x' + str(track.height),
-                     title.get('container')])
+            test = pymediainfo.MediaInfo.parse(tv_file[0])
 
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv', "w",
+            for track in test.tracks:
+
+                if track.track_type == 'Video':
+                    tv_index_file_results[title_key]["DIRECTORY"] = folder_title
+                    tv_index_file_results[title_key]["TITLE"] = title.get('title')
+                    tv_index_file_results[title_key]["YEAR"] = title.get('year')
+                    tv_index_file_results[title_key]["EPISODE TITLE"] = title.get('episode_title')
+                    tv_index_file_results[title_key]["SEASON"] = title.get('season')
+                    tv_index_file_results[title_key]["EPISODE NUMBER"] = title.get('episode')
+                    tv_index_file_results[title_key]["RESOLUTION"] = str(track.width) + 'x' + str(track.height)
+                    tv_index_file_results[title_key]["FILE-TYPE"] = title.get('container')
+
+        elif tv_file[0].lower().endswith(nfo_extensions) and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
+
+            if title_key not in tv_index_file_results:
+                tv_index_file_results[title_key] = {}
+
+            with open(tv_file[0]) as f:
+                for line in f.readlines():
+                    if '<plot>' in line:
+                        tv_index_file_results[title_key].update({"PLOT": line})
+
+                    if '<rating>' in line:
+                        tv_index_file_results[title_key].update({"RATING": line})
+
+                    if '<runtime>' in line:
+                        tv_index_file_results[title_key].update({"RUN-TIME": line})
+
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv', "w",
               newline="") as f:
-        csv_writer = csv.writer(f)
-        for tv_row in tv_index_file_results:
+        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "EPISODE TITLE", "SEASON", "EPISODE NUMBER",
+                                        "RESOLUTION", "FILE-TYPE", "PLOT", "RATING", "RUN-TIME"])
+        for tv_row in tv_index_file_results.values():
             csv_writer.writerow(tv_row)
 
 
 def create_media_files_index_results_csv(username_input):
-    movie_index_results(username_input)
-    tv_show_index_results(username_input)
+    movie_index_all_results(username_input)
+    tv_index_all_results(username_input)
 
 
 def movie_index_update_results(username_input):
     movie_index = csv.reader(
-        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-MOVIE-FILES-INDEX.csv'))
-    movie_index_file_results = []
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-MOVIE-INDEX.csv'))
 
-    for movie_file in movie_index:
+    movie_index_file_results = {}
 
-        title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
+    for movie_file in sorted(movie_index):
 
-        title_and_year = (movie_file[0].rsplit('/')[-2])
+        title_key = movie_file[0].rsplit('/')[-2]
 
-        mv_year = (title_and_year[-5:-1])
+        if title_key not in movie_index_file_results:
+            movie_index_file_results[title_key] = {}
 
-        mv_title = (title_and_year[0:-7])
+        if movie_file[0].lower().endswith(extensions):
 
-        test = pymediainfo.MediaInfo.parse(movie_file[0])
+            title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
 
-        for track in test.tracks:
+            test = pymediainfo.MediaInfo.parse(movie_file[0])
 
-            if track.track_type == 'Video':
-                movie_index_file_results.append(
-                    [title.get('title'), title.get('year'), str(track.width) + 'x' + str(track.height),
-                     title.get('container')])
+            for track in test.tracks:
 
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "a",
+                if track.track_type == 'Video':
+                    movie_index_file_results[title_key]["DIRECTORY"] = title_key
+                    movie_index_file_results[title_key]["TITLE"] = title.get('title')
+                    movie_index_file_results[title_key]["YEAR"] = title.get('year')
+                    movie_index_file_results[title_key]["RESOLUTION"] = str(track.width) + 'x' + str(track.height)
+                    movie_index_file_results[title_key]["FILE-TYPE"] = title.get('container')
+
+        elif movie_file[0].lower().endswith(nfo_extensions):
+            with open(movie_file[0]) as f:
+                for line in f.readlines():
+                    if '<plot>' in line:
+                        movie_index_file_results[title_key]["PLOT"] = line
+
+                    if '<rating>' in line:
+                        movie_index_file_results[title_key]["RATING"] = line
+
+                    if '<runtime>' in line:
+                        movie_index_file_results[title_key]["RUN-TIME"] = line
+
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv', "w",
               newline="") as f:
-        csv_writer = csv.writer(f)
-        for movie_row in movie_index_file_results:
+        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "RESOLUTION", "FILE-TYPE", "PLOT", "RATING",
+                                        "RUN-TIME"])
+        for movie_row in movie_index_file_results.values():
             csv_writer.writerow(movie_row)
 
 
 def tv_show_index_update_results(username_input):
     tv_index = csv.reader(
-        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-TV-FILES-INDEX.csv'))
-    tv_index_file_results = []
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-TV-INDEX.csv'))
 
-    for tv_file in tv_index:
+    tv_index_file_results = {}
 
-        title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
+    for tv_file in sorted(tv_index):
 
-        title_and_year = (tv_file[0].rsplit('/')[-2])
+        title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
 
-        tv_year = (title_and_year[-5:-1])
+        folder_title = tv_file[0].rsplit('/')[-2]
 
-        tv_title = (title_and_year[0:-7])
+        if tv_file[0].lower().endswith(extensions) and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
 
-        test = pymediainfo.MediaInfo.parse(tv_file[0])
+            if title_key not in tv_index_file_results:
+                tv_index_file_results[title_key] = {}
 
-        for track in test.tracks:
+            title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
 
-            if track.track_type == 'Video':
-                tv_index_file_results.append(
-                    [title_and_year, title.get('title'), title.get('episode_title'), title.get('season'),
-                     title.get('episode'), title('year'), str(track.width) + 'x' + str(track.height),
-                     title.get('container')])
+            test = pymediainfo.MediaInfo.parse(tv_file[0])
 
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv', "a",
+            for track in test.tracks:
+
+                if track.track_type == 'Video':
+                    tv_index_file_results[title_key]["DIRECTORY"] = folder_title
+                    tv_index_file_results[title_key]["TITLE"] = title.get('title')
+                    tv_index_file_results[title_key]["YEAR"] = title.get('year')
+                    tv_index_file_results[title_key]["EPISODE TITLE"] = title.get('episode_title')
+                    tv_index_file_results[title_key]["SEASON"] = title.get('season')
+                    tv_index_file_results[title_key]["EPISODE NUMBER"] = title.get('episode')
+                    tv_index_file_results[title_key]["RESOLUTION"] = str(track.width) + 'x' + str(track.height)
+                    tv_index_file_results[title_key]["FILE-TYPE"] = title.get('container')
+
+        elif tv_file[0].lower().endswith(nfo_extensions) and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
+
+            if title_key not in tv_index_file_results:
+                tv_index_file_results[title_key] = {}
+
+            with open(tv_file[0]) as f:
+                for line in f.readlines():
+                    if '<plot>' in line:
+                        tv_index_file_results[title_key].update({"PLOT": line})
+
+                    if '<rating>' in line:
+                        tv_index_file_results[title_key].update({"RATING": line})
+
+                    if '<runtime>' in line:
+                        tv_index_file_results[title_key].update({"RUN-TIME": line})
+
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv', "w",
               newline="") as f:
-        csv_writer = csv.writer(f)
-        for tv_row in tv_index_file_results:
+        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "EPISODE TITLE", "SEASON", "EPISODE NUMBER",
+                                        "RESOLUTION", "FILE-TYPE", "PLOT", "RATING", "RUN-TIME"])
+        for tv_row in tv_index_file_results.values():
             csv_writer.writerow(tv_row)
 
 
 def re_sort_csv_indices(username_input):
     movie_results = csv.reader(
-        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "r"))
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv', "r"))
     sorted_movie_results = sorted(movie_results, key=lambda row: row[0])
     tv_results = csv.reader(
-        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv', "r"))
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv', "r"))
     sorted_tv_results = sorted(tv_results, key=lambda row: row[0])
     movie_results_file = []
     tv_results_file = []
@@ -1832,7 +1851,7 @@ def re_sort_csv_indices(username_input):
     for line in sorted_movie_results:
         movie_results_file.append(line)
 
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', "w",
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv', "w",
               newline="") as f:
         csv_writer = csv.writer(f)
         for movie_row in movie_results_file:
@@ -1841,7 +1860,7 @@ def re_sort_csv_indices(username_input):
     for line in sorted_tv_results:
         tv_results_file.append(line)
 
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv', "w",
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv', "w",
               newline="") as f:
         csv_writer = csv.writer(f)
         for tv_row in tv_results_file:
@@ -1852,88 +1871,47 @@ def create_updated_media_files_index_results_csv(username_input):
     movie_index_update_results(username_input)
     tv_show_index_update_results(username_input)
     re_sort_csv_indices(username_input)
-    os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-MOVIE-FILES-INDEX.csv')
-    os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-MOVIE-FILES-INDEX.csv')
-    os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-TV-FILES-INDEX.csv')
-    os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-TV-FILES-INDEX.csv')
+    os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-MOVIE-INDEX.csv')
+    os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-MOVIE-INDEX.csv')
+    os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-TV-INDEX.csv')
+    os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-TV-INDEX.csv')
 
 
 def rename_existing_movie_and_tv_indices_for_update_search(username_input):
     for index_file in os.listdir(r'/home/' + username_input + '/MEDIA-INDEX/'):
-        if index_file.startswith('MOVIE-FILES-I'):
+        if index_file.startswith('MOVIE-IND'):
             os.rename(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + index_file,
                       r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + 'OLD-' + index_file)
-        if index_file.startswith('TV-FILES-I'):
+        if index_file.startswith('TV-IND'):
             os.rename(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + index_file,
                       r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + 'OLD-' + index_file)
-
-
-def update_search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
-                                                   tv_alt_dir_input):
-    movie_file_results = []
-    for root, dirs, files in os.walk(movie_dir_input):
-        for movie_file in sorted(files):
-            if movie_file.endswith(extensions):
-                movie_file_results.append([root + '/' + movie_file])
-
-    if movie_alt_dir_input is not str(''):
-
-        for root, dirs, files in os.walk(movie_alt_dir_input):
-            for movie_file in sorted(files):
-                if movie_file.endswith(extensions):
-                    movie_file_results.append([root + '/' + movie_file])
-
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv', "w",
-              newline="") as f:
-        csv_writer = csv.writer(f)
-        for movie_row in sorted(movie_file_results):
-            csv_writer.writerow(movie_row)
-
-    tv_show_file_results = []
-    for root, dirs, files in os.walk(tv_dir_input):
-        for tv_file in sorted(files):
-            if tv_file.endswith(extensions):
-                tv_show_file_results.append([root + '/' + tv_file])
-
-    if tv_alt_dir_input is not str(''):
-
-        for root, dirs, files in os.walk(tv_alt_dir_input):
-            for alt_file in sorted(files):
-                if alt_file.endswith(extensions):
-                    tv_show_file_results.append([root + '/' + alt_file])
-
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', "w",
-              newline="") as f:
-        csv_writer = csv.writer(f)
-        for tv_row in sorted(tv_show_file_results):
-            csv_writer.writerow(tv_row)
 
 
 def compare_old_and_updated_indices_and_create_differences_files(username_input, movie_dir_input, tv_dir_input,
                                                                  movie_alt_dir_input, tv_alt_dir_input):
     rename_existing_movie_and_tv_indices_for_update_search(username_input)
-    update_search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
-                                                   tv_alt_dir_input)
+    search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
+                                            tv_alt_dir_input)
 
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-MOVIE-FILES-INDEX.csv',
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-MOVIE-INDEX.csv',
               'r') as mi_0, open(
-        r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-INDEX.csv', 'r') as mi_1:
+        r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-INDEX.csv', 'r') as mi_1:
         old_movie_index = mi_0.readlines()
         new_movie_index = mi_1.readlines()
 
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-MOVIE-FILES-INDEX.csv',
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-MOVIE-INDEX.csv',
               'w') as outFile:
         for line in new_movie_index:
             if line not in old_movie_index:
                 outFile.write(line)
 
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-TV-FILES-INDEX.csv',
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-TV-INDEX.csv',
               'r') as ti_0, open(
-        r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', 'r') as ti_1:
+        r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-INDEX.csv', 'r') as ti_1:
         old_tv_index = ti_0.readlines()
         new_tv_index = ti_1.readlines()
 
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-TV-FILES-INDEX.csv',
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-TV-INDEX.csv',
               'w') as outFile:
         for line in new_tv_index:
             if line not in old_tv_index:
@@ -1942,19 +1920,19 @@ def compare_old_and_updated_indices_and_create_differences_files(username_input,
 
 def compare_movie_results_file_and_create_differences_files(username_input):
     print()
-    username_input_x = input("ENTER USERNAME FOR THE MOVIE-FILES-RESULTS LISTS TO COMPARE:")
+    username_input_x = input("ENTER USERNAME FOR THE MOVIE-RESULTS LISTS TO COMPARE:")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
 
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv',
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv',
               'r') as m_0, open(
-              r'/home/' + username_input + '/' + username_input_x + '-MEDIA-INDEX/MOVIE-FILES-RESULTS.csv', 'r') as m_1:
+              r'/home/' + username_input + '/' + username_input_x + '-MEDIA-INDEX/MOVIE-RESULTS.csv', 'r') as m_1:
         movie_results = m_0.readlines()
         alt_movie_results = m_1.readlines()
 
         with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + username_input_x +
-                  '-MOVIE-FILES-COMPARISON-RESULTS.csv', 'w') as outFile_m:
+                  '-MOVIE-COMPARISON-RESULTS.csv', 'w') as outFile_m:
 
             for line in compare_results(movie_results, alt_movie_results):
                 outFile_m.write(line)
@@ -1962,32 +1940,32 @@ def compare_movie_results_file_and_create_differences_files(username_input):
 
 def compare_tv_results_file_and_create_differences_files(username_input):
     print()
-    username_input_x = input("ENTER USERNAME FOR THE TV-FILES-RESULTS LISTS TO COMPARE:")
+    username_input_x = input("ENTER USERNAME FOR THE TV-RESULTS LISTS TO COMPARE:")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
 
-    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-RESULTS.csv',
+    with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv',
               'r') as t_0, open(
-              r'/home/' + username_input + '/' + username_input_x + '-MEDIA-INDEX/TV-FILES-RESULTS.csv', 'r') as t_1:
+              r'/home/' + username_input + '/' + username_input_x + '-MEDIA-INDEX/TV-RESULTS.csv', 'r') as t_1:
         tv_results = t_0.readlines()
         alt_tv_results = t_1.readlines()
 
         with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + username_input_x +
-                  '-TV-FILES-COMPARISON-RESULTS.csv', 'w') as outFile_t:
+                  '-TV-COMPARISON-RESULTS.csv', 'w') as outFile_t:
 
             for line in compare_results(tv_results, alt_tv_results):
                 outFile_t.write(line)
 
 
-def compare_results(results_u, results_a):
+def compare_results(results_user, results_other):
     output = []
-    for line in results_u:
-        if line not in results_a:
+    for line in results_user:
+        if line not in results_other:
             output.append('HAVE: ' + line)
 
-    for line in results_a:
-        if line not in results_u:
+    for line in results_other:
+        if line not in results_user:
             output.append('DO NOT HAVE: ' + line)
 
     return output
