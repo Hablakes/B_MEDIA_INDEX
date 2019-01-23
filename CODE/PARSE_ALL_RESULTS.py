@@ -38,7 +38,7 @@ def movie_index_all_results(username_input):
                     movie_index_file_results[title_key]["TITLE"] = title.get('title')
                     movie_index_file_results[title_key]["YEAR"] = title.get('year')
                     movie_index_file_results[title_key]["RESOLUTION"] = str(track.width) + 'x' + str(track.height)
-                    movie_index_file_results[title_key]["FILE TYPE"] = title.get('container')
+                    movie_index_file_results[title_key]["FILE-TYPE"] = title.get('container')
 
         elif movie_file[0].lower().endswith(nfo_extensions):
             with open(movie_file[0]) as f:
@@ -46,9 +46,16 @@ def movie_index_all_results(username_input):
                     if '<plot>' in line:
                         movie_index_file_results[title_key]["PLOT"] = line
 
+                    if '<rating>' in line:
+                        movie_index_file_results[title_key]["RATING"] = line
+
+                    if '<runtime>' in line:
+                        movie_index_file_results[title_key]["RUN-TIME"] = line
+
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv', "w",
               newline="") as f:
-        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "RESOLUTION", "FILE TYPE", "PLOT"])
+        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "RESOLUTION", "FILE-TYPE", "PLOT", "RATING",
+                                        "RUN-TIME"])
         for movie_row in movie_index_file_results.values():
             csv_writer.writerow(movie_row)
 
@@ -84,7 +91,7 @@ def tv_index_all_results(username_input):
                     tv_index_file_results[title_key]["SEASON"] = title.get('season')
                     tv_index_file_results[title_key]["EPISODE NUMBER"] = title.get('episode')
                     tv_index_file_results[title_key]["RESOLUTION"] = str(track.width) + 'x' + str(track.height)
-                    tv_index_file_results[title_key]["FILE TYPE"] = title.get('container')
+                    tv_index_file_results[title_key]["FILE-TYPE"] = title.get('container')
 
         elif tv_file[0].lower().endswith(nfo_extensions) and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
 
@@ -96,19 +103,19 @@ def tv_index_all_results(username_input):
                     if '<plot>' in line:
                         tv_index_file_results[title_key].update({"PLOT": line})
 
-    for tv_eps in tv_index_file_results.items():
-        print(tv_eps)
+                    if '<rating>' in line:
+                        tv_index_file_results[title_key].update({"RATING": line})
 
+                    if '<runtime>' in line:
+                        tv_index_file_results[title_key].update({"RUN-TIME": line})
 
-#movie_index_all_results(username_input='bx')
-tv_index_all_results(username_input='bx')
-
-
-"""
     with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-RESULTS.csv', "w",
               newline="") as f:
-        csv_writer = csv.writer(f, ["DIRECTORY", "TITLE", "YEAR", "EPISODE TITLE", "SEASON", "EPISODE NUMBER",
-                                    "RESOLUTION", "FILE TYPE", "PLOT"])
-        for tv_row in tv_file_results:
+        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "EPISODE TITLE", "SEASON", "EPISODE NUMBER",
+                                        "RESOLUTION", "FILE-TYPE", "PLOT", "RATING", "RUN-TIME"])
+        for tv_row in tv_index_file_results.values():
             csv_writer.writerow(tv_row)
-"""
+
+
+movie_index_all_results(username_input='bx')
+tv_index_all_results(username_input='bx')
