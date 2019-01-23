@@ -84,9 +84,9 @@ def first_launch_dirs():
             pass
         with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-FILES-INDEX.csv', 'w'):
             pass
-        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-NFO-FILES-INDEX.csv'):
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-NFO-INDEX.csv'):
             pass
-        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-NFO-FILES-INDEX.csv'):
+        with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/TV-NFO-INDEX.csv'):
             pass
         with open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-SRT-INDEX.csv', 'w'):
             pass
