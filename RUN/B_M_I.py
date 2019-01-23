@@ -396,10 +396,8 @@ def run_file_query_and_sort():
 
 
 def movie_query_all_results(username_input):
-    movie_results = csv.reader(
+    mv_files_results_list = csv.reader(
         open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/MOVIE-RESULTS.csv'))
-
-    movie_found_results = {}
 
     mv_query_action = input("ENTER SEARCH QUERY (MOVIES):")
     print()
@@ -407,59 +405,65 @@ def movie_query_all_results(username_input):
     print()
     mv_query_action_lower = str(mv_query_action.lower())
 
-    for movie_file in sorted(movie_results):
-        if mv_query_action_lower in movie_file[1].lower():
-            if movie_file[0] not in movie_found_results:
-                movie_found_results[str(movie_file[0])] = []
-            movie_found_results[str(movie_file[0])].append(movie_file)
+    for movie_file in mv_files_results_list:
 
-    for items in movie_found_results.items():
-        print()
-        print()
-        print("MOVIE FOLDER")
-        print()
-        print(items[1][0][0])
-        print("--------------------------------------------------------------------------------------------------")
-        print()
-        print("MOVIE TITLE")
-        print()
-        print(items[1][0][1])
-        print("--------------------------------------------------------------------------------------------------")
-        print()
-        print("MOVIE YEAR")
-        print()
-        print(items[1][0][2])
-        print("--------------------------------------------------------------------------------------------------")
-        print()
-        print("MOVIE RESOLUTION")
-        print()
-        print(items[1][0][3])
-        print("--------------------------------------------------------------------------------------------------")
-        print()
-        print("MOVIE FILE-TYPE")
-        print()
-        print(items[1][0][4])
-        print("--------------------------------------------------------------------------------------------------")
-        print()
-        print("MOVIE RATING")
-        print()
-        movie_rating = re.findall("<rating>(.*?)</rating>", items[1][0][6])
-        print(movie_rating[0])
-        print("--------------------------------------------------------------------------------------------------")
-        print()
-        print("MOVIE RUN-TIME")
-        print()
-        movie_runtime = re.findall("<runtime>(.*?)</runtime>", items[1][0][7])
-        print(movie_runtime[0], "- Minutes")
-        print("--------------------------------------------------------------------------------------------------")
-        print()
-        print("MOVIE PLOT")
-        print()
-        movie_plot = re.findall("<plot>(.*?)</plot>", items[1][0][5])
-        print(textwrap.fill(movie_plot[0], 80))
-        print()
-        print("--------------------------------------------------------------------------------------------------")
-        print()
+        if mv_query_action_lower in movie_file[1].lower():
+
+            print()
+            print()
+            print("MOVIE FOLDER")
+            print()
+            print(movie_file[0])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("MOVIE TITLE")
+            print()
+            print(movie_file[1])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("MOVIE YEAR")
+            print()
+            print(movie_file[2])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("MOVIE RESOLUTION")
+            print()
+            print(movie_file[3])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("MOVIE FILE-TYPE")
+            print()
+            print(movie_file[4])
+            print("--------------------------------------------------------------------------------------------------")
+
+            if int(len(movie_file[6])) != 0:
+
+                print("RATING")
+                print()
+                mv_rating = re.findall("<rating>(.*?)</rating>", movie_file[6])
+                print(mv_rating[0])
+                print()
+                print("-------------------------------------------------"
+                      "-------------------------------------------------")
+                print()
+
+            if int(len(movie_file[5])) != 0:
+
+                    print("PLOT")
+                    print()
+                    if '</plot>' not in movie_file[5]:
+                        mv_plot = re.findall("<plot>(.*?)", movie_file[5])
+                        print(textwrap.fill(mv_plot[0], 80))
+                        print("-------------------------------------------------"
+                              "-------------------------------------------------")
+                        print()
+
+                    elif "</plot>" in movie_file[5]:
+                        mv_plot = re.findall("<plot>(.*?)</plot>", movie_file[5])
+                        print(textwrap.fill(mv_plot[0], 80))
+                        print("-------------------------------------------------"
+                              "-------------------------------------------------")
+                        print()
 
 
 def tv_query_all_results(username_input):
@@ -535,14 +539,14 @@ def tv_query_all_results(username_input):
                     print()
                     if '</plot>' not in tv_file[8]:
                         tv_plot = re.findall("<plot>(.*?)", tv_file[8])
-                        print(tv_plot)
+                        print(textwrap.fill(tv_plot[0], 80))
                         print("-------------------------------------------------"
                               "-------------------------------------------------")
                         print()
 
                     elif "</plot>" in tv_file[8]:
                         tv_plot = re.findall("<plot>(.*?)</plot>", tv_file[8])
-                        print(tv_plot[0])
+                        print(textwrap.fill(tv_plot[0], 80))
                         print("-------------------------------------------------"
                               "-------------------------------------------------")
                         print()
