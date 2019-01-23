@@ -369,6 +369,7 @@ def movie_query_all_results(username_input):
             print()
             print(movie_file[4])
             print("--------------------------------------------------------------------------------------------------")
+            print()
 
             if int(len(movie_file[6])) != 0:
 
@@ -376,7 +377,6 @@ def movie_query_all_results(username_input):
                 print()
                 mv_rating = re.findall("<rating>(.*?)</rating>", movie_file[6])
                 print(mv_rating[0])
-                print()
                 print("-------------------------------------------------"
                       "-------------------------------------------------")
                 print()
@@ -462,7 +462,6 @@ def tv_query_all_results(username_input):
                 print()
                 tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
                 print(tv_rating[0])
-                print()
                 print("-------------------------------------------------"
                       "-------------------------------------------------")
                 print()
@@ -535,7 +534,6 @@ def tv_query_all_results(username_input):
                 print()
                 tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
                 print(tv_rating[0])
-                print()
                 print("-------------------------------------------------"
                       "-------------------------------------------------")
                 print()
