@@ -137,7 +137,7 @@ def run_query():
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
-    print("SEARCH TITLES OF   -   1) MOVIES - 2) TV SHOWS SERIES                                - 5) EXIT")
+    print("SEARCH TITLES OF   -   1) MOVIES - 2) TV SHOWS SERIES                                - 3) EXIT")
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
