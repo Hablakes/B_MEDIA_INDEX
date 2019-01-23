@@ -126,19 +126,34 @@ def tv_query_all_results(username_input):
             print(tv_file[7])
             print("--------------------------------------------------------------------------------------------------")
             print()
-            print("RATING")
-            print()
-            tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
-            print(tv_rating[0])
-            print("--------------------------------------------------------------------------------------------------")
-            print()
-            print("PLOT")
-            print()
-            tv_plot = re.findall("<plot>(.*?)</plot>", tv_file[8])
-            print(tv_plot[0])
-            print()
-            print("--------------------------------------------------------------------------------------------------")
-            print()
+            if int(len(tv_file[9])) != 0:
+
+                print("RATING")
+                print()
+                tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
+                print(tv_rating[0])
+                print()
+                print("-------------------------------------------------"
+                      "-------------------------------------------------")
+                print()
+
+            if int(len(tv_file[8])) != 0:
+
+                    print("PLOT")
+                    print()
+                    if '</plot>' not in tv_file[8]:
+                        tv_plot = re.findall("<plot>(.*?)", tv_file[8])
+                        print(tv_plot)
+                        print("-------------------------------------------------"
+                              "-------------------------------------------------")
+                        print()
+
+                    elif "</plot>" in tv_file[8]:
+                        tv_plot = re.findall("<plot>(.*?)</plot>", tv_file[8])
+                        print(tv_plot[0])
+                        print("-------------------------------------------------"
+                              "-------------------------------------------------")
+                        print()
 
         elif tv_show_query_action_lower in tv_file[3].lower():
 
@@ -184,19 +199,34 @@ def tv_query_all_results(username_input):
             print(tv_file[7])
             print("--------------------------------------------------------------------------------------------------")
             print()
-            print("RATING")
-            print()
-            tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
-            print(tv_rating[0])
-            print("--------------------------------------------------------------------------------------------------")
-            print()
-            print("PLOT")
-            print()
-            tv_plot = re.findall("<plot>(.*?)</plot>", tv_file[8])
-            print(tv_plot[0])
-            print()
-            print("--------------------------------------------------------------------------------------------------")
-            print()
+            if int(len(tv_file[9])) != 0:
+
+                print("RATING")
+                print()
+                tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
+                print(tv_rating[0])
+                print()
+                print("-------------------------------------------------"
+                      "-------------------------------------------------")
+                print()
+
+            if int(len(tv_file[8])) != 0:
+
+                    print("PLOT")
+                    print()
+                    if '</plot>' not in tv_file[8]:
+                        tv_plot = re.findall("<plot>(.*?)", tv_file[8])
+                        print(tv_plot)
+                        print("-------------------------------------------------"
+                              "-------------------------------------------------")
+                        print()
+
+                    elif "</plot>" in tv_file[8]:
+                        tv_plot = re.findall("<plot>(.*?)</plot>", tv_file[8])
+                        print(tv_plot[0])
+                        print("-------------------------------------------------"
+                              "-------------------------------------------------")
+                        print()
 
 
 #movie_query_all_results(username_input='bx')
