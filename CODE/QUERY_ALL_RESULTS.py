@@ -50,14 +50,11 @@ def movie_query_all_results(username_input):
         print()
         print("MOVIE PLOT")
         print()
-        print(textwrap.fill(items[1][0][5], 80))
+        movie_plot = re.findall("<plot>(.*?)</plot>", items[1][0][5])
+        print(textwrap.fill(movie_plot[0], 80))
         print()
         print("--------------------------------------------------------------------------------------------------")
         print()
 
-
-"""           
-(\[\[\'(.*?)\'\]\,)|<plot>(.*?), \\'</plot>
-"""
 
 movie_query_all_results(username_input='bx')
