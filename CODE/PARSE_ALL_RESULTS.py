@@ -117,5 +117,5 @@ def tv_index_all_results(username_input):
             csv_writer.writerow(tv_row)
 
 
-movie_index_all_results(username_input='bx')
+#movie_index_all_results(username_input='bx')
 tv_index_all_results(username_input='bx')
