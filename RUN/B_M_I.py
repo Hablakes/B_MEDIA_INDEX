@@ -394,13 +394,13 @@ def movie_query_all_results(username_input):
                 print()
                 if '</runtime>' not in movie_file[7]:
                     mv_runtime = re.findall("<runtime>(.*?)", movie_file[7])
-                    print(mv_runtime[0])
+                    print(mv_runtime[0], ": Minutes")
                     print("-------------------------------------------------"
                           "-------------------------------------------------")
                     print()
                 if '</runtime>' in movie_file[7]:
                     mv_runtime = re.findall("<runtime>(.*?)</runtime>", movie_file[7])
-                    print(mv_runtime[0])
+                    print(mv_runtime[0], ": Minutes")
                     print("-------------------------------------------------"
                           "-------------------------------------------------")
                     print()
