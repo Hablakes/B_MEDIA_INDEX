@@ -4,6 +4,7 @@ import re
 import textwrap
 
 import guessit
+import pyfiglet
 import pymediainfo
 
 import matplotlib.pylab as plt
@@ -35,9 +36,7 @@ username_input = None
 
 def first_launch_dirs():
 
-    print("____ ___ ____ ____ ___    ___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
-    print("[__   |  |__| |__/  |  __ |__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/ ")
-    print("___]  |  |  | |  \  |     |__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
+    print(pyfiglet.figlet_format("START-MEDIA-INDEX", font="cybermedium"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -99,9 +98,7 @@ def first_launch_dirs():
 
 
 def launch_media_index():
-    print("___     _  _ ____ ___  _ ____    _ _  _ ___  ____ _  _")
-    print("|__] __ |\/| |___ |  \ | |__| __ | |\ | |  \ |___  \/")
-    print("|__]    |  | |___ |__/ | |  |    | | \| |__/ |___ _/\_")
+    print(pyfiglet.figlet_format("MEDIA-INDEX", font="cybermedium"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -131,9 +128,7 @@ def launch_media_index():
 
 
 def run_query():
-    print("___     _  _ ____ ___  _ ____    ____ _  _ ____ ____ _   _")
-    print("|__] __ |\/| |___ |  \ | |__| __ |  | |  | |___ |__/  \_/")
-    print("|__]    |  | |___ |__/ | |  |    |_\| |__| |___ |  \   |   ")
+    print(pyfiglet.figlet_format("MEDIA-QUERY", font="cybermedium"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -201,9 +196,7 @@ def tv_title_search(username_input):
 
 
 def run_sort():
-    print("___     _  _ ____ ___  _ ____    ____ ____ ____ ___")
-    print("|__] __ |\/| |___ |  \ | |__| __ [__  |  | |__/  |")
-    print("|__]    |  | |___ |__/ | |  |    ___] |__| |  \  | ")
+    print(pyfiglet.figlet_format("SORT-OPTIONS", font="cybermedium"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -306,9 +299,7 @@ def total_tv_episodes_sort_function_base(username_input, sort_options_int):
 
 
 def run_file_query_and_sort():
-    print("___     ____ _ _    ____    ___  ____ ___ ____    ____ _  _ ____ ____ _   _")
-    print("|__] __ |___ | |    |___ __ |  \ |__|  |  |__| __ |  | |  | |___ |__/  \_/")
-    print("|__]    |    | |___ |___    |__/ |  |  |  |  |    |_\| |__| |___ |  \   |")
+    print(pyfiglet.figlet_format("FILE-INFO-QUERY", font="cybermedium"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -596,9 +587,7 @@ def tv_query_all_results(username_input):
 
 
 def run_graphs():
-    print("___     ____ ____ ____ ___  _  _    ____ ___  ___ _ ____ _  _ ____")
-    print("|__] __ | __ |__/ |__| |__] |__| __ |  | |__]  |  | |  | |\ | [__")
-    print("|__]    |__] |  \ |  | |    |  |    |__| |     |  | |__| | \| ___]")
+    print(pyfiglet.figlet_format("GRAPH-OPTIONS", font="cybermedium"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -620,9 +609,7 @@ def run_graphs():
 
 
 def run_picture_graphs():
-    print("___     ___  _ ____ ___ _  _ ____ ____    ____ ____ ____ ___  _  _ ____")
-    print("|__] __ |__] | |     |  |  | |__/ |___ __ | __ |__/ |__| |__] |__| [__")
-    print("|__]    |    | |___  |  |__| |  \ |___    |__] |  \ |  | |    |  | ___]")
+    print(pyfiglet.figlet_format("PICTURE-GRAPHS", font="cybermedium"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -934,9 +921,7 @@ def search_file_type_totals_tv(username_input, b_totals_query_input_int, picture
 
 
 def run_terminal_graphs():
-    print("___     ___ ____ ____ _  _ _ _  _ ____ _       ____ ____ ____ ___  _  _ ____")
-    print("|__] __  |  |___ |__/ |\/| | |\ | |__| |    __ | __ |__/ |__| |__] |__| [__")
-    print("|__]     |  |___ |  \ |  | | | \| |  | |___    |__] |  \ |  | |    |  | ___]")
+    print(pyfiglet.figlet_format("TERMINAL-GRAPHS", font="cybermedium"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -1152,9 +1137,7 @@ def terminal_graph_options_base_1(username_input, terminal_graph_options_int):
 
 
 def totals_query():
-    print("___     ___ ____ ___ ____ _    ____    ____ _  _ ____ ____ _   _")
-    print("|__] __  |  |  |  |  |__| |    [__  __ |  | |  | |___ |__/  \_/ ")
-    print("|__]     |  |__|  |  |  | |___ ___]    |_\| |__| |___ |  \   |   ")
+    print(pyfiglet.figlet_format("TOTALS-QUERY", font="cybermedium"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
@@ -1432,9 +1415,7 @@ def tv_decades_totals(username_input):
 
 
 def create_media_indices_all():
-    print("___     _ _  _ ___  ____ _  _    ____ ___  ___ _ ____ _  _ ____")
-    print("|__] __ | |\ | |  \ |___  \/  __ |  | |__]  |  | |  | |\ | [__ ")
-    print("|__]    | | \| |__/ |___ _/\_    |__| |     |  | |__| | \| ___]")
+    print(pyfiglet.figlet_format("INDEX-OPTIONS", font="cybermedium"))
     print()
     print("--------------------------------------------------------------------------------------------------")
     print()
