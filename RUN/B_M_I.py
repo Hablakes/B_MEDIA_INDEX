@@ -375,39 +375,53 @@ def movie_query_all_results(username_input):
 
                 print("RATING")
                 print()
-                mv_rating = re.findall("<rating>(.*?)</rating>", movie_file[6])
-                print(mv_rating[0])
-                print("-------------------------------------------------"
-                      "-------------------------------------------------")
-                print()
+                if '</rating>' not in movie_file[6]:
+                    mv_rating = re.findall("<rating>(.*?)", movie_file[6])
+                    print(mv_rating[0])
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
+                    print()
+                if '</rating>' in movie_file[6]:
+                    mv_rating = re.findall("<rating>(.*?)</rating>", movie_file[6])
+                    print(mv_rating[0])
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
+                    print()
 
             if int(len(movie_file[7])) != 0:
 
                 print("RUNTIME")
                 print()
-                mv_runtime = re.findall("<runtime>(.*?)</runtime>", movie_file[7])
-                print(mv_runtime[0])
-                print("-------------------------------------------------"
-                      "-------------------------------------------------")
-                print()
+                if '</runtime>' not in movie_file[7]:
+                    mv_runtime = re.findall("<runtime>(.*?)", movie_file[7])
+                    print(mv_runtime[0])
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
+                    print()
+                if '</runtime>' in movie_file[7]:
+                    mv_runtime = re.findall("<runtime>(.*?)</runtime>", movie_file[7])
+                    print(mv_runtime[0])
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
+                    print()
 
             if int(len(movie_file[5])) != 0:
 
-                    print("PLOT")
+                print("PLOT")
+                print()
+                if '</plot>' not in movie_file[5]:
+                    mv_plot = re.findall("<plot>(.*?)", movie_file[5])
+                    print(textwrap.fill(mv_plot[0], 80))
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
                     print()
-                    if '</plot>' not in movie_file[5]:
-                        mv_plot = re.findall("<plot>(.*?)", movie_file[5])
-                        print(textwrap.fill(mv_plot[0], 80))
-                        print("-------------------------------------------------"
-                              "-------------------------------------------------")
-                        print()
 
-                    elif "</plot>" in movie_file[5]:
-                        mv_plot = re.findall("<plot>(.*?)</plot>", movie_file[5])
-                        print(textwrap.fill(mv_plot[0], 80))
-                        print("-------------------------------------------------"
-                              "-------------------------------------------------")
-                        print()
+                elif '</plot>' in movie_file[5]:
+                    mv_plot = re.findall("<plot>(.*?)</plot>", movie_file[5])
+                    print(textwrap.fill(mv_plot[0], 80))
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
+                    print()
 
 
 def tv_query_all_results(username_input):
@@ -470,29 +484,36 @@ def tv_query_all_results(username_input):
 
                 print("RATING")
                 print()
-                tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
-                print(tv_rating[0])
-                print("-------------------------------------------------"
-                      "-------------------------------------------------")
-                print()
+                if '</rating>' not in tv_file[9]:
+                    tv_rating = re.findall("<rating>(.*?)", tv_file[9])
+                    print(tv_rating[0])
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
+                    print()
+                if '</rating>' in tv_file[9]:
+                    tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
+                    print(tv_rating[0])
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
+                    print()
 
             if int(len(tv_file[8])) != 0:
 
-                    print("PLOT")
+                print("PLOT")
+                print()
+                if '</plot>' not in tv_file[8]:
+                    tv_plot = re.findall("<plot>(.*?)", tv_file[8])
+                    print(textwrap.fill(tv_plot[0], 80))
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
                     print()
-                    if '</plot>' not in tv_file[8]:
-                        tv_plot = re.findall("<plot>(.*?)", tv_file[8])
-                        print(textwrap.fill(tv_plot[0], 80))
-                        print("-------------------------------------------------"
-                              "-------------------------------------------------")
-                        print()
 
-                    elif "</plot>" in tv_file[8]:
-                        tv_plot = re.findall("<plot>(.*?)</plot>", tv_file[8])
-                        print(textwrap.fill(tv_plot[0], 80))
-                        print("-------------------------------------------------"
-                              "-------------------------------------------------")
-                        print()
+                elif '</plot>' in tv_file[8]:
+                    tv_plot = re.findall("<plot>(.*?)</plot>", tv_file[8])
+                    print(textwrap.fill(tv_plot[0], 80))
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
+                    print()
 
         elif tv_show_query_action_lower in tv_file[3].lower():
 
@@ -542,29 +563,36 @@ def tv_query_all_results(username_input):
 
                 print("RATING")
                 print()
-                tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
-                print(tv_rating[0])
-                print("-------------------------------------------------"
-                      "-------------------------------------------------")
-                print()
+                if '</rating>' not in tv_file[9]:
+                    tv_rating = re.findall("<rating>(.*?)", tv_file[9])
+                    print(tv_rating[0])
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
+                    print()
+                if '</rating>' in tv_file[9]:
+                    tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
+                    print(tv_rating[0])
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
+                    print()
 
             if int(len(tv_file[8])) != 0:
 
-                    print("PLOT")
+                print("PLOT")
+                print()
+                if '</plot>' not in tv_file[8]:
+                    tv_plot = re.findall("<plot>(.*?)", tv_file[8])
+                    print(tv_plot)
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
                     print()
-                    if '</plot>' not in tv_file[8]:
-                        tv_plot = re.findall("<plot>(.*?)", tv_file[8])
-                        print(tv_plot)
-                        print("-------------------------------------------------"
-                              "-------------------------------------------------")
-                        print()
 
-                    elif "</plot>" in tv_file[8]:
-                        tv_plot = re.findall("<plot>(.*?)</plot>", tv_file[8])
-                        print(tv_plot[0])
-                        print("-------------------------------------------------"
-                              "-------------------------------------------------")
-                        print()
+                elif '</plot>' in tv_file[8]:
+                    tv_plot = re.findall("<plot>(.*?)</plot>", tv_file[8])
+                    print(tv_plot[0])
+                    print("-------------------------------------------------"
+                          "-------------------------------------------------")
+                    print()
 
 
 def run_graphs():
