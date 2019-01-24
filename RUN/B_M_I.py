@@ -381,7 +381,7 @@ def movie_query_all_results(username_input):
                     print("-------------------------------------------------"
                           "-------------------------------------------------")
                     print()
-                if '</rating>' in movie_file[6]:
+                elif '</rating>' in movie_file[6]:
                     mv_rating = re.findall("<rating>(.*?)</rating>", movie_file[6])
                     print(mv_rating[0])
                     print("-------------------------------------------------"
@@ -398,7 +398,7 @@ def movie_query_all_results(username_input):
                     print("-------------------------------------------------"
                           "-------------------------------------------------")
                     print()
-                if '</runtime>' in movie_file[7]:
+                elif '</runtime>' in movie_file[7]:
                     mv_runtime = re.findall("<runtime>(.*?)</runtime>", movie_file[7])
                     print(mv_runtime[0], ": Minutes")
                     print("-------------------------------------------------"
@@ -490,7 +490,7 @@ def tv_query_all_results(username_input):
                     print("-------------------------------------------------"
                           "-------------------------------------------------")
                     print()
-                if '</rating>' in tv_file[9]:
+                elif '</rating>' in tv_file[9]:
                     tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
                     print(tv_rating[0])
                     print("-------------------------------------------------"
@@ -569,7 +569,7 @@ def tv_query_all_results(username_input):
                     print("-------------------------------------------------"
                           "-------------------------------------------------")
                     print()
-                if '</rating>' in tv_file[9]:
+                elif '</rating>' in tv_file[9]:
                     tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
                     print(tv_rating[0])
                     print("-------------------------------------------------"
