@@ -381,6 +381,16 @@ def movie_query_all_results(username_input):
                       "-------------------------------------------------")
                 print()
 
+            if int(len(movie_file[7])) != 0:
+
+                print("RUNTIME")
+                print()
+                mv_runtime = re.findall("<runtime>(.*?)</runtime>", movie_file[7])
+                print(mv_runtime[0])
+                print("-------------------------------------------------"
+                      "-------------------------------------------------")
+                print()
+
             if int(len(movie_file[5])) != 0:
 
                     print("PLOT")
