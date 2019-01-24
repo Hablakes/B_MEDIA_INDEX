@@ -832,7 +832,8 @@ def search_file_type_totals_movies(username_input, b_totals_query_input_int, pic
         print()
         print("TOTAL AMOUNTS OF FILE-TYPES IN MOVIES:")
         print()
-        print(movie_file_type_totals)
+        for items in movie_file_type_totals.items():
+            print(items)
         print()
         print("--------------------------------------------------------------------------------------------------")
         print()
@@ -887,7 +888,8 @@ def search_file_type_totals_tv(username_input, b_totals_query_input_int, picture
         print()
         print("TOTAL AMOUNTS OF FILE-TYPES IN TV SHOWS:")
         print()
-        print(tv_file_type_totals)
+        for items in tv_file_type_totals.items():
+            print(items)
         print()
         print("--------------------------------------------------------------------------------------------------")
         print()
@@ -1353,9 +1355,9 @@ def movie_decades_totals(username_input):
     for item in media_movie_years_decades_totals.items():
         print()
         print(item)
-        print()
-        print("--------------------------------------------------------------------------------------------------")
-        print()
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
 
 
 def tv_year_totals(username_input):
@@ -1409,9 +1411,9 @@ def tv_decades_totals(username_input):
     for item in media_tv_years_decades_totals.items():
         print()
         print(item)
-        print()
-        print("--------------------------------------------------------------------------------------------------")
-        print()
+    print()
+    print("--------------------------------------------------------------------------------------------------")
+    print()
 
 
 def create_media_indices_all():
