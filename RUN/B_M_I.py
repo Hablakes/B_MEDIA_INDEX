@@ -1904,9 +1904,23 @@ def re_sort_csv_indices(username_input):
 
 
 def create_updated_media_files_index_results_csv(username_input):
-    movie_index_update_results(username_input)
-    tv_show_index_update_results(username_input)
-    re_sort_csv_indices(username_input)
+    movie_updates = csv.reader(
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-MOVIE-INDEX.csv'))
+    tv_updates = csv.reader(
+        open(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-TV-INDEX.csv'))
+
+    for movies in movie_updates:
+        if int(len(movies)) != 0:
+            movie_index_update_results(username_input)
+        else:
+            continue
+
+    for tv_shows in tv_updates:
+        if int(len(tv_shows)) != 0:
+            tv_show_index_update_results(username_input)
+        else:
+            continue
+
     os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-MOVIE-INDEX.csv')
     os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/UPDATES-TO-MOVIE-INDEX.csv')
     os.remove(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/OLD-TV-INDEX.csv')
