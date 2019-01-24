@@ -1464,6 +1464,8 @@ def create_media_indices_all():
     elif cmi_action == 3:
         create_media_files_index_results_csv(username_input)
     elif cmi_action == 4:
+        compare_old_and_updated_indices_and_create_differences_files(
+            username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
         create_updated_media_files_index_results_csv(username_input)
         re_sort_csv_indices(username_input)
     elif cmi_action == 5:
