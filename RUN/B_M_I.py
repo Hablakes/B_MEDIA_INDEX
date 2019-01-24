@@ -1914,7 +1914,7 @@ def create_updated_media_files_index_results_csv(username_input):
 
 
 def rename_existing_movie_and_tv_indices_for_update_search(username_input):
-    for index_file in os.listdir(r'/home/' + username_input + '-/MEDIA-INDEX/'):
+    for index_file in os.listdir(r'/home/' + username_input + '/-MEDIA-INDEX/'):
         if index_file.startswith('MOVIE-IND'):
             os.rename(r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + index_file,
                       r'/home/' + username_input + '/' + username_input + '-MEDIA-INDEX/' + 'OLD-' + index_file)
