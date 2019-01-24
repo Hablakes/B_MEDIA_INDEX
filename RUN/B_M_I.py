@@ -725,11 +725,11 @@ def pie_chart_options_base(username_input, picture_graph_options_int):
 
     for res in movie_files_results_list:
 
-        if re.findall("19\d{2}x", res[2]):
+        if re.findall("19\d{2}x", res[3]):
             m_ten_eighty_found_list.append(res)
-        elif re.findall("1[0-8]\d{2}x", res[2]):
+        elif re.findall("1[0-8]\d{2}x", res[3]):
             m_seven_twenty_found_list.append(res)
-        elif re.findall("\d{3}x", res[2]):
+        elif re.findall("\d{3}x", res[3]):
             m_standard_def_found_list.append(res)
         else:
             m_empty_response_list.append(+1)
@@ -804,10 +804,10 @@ def search_file_type_totals_movies(username_input, b_totals_query_input_int, pic
     extensions_totals = {}
 
     for file_type in movie_file_index:
-        if str(',') not in file_type[3]:
-            if file_type[3] not in extensions_dict:
-                extensions_dict[file_type[3]] = []
-            extensions_dict[file_type[3]].append(file_type[3])
+        if str(',') not in file_type[4]:
+            if file_type[4] not in extensions_dict:
+                extensions_dict[file_type[4]] = []
+            extensions_dict[file_type[4]].append(file_type[4])
     movie_file_type_totals = {}
 
     if b_totals_query_input_int == 7:
@@ -1074,11 +1074,11 @@ def terminal_graph_options_base_1(username_input, terminal_graph_options_int):
 
     for res in movie_files_results_list:
 
-        if re.findall("19\d{2}x", res[2]):
+        if re.findall("19\d{2}x", res[3]):
             m_ten_eighty_found_list.append(res)
-        elif re.findall("1[0-8]\d{2}x", res[2]):
+        elif re.findall("1[0-8]\d{2}x", res[3]):
             m_seven_twenty_found_list.append(res)
-        elif re.findall("\d{3}x", res[2]):
+        elif re.findall("\d{3}x", res[3]):
             m_standard_def_found_list.append(res)
         else:
             m_empty_response_list.append(+1)
