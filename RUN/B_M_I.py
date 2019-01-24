@@ -689,7 +689,7 @@ def bar_graph_options_base(username_input, picture_graph_options_int):
             movie_year_totals[year_values] = len(value)
         x, y = zip(*sorted(movie_year_totals.items()))
         plt.bar(x, y)
-        plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-YEAR-RESULTS.png'.format(username_input)))
+        plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES/MOVIE-YEAR-RESULTS.png'.format(username_input)))
         plt.show()
 
     if picture_graph_options_int == 2:
@@ -698,7 +698,7 @@ def bar_graph_options_base(username_input, picture_graph_options_int):
             tv_year_totals[year_values] = len(value)
         x, y = zip(*sorted(tv_year_totals.items()))
         plt.bar(x, y)
-        plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-YEAR-RESULTS.png'.format(username_input)))
+        plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES/TV-YEAR-RESULTS.png'.format(username_input)))
         plt.show()
 
     if picture_graph_options_int == 3:
@@ -707,7 +707,7 @@ def bar_graph_options_base(username_input, picture_graph_options_int):
             movie_decades_totals[year_values] = len(value)
         x, y = zip(*movie_decades_totals.items())
         plt.bar(x, y, width=5)
-        plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-DECADE-RESULTS.png'.format(username_input)))
+        plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES/MOVIE-DECADE-RESULTS.png'.format(username_input)))
         plt.show()
 
     if picture_graph_options_int == 4:
@@ -716,7 +716,7 @@ def bar_graph_options_base(username_input, picture_graph_options_int):
             tv_decades_totals[year_values] = len(value)
         x, y = zip(*tv_decades_totals.items())
         plt.bar(x, y, width=5)
-        plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-DECADE-RESULTS.png'.format(username_input)))
+        plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES/TV-DECADE-RESULTS.png'.format(username_input)))
         plt.show()
 
 
@@ -790,7 +790,7 @@ def pie_chart_options_base(username_input, picture_graph_options_int):
         plt.setp(autotexts, size=9, weight='bold')
         ax.set_title("MOVIE-RESOLUTION-RESULTS")
         plt.savefig(
-            os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESOLUTION-RESULTS.png'.format(username_input)))
+            os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES/MOVIE-RESOLUTION-RESULTS.png'.format(username_input)))
         plt.show()
 
     if picture_graph_options_int == 6:
@@ -807,7 +807,7 @@ def pie_chart_options_base(username_input, picture_graph_options_int):
         plt.setp(autotexts, size=9, weight='bold')
         ax.set_title("TV-SHOW-RESOLUTION-RESULTS")
         plt.savefig(
-            os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESOLUTION-RESULTS.png'.format(username_input)))
+            os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES/TV-RESOLUTION-RESULTS.png'.format(username_input)))
         plt.show()
 
 
@@ -845,7 +845,7 @@ def search_file_type_totals_movies(username_input, b_totals_query_input_int, pic
         x, y = zip(*sorted(movie_file_type_totals.items()))
         plt.bar(x, y)
         plt.savefig(
-            os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-FILE-TYPE-RESULTS.png'.format(username_input)))
+            os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES/MOVIE-FILE-TYPE-RESULTS.png'.format(username_input)))
         plt.show()
 
     if terminal_graph_options_int == 7:
@@ -899,7 +899,7 @@ def search_file_type_totals_tv(username_input, b_totals_query_input_int, picture
 
         x, y = zip(*sorted(tv_file_type_totals.items()))
         plt.bar(x, y)
-        plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-FILE-TYPE-RESULTS.png'.format(username_input)))
+        plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES/TV-FILE-TYPE-RESULTS.png'.format(username_input)))
         plt.show()
 
     if terminal_graph_options_int == 8:
@@ -1792,7 +1792,7 @@ def movie_index_update_results(username_input):
                     if '<runtime>' in line:
                         movie_index_file_results[title_key]["RUN-TIME"] = line
 
-    with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), "w",
+    with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), "a",
               newline="") as f:
         csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "RESOLUTION", "FILE-TYPE", "PLOT", "RATING",
                                         "RUN-TIME"])
@@ -1849,7 +1849,7 @@ def tv_show_index_update_results(username_input):
                     if '<runtime>' in line:
                         tv_index_file_results[title_key].update({"RUN-TIME": line})
 
-    with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), "w",
+    with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), "a",
               newline="") as f:
         csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "EPISODE TITLE", "SEASON", "EPISODE NUMBER",
                                         "RESOLUTION", "FILE-TYPE", "PLOT", "RATING", "RUN-TIME"])
