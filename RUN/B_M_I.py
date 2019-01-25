@@ -68,32 +68,44 @@ def first_launch_dirs():
         os.makedirs(os.path.expanduser(r'~/{0}-MEDIA-INDEX/'.format(username_input)), exist_ok=True)
         os.makedirs(os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES'.format(username_input)), exist_ok=True)
 
-        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/{0}-USER-INFO.csv'.format(username_input)), 'w') as f:
+        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/{0}-USER-INFO.csv'.format(username_input)), 'w',
+                  encoding='UTF8') as f:
             csv_writer = csv.writer(f)
             for row in user_info.items():
                 csv_writer.writerow(row)
 
-        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)), 'w'):
+        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)), 'w',
+                  encoding='UTF8'):
             pass
-        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-INDEX.csv'.format(username_input)), 'w'):
+        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-INDEX.csv'.format(username_input)), 'w',
+                  encoding='UTF8'):
             pass
-        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-INDEX.csv'.format(username_input)), 'w'):
+        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-INDEX.csv'.format(username_input)), 'w',
+                  encoding='UTF8'):
             pass
-        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-FILES-INDEX.csv'.format(username_input)), 'w'):
+        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-FILES-INDEX.csv'.format(username_input)), 'w',
+                  encoding='UTF8'):
             pass
-        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-FILES-INDEX.csv'.format(username_input)), 'w'):
+        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-FILES-INDEX.csv'.format(username_input)), 'w',
+                  encoding='UTF8'):
             pass
-        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-NFO-INDEX.csv'.format(username_input)), 'w'):
+        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-NFO-INDEX.csv'.format(username_input)), 'w',
+                  encoding='UTF8'):
             pass
-        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-NFO-INDEX.csv'.format(username_input)), 'w'):
+        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-NFO-INDEX.csv'.format(username_input)), 'w',
+                  encoding='UTF8'):
             pass
-        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-SRT-INDEX.csv'.format(username_input)), 'w'):
+        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-SRT-INDEX.csv'.format(username_input)), 'w',
+                  encoding='UTF8'):
             pass
-        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-SRT-INDEX.csv'.format(username_input)), 'w'):
+        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-SRT-INDEX.csv'.format(username_input)), 'w',
+                  encoding='UTF8'):
             pass
-        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), 'w'):
+        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), 'w',
+                  encoding='UTF8'):
             pass
-        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), 'w'):
+        with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), 'w',
+                  encoding='UTF8'):
             pass
 
 
@@ -151,7 +163,8 @@ def run_query():
 
 def movie_title_search(username_input):
     media_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     movie_title_search_action = input("QUERY MOVIES:")
     print()
     print("--------------------------------------------------------------------------------------------------")
@@ -173,7 +186,8 @@ def movie_title_search(username_input):
 
 def tv_title_search(username_input):
     media_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     tv_title_search_action = input("QUERY TV SHOWS:")
     print()
     print("--------------------------------------------------------------------------------------------------")
@@ -238,7 +252,8 @@ def run_sort():
 
 def sort_function_base(username_input, sort_options_int):
     media_index = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     sorted_title = sorted(media_index, key=lambda x: (x[0], x[1]))
     sorted_title_r = sorted(media_index, key=lambda x: (x[0], x[1]), reverse=True)
     sorted_year = sorted(media_index, key=lambda x: (x[0], x[2]))
@@ -259,7 +274,8 @@ def sort_function_base(username_input, sort_options_int):
 
 def total_tv_episodes_sort_function_base(username_input, sort_options_int):
     tv_results_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input))),
+                   encoding='UTF8'))
     tv_amounts = []
     tv_show_episodes_found = []
     tv_show_found = {}
@@ -322,7 +338,7 @@ def run_file_query_and_sort():
 
 def movie_query_all_results(username_input):
     mv_files_results_list = csv.reader(
-        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input))))
+        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), encoding='UTF8'))
 
     mv_query_action = input("ENTER SEARCH QUERY (MOVIES):")
     print()
@@ -654,7 +670,8 @@ def run_picture_graphs():
 
 def bar_graph_options_base(username_input, picture_graph_options_int):
     media_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     movie_years_dict = {}
     movie_decades_dict = {}
     tv_decades_amount_dict = {}
@@ -723,9 +740,11 @@ def bar_graph_options_base(username_input, picture_graph_options_int):
 
 def pie_chart_options_base(username_input, picture_graph_options_int):
     movie_files_results_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input))),
+                   encoding='UTF8'))
     tv_files_results_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input))),
+                   encoding='UTF8'))
 
     m_ten_eighty_found_list = []
     m_seven_twenty_found_list = []
@@ -815,7 +834,8 @@ def pie_chart_options_base(username_input, picture_graph_options_int):
 def search_file_type_totals_movies(username_input, b_totals_query_input_int, picture_graph_options_int,
                                    terminal_graph_options_int):
     movie_file_index = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input))),
+                   encoding='UTF8'))
     extensions_dict = {}
     extensions_totals = {}
 
@@ -871,7 +891,8 @@ def search_file_type_totals_movies(username_input, b_totals_query_input_int, pic
 def search_file_type_totals_tv(username_input, b_totals_query_input_int, picture_graph_options_int,
                                terminal_graph_options_int):
     tv_file_index = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input))),
+                   encoding='UTF8'))
     extensions_dict = {}
     extensions_totals = {}
 
@@ -968,7 +989,8 @@ def run_terminal_graphs():
 
 def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
     media_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
 
     movie_years_dict = {}
     movie_decades_dict = {}
@@ -1073,9 +1095,11 @@ def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
 
 def terminal_graph_options_base_1(username_input, terminal_graph_options_int):
     movie_files_results_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input))),
+                   encoding='UTF8'))
     tv_files_results_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input))),
+                   encoding='UTF8'))
 
     m_ten_eighty_found_list = []
     m_seven_twenty_found_list = []
@@ -1188,7 +1212,8 @@ def totals_query():
 
 def movie_titles_amount(username_input):
     media_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     movie_amounts_list = []
     for counted_movie_title in media_index_list:
         if movie_string in counted_movie_title:
@@ -1204,9 +1229,11 @@ def movie_titles_amount(username_input):
 
 def tv_titles_amount(username_input):
     media_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     tv_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-FILES-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-FILES-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     tv_amounts_list = []
     episode_amounts_list = []
     for counted_tv_title in media_index_list:
@@ -1233,9 +1260,11 @@ def tv_titles_amount(username_input):
 
 def library_total_amount(username_input):
     media_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     tv_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-FILES-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-FILES-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     tv_amounts_list = []
     episode_amounts_list = []
     movie_amounts_list = []
@@ -1279,7 +1308,8 @@ def library_total_amount(username_input):
 
 def total_tv_episodes_in_show_title(username_input):
     tv_results_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input))),
+                   encoding='UTF8'))
     tv_amounts = []
     tv_show_episodes_found = []
     tv_show_found = {}
@@ -1307,7 +1337,8 @@ def total_tv_episodes_in_show_title(username_input):
 
 def movie_year_totals(username_input):
     media_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     movie_years_amount_dict = {}
     print("ENTER A YEAR:")
     print()
@@ -1338,7 +1369,8 @@ def movie_year_totals(username_input):
 
 def movie_decades_totals(username_input):
     media_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     movie_years_decades_dict = {}
     for media_movie in media_index_list:
         media_movie_year = re.split("(.+) \((\d{4})\)", media_movie[2], flags=0)
@@ -1363,7 +1395,8 @@ def movie_decades_totals(username_input):
 
 def tv_year_totals(username_input):
     media_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     tv_years_amount_dict = {}
     print("ENTER A YEAR:")
     print()
@@ -1394,7 +1427,8 @@ def tv_year_totals(username_input):
 
 def tv_decades_totals(username_input):
     media_index_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input))),
+                   encoding='UTF8'))
     tv_years_decades_amount_dict = {}
     for media_tv in media_index_list:
         media_tv_year = re.split("(.+) \((\d{4})\)", media_tv[2], flags=0)
@@ -1530,7 +1564,7 @@ def scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_in
             tv_title_items.append(title_item_check)
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MEDIA-INDEX.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.writer(f)
         for file_row in movie_title_items:
             csv_writer.writerow(file_row)
@@ -1569,25 +1603,25 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
                     m_srt_file_results.append([root + '/' + alt_file])
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-INDEX.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.writer(f)
         for movie_row in sorted(movie_all_results):
             csv_writer.writerow(movie_row)
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-FILES-INDEX.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.writer(f)
         for movie_row in sorted(movie_file_results):
             csv_writer.writerow(movie_row)
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-NFO-INDEX.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.writer(f)
         for movie_row in sorted(m_nfo_file_results):
             csv_writer.writerow(movie_row)
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-SRT-INDEX.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.writer(f)
         for movie_row in sorted(m_srt_file_results):
             csv_writer.writerow(movie_row)
@@ -1621,25 +1655,25 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
                     t_srt_file_results.append([root + '/' + alt_file])
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-INDEX.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.writer(f)
         for tv_row in sorted(tv_show_all_results):
             csv_writer.writerow(tv_row)
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-FILES-INDEX.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.writer(f)
         for tv_row in sorted(tv_show_file_results):
             csv_writer.writerow(tv_row)
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-NFO-INDEX.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.writer(f)
         for tv_row in sorted(t_nfo_file_results):
             csv_writer.writerow(tv_row)
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-SRT-INDEX.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.writer(f)
         for tv_row in sorted(t_srt_file_results):
             csv_writer.writerow(tv_row)
@@ -1647,7 +1681,7 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
 
 def movie_index_all_results(username_input):
     movie_index = csv.reader(
-        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-INDEX.csv'.format(username_input))))
+        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-INDEX.csv'.format(username_input))), encoding='UTF8')
 
     movie_index_file_results = {}
 
@@ -1686,7 +1720,7 @@ def movie_index_all_results(username_input):
                         movie_index_file_results[title_key]["RUN-TIME"] = line
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "RESOLUTION", "FILE-TYPE", "PLOT", "RATING",
                                         "RUN-TIME"])
         for movie_row in movie_index_file_results.values():
@@ -1695,7 +1729,7 @@ def movie_index_all_results(username_input):
 
 def tv_index_all_results(username_input):
     tv_index = csv.reader(
-        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-INDEX.csv'.format(username_input))))
+        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-INDEX.csv'.format(username_input))), encoding='UTF8')
 
     tv_index_file_results = {}
 
@@ -1743,7 +1777,7 @@ def tv_index_all_results(username_input):
                         tv_index_file_results[title_key].update({"RUN-TIME": line})
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "EPISODE TITLE", "SEASON", "EPISODE NUMBER",
                                         "RESOLUTION", "FILE-TYPE", "PLOT", "RATING", "RUN-TIME"])
         for tv_row in tv_index_file_results.values():
@@ -1757,7 +1791,8 @@ def create_media_files_index_results_csv(username_input):
 
 def movie_index_update_results(username_input):
     movie_index = csv.reader(
-        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/UPDATES-TO-MOVIE-INDEX.csv'.format(username_input))))
+        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/UPDATES-TO-MOVIE-INDEX.csv'.format(username_input))),
+        encoding='UTF8')
 
     movie_index_file_results = {}
 
@@ -1796,7 +1831,7 @@ def movie_index_update_results(username_input):
                         movie_index_file_results[title_key]["RUN-TIME"] = line
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), "a",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "RESOLUTION", "FILE-TYPE", "PLOT", "RATING",
                                         "RUN-TIME"])
         for movie_row in movie_index_file_results.values():
@@ -1853,7 +1888,7 @@ def tv_show_index_update_results(username_input):
                         tv_index_file_results[title_key].update({"RUN-TIME": line})
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), "a",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "EPISODE TITLE", "SEASON", "EPISODE NUMBER",
                                         "RESOLUTION", "FILE-TYPE", "PLOT", "RATING", "RUN-TIME"])
         for tv_row in tv_index_file_results.values():
@@ -1862,10 +1897,10 @@ def tv_show_index_update_results(username_input):
 
 def re_sort_csv_indices(username_input):
     movie_results = csv.reader(
-        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), "r"))
+        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), "r", encoding='UTF8'))
     sorted_movie_results = sorted(movie_results, key=lambda row: row[0])
     tv_results = csv.reader(
-        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), "r"))
+        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), "r", encoding='UTF8'))
     sorted_tv_results = sorted(tv_results, key=lambda row: row[0])
     movie_results_file = []
     tv_results_file = []
@@ -1874,7 +1909,7 @@ def re_sort_csv_indices(username_input):
         movie_results_file.append(line)
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.writer(f)
         for movie_row in movie_results_file:
             csv_writer.writerow(movie_row)
@@ -1883,7 +1918,7 @@ def re_sort_csv_indices(username_input):
         tv_results_file.append(line)
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), "w",
-              newline="") as f:
+              newline="", encoding='UTF8') as f:
         csv_writer = csv.writer(f)
         for tv_row in tv_results_file:
             csv_writer.writerow(tv_row)
@@ -1891,9 +1926,11 @@ def re_sort_csv_indices(username_input):
 
 def create_updated_media_files_index_results_csv(username_input):
     movie_updates = csv.reader(
-        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/UPDATES-TO-MOVIE-INDEX.csv'.format(username_input))))
+        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/UPDATES-TO-MOVIE-INDEX.csv'.format(username_input))),
+        encoding='UTF8')
     tv_updates = csv.reader(
-        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/UPDATES-TO-TV-INDEX.csv'.format(username_input))))
+        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/UPDATES-TO-TV-INDEX.csv'.format(username_input))),
+        encoding='UTF8')
 
     for movies in movie_updates:
         if int(len(movies)) != 0:
@@ -1930,25 +1967,25 @@ def compare_old_and_updated_indices_and_create_differences_files(username_input,
                                             tv_alt_dir_input)
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/OLD-MOVIE-INDEX.csv'.format(username_input)),
-              'r') as mi_0, open(
-        os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-INDEX.csv'.format(username_input)), 'r') as mi_1:
+              'r', encoding='UTF8') as mi_0, open(
+        os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-INDEX.csv'.format(username_input)), 'r', encoding='UTF8') as mi_1:
         old_movie_index = mi_0.readlines()
         new_movie_index = mi_1.readlines()
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/UPDATES-TO-MOVIE-INDEX.csv'.format(username_input)),
-              'w') as outFile:
+              'w', encoding='UTF8') as outFile:
         for line in new_movie_index:
             if line not in old_movie_index:
                 outFile.write(line)
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/OLD-TV-INDEX.csv'.format(username_input)),
-              'r') as ti_0, open(
-        os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-INDEX.csv'.format(username_input)), 'r') as ti_1:
+              'r', encoding='UTF8') as ti_0, open(
+        os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-INDEX.csv'.format(username_input)), 'r', encoding='UTF8') as ti_1:
         old_tv_index = ti_0.readlines()
         new_tv_index = ti_1.readlines()
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/UPDATES-TO-TV-INDEX.csv'.format(username_input)),
-              'w') as outFile:
+              'w', encoding='UTF8') as outFile:
         for line in new_tv_index:
             if line not in old_tv_index:
                 outFile.write(line)
@@ -1962,15 +1999,15 @@ def compare_movie_results_file_and_create_differences_files(username_input):
     print()
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)),
-              'r') as m_0, open(
+              'r', encoding='UTF8') as m_0, open(
         os.path.expanduser(
             r'~/{0}/'.format(username_input)) + username_input_x + '-MEDIA-INDEX/MOVIE-RESULTS.csv',
-        'r') as m_1:
+        'r', encoding='UTF8') as m_1:
         movie_results = m_0.readlines()
         alt_movie_results = m_1.readlines()
 
         with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/'.format(username_input)) + username_input_x +
-                  '-MOVIE-COMPARISON-RESULTS.csv', 'w') as outFile_m:
+                  '-MOVIE-COMPARISON-RESULTS.csv', 'w', encoding='UTF8') as outFile_m:
             for line in compare_results(movie_results, alt_movie_results):
                 outFile_m.write(line)
 
@@ -1983,15 +2020,15 @@ def compare_tv_results_file_and_create_differences_files(username_input):
     print()
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)),
-              'r') as t_0, open(
+              'r', encoding='UTF8') as t_0, open(
         os.path.expanduser(
             r'~/{0}/'.format(username_input)) + username_input_x + '-MEDIA-INDEX/TV-RESULTS.csv',
-        'r') as t_1:
+        'r', encoding='UTF8') as t_1:
         tv_results = t_0.readlines()
         alt_tv_results = t_1.readlines()
 
         with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/'.format(username_input)) + username_input_x +
-                  '-TV-COMPARISON-RESULTS.csv', 'w') as outFile_t:
+                  '-TV-COMPARISON-RESULTS.csv', 'w', encoding='UTF8') as outFile_t:
             for line in compare_results(tv_results, alt_tv_results):
                 outFile_t.write(line)
 
