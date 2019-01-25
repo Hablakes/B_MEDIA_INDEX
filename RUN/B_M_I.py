@@ -417,7 +417,8 @@ def movie_query_all_results(username_input):
 
 def tv_query_all_results(username_input):
     tv_files_results_list = list(
-        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)))))
+        csv.reader(open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)),
+                        encoding='UTF8')))
 
     tv_show_query_action = input("ENTER SEARCH QUERY (TV SHOWS):")
     print()
