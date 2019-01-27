@@ -1646,7 +1646,7 @@ def tv_index_all_results(username_input):
 
 
 def create_media_files_index_results_csv(username_input):
-#    movie_index_all_results(username_input)
+    movie_index_all_results(username_input)
     tv_index_all_results(username_input)
 
 
@@ -1661,13 +1661,28 @@ def movie_index_update_results(username_input):
     movie_results = csv.reader(
         open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), encoding='UTF8'))
 
-    movie_update_results_list = []
+    movie_index_results_list = []
 
     movie_index_file_results = {}
 
+    for found_index_file in movie_index:
+        movie_index_results_list.append(found_index_file[0].rsplit('/', 1)[-1])
+
     for found_movie_file in movie_results:
-        if found_movie_file[8] in list(movie_index):
-            movie_update_results_list.append(found_movie_file)
+        found_movie_filename = found_movie_file[8]
+        if found_movie_filename in movie_index_results_list:
+            if found_movie_filename not in movie_index_file_results:
+                movie_index_file_results[found_movie_filename] = {}
+
+            movie_index_file_results[found_movie_filename]["DIRECTORY"] = found_movie_file[0]
+            movie_index_file_results[found_movie_filename]["TITLE"] = found_movie_file[1]
+            movie_index_file_results[found_movie_filename]["YEAR"] = found_movie_file[2]
+            movie_index_file_results[found_movie_filename]["RESOLUTION"] = found_movie_file[3]
+            movie_index_file_results[found_movie_filename]["FILE-TYPE"] = found_movie_file[4]
+            movie_index_file_results[found_movie_filename]["PLOT"] = found_movie_file[5]
+            movie_index_file_results[found_movie_filename]["RATING"] = found_movie_file[6]
+            movie_index_file_results[found_movie_filename]["RUN-TIME"] = found_movie_file[7]
+            movie_index_file_results[found_movie_filename]["FILENAME"] = found_movie_file[8]
 
     for movie_file in sorted(movie_index_update):
 
@@ -1706,13 +1721,11 @@ def movie_index_update_results(username_input):
                     if '<runtime>' in line:
                         movie_index_file_results[title_key]["RUN-TIME"] = line
 
-    for movie_items in movie_index_file_results.values():
-        movie_update_results_list.append(movie_items)
-
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), "w",
               newline="", encoding='UTF8') as f:
-        csv_writer = csv.writer(f)
-        for movie_row in movie_update_results_list:
+        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "RESOLUTION", "FILE-TYPE", "PLOT", "RATING",
+                                        "RUN-TIME", "FILENAME"])
+        for movie_row in movie_index_file_results.values():
             csv_writer.writerow(movie_row)
 
 
@@ -1726,13 +1739,31 @@ def tv_show_index_update_results(username_input):
     tv_results = csv.reader(
         open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), encoding='UTF8'))
 
-    tv_update_results_list = []
+    tv_index_results_list = []
 
     tv_index_file_results = {}
 
+    for found_index_file in tv_index:
+        tv_index_results_list.append(found_index_file[0].rsplit('/', 1)[-1])
+
     for found_tv_file in tv_results:
-        if found_tv_file[11] in list(tv_index):
-            tv_update_results_list.append(found_tv_file)
+        found_tv_filename = found_tv_file[11]
+        if found_tv_filename in tv_index_results_list:
+            if found_tv_filename not in tv_index_file_results:
+                tv_index_file_results[found_tv_filename] = {}
+
+            tv_index_file_results[found_tv_filename]["DIRECTORY"] = found_tv_file[0]
+            tv_index_file_results[found_tv_filename]["TITLE"] = found_tv_file[1]
+            tv_index_file_results[found_tv_filename]["YEAR"] = found_tv_file[2]
+            tv_index_file_results[found_tv_filename]["EPISODE TITLE"] = found_tv_file[3]
+            tv_index_file_results[found_tv_filename]["SEASON"] = found_tv_file[4]
+            tv_index_file_results[found_tv_filename]["EPISODE NUMBER"] = found_tv_file[5]
+            tv_index_file_results[found_tv_filename]["RESOLUTION"] = found_tv_file[6]
+            tv_index_file_results[found_tv_filename]["FILE-TYPE"] = found_tv_file[7]
+            tv_index_file_results[found_tv_filename]["PLOT"] = found_tv_file[8]
+            tv_index_file_results[found_tv_filename]["RATING"] = found_tv_file[9]
+            tv_index_file_results[found_tv_filename]["RUN-TIME"] = found_tv_file[10]
+            tv_index_file_results[found_tv_filename]["FILENAME"] = found_tv_file[11]
 
     for tv_file in sorted(tv_index_update):
 
@@ -1780,13 +1811,11 @@ def tv_show_index_update_results(username_input):
                     if '<runtime>' in line:
                         tv_index_file_results[title_key].update({"RUN-TIME": line})
 
-    for tv_items in tv_index_file_results.values():
-        tv_update_results_list.append(tv_items)
-
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), "w",
               newline="", encoding='UTF8') as f:
-        csv_writer = csv.writer(f)
-        for tv_row in tv_update_results_list:
+        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "EPISODE TITLE", "SEASON", "EPISODE NUMBER",
+                                        "RESOLUTION", "FILE-TYPE", "PLOT", "RATING", "RUN-TIME", "FILENAME"])
+        for tv_row in tv_index_file_results.values():
             csv_writer.writerow(tv_row)
 
 
