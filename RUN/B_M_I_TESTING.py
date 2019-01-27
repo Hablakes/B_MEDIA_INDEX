@@ -1949,7 +1949,8 @@ def search_movie_plots(username_input):
     sep()
     for items in plots_list:
         if plot_search_lower in items.lower():
-            print(items)
+            print()
+            print(textwrap.fill(items, 80))
     sep()
 
 
@@ -1965,7 +1966,8 @@ def search_tv_plots(username_input):
     sep()
     for items in plots_list:
         if plot_search_lower in items.lower():
-            print(items)
+            print()
+            print(textwrap.fill(items, 80))
     sep()
 
 
@@ -1985,7 +1987,8 @@ def search_all_plots(username_input):
     sep()
     for items in plots_list:
         if plot_search_lower in items.lower():
-            print(items)
+            print()
+            print(textwrap.fill(items, 80))
     sep()
 
 
