@@ -1553,7 +1553,12 @@ def movie_index_all_results(username_input):
 
             title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
 
-            test = pymediainfo.MediaInfo.parse(movie_file[0])
+            try:
+                test = pymediainfo.MediaInfo.parse(movie_file[0])
+            except OSError as e:  # If an OSError happens, it enters the below Block.
+                print("OSError on {}".format(movie_file[0]))  # Print what File it crashed on
+                print(e)  # Print the Error
+                continue  # Continue to next Item
 
             for track in test.tracks:
 
@@ -1566,16 +1571,21 @@ def movie_index_all_results(username_input):
                     movie_index_file_results[title_key]["FILENAME"] = filename_key
 
         elif movie_file[0].lower().endswith(nfo_extensions):
-            with open(movie_file[0]) as f:
-                for line in f.readlines():
-                    if '<plot>' in line:
-                        movie_index_file_results[title_key]["PLOT"] = line
+            try:
+                with open(movie_file[0]) as f:
+                    for line in f.readlines():
+                        if '<plot>' in line:
+                            movie_index_file_results[title_key]["PLOT"] = line
 
-                    if '<rating>' in line:
-                        movie_index_file_results[title_key]["RATING"] = line
+                        if '<rating>' in line:
+                            movie_index_file_results[title_key]["RATING"] = line
 
-                    if '<runtime>' in line:
-                        movie_index_file_results[title_key]["RUN-TIME"] = line
+                        if '<runtime>' in line:
+                            movie_index_file_results[title_key]["RUN-TIME"] = line
+            except Exception as e:
+                print(e)  # Print the Error
+                print(movie_file[0])  # Print the File it was opening when the Error happened
+                continue  # Continue on to the next Item
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), "w",
               newline="", encoding='UTF8') as f:
@@ -1606,7 +1616,12 @@ def tv_index_all_results(username_input):
 
             title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
 
-            test = pymediainfo.MediaInfo.parse(tv_file[0])
+            try:
+                test = pymediainfo.MediaInfo.parse(tv_file[0])
+            except OSError as e:  # If an OSError happens, it enters the below Block.
+                print("OSError on {}".format(tv_file[0]))  # Print what File it crashed on
+                print(e)  # Print the Error
+                continue  # Continue to next Item
 
             for track in test.tracks:
 
@@ -1626,16 +1641,21 @@ def tv_index_all_results(username_input):
             if title_key not in tv_index_file_results:
                 tv_index_file_results[title_key] = {}
 
-            with open(tv_file[0]) as f:
-                for line in f.readlines():
-                    if '<plot>' in line:
-                        tv_index_file_results[title_key].update({"PLOT": line})
+                try:
+                    with open(tv_file[0]) as f:
+                        for line in f.readlines():
+                            if '<plot>' in line:
+                                tv_index_file_results[title_key]["PLOT"] = line
 
-                    if '<rating>' in line:
-                        tv_index_file_results[title_key].update({"RATING": line})
+                            if '<rating>' in line:
+                                tv_index_file_results[title_key]["RATING"] = line
 
-                    if '<runtime>' in line:
-                        tv_index_file_results[title_key].update({"RUN-TIME": line})
+                            if '<runtime>' in line:
+                                tv_index_file_results[title_key]["RUN-TIME"] = line
+                except Exception as e:
+                    print(e)  # Print the Error
+                    print(tv_file[0])  # Print the File it was opening when the Error happened
+                    continue  # Continue on to the next Item
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), "w",
               newline="", encoding='UTF8') as f:
@@ -1697,7 +1717,12 @@ def movie_index_update_results(username_input):
 
             title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
 
-            test = pymediainfo.MediaInfo.parse(movie_file[0])
+            try:
+                test = pymediainfo.MediaInfo.parse(movie_file[0])
+            except OSError as e:  # If an OSError happens, it enters the below Block.
+                print("OSError on {}".format(movie_file[0]))  # Print what File it crashed on
+                print(e)  # Print the Error
+                continue  # Continue to next Item
 
             for track in test.tracks:
 
@@ -1711,15 +1736,21 @@ def movie_index_update_results(username_input):
 
         elif movie_file[0].lower().endswith(nfo_extensions):
             with open(movie_file[0]) as f:
-                for line in f.readlines():
-                    if '<plot>' in line:
-                        movie_index_file_results[title_key]["PLOT"] = line
+                try:
+                    with open(movie_file[0]) as f:
+                        for line in f.readlines():
+                            if '<plot>' in line:
+                                movie_index_file_results[title_key]["PLOT"] = line
 
-                    if '<rating>' in line:
-                        movie_index_file_results[title_key]["RATING"] = line
+                            if '<rating>' in line:
+                                movie_index_file_results[title_key]["RATING"] = line
 
-                    if '<runtime>' in line:
-                        movie_index_file_results[title_key]["RUN-TIME"] = line
+                            if '<runtime>' in line:
+                                movie_index_file_results[title_key]["RUN-TIME"] = line
+                except Exception as e:
+                    print(e)  # Print the Error
+                    print(movie_file[0])  # Print the File it was opening when the Error happened
+                    continue  # Continue on to the next Item
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), "w",
               newline="", encoding='UTF8') as f:
@@ -1780,7 +1811,12 @@ def tv_show_index_update_results(username_input):
 
             title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
 
-            test = pymediainfo.MediaInfo.parse(tv_file[0])
+            try:
+                test = pymediainfo.MediaInfo.parse(tv_file[0])
+            except OSError as e:  # If an OSError happens, it enters the below Block.
+                print("OSError on {}".format(tv_file[0]))  # Print what File it crashed on
+                print(e)  # Print the Error
+                continue  # Continue to next Item
 
             for track in test.tracks:
 
@@ -1800,16 +1836,22 @@ def tv_show_index_update_results(username_input):
             if title_key not in tv_index_file_results:
                 tv_index_file_results[title_key] = {}
 
-            with open(tv_file[0]) as f:
-                for line in f.readlines():
-                    if '<plot>' in line:
-                        tv_index_file_results[title_key].update({"PLOT": line})
+                with open(tv_file[0]) as f:
+                    try:
+                        with open(tv_file[0]) as f:
+                            for line in f.readlines():
+                                if '<plot>' in line:
+                                    tv_index_file_results[title_key]["PLOT"] = line
 
-                    if '<rating>' in line:
-                        tv_index_file_results[title_key].update({"RATING": line})
+                                if '<rating>' in line:
+                                    tv_index_file_results[title_key]["RATING"] = line
 
-                    if '<runtime>' in line:
-                        tv_index_file_results[title_key].update({"RUN-TIME": line})
+                                if '<runtime>' in line:
+                                    tv_index_file_results[title_key]["RUN-TIME"] = line
+                    except Exception as e:
+                        print(e)  # Print the Error
+                        print(tv_file[0])  # Print the File it was opening when the Error happened
+                        continue  # Continue on to the next Item
 
     with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), "w",
               newline="", encoding='UTF8') as f:
