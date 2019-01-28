@@ -1499,6 +1499,24 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
         for movie_row in sorted(movie_all_results):
             csv_writer.writerow(movie_row)
 
+    with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-FILES-INDEX.csv'.format(username_input)), "w",
+              newline="", encoding='UTF8') as f:
+        csv_writer = csv.writer(f)
+        for movie_row in sorted(movie_file_results):
+            csv_writer.writerow(movie_row)
+
+    with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-NFO-INDEX.csv'.format(username_input)), "w",
+              newline="", encoding='UTF8') as f:
+        csv_writer = csv.writer(f)
+        for movie_row in sorted(m_nfo_file_results):
+            csv_writer.writerow(movie_row)
+
+    with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-SRT-INDEX.csv'.format(username_input)), "w",
+              newline="", encoding='UTF8') as f:
+        csv_writer = csv.writer(f)
+        for movie_row in sorted(m_srt_file_results):
+            csv_writer.writerow(movie_row)
+
     tv_show_all_results = []
     tv_show_file_results = []
     t_nfo_file_results = []
@@ -1531,6 +1549,24 @@ def search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_
               newline="", encoding='UTF8') as f:
         csv_writer = csv.writer(f)
         for tv_row in sorted(tv_show_all_results):
+            csv_writer.writerow(tv_row)
+
+    with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-FILES-INDEX.csv'.format(username_input)), "w",
+              newline="", encoding='UTF8') as f:
+        csv_writer = csv.writer(f)
+        for tv_row in sorted(tv_show_file_results):
+            csv_writer.writerow(tv_row)
+
+    with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-NFO-INDEX.csv'.format(username_input)), "w",
+              newline="", encoding='UTF8') as f:
+        csv_writer = csv.writer(f)
+        for tv_row in sorted(t_nfo_file_results):
+            csv_writer.writerow(tv_row)
+
+    with open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-SRT-INDEX.csv'.format(username_input)), "w",
+              newline="", encoding='UTF8') as f:
+        csv_writer = csv.writer(f)
+        for tv_row in sorted(t_srt_file_results):
             csv_writer.writerow(tv_row)
 
 
