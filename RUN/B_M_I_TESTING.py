@@ -2074,7 +2074,6 @@ def search_movie_plots(username_input):
     plots_list = []
     for plot in movie_results:
         plots_list.append("MOVIE" + ' - ' + plot[0] + ' - ' + plot[5])
-    sep()
     plot_search = input("SEARCH MOVIE PLOTS FOR KEYWORD(S):")
     plot_search_lower = plot_search.lower()
     sep()
@@ -2091,7 +2090,6 @@ def search_tv_plots(username_input):
     plots_list = []
     for plot in tv_results:
         plots_list.append("TV SHOW" + ' - ' + plot[0] + ' - ' + plot[8])
-    sep()
     plot_search = input("SEARCH TV SHOW(S) PLOTS FOR KEYWORD(S):")
     plot_search_lower = plot_search.lower()
     sep()
@@ -2112,7 +2110,6 @@ def search_all_plots(username_input):
         plots_list.append("MOVIE" + ' - ' + plot[0] + ' - ' + plot[5])
     for plot in tv_results:
         plots_list.append("TV SHOW" + ' - ' + plot[0] + ' - ' + plot[8])
-    sep()
     plot_search = input("SEARCH ALL MEDIA PLOTS FOR KEYWORD(S):")
     plot_search_lower = plot_search.lower()
     sep()
