@@ -1238,6 +1238,8 @@ def total_tv_episodes_in_show_title(username_input):
         print()
         print(item)
         sep()
+    print("# OF EPISODES TOTAL: ", sum(tv_show_found.values()))
+    sep()
 
 
 def movie_year_totals(username_input):
