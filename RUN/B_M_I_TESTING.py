@@ -1371,49 +1371,39 @@ def tv_decades_totals(username_input):
 def create_media_indices_all():
     print(pyfiglet.figlet_format("INDEX-OPTIONS", font="cybermedium"))
     sep()
-    print("1) CREATE NEW MEDIA INDICES              -  2) UPDATE MEDIA INDEX")
+    print("1) CREATE NEW PARSE-RESULTS INDICES      -  2) UPDATE PARSE-RESULTS INDICES")
     print()
-    print("3) CREATE NEW PARSE-RESULTS INDICES      -  4) UPDATE PARSE-RESULTS INDICES")
+    print("3) CREATE ALL NEW INDICES                -  4) UPDATE ALL INDICES")
     print()
-    print("5) CREATE ALL NEW INDICES                -  6) UPDATE ALL INDICES")
-    print()
-    print("7) COMPARE AGAINST ANOTHER RESULTS FILE  -  8) EXIT")
+    print("5) COMPARE AGAINST ANOTHER RESULTS FILE  -  6) EXIT")
     sep()
     cmi_input = input("ENTER #")
     sep()
     cmi_action = int(cmi_input)
     if cmi_action == 1:
+        create_media_files_index_results_csv(username_input)
+    elif cmi_action == 2:
+        compare_old_and_updated_indices_and_create_differences_files(
+            username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
+        create_updated_media_files_index_results_csv(username_input)
+        re_sort_csv_indices(username_input)
+    elif cmi_action == 3:
         scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input,
                                           movie_alt_dir_input, tv_alt_dir_input)
         search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input,
                                                 movie_alt_dir_input, tv_alt_dir_input)
-    elif cmi_action == 2:
-        compare_old_and_updated_indices_and_create_differences_files(
-            username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
-    elif cmi_action == 3:
         create_media_files_index_results_csv(username_input)
     elif cmi_action == 4:
+        scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input,
+                                          movie_alt_dir_input, tv_alt_dir_input)
         compare_old_and_updated_indices_and_create_differences_files(
             username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
         create_updated_media_files_index_results_csv(username_input)
         re_sort_csv_indices(username_input)
     elif cmi_action == 5:
-        scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input,
-                                          movie_alt_dir_input, tv_alt_dir_input)
-        search_folder_items_and_save_file_paths(username_input, movie_dir_input, tv_dir_input,
-                                                movie_alt_dir_input, tv_alt_dir_input)
-        create_media_files_index_results_csv(username_input)
-    elif cmi_action == 6:
-        scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input,
-                                          movie_alt_dir_input, tv_alt_dir_input)
-        compare_old_and_updated_indices_and_create_differences_files(
-            username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
-        create_updated_media_files_index_results_csv(username_input)
-        re_sort_csv_indices(username_input)
-    elif cmi_action == 7:
         compare_movie_results_file_and_create_differences_files(username_input)
         compare_tv_results_file_and_create_differences_files(username_input)
-    elif cmi_action == 8:
+    elif cmi_action == 6:
         launch_media_index()
 
 
