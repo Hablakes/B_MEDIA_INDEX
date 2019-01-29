@@ -807,6 +807,7 @@ def search_file_type_totals_movies(username_input, b_totals_query_input_int, pic
         print("TOTAL AMOUNTS OF FILE-TYPES IN MOVIES:")
         print()
         for items in movie_file_type_totals.items():
+            print()
             print(items)
         sep()
 
@@ -833,6 +834,7 @@ def search_file_type_totals_movies(username_input, b_totals_query_input_int, pic
 
         graph = Pyasciigraph()
         for line in graph.graph('MOVIES: FILE-TYPE AMOUNTS', file_type_totals_terminal_graph_list):
+            print()
             print(line)
         sep()
 
@@ -860,6 +862,7 @@ def search_file_type_totals_tv(username_input, b_totals_query_input_int, picture
         print("TOTAL AMOUNTS OF FILE-TYPES IN TV SHOWS:")
         print()
         for items in tv_file_type_totals.items():
+            print()
             print(items)
         sep()
 
@@ -885,6 +888,7 @@ def search_file_type_totals_tv(username_input, b_totals_query_input_int, picture
 
         graph = Pyasciigraph()
         for line in graph.graph('TV SHOWS: FILE-TYPE AMOUNTS', file_type_totals_terminal_graph_list):
+            print()
             print(line)
         sep()
 
@@ -974,6 +978,7 @@ def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
         graph = Pyasciigraph()
 
         for line in graph.graph('MOVIES: YEAR AMOUNTS', movie_years_terminal_graph_list):
+            print()
             print(line)
         sep()
 
@@ -990,6 +995,7 @@ def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
 
         graph = Pyasciigraph()
         for line in graph.graph('TV SHOWS: YEAR AMOUNTS', tv_years_terminal_graph_list):
+            print()
             print(line)
         sep()
 
@@ -1005,6 +1011,7 @@ def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
 
         graph = Pyasciigraph()
         for line in graph.graph('MOVIES: DECADE AMOUNTS', movie_decades_terminal_graph_list):
+            print()
             print(line)
         sep()
 
@@ -1020,6 +1027,7 @@ def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
 
         graph = Pyasciigraph()
         for line in graph.graph('TV SHOWS: DECADE AMOUNTS', tv_decades_terminal_graph_list):
+            print()
             print(line)
         sep()
 
@@ -1079,6 +1087,7 @@ def terminal_graph_options_base_1(username_input, terminal_graph_options_int):
 
         graph = Pyasciigraph()
         for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES', movies_graph_terminal_results):
+            print()
             print(line)
         sep()
 
@@ -1086,6 +1095,7 @@ def terminal_graph_options_base_1(username_input, terminal_graph_options_int):
 
         graph = Pyasciigraph()
         for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES', tv_shows_graph_terminal_results):
+            print()
             print(line)
         sep()
 
