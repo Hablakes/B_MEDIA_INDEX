@@ -211,7 +211,6 @@ def run_sort():
     sep()
     sort_input = input("ENTER #")
     sep()
-    global sort_options_int
     sort_options_int = int(sort_input)
     if sort_options_int == 1:
         sort_function_base(username_input, sort_options_int=1)
@@ -609,7 +608,6 @@ def run_picture_graphs():
     sep()
     picture_graph_options = input("ENTER #")
     sep()
-    global picture_graph_options_int
     picture_graph_options_int = int(picture_graph_options)
     if picture_graph_options_int == 1:
         bar_graph_options_base(username_input, picture_graph_options_int=1)
@@ -641,10 +639,10 @@ def bar_graph_options_base(username_input, picture_graph_options_int):
     movie_decades_dict = {}
     tv_decades_amount_dict = {}
     tv_years_dict = {}
-    movie_year_totals = {}
-    movie_decades_totals = {}
-    tv_year_totals = {}
-    tv_decades_totals = {}
+    movie_year_totals_dict = {}
+    movie_decades_totals_dict = {}
+    tv_year_totals_dict = {}
+    tv_decades_totals_dict = {}
 
     for title_item in media_index_list:
         title_item_year = re.split("(.+) \((\d{4})\)", title_item[2], flags=0)
@@ -669,8 +667,8 @@ def bar_graph_options_base(username_input, picture_graph_options_int):
     if picture_graph_options_int == 1:
 
         for year_values, value in sorted(movie_years_dict.items()):
-            movie_year_totals[year_values] = len(value)
-        x, y = zip(*sorted(movie_year_totals.items()))
+            movie_year_totals_dict[year_values] = len(value)
+        x, y = zip(*sorted(movie_year_totals_dict.items()))
         plt.bar(x, y)
         plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES/MOVIE-YEAR-RESULTS.png'.format(username_input)))
         plt.show()
@@ -678,8 +676,8 @@ def bar_graph_options_base(username_input, picture_graph_options_int):
     if picture_graph_options_int == 2:
 
         for year_values, value in sorted(tv_years_dict.items()):
-            tv_year_totals[year_values] = len(value)
-        x, y = zip(*sorted(tv_year_totals.items()))
+            tv_year_totals_dict[year_values] = len(value)
+        x, y = zip(*sorted(tv_year_totals_dict.items()))
         plt.bar(x, y)
         plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES/TV-YEAR-RESULTS.png'.format(username_input)))
         plt.show()
@@ -687,8 +685,8 @@ def bar_graph_options_base(username_input, picture_graph_options_int):
     if picture_graph_options_int == 3:
 
         for year_values, value in sorted(movie_decades_dict.items()):
-            movie_decades_totals[year_values] = len(value)
-        x, y = zip(*movie_decades_totals.items())
+            movie_decades_totals_dict[year_values] = len(value)
+        x, y = zip(*movie_decades_totals_dict.items())
         plt.bar(x, y, width=5)
         plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES/MOVIE-DECADE-RESULTS.png'.format(username_input)))
         plt.show()
@@ -696,8 +694,8 @@ def bar_graph_options_base(username_input, picture_graph_options_int):
     if picture_graph_options_int == 4:
 
         for year_values, value in sorted(tv_decades_amount_dict.items()):
-            tv_decades_totals[year_values] = len(value)
-        x, y = zip(*tv_decades_totals.items())
+            tv_decades_totals_dict[year_values] = len(value)
+        x, y = zip(*tv_decades_totals_dict.items())
         plt.bar(x, y, width=5)
         plt.savefig(os.path.expanduser(r'~/{0}-MEDIA-INDEX/FILES/TV-DECADE-RESULTS.png'.format(username_input)))
         plt.show()
@@ -918,7 +916,6 @@ def run_terminal_graphs():
     sep()
     terminal_graph_options = input("ENTER #")
     sep()
-    global terminal_graph_options_int
     terminal_graph_options_int = int(terminal_graph_options)
     if terminal_graph_options_int == 1:
         terminal_graph_options_base_0(username_input, terminal_graph_options_int=1)
@@ -951,10 +948,10 @@ def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
     movie_decades_dict = {}
     tv_decades_amount_dict = {}
     tv_years_dict = {}
-    movie_year_totals = {}
-    movie_decades_totals = {}
-    tv_year_totals = {}
-    tv_decades_totals = {}
+    movie_year_totals_dict = {}
+    movie_decades_totals_dict = {}
+    tv_year_totals_dict = {}
+    tv_decades_totals_dict = {}
 
     for title_item in media_index_list:
         title_item_year = re.split("(.+) \((\d{4})\)", title_item[2], flags=0)
@@ -979,8 +976,8 @@ def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
     if terminal_graph_options_int == 1:
 
         for movie_year_values, value in sorted(movie_years_dict.items()):
-            movie_year_totals[movie_year_values] = len(value)
-        movie_data = sorted(movie_year_totals.items())
+            movie_year_totals_dict[movie_year_values] = len(value)
+        movie_data = sorted(movie_year_totals_dict.items())
 
         movie_years_terminal_graph_list = []
 
@@ -997,8 +994,8 @@ def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
     if terminal_graph_options_int == 2:
 
         for tv_year_values, value in sorted(tv_years_dict.items()):
-            tv_year_totals[tv_year_values] = len(value)
-        tv_data = sorted(tv_year_totals.items())
+            tv_year_totals_dict[tv_year_values] = len(value)
+        tv_data = sorted(tv_year_totals_dict.items())
 
         tv_years_terminal_graph_list = []
 
@@ -1014,11 +1011,11 @@ def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
     if terminal_graph_options_int == 3:
 
         for movie_year_values, value in sorted(movie_decades_dict.items()):
-            movie_decades_totals[movie_year_values] = len(value)
+            movie_decades_totals_dict[movie_year_values] = len(value)
 
         movie_decades_terminal_graph_list = []
 
-        for key, value in movie_decades_totals.items():
+        for key, value in movie_decades_totals_dict.items():
             movie_decades_terminal_graph_list.append((str(key), value))
 
         graph = Pyasciigraph()
@@ -1030,11 +1027,11 @@ def terminal_graph_options_base_0(username_input, terminal_graph_options_int):
     if terminal_graph_options_int == 4:
 
         for tv_year_values, value in sorted(tv_decades_amount_dict.items()):
-            tv_decades_totals[tv_year_values] = len(value)
+            tv_decades_totals_dict[tv_year_values] = len(value)
 
         tv_decades_terminal_graph_list = []
 
-        for key, value in tv_decades_totals.items():
+        for key, value in tv_decades_totals_dict.items():
             tv_decades_terminal_graph_list.append((str(key), value))
 
         graph = Pyasciigraph()
@@ -1125,7 +1122,6 @@ def totals_query():
     sep()
     b_totals_query_input = input("ENTER #")
     sep()
-    global b_totals_query_input_int
     b_totals_query_input_int = int(b_totals_query_input)
     if b_totals_query_input_int == 1:
         movie_year_totals(username_input)
@@ -1953,10 +1949,10 @@ def re_sort_csv_indices(username_input):
 def create_updated_media_files_index_results_csv(username_input):
     movie_updates = csv.reader(
         open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/UPDATES-TO-MOVIE-INDEX.csv'.format(username_input)),
-        encoding='UTF8'))
+             encoding='UTF8'))
     tv_updates = csv.reader(
         open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/UPDATES-TO-TV-INDEX.csv'.format(username_input)),
-        encoding='UTF8'))
+             encoding='UTF8'))
 
     for movies in movie_updates:
         if int(len(movies)) != 0:
