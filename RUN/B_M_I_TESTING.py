@@ -243,16 +243,24 @@ def sort_function_base(username_input, sort_options_int):
     sorted_year_r = sorted(media_index, key=lambda x: (x[0], x[2]), reverse=True)
     if sort_options_int == 1:
         for title_item in sorted_title:
+            print()
             print(title_item)
+        sep()
     elif sort_options_int == 2:
         for title_item in sorted_title_r:
+            print()
             print(title_item)
+        sep()
     elif sort_options_int == 3:
         for title_item in sorted_year:
+            print()
             print(title_item)
+        sep()
     elif sort_options_int == 4:
         for title_item in sorted_year_r:
+            print()
             print(title_item)
+        sep()
 
 
 def total_tv_episodes_sort_function_base(username_input, sort_options_int):
@@ -273,20 +281,24 @@ def total_tv_episodes_sort_function_base(username_input, sort_options_int):
     sorted_by_value_a = sorted(tv_show_found.items(), key=lambda kv: kv[1], reverse=True)
     if sort_options_int == 5:
         for item in sorted_by_key_d:
+            print()
             print(item)
-            sep()
+        sep()
     if sort_options_int == 6:
         for item in sorted_by_key_a:
+            print()
             print(item)
-            sep()
+        sep()
     if sort_options_int == 7:
         for item in sorted_by_value_d:
+            print()
             print(item)
-            sep()
+        sep()
     if sort_options_int == 8:
         for item in sorted_by_value_a:
+            print()
             print(item)
-            sep()
+        sep()
 
 
 def run_file_query_and_sort():
