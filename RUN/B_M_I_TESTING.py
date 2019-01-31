@@ -198,6 +198,58 @@ def tv_title_search(username_input):
     sep()
 
 
+def search_movie_plots(username_input):
+    movie_results = csv.reader(
+        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), encoding='UTF8'))
+    plots_list = []
+    for plot in movie_results:
+        plots_list.append("MOVIE" + ' - ' + plot[0] + ' - ' + plot[5])
+    plot_search = input("SEARCH MOVIE PLOTS FOR KEYWORD(S):")
+    plot_search_lower = plot_search.lower()
+    sep()
+    for items in plots_list:
+        if plot_search_lower in items.lower():
+            print()
+            print(textwrap.fill(items, 80))
+    sep()
+
+
+def search_tv_plots(username_input):
+    tv_results = csv.reader(
+        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), encoding='UTF8'))
+    plots_list = []
+    for plot in tv_results:
+        plots_list.append("TV SHOW" + ' - ' + plot[0] + ' - ' + plot[8])
+    plot_search = input("SEARCH TV SHOW(S) PLOTS FOR KEYWORD(S):")
+    plot_search_lower = plot_search.lower()
+    sep()
+    for items in plots_list:
+        if plot_search_lower in items.lower():
+            print()
+            print(textwrap.fill(items, 80))
+    sep()
+
+
+def search_all_plots(username_input):
+    movie_results = csv.reader(
+        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), encoding='UTF8'))
+    tv_results = csv.reader(
+        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), encoding='UTF8'))
+    plots_list = []
+    for plot in movie_results:
+        plots_list.append("MOVIE" + ' - ' + plot[0] + ' - ' + plot[5])
+    for plot in tv_results:
+        plots_list.append("TV SHOW" + ' - ' + plot[0] + ' - ' + plot[8])
+    plot_search = input("SEARCH ALL MEDIA PLOTS FOR KEYWORD(S):")
+    plot_search_lower = plot_search.lower()
+    sep()
+    for items in plots_list:
+        if plot_search_lower in items.lower():
+            print()
+            print(textwrap.fill(items, 80))
+    sep()
+
+
 def run_sort():
     print(pyfiglet.figlet_format("SORT-OPTIONS", font="cybermedium"))
     sep()
@@ -2052,58 +2104,6 @@ def compare_results(results_user, results_other):
             output.append('DO NOT HAVE: ' + line)
 
     return output
-
-
-def search_movie_plots(username_input):
-    movie_results = csv.reader(
-        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), encoding='UTF8'))
-    plots_list = []
-    for plot in movie_results:
-        plots_list.append("MOVIE" + ' - ' + plot[0] + ' - ' + plot[5])
-    plot_search = input("SEARCH MOVIE PLOTS FOR KEYWORD(S):")
-    plot_search_lower = plot_search.lower()
-    sep()
-    for items in plots_list:
-        if plot_search_lower in items.lower():
-            print()
-            print(textwrap.fill(items, 80))
-    sep()
-
-
-def search_tv_plots(username_input):
-    tv_results = csv.reader(
-        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), encoding='UTF8'))
-    plots_list = []
-    for plot in tv_results:
-        plots_list.append("TV SHOW" + ' - ' + plot[0] + ' - ' + plot[8])
-    plot_search = input("SEARCH TV SHOW(S) PLOTS FOR KEYWORD(S):")
-    plot_search_lower = plot_search.lower()
-    sep()
-    for items in plots_list:
-        if plot_search_lower in items.lower():
-            print()
-            print(textwrap.fill(items, 80))
-    sep()
-
-
-def search_all_plots(username_input):
-    movie_results = csv.reader(
-        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/MOVIE-RESULTS.csv'.format(username_input)), encoding='UTF8'))
-    tv_results = csv.reader(
-        open(os.path.expanduser(r'~/{0}-MEDIA-INDEX/TV-RESULTS.csv'.format(username_input)), encoding='UTF8'))
-    plots_list = []
-    for plot in movie_results:
-        plots_list.append("MOVIE" + ' - ' + plot[0] + ' - ' + plot[5])
-    for plot in tv_results:
-        plots_list.append("TV SHOW" + ' - ' + plot[0] + ' - ' + plot[8])
-    plot_search = input("SEARCH ALL MEDIA PLOTS FOR KEYWORD(S):")
-    plot_search_lower = plot_search.lower()
-    sep()
-    for items in plots_list:
-        if plot_search_lower in items.lower():
-            print()
-            print(textwrap.fill(items, 80))
-    sep()
 
 
 first_launch_dirs()
