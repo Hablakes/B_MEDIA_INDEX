@@ -32,7 +32,7 @@ B-MEDIA-INDEX USAGE(S):
 4) Enter any alternate Directories for Movies and TV Shows
 5) Allow the Program to create a new Folders Index (Quick)
 6) MAIN SCREEN, Option #6 - INDEXING
-7) Option #5 - CREATE ALL NEW INDICES (** THIS WILL TAKE AWHILE IF YOU HAVE A LARGE LIBRARY **)
+7) Option #3 - CREATE ALL NEW INDICES (** THIS WILL TAKE AWHILE IF YOU HAVE A LARGE LIBRARY **)
 8) When step 7 is complete, you will have full functionality for the MEDIA-INDEX.
 
 * IF NOT FIRST TIME RUNNING
