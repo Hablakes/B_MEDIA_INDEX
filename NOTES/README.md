@@ -1,5 +1,5 @@
 # B-MEDIA-INDEX
-Python // Media-Index
+Python // Custom Python Media-Index
 
 -------------------------------------------------------------------------------------------------
 ** YOU WILL GET THE BEST RESULTS ON LINUX (Arch Based Systems Specifically) **
