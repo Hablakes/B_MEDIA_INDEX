@@ -9,6 +9,7 @@ import pymediainfo
 
 import matplotlib.pylab as plt
 import numpy as np
+
 from tkinter import filedialog
 from tkinter import *
 
@@ -31,6 +32,33 @@ def compare_results(results_user, results_other):
     return output
 
 
+def launch_media_index():
+    sep()
+    print(pyfiglet.figlet_format("MEDIA-INDEX", font="cybermedium"))
+    sep()
+    print("1) QUERIES - 2) SORTING - 3) FILE DATA/INFO - 4) GRAPHS - 5) TOTALS - 6) INDEXING")
+    print()
+    print("0) EXIT")
+    sep()
+    lmi_input = input("ENTER #")
+    sep()
+    lmi_action = int(lmi_input)
+    if lmi_action == 1:
+        pass
+    elif lmi_action == 2:
+        pass
+    elif lmi_action == 3:
+        pass
+    elif lmi_action == 4:
+        pass
+    elif lmi_action == 5:
+        pass
+    elif lmi_action == 6:
+        pass
+    elif lmi_action == 0:
+        exit()
+
+
 def select_directory_with_tk_gui():
     root = Tk()
     root.withdraw()
@@ -45,4 +73,4 @@ def sep():
         print(lines)
 
 
-select_directory_with_tk_gui()
+launch_media_index()
