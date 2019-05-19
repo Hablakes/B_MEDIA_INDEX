@@ -10,15 +10,27 @@ import pymediainfo
 import matplotlib.pylab as plt
 import numpy as np
 
+from ascii_graph import Pyasciigraph
+
 from tkinter import filedialog
 from tkinter import *
 
-from ascii_graph import Pyasciigraph
-
-
-directory_selected_in_gui_list = []
 
 username_input = None
+
+media_index_folder = '~/{0}_MEDIA_INDEX'
+
+
+all_extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
+                  ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
+                  ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm",
+                  ".rmvb", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm", ".nfo",
+                  ".srt")
+
+video_extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
+                    ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
+                    ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm",
+                    ".rmvb", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
 
 
 def compare_results(results_user, results_other):
@@ -39,8 +51,6 @@ def first_launch_dirs():
     separator()
 
     global username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
-
-    media_index_folder = '~/{0}_MEDIA_INDEX'
 
     username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
     separator()
@@ -83,7 +93,7 @@ def launch_media_index():
     first_launch_dirs()
     print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
     separator()
-    print("1) QUERIES - 2) SORTING - 3) FILE DATA/INFO - 4) GRAPHS - 5) TOTALS - 6) INDEXING")
+    print("1) SEARCH DATABASE")
     print()
     print("0) EXIT")
     separator()
@@ -91,17 +101,8 @@ def launch_media_index():
     separator()
     lmi_input_action = int(lmi_input)
     if lmi_input_action == 1:
-        pass
-    elif lmi_input_action == 2:
-        pass
-    elif lmi_input_action == 3:
-        pass
-    elif lmi_input_action == 4:
-        pass
-    elif lmi_input_action == 5:
-        pass
-    elif lmi_input_action == 6:
-        pass
+        walk_directories_and_create_indices(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
+                                            tv_alt_dir_input)
     elif lmi_input_action == 0:
         exit()
 
@@ -118,6 +119,75 @@ def select_directory_with_tk_gui():
 def separator():
     for lines in "\n", '-' * 100, "\n":
         print(lines)
+
+
+def walk_directories_and_create_indices(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
+                                        tv_alt_dir_input):
+    movie_all_files_results = []
+    movie_video_files_results = []
+
+    if movie_dir_input is not str(''):
+
+        for root, dirs, files in os.walk(movie_dir_input):
+            for movie_file in sorted(files):
+                if movie_file.lower().endswith(all_extensions):
+                    movie_all_files_results.append([root + '/' + movie_file])
+                if movie_file.lower().endswith(video_extensions):
+                    movie_video_files_results.append([root + '/' + movie_file])
+
+    if movie_alt_dir_input is not str(''):
+
+        for root, dirs, files in os.walk(movie_alt_dir_input):
+            for alt_file in sorted(files):
+                if alt_file.lower().endswith(all_extensions):
+                    movie_all_files_results.append([root + '/' + alt_file])
+                if alt_file.lower().endswith(video_extensions):
+                    movie_video_files_results.append([root + '/' + alt_file])
+
+    with open(os.path.expanduser((media_index_folder + '/MOVIE_INDEX_ALL_FILES.csv').format(username_input)), "w",
+              encoding='UTF8', newline="") as f:
+        csv_writer = csv.writer(f)
+        for movie_row in sorted(movie_all_files_results):
+            csv_writer.writerow(movie_row)
+
+    with open(os.path.expanduser((media_index_folder + '/MOVIE_INDEX_VIDEO_FILES.csv').format(username_input)), "w",
+              encoding='UTF8', newline="") as f:
+        csv_writer = csv.writer(f)
+        for movie_row in sorted(movie_video_files_results):
+            csv_writer.writerow(movie_row)
+
+    tv_show_all_files_results = []
+    tv_show_video_files_results = []
+
+    if tv_dir_input is not str(''):
+
+        for root, dirs, files in os.walk(tv_dir_input):
+            for tv_file in sorted(files):
+                if tv_file.lower().endswith(all_extensions):
+                    tv_show_all_files_results.append([root + '/' + tv_file])
+                if tv_file.lower().endswith(video_extensions):
+                    tv_show_video_files_results.append([root + '/' + tv_file])
+
+    if tv_alt_dir_input is not str(''):
+
+        for root, dirs, files in os.walk(tv_alt_dir_input):
+            for alt_file in sorted(files):
+                if alt_file.lower().endswith(all_extensions):
+                    tv_show_all_files_results.append([root + '/' + alt_file])
+                if alt_file.lower().endswith(video_extensions):
+                    tv_show_video_files_results.append([root + '/' + alt_file])
+
+    with open(os.path.expanduser((media_index_folder + '/TV_INDEX_ALL_FILES.csv').format(username_input)), "w",
+              encoding='UTF8', newline="") as f:
+        csv_writer = csv.writer(f)
+        for tv_row in sorted(tv_show_all_files_results):
+            csv_writer.writerow(tv_row)
+
+    with open(os.path.expanduser((media_index_folder + '/TV_INDEX_VIDEO_FILES.csv').format(username_input)), "w",
+              encoding='UTF8', newline="") as f:
+        csv_writer = csv.writer(f)
+        for tv_row in sorted(tv_show_video_files_results):
+            csv_writer.writerow(tv_row)
 
 
 launch_media_index()
