@@ -40,10 +40,12 @@ def first_launch_dirs():
 
     global username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
 
+    media_index_folder = '~/{0}_MEDIA_INDEX'
+
     username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
     separator()
 
-    user_info_file = os.path.expanduser("~/{0}_MEDIA_INDEX/{0}_USER_INFO.csv".format(username_input))
+    user_info_file = os.path.expanduser((media_index_folder + '/{0}_USER_INFO.csv').format(username_input))
 
     if os.path.isfile(user_info_file):
         user_info_file = list(csv.reader(open(user_info_file)))
@@ -68,8 +70,8 @@ def first_launch_dirs():
         user_info = {'user:': username_input, 'movie_dir:': movie_dir_input, 'tv_dir:': tv_dir_input,
                      'movie_alt_dir:': movie_alt_dir_input, 'tv_alt_dir:': tv_alt_dir_input}
 
-        os.makedirs(os.path.expanduser(r'~/{0}_MEDIA_INDEX/'.format(username_input)), exist_ok=True)
-        os.makedirs(os.path.expanduser(r'~/{0}_MEDIA_INDEX/FILES'.format(username_input)), exist_ok=True)
+        os.makedirs(os.path.expanduser((media_index_folder + '/').format(username_input)), exist_ok=True)
+        os.makedirs(os.path.expanduser((media_index_folder + '/FILES').format(username_input)), exist_ok=True)
 
         with open(user_info_file, 'w', encoding='UTF8', newline='') as f:
             csv_writer = csv.writer(f)
