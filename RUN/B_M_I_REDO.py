@@ -47,7 +47,6 @@ def first_launch_dirs():
 
     if os.path.isfile(user_info_file):
         user_info_file = list(csv.reader(open(user_info_file)))
-        print(user_info_file)
         movie_dir_input = user_info_file[1][1]
         tv_dir_input = user_info_file[2][1]
         movie_alt_dir_input = user_info_file[3][1]
