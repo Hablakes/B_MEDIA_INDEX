@@ -18,6 +18,8 @@ from ascii_graph import Pyasciigraph
 
 directory_selected_in_gui_list = []
 
+username_input = None
+
 
 def compare_results(results_user, results_other):
     output = []
@@ -32,30 +34,72 @@ def compare_results(results_user, results_other):
     return output
 
 
+def first_launch_dirs():
+    print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
+    separator()
+
+    global username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
+
+    username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
+    separator()
+
+    user_info_filename = os.path.expanduser("~/{0}_MEDIA_INDEX/{0}_USER_INFO.txt".format(username_input))
+
+    if os.path.isfile(user_info_filename):
+        user_info_file = list(csv.reader(open(user_info_filename)))
+        movie_dir_input = user_info_file[1][1]
+        tv_dir_input = user_info_file[2][1]
+        movie_alt_dir_input = user_info_file[3][1]
+        tv_alt_dir_input = user_info_file[4][1]
+    else:
+        print("ENTER PATH OF MOVIE DIRECTORY:")
+        movie_dir_input = str(select_directory_with_tk_gui())
+        print("ENTER PATH OF TV DIRECTORY:")
+        tv_dir_input = str(select_directory_with_tk_gui())
+        print("ENTER PATH OF ANY ALTERNATE MOVIE DIRECTORY, IF NONE HIT CANCEL:")
+        movie_alt_dir_input = str(select_directory_with_tk_gui())
+        print("ENTER PATH OF ANY ALTERNATE TV DIRECTORY, IF NONE HIT CANCEL:")
+        tv_alt_dir_input = str(select_directory_with_tk_gui())
+        separator()
+
+        user_info = {'user:': username_input, 'movie_dir:': movie_dir_input, 'tv_dir:': tv_dir_input,
+                     'movie_alt_dir:': movie_alt_dir_input, 'tv_alt_dir:': tv_alt_dir_input}
+
+        os.makedirs(os.path.expanduser(r'~/{0}_MEDIA_INDEX/'.format(username_input)), exist_ok=True)
+        os.makedirs(os.path.expanduser(r'~/{0}_MEDIA_INDEX/FILES'.format(username_input)), exist_ok=True)
+
+        with open(os.path.expanduser(r'~/{0}_MEDIA_INDEX/{0}_USER_INFO.csv'.format(username_input)), 'w',
+                  encoding='UTF8') as f:
+            csv_writer = csv.writer(f)
+            for row in user_info.items():
+                csv_writer.writerow(row)
+
+
 def launch_media_index():
-    sep()
-    print(pyfiglet.figlet_format("MEDIA-INDEX", font="cybermedium"))
-    sep()
+    first_launch_dirs()
+    separator()
+    print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
+    separator()
     print("1) QUERIES - 2) SORTING - 3) FILE DATA/INFO - 4) GRAPHS - 5) TOTALS - 6) INDEXING")
     print()
     print("0) EXIT")
-    sep()
+    separator()
     lmi_input = input("ENTER #")
-    sep()
-    lmi_action = int(lmi_input)
-    if lmi_action == 1:
+    separator()
+    lmi_input_action = int(lmi_input)
+    if lmi_input_action == 1:
         pass
-    elif lmi_action == 2:
+    elif lmi_input_action == 2:
         pass
-    elif lmi_action == 3:
+    elif lmi_input_action == 3:
         pass
-    elif lmi_action == 4:
+    elif lmi_input_action == 4:
         pass
-    elif lmi_action == 5:
+    elif lmi_input_action == 5:
         pass
-    elif lmi_action == 6:
+    elif lmi_input_action == 6:
         pass
-    elif lmi_action == 0:
+    elif lmi_input_action == 0:
         exit()
 
 
@@ -64,11 +108,11 @@ def select_directory_with_tk_gui():
     root.withdraw()
     root.update()
     selected_directory = filedialog.askdirectory()
-    directory_selected_in_gui_list.append(selected_directory)
     root.destroy()
+    return selected_directory
 
 
-def sep():
+def separator():
     for lines in "\n", '-' * 100, "\n":
         print(lines)
 
