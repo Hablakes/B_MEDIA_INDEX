@@ -43,23 +43,27 @@ def first_launch_dirs():
     username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
     separator()
 
-    user_info_filename = os.path.expanduser("~/{0}_MEDIA_INDEX/{0}_USER_INFO.txt".format(username_input))
+    user_info_file = os.path.expanduser("~/{0}_MEDIA_INDEX/{0}_USER_INFO.csv".format(username_input))
 
-    if os.path.isfile(user_info_filename):
-        user_info_file = list(csv.reader(open(user_info_filename)))
+    if os.path.isfile(user_info_file):
+        user_info_file = list(csv.reader(open(user_info_file)))
+        print(user_info_file)
         movie_dir_input = user_info_file[1][1]
         tv_dir_input = user_info_file[2][1]
         movie_alt_dir_input = user_info_file[3][1]
         tv_alt_dir_input = user_info_file[4][1]
     else:
         print("ENTER PATH OF MOVIE DIRECTORY:")
-        movie_dir_input = str(select_directory_with_tk_gui())
+        movie_dir_input = select_directory_with_tk_gui()
+        print()
         print("ENTER PATH OF TV DIRECTORY:")
-        tv_dir_input = str(select_directory_with_tk_gui())
-        print("ENTER PATH OF ANY ALTERNATE MOVIE DIRECTORY, IF NONE HIT CANCEL:")
-        movie_alt_dir_input = str(select_directory_with_tk_gui())
-        print("ENTER PATH OF ANY ALTERNATE TV DIRECTORY, IF NONE HIT CANCEL:")
-        tv_alt_dir_input = str(select_directory_with_tk_gui())
+        tv_dir_input = select_directory_with_tk_gui()
+        print()
+        print("ENTER PATH OF ALTERNATE MOVIE DIRECTORY, IF NONE HIT CANCEL:")
+        movie_alt_dir_input = select_directory_with_tk_gui()
+        print()
+        print("ENTER PATH OF ALTERNATE TV DIRECTORY, IF NONE HIT CANCEL:")
+        tv_alt_dir_input = select_directory_with_tk_gui()
         separator()
 
         user_info = {'user:': username_input, 'movie_dir:': movie_dir_input, 'tv_dir:': tv_dir_input,
@@ -68,16 +72,14 @@ def first_launch_dirs():
         os.makedirs(os.path.expanduser(r'~/{0}_MEDIA_INDEX/'.format(username_input)), exist_ok=True)
         os.makedirs(os.path.expanduser(r'~/{0}_MEDIA_INDEX/FILES'.format(username_input)), exist_ok=True)
 
-        with open(os.path.expanduser(r'~/{0}_MEDIA_INDEX/{0}_USER_INFO.csv'.format(username_input)), 'w',
-                  encoding='UTF8') as f:
+        with open(user_info_file, 'w', encoding='UTF8', newline='') as f:
             csv_writer = csv.writer(f)
-            for row in user_info.items():
-                csv_writer.writerow(row)
+            for user_data in user_info.items():
+                csv_writer.writerow(user_data)
 
 
 def launch_media_index():
     first_launch_dirs()
-    separator()
     print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
     separator()
     print("1) QUERIES - 2) SORTING - 3) FILE DATA/INFO - 4) GRAPHS - 5) TOTALS - 6) INDEXING")
