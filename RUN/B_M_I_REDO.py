@@ -1,5 +1,6 @@
 import csv
 import os
+import pathlib
 import re
 import textwrap
 
@@ -123,13 +124,13 @@ def walk_directories_and_create_indices(username_input, movie_dir_input, tv_dir_
         for root, dirs, files in os.walk(movie_dir_input):
             for movie_file in sorted(files):
                 if movie_file.lower().endswith(video_extensions):
-                    movie_video_files_results.append([root + '/' + movie_file])
+                    movie_video_files_results.append([(pathlib.Path(root) / movie_file).as_posix()])
 
     if movie_alt_dir_input is not str(''):
         for root, dirs, files in os.walk(movie_alt_dir_input):
             for alt_file in sorted(files):
                 if alt_file.lower().endswith(video_extensions):
-                    movie_video_files_results.append([root + '/' + alt_file])
+                    movie_video_files_results.append([(pathlib.Path(root) / alt_file).as_posix()])
 
     with open(os.path.expanduser((media_index_folder + '/MOVIE_VIDEO_FILES_PATHS.csv').format(username_input)), "w",
               encoding='UTF8', newline="") as f:
@@ -143,13 +144,13 @@ def walk_directories_and_create_indices(username_input, movie_dir_input, tv_dir_
         for root, dirs, files in os.walk(tv_dir_input):
             for tv_file in sorted(files):
                 if tv_file.lower().endswith(video_extensions):
-                    tv_show_video_files_results.append([root + '/' + tv_file])
+                    tv_show_video_files_results.append([(pathlib.Path(root) / tv_file).as_posix()])
 
     if tv_alt_dir_input is not str(''):
         for root, dirs, files in os.walk(tv_alt_dir_input):
             for alt_file in sorted(files):
                 if alt_file.lower().endswith(video_extensions):
-                    tv_show_video_files_results.append([root + '/' + alt_file])
+                    tv_show_video_files_results.append([(pathlib.Path(root) / alt_file).as_posix()])
 
     with open(os.path.expanduser((media_index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username_input)), "w",
               encoding='UTF8', newline="") as f:
