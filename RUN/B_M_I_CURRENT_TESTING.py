@@ -104,6 +104,50 @@ def launch_media_index():
     first_launch_and_directory_selection(username_input)
 
 
+def library_total_amount(username_input):
+    media_index_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF8')))
+    tv_index_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username_input)), encoding='UTF8')))
+
+    tv_amounts_list = []
+    episode_amounts_list = []
+    movie_amounts_list = []
+
+    for counted_movie_title in media_index_list:
+        if str("MOVIE") in counted_movie_title:
+            movie_amounts_list.append(counted_movie_title)
+
+    for counted_tv_title in media_index_list:
+        if str("TV") in counted_tv_title:
+            tv_amounts_list.append(counted_tv_title)
+
+    for counted_episode_titles in tv_index_list:
+        episode_amounts_list.append(+1)
+
+    print()
+    print("TOTAL AMOUNT OF MOVIES:")
+    print()
+    print(len(movie_amounts_list))
+    separator()
+    print()
+    print("TOTAL AMOUNT OF TV SHOWS:")
+    print()
+    print(len(tv_amounts_list))
+    print()
+    print()
+    print("TOTAL AMOUNT OF TV EPISODES:")
+    print()
+    print(len(episode_amounts_list))
+    separator()
+    print()
+    print("TOTAL AMOUNT OF ITEMS IN MEDIA-LIBRARY:")
+    print()
+    print(len(movie_amounts_list) + len(episode_amounts_list))
+    separator()
+
+
+
 def media_index_home(username_input):
     first_launch_and_directory_selection(username_input)
     print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
@@ -113,7 +157,7 @@ def media_index_home(username_input):
     print()
     print("3) CREATE PATH INDICES        -   4) CREATE TITLE INDEX")
     print()
-    print("0) EXIT")
+    print("5) DISPLAY LIBRARY TOTALS     -   0) EXIT")
     separator()
 
     lmi_input = input("ENTER #")
@@ -132,6 +176,8 @@ def media_index_home(username_input):
     elif lmi_input_action == 4:
         scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
                                           tv_alt_dir_input)
+    elif lmi_input_action == 5:
+        library_total_amount(username_input)
 
 
 def separator():
