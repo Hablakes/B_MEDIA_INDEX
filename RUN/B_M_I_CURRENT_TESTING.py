@@ -147,7 +147,6 @@ def library_total_amount(username_input):
     separator()
 
 
-
 def media_index_home(username_input):
     first_launch_and_directory_selection(username_input)
     print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
