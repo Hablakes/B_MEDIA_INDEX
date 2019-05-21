@@ -21,10 +21,10 @@ username_input = None
 
 media_index_folder = '~/{0}_MEDIA_INDEX'
 
-video_extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
-                    ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
-                    ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm",
-                    ".rmvb", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
+extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
+              ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
+              ".mp4", ".mpeg", ".mpg", ".mt2s", ".mts", ".nfo", ".nrg", ".nsv", ".nuv", ".ogm", ".pva", ".qt", ".rm",
+              ".rmvb", ".strm", ".svq3", ".ts", ".ty", ".viv", ".vob", ".vp3", ".wmv", ".xvid", ".webm")
 
 
 def compare_results(results_user, results_other):
@@ -45,6 +45,144 @@ def change_directory_selection():
     separator()
 
     directory_selection()
+
+
+def create_media_information_indices():
+    create_movie_information_index()
+    create_tv_information_index()
+
+
+def create_movie_information_index():
+    movie_index = csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/MOVIE_VIDEO_FILES_PATHS.csv').format(username_input)), encoding='UTF8'))
+
+    movie_index_file_results = {}
+
+    for movie_file in sorted(movie_index):
+
+        movie_title_key = movie_file[0].rsplit('/')[-2]
+
+        movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
+
+        if movie_title_key not in movie_index_file_results:
+            movie_index_file_results[movie_title_key] = {}
+
+        if movie_file[0].lower().endswith(extensions) and movie_filename_key.lower() != '.nfo':
+
+            title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
+
+            try:
+                test = pymediainfo.MediaInfo.parse(movie_file[0])
+            except OSError as e:
+                print("OSError on {}".format(movie_file[0]))
+                print(e)
+                continue
+
+            for track in test.tracks:
+
+                if track.track_type == 'Video':
+                    movie_index_file_results[movie_title_key]["DIRECTORY"] = movie_title_key
+                    movie_index_file_results[movie_title_key]["TITLE"] = title.get('title')
+                    movie_index_file_results[movie_title_key]["YEAR"] = title.get('year')
+                    movie_index_file_results[movie_title_key]["RESOLUTION"] = str(track.width) + 'x' + str(track.height)
+                    movie_index_file_results[movie_title_key]["FILE-TYPE"] = title.get('container')
+                    movie_index_file_results[movie_title_key]["FILENAME"] = movie_filename_key
+
+        elif movie_file[0].lower().endswith(".nfo"):
+
+            try:
+                with open(movie_file[0]) as f:
+                    for line in f.readlines():
+                        if '<plot>' in line:
+                            movie_index_file_results[movie_title_key]["PLOT"] = line
+
+                        if '<rating>' in line:
+                            movie_index_file_results[movie_title_key]["RATING"] = line
+
+                        if '<runtime>' in line:
+                            movie_index_file_results[movie_title_key]["RUN-TIME"] = line
+            except Exception as e:
+                print(e)
+                print(movie_file[0])
+                continue
+
+    with open(os.path.expanduser((media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), "w",
+              encoding='UTF8', newline="") as f:
+        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "RESOLUTION", "FILE-TYPE", "PLOT", "RATING",
+                                        "RUN-TIME", "FILENAME"])
+        for movie_row in movie_index_file_results.values():
+            csv_writer.writerow(movie_row)
+
+
+def create_tv_information_index():
+    tv_index = csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username_input)), encoding='UTF8'))
+
+    tv_index_file_results = {}
+
+    for tv_file in sorted(tv_index):
+
+        tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
+
+        tv_folder_title = tv_file[0].rsplit('/')[-2]
+
+        tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
+
+        if tv_file[0].lower().endswith(extensions) and tv_filename_key.lower() != '.nfo':
+
+            if tv_title_key not in tv_index_file_results:
+                tv_index_file_results[tv_title_key] = {}
+
+            title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
+
+            try:
+                test = pymediainfo.MediaInfo.parse(tv_file[0])
+            except OSError as e:
+                print("OSError on {}".format(tv_file[0]))
+                print(e)
+                continue
+
+            for track in test.tracks:
+
+                if track.track_type == 'Video':
+                    tv_index_file_results[tv_title_key]["DIRECTORY"] = tv_folder_title
+                    tv_index_file_results[tv_title_key]["TITLE"] = title.get('title')
+                    tv_index_file_results[tv_title_key]["YEAR"] = title.get('year')
+                    tv_index_file_results[tv_title_key]["EPISODE TITLE"] = title.get('episode_title')
+                    tv_index_file_results[tv_title_key]["SEASON"] = title.get('season')
+                    tv_index_file_results[tv_title_key]["EPISODE NUMBER"] = title.get('episode')
+                    tv_index_file_results[tv_title_key]["RESOLUTION"] = str(track.width) + 'x' + str(track.height)
+                    tv_index_file_results[tv_title_key]["FILE-TYPE"] = title.get('container')
+                    tv_index_file_results[tv_title_key]["FILENAME"] = tv_filename_key
+
+        elif tv_file[0].lower().endswith(".nfo") and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
+
+            if tv_title_key not in tv_index_file_results:
+                tv_index_file_results[tv_title_key] = {}
+
+                try:
+                    with open(tv_file[0]) as f:
+                        for line in f.readlines():
+                            if '<plot>' in line:
+                                tv_index_file_results[tv_title_key]["PLOT"] = line
+
+                            if '<rating>' in line:
+                                tv_index_file_results[tv_title_key]["RATING"] = line
+
+                            if '<runtime>' in line:
+                                tv_index_file_results[tv_title_key]["RUN-TIME"] = line
+
+                except Exception as e:
+                    print(e)
+                    print(tv_file[0])
+                    continue
+
+    with open(os.path.expanduser((media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), "w",
+              encoding='UTF8', newline="") as f:
+        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "EPISODE TITLE", "SEASON", "EPISODE NUMBER",
+                                        "RESOLUTION", "FILE-TYPE", "PLOT", "RATING", "RUN-TIME", "FILENAME"])
+        for tv_row in tv_index_file_results.values():
+            csv_writer.writerow(tv_row)
 
 
 def directory_selection():
@@ -134,13 +272,13 @@ def media_index_home():
     print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
     separator()
 
-    print("1) ADD DATABASE DIRECTORIES   -   2) CHANGE DATABASE DIRECTORIES")
+    print("1) ADD DATABASE DIRECTORIES           -   2) CHANGE DATABASE DIRECTORIES")
     print()
-    print("3) CREATE PATH INDICES        -   4) CREATE TITLE INDEX")
+    print("3) CREATE PATH INDICES                -   4) CREATE TITLE INDEX")
     print()
-    print("5) DISPLAY LIBRARY TOTALS     -   6) TERMINAL GRAPH OPTIONS")
+    print("5) DISPLAY LIBRARY TOTALS             -   6) TERMINAL GRAPH OPTIONS")
     print()
-    print("0) EXIT")
+    print("7) CREATE MEDIA INFORMATION INDICES   -   0) EXIT")
     separator()
 
     lmi_input = input("ENTER #")
@@ -156,11 +294,13 @@ def media_index_home():
     elif lmi_input_action == 3:
         walk_directories_and_create_indices(movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
     elif lmi_input_action == 4:
-        scrape_media_folders_info_for_csv(movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
+        scrape_media_folders_for_csv(movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
     elif lmi_input_action == 5:
         library_total_amount()
     elif lmi_input_action == 6:
         run_terminal_graphs()
+    elif lmi_input_action == 7:
+        create_media_information_indices()
 
 
 def run_terminal_graphs():
@@ -195,7 +335,7 @@ def separator():
         print(lines)
 
 
-def scrape_media_folders_info_for_csv(movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input):
+def scrape_media_folders_for_csv(movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input):
     movie_title_items = []
     tv_title_items = []
 
@@ -402,13 +542,13 @@ def walk_directories_and_create_indices(movie_dir_input, tv_dir_input, movie_alt
     if movie_dir_input is not str(''):
         for root, dirs, files in os.walk(movie_dir_input):
             for movie_file in sorted(files):
-                if movie_file.lower().endswith(video_extensions):
+                if movie_file.lower().endswith(extensions):
                     movie_video_files_results.append([(pathlib.Path(root) / movie_file).as_posix()])
 
     if movie_alt_dir_input is not str(''):
         for root, dirs, files in os.walk(movie_alt_dir_input):
             for alt_file in sorted(files):
-                if alt_file.lower().endswith(video_extensions):
+                if alt_file.lower().endswith(extensions):
                     movie_video_files_results.append([(pathlib.Path(root) / alt_file).as_posix()])
 
     with open(os.path.expanduser((media_index_folder + '/MOVIE_VIDEO_FILES_PATHS.csv').format(username_input)), "w",
@@ -422,13 +562,13 @@ def walk_directories_and_create_indices(movie_dir_input, tv_dir_input, movie_alt
     if tv_dir_input is not str(''):
         for root, dirs, files in os.walk(tv_dir_input):
             for tv_file in sorted(files):
-                if tv_file.lower().endswith(video_extensions):
+                if tv_file.lower().endswith(extensions):
                     tv_show_video_files_results.append([(pathlib.Path(root) / tv_file).as_posix()])
 
     if tv_alt_dir_input is not str(''):
         for root, dirs, files in os.walk(tv_alt_dir_input):
             for alt_file in sorted(files):
-                if alt_file.lower().endswith(video_extensions):
+                if alt_file.lower().endswith(extensions):
                     tv_show_video_files_results.append([(pathlib.Path(root) / alt_file).as_posix()])
 
     with open(os.path.expanduser((media_index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username_input)), "w",
