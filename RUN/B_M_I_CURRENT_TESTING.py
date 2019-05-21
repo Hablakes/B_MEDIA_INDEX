@@ -20,9 +20,6 @@ from tkinter import *
 username_input = None
 
 media_index_folder = '~/{0}_MEDIA_INDEX'
-media_title_index = os.path.expanduser((media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input))
-user_info_file = os.path.expanduser((media_index_folder + '/{0}_USER_INFO.csv').format(username_input))
-
 
 video_extensions = (".3gp", ".asf", ".asx", ".avc", ".avi", ".bdmv", ".bin", ".bivx", ".dat", ".disc", ".divx", ".dv",
                     ".dvr-ms", ".evo", ".fli", ".flv", ".h264", ".img", ".iso", ".m2ts", ".m2v", ".m4v", ".mkv", ".mov",
@@ -53,6 +50,8 @@ def change_directory_selection():
 def directory_selection(username_input):
     global movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
 
+    user_info_file = os.path.expanduser((media_index_folder + '/{0}_USER_INFO.csv').format(username_input))
+
     print("ENTER PATH OF MOVIE DIRECTORY:")
     movie_dir_input = tk_gui_file_browser_window()
     print()
@@ -76,13 +75,9 @@ def directory_selection(username_input):
 
 
 def first_launch_and_directory_selection(username_input):
-    print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
-    separator()
-
     global movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
 
-    os.makedirs(os.path.expanduser((media_index_folder + '/').format(username_input)), exist_ok=True)
-    os.makedirs(os.path.expanduser((media_index_folder + '/FILES').format(username_input)), exist_ok=True)
+    user_info_file = os.path.expanduser((media_index_folder + '/{0}_USER_INFO.csv').format(username_input))
 
     if os.path.isfile(user_info_file):
         user_info_file_check = list(csv.reader(open(user_info_file)))
@@ -91,6 +86,9 @@ def first_launch_and_directory_selection(username_input):
         movie_alt_dir_input = user_info_file_check[3][1]
         tv_alt_dir_input = user_info_file_check[4][1]
     else:
+        os.makedirs(os.path.expanduser((media_index_folder + '/').format(username_input)), exist_ok=True)
+        os.makedirs(os.path.expanduser((media_index_folder + '/FILES').format(username_input)), exist_ok=True)
+
         directory_selection(username_input)
 
 
@@ -103,10 +101,11 @@ def launch_media_index():
     username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
     separator()
 
-    media_index_home(username_input)
+    first_launch_and_directory_selection(username_input)
 
 
 def media_index_home(username_input):
+    first_launch_and_directory_selection(username_input)
     print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
     separator()
 
@@ -116,9 +115,11 @@ def media_index_home(username_input):
     print()
     print("0) EXIT")
     separator()
+
     lmi_input = input("ENTER #")
     separator()
     lmi_input_action = int(lmi_input)
+
     if lmi_input_action == 0:
         exit()
     elif lmi_input_action == 1:
@@ -129,7 +130,8 @@ def media_index_home(username_input):
     elif lmi_input_action == 3:
         first_launch_and_directory_selection(username_input)
     elif lmi_input_action == 4:
-        scrape_media_folders_info_for_csv(movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
+        scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
+                                          tv_alt_dir_input)
 
 
 def separator():
@@ -137,7 +139,8 @@ def separator():
         print(lines)
 
 
-def scrape_media_folders_info_for_csv(movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input):
+def scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
+                                      tv_alt_dir_input):
     movie_title_items = []
     tv_title_items = []
 
@@ -191,7 +194,8 @@ def scrape_media_folders_info_for_csv(movie_dir_input, tv_dir_input, movie_alt_d
 
             tv_title_items.append(title_item_check)
 
-    with open(media_title_index, "w", encoding='UTF8', newline="") as f:
+    with open(os.path.expanduser((media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), "w",
+              encoding='UTF8', newline="") as f:
         csv_writer = csv.writer(f)
         for file_row in movie_title_items:
             csv_writer.writerow(file_row)
