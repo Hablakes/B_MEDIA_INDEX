@@ -41,16 +41,50 @@ def compare_results(results_user, results_other):
     return output
 
 
-def first_launch_dirs():
+def change_directory_selection():
+    print(pyfiglet.figlet_format("CHANGE-DIRECTORY", font="cybermedium"))
+    separator()
+
+    directory_selection(username_input)
+
+
+def directory_selection(username_input):
+    global movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
+
+    user_info_file = os.path.expanduser((media_index_folder + '/{0}_USER_INFO.csv').format(username_input))
+
+    print("ENTER PATH OF MOVIE DIRECTORY:")
+    movie_dir_input = tk_gui_file_browser_window()
+    print()
+    print("ENTER PATH OF TV DIRECTORY:")
+    tv_dir_input = tk_gui_file_browser_window()
+    print()
+    print("ENTER PATH OF ALTERNATE MOVIE DIRECTORY, IF NONE HIT CANCEL:")
+    movie_alt_dir_input = tk_gui_file_browser_window()
+    print()
+    print("ENTER PATH OF ALTERNATE TV DIRECTORY, IF NONE HIT CANCEL:")
+    tv_alt_dir_input = tk_gui_file_browser_window()
+    separator()
+
+    user_info = {'user:': username_input, 'movie_dir:': movie_dir_input, 'tv_dir:': tv_dir_input,
+                 'movie_alt_dir:': movie_alt_dir_input, 'tv_alt_dir:': tv_alt_dir_input}
+
+    with open(user_info_file, 'w', encoding='UTF8', newline='') as f:
+        csv_writer = csv.writer(f)
+        for user_data in user_info.items():
+            csv_writer.writerow(user_data)
+
+
+def first_launch_and_directory_selection(username_input):
     print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
     separator()
 
-    global username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
-
-    username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
-    separator()
+    global movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
 
     user_info_file = os.path.expanduser((media_index_folder + '/{0}_USER_INFO.csv').format(username_input))
+
+    os.makedirs(os.path.expanduser((media_index_folder + '/').format(username_input)), exist_ok=True)
+    os.makedirs(os.path.expanduser((media_index_folder + '/FILES').format(username_input)), exist_ok=True)
 
     if os.path.isfile(user_info_file):
         user_info_file = list(csv.reader(open(user_info_file)))
@@ -59,50 +93,44 @@ def first_launch_dirs():
         movie_alt_dir_input = user_info_file[3][1]
         tv_alt_dir_input = user_info_file[4][1]
     else:
-        print("ENTER PATH OF MOVIE DIRECTORY:")
-        movie_dir_input = select_directory_with_tk_gui()
-        print()
-        print("ENTER PATH OF TV DIRECTORY:")
-        tv_dir_input = select_directory_with_tk_gui()
-        print()
-        print("ENTER PATH OF ALTERNATE MOVIE DIRECTORY, IF NONE HIT CANCEL:")
-        movie_alt_dir_input = select_directory_with_tk_gui()
-        print()
-        print("ENTER PATH OF ALTERNATE TV DIRECTORY, IF NONE HIT CANCEL:")
-        tv_alt_dir_input = select_directory_with_tk_gui()
-        separator()
-
-        user_info = {'user:': username_input, 'movie_dir:': movie_dir_input, 'tv_dir:': tv_dir_input,
-                     'movie_alt_dir:': movie_alt_dir_input, 'tv_alt_dir:': tv_alt_dir_input}
-
-        os.makedirs(os.path.expanduser((media_index_folder + '/').format(username_input)), exist_ok=True)
-        os.makedirs(os.path.expanduser((media_index_folder + '/FILES').format(username_input)), exist_ok=True)
-
-        with open(user_info_file, 'w', encoding='UTF8', newline='') as f:
-            csv_writer = csv.writer(f)
-            for user_data in user_info.items():
-                csv_writer.writerow(user_data)
+        directory_selection(username_input)
 
 
 def launch_media_index():
-    first_launch_dirs()
     print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
     separator()
-    print("1) CREATE INDICES")
+
+    global username_input
+
+    username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
+    separator()
+
+    media_index_home(username_input)
+
+
+def media_index_home(username_input):
+    print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
+    separator()
+
+    print("1) CREATE INDICES   -   2) ADD DATABASE DIRECTORIES   -   3) CHANGE DATABASE DIRECTORIES")
     print()
     print("0) EXIT")
     separator()
     lmi_input = input("ENTER #")
     separator()
     lmi_input_action = int(lmi_input)
-    if lmi_input_action == 1:
+    if lmi_input_action == 0:
+        exit()
+    elif lmi_input_action == 1:
         walk_directories_and_create_indices(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
                                             tv_alt_dir_input)
-    elif lmi_input_action == 0:
-        exit()
+    elif lmi_input_action == 2:
+        first_launch_and_directory_selection(username_input)
+    elif lmi_input_action == 3:
+        change_directory_selection()
 
 
-def select_directory_with_tk_gui():
+def tk_gui_file_browser_window():
     root = Tk()
     root.withdraw()
     root.update()
@@ -160,3 +188,6 @@ def walk_directories_and_create_indices(username_input, movie_dir_input, tv_dir_
 
 
 launch_media_index()
+
+while True:
+    media_index_home(username_input)
