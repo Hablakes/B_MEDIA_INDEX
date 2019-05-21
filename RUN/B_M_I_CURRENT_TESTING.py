@@ -44,10 +44,10 @@ def change_directory_selection():
     print(pyfiglet.figlet_format("CHANGE_DIRECTORY", font="cybermedium"))
     separator()
 
-    directory_selection(username_input)
+    directory_selection()
 
 
-def directory_selection(username_input):
+def directory_selection():
     global movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
 
     user_info_file = os.path.expanduser((media_index_folder + '/{0}_USER_INFO.csv').format(username_input))
@@ -74,7 +74,7 @@ def directory_selection(username_input):
             csv_writer.writerow(user_data)
 
 
-def first_launch_and_directory_selection(username_input):
+def first_launch_and_directory_selection():
     global movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input
 
     user_info_file = os.path.expanduser((media_index_folder + '/{0}_USER_INFO.csv').format(username_input))
@@ -89,7 +89,7 @@ def first_launch_and_directory_selection(username_input):
         os.makedirs(os.path.expanduser((media_index_folder + '/').format(username_input)), exist_ok=True)
         os.makedirs(os.path.expanduser((media_index_folder + '/FILES').format(username_input)), exist_ok=True)
 
-        directory_selection(username_input)
+        directory_selection()
 
 
 def launch_media_index():
@@ -101,10 +101,10 @@ def launch_media_index():
     username_input = input("ENTER YOUR USERNAME (CASE-SENSITIVE):")
     separator()
 
-    first_launch_and_directory_selection(username_input)
+    first_launch_and_directory_selection()
 
 
-def library_total_amount(username_input):
+def library_total_amount():
     media_index_list = list(csv.reader(open(os.path.expanduser(
         (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF8')))
     tv_index_list = list(csv.reader(open(os.path.expanduser(
@@ -147,8 +147,8 @@ def library_total_amount(username_input):
     separator()
 
 
-def media_index_home(username_input):
-    first_launch_and_directory_selection(username_input)
+def media_index_home():
+    first_launch_and_directory_selection()
     print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
     separator()
 
@@ -156,7 +156,9 @@ def media_index_home(username_input):
     print()
     print("3) CREATE PATH INDICES        -   4) CREATE TITLE INDEX")
     print()
-    print("5) DISPLAY LIBRARY TOTALS     -   0) EXIT")
+    print("5) DISPLAY LIBRARY TOTALS     -   6) TERMINAL GRAPH OPTIONS")
+    print()
+    print("0) EXIT")
     separator()
 
     lmi_input = input("ENTER #")
@@ -166,17 +168,149 @@ def media_index_home(username_input):
     if lmi_input_action == 0:
         exit()
     elif lmi_input_action == 1:
-        walk_directories_and_create_indices(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
-                                            tv_alt_dir_input)
+        walk_directories_and_create_indices(movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
     elif lmi_input_action == 2:
         change_directory_selection()
     elif lmi_input_action == 3:
-        first_launch_and_directory_selection(username_input)
+        walk_directories_and_create_indices(movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
     elif lmi_input_action == 4:
-        scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
-                                          tv_alt_dir_input)
+        scrape_media_folders_info_for_csv(movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input)
     elif lmi_input_action == 5:
-        library_total_amount(username_input)
+        library_total_amount()
+    elif lmi_input_action == 6:
+        run_terminal_graphs()
+
+
+def run_terminal_graphs():
+    print(pyfiglet.figlet_format("TERMINAL_GRAPHS", font="cybermedium"))
+    separator()
+
+    print("1) MOVIES (TITLES PER YEAR)         - 2) TV SHOWS (TITLES PER YEAR)")
+    print()
+    print("3) MOVIES (TITLES PER DECADE)       - 4) TV SHOWS (TITLES PER DECADE)")
+    print()
+    print("0) MAIN MENU")
+    separator()
+
+    terminal_graph_options = input("ENTER #")
+    separator()
+    terminal_graph_options_int = int(terminal_graph_options)
+
+    if terminal_graph_options_int == 1:
+        terminal_graph_options_base(terminal_graph_options_int=1)
+    elif terminal_graph_options_int == 2:
+        terminal_graph_options_base(terminal_graph_options_int=2)
+    elif terminal_graph_options_int == 3:
+        terminal_graph_options_base(terminal_graph_options_int=3)
+    elif terminal_graph_options_int == 4:
+        terminal_graph_options_base(terminal_graph_options_int=4)
+    elif terminal_graph_options_int == 0:
+        media_index_home()
+
+
+def terminal_graph_options_base(terminal_graph_options_int):
+    media_index_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF8')))
+
+    movie_years_dict = {}
+    movie_decades_dict = {}
+    tv_years_dict = {}
+    tv_decades_amount_dict = {}
+
+    movie_year_totals_dict = {}
+    movie_decades_totals_dict = {}
+    tv_year_totals_dict = {}
+    tv_decades_totals_dict = {}
+
+    for title_item in media_index_list:
+        title_item_year = re.split("(.+) \((\d{4})\)", title_item[2], flags=0)
+        title_item_year_int = int(title_item_year[0])
+        title_item_decade_int = int(title_item_year[0][:-1] + '0')
+
+        if title_item_year_int in range(1900, 2100, 1):
+            if str("MOVIE") in title_item:
+
+                if title_item_year_int not in movie_years_dict:
+                    movie_years_dict[title_item_year_int] = []
+                movie_years_dict[title_item_year_int].append(title_item)
+                if title_item_decade_int not in movie_decades_dict:
+                    movie_decades_dict[title_item_decade_int] = []
+                movie_decades_dict[title_item_decade_int].append(title_item)
+
+            if str("TV") in title_item:
+                if title_item_year_int not in tv_years_dict:
+                    tv_years_dict[title_item_year_int] = []
+                tv_years_dict[title_item_year_int].append(title_item)
+                if title_item_decade_int not in tv_decades_amount_dict:
+                    tv_decades_amount_dict[title_item_decade_int] = []
+                tv_decades_amount_dict[title_item_decade_int].append(title_item)
+
+    if terminal_graph_options_int == 1:
+
+        for movie_year_values, value in sorted(movie_years_dict.items()):
+            movie_year_totals_dict[movie_year_values] = len(value)
+        movie_data = sorted(movie_year_totals_dict.items())
+
+        movie_years_terminal_graph_list = []
+
+        for key, value in movie_data:
+            movie_years_terminal_graph_list.append((str(key), value))
+
+        graph = Pyasciigraph()
+
+        for line in graph.graph('MOVIES: YEAR AMOUNTS', movie_years_terminal_graph_list):
+            print()
+            print(line)
+        separator()
+
+    if terminal_graph_options_int == 2:
+
+        for tv_year_values, value in sorted(tv_years_dict.items()):
+            tv_year_totals_dict[tv_year_values] = len(value)
+        tv_data = sorted(tv_year_totals_dict.items())
+
+        tv_years_terminal_graph_list = []
+
+        for key, value in tv_data:
+            tv_years_terminal_graph_list.append((str(key), value))
+
+        graph = Pyasciigraph()
+        for line in graph.graph('TV SHOWS: YEAR AMOUNTS', tv_years_terminal_graph_list):
+            print()
+            print(line)
+        separator()
+
+    if terminal_graph_options_int == 3:
+
+        for movie_year_values, value in sorted(movie_decades_dict.items()):
+            movie_decades_totals_dict[movie_year_values] = len(value)
+
+        movie_decades_terminal_graph_list = []
+
+        for key, value in movie_decades_totals_dict.items():
+            movie_decades_terminal_graph_list.append((str(key), value))
+
+        graph = Pyasciigraph()
+        for line in graph.graph('MOVIES: DECADE AMOUNTS', movie_decades_terminal_graph_list):
+            print()
+            print(line)
+        separator()
+
+    if terminal_graph_options_int == 4:
+
+        for tv_year_values, value in sorted(tv_decades_amount_dict.items()):
+            tv_decades_totals_dict[tv_year_values] = len(value)
+
+        tv_decades_terminal_graph_list = []
+
+        for key, value in tv_decades_totals_dict.items():
+            tv_decades_terminal_graph_list.append((str(key), value))
+
+        graph = Pyasciigraph()
+        for line in graph.graph('TV SHOWS: DECADE AMOUNTS', tv_decades_terminal_graph_list):
+            print()
+            print(line)
+        separator()
 
 
 def separator():
@@ -184,21 +318,23 @@ def separator():
         print(lines)
 
 
-def scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
-                                      tv_alt_dir_input):
+def scrape_media_folders_info_for_csv(movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input):
     movie_title_items = []
     tv_title_items = []
 
-    for movie_found in sorted(os.listdir(movie_dir_input)):
-        movie_scrape_info = guessit.guessit(movie_found)
+    if movie_dir_input is not str(''):
+        movie_dir_list = os.listdir(movie_dir_input)
 
-        title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
+        for movie_found in sorted(movie_dir_list):
+            movie_scrape_info = guessit.guessit(movie_found)
 
-        if "," in title_item_check[2]:
-            title_item_check.append(title_item_check[2][-5:-1])
-            title_item_check.remove(title_item_check[2])
+            title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
 
-        movie_title_items.append(title_item_check)
+            if "," in title_item_check[2]:
+                title_item_check.append(title_item_check[2][-5:-1])
+                title_item_check.remove(title_item_check[2])
+
+            movie_title_items.append(title_item_check)
 
     if movie_alt_dir_input is not str(''):
         movie_alt_dir_list = os.listdir(movie_alt_dir_input)
@@ -214,16 +350,19 @@ def scrape_media_folders_info_for_csv(username_input, movie_dir_input, tv_dir_in
 
             movie_title_items.append(title_item_check)
 
-    for tv_found in sorted(os.listdir(tv_dir_input)):
-        tv_scrape_info = guessit.guessit(tv_found)
+    if tv_dir_input is not str(''):
+        tv_dir_list = os.listdir(tv_dir_input)
 
-        title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
+        for tv_found in sorted(tv_dir_list):
+            tv_scrape_info = guessit.guessit(tv_found)
 
-        if "," in title_item_check[2]:
-            title_item_check.append(title_item_check[2][-5:-1])
-            title_item_check.remove(title_item_check[2])
+            title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
 
-        tv_title_items.append(title_item_check)
+            if "," in title_item_check[2]:
+                title_item_check.append(title_item_check[2][-5:-1])
+                title_item_check.remove(title_item_check[2])
+
+            tv_title_items.append(title_item_check)
 
     if tv_alt_dir_input is not str(''):
         tv_alt_dir_list = os.listdir(tv_alt_dir_input)
@@ -257,8 +396,7 @@ def tk_gui_file_browser_window():
     return selected_directory
 
 
-def walk_directories_and_create_indices(username_input, movie_dir_input, tv_dir_input, movie_alt_dir_input,
-                                        tv_alt_dir_input):
+def walk_directories_and_create_indices(movie_dir_input, tv_dir_input, movie_alt_dir_input, tv_alt_dir_input):
     movie_video_files_results = []
 
     if movie_dir_input is not str(''):
@@ -303,4 +441,4 @@ def walk_directories_and_create_indices(username_input, movie_dir_input, tv_dir_
 launch_media_index()
 
 while True:
-    media_index_home(username_input)
+    media_index_home()
