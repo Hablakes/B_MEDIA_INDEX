@@ -9,8 +9,9 @@ import pymediainfo
 
 from ascii_graph import Pyasciigraph
 
-from tkinter import filedialog
 from tkinter import *
+from tkinter import filedialog
+from tkinter.filedialog import askopenfilename
 
 
 username_input = None
@@ -274,7 +275,9 @@ def media_index_home():
     print()
     print("5) DISPLAY LIBRARY TOTALS             -   6) TERMINAL GRAPH OPTIONS")
     print()
-    print("7) CREATE MEDIA INFORMATION INDICES   -   0) EXIT")
+    print("7) CREATE MEDIA INFORMATION INDICES   -   8) COMPARE TWO USERS INFORMATION INDICES")
+    print()
+    print("0) EXIT")
     separator()
 
     lmi_input = input("ENTER #")
@@ -297,6 +300,8 @@ def media_index_home():
         run_terminal_graphs()
     elif lmi_input_action == 7:
         create_media_information_indices()
+    elif lmi_input_action == 8:
+        select_users_indices_to_compare()
 
 
 def run_terminal_graphs():
@@ -393,6 +398,43 @@ def search_file_type_totals(terminal_graph_options_int):
             print()
             print(line)
         separator()
+
+
+def select_users_indices_to_compare():
+    print()
+    print("SELECT THE MOVIE_INFORMATION_INDICES TO COMPARE")
+    separator()
+
+    print("SELECT USER MOVIE INFORMATION INDEX:")
+    m_0 = tk_gui_file_selection_window()
+    print("SELECT COMPARISON MOVIE INFORMATION INDEX:")
+    m_1 = tk_gui_file_selection_window()
+
+    print("SELECT USER TV INFORMATION INDEX:")
+    t_0 = tk_gui_file_selection_window()
+    print("SELECT COMPARISON TV INFORMATION INDEX:")
+    t_1 = tk_gui_file_selection_window()
+    separator()
+
+    with open(m_0, 'r', encoding='UTF8') as movies_0, open(m_1, 'r', encoding='UTF8') as movies_1:
+        user_movie_results = movies_0.readlines()
+        comparison_movie_results = movies_1.readlines()
+
+        with open(os.path.expanduser(
+                (media_index_folder + '/FILES/MOVIE_COMPARISON_INDEX.csv').format(username_input)),
+                'w', encoding='UTF8', newline="") as outFile_m:
+            for line in compare_results(user_movie_results, comparison_movie_results):
+                outFile_m.write(line)
+
+    with open(t_0, 'r', encoding='UTF8') as tv_0, open(t_1, 'r', encoding='UTF8') as tv_1:
+        user_tv_results = tv_0.readlines()
+        comparison_tv_results = tv_1.readlines()
+
+        with open(os.path.expanduser(
+                (media_index_folder + '/FILES/TV_COMPARISON_INDEX.csv').format(username_input)),
+                'w', encoding='UTF8', newline="") as outFile_t:
+            for line in compare_results(user_tv_results, comparison_tv_results):
+                outFile_t.write(line)
 
 
 def separator():
@@ -585,6 +627,7 @@ def terminal_graph_options_advanced(terminal_graph_options_int):
     m_standard_def_found_list = []
     m_empty_response_list = []
     movies_total_list = []
+
     tv_ten_eighty_found_list = []
     tv_seven_twenty_found_list = []
     tv_standard_def_found_list = []
@@ -647,6 +690,15 @@ def tk_gui_file_browser_window():
     selected_directory = filedialog.askdirectory()
     root.destroy()
     return selected_directory
+
+
+def tk_gui_file_selection_window():
+    root = Tk()
+    root.withdraw()
+    root.update()
+    selected_file = askopenfilename()
+    root.destroy()
+    return selected_file
 
 
 def username_check_and_folder_creation():
