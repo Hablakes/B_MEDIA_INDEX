@@ -2,6 +2,7 @@ import csv
 import os
 import pathlib
 import re
+import textwrap
 
 import guessit
 import pyfiglet
@@ -269,13 +270,15 @@ def media_index_home():
     print(pyfiglet.figlet_format("MEDIA_INDEX", font="cybermedium"))
     separator()
 
-    print("1) ADD DATABASE DIRECTORIES           -   2) CHANGE DATABASE DIRECTORIES")
+    print("1) ADD DATABASE DIRECTORIES                -   2) CHANGE DATABASE DIRECTORIES")
     print()
-    print("3) CREATE PATH INDICES                -   4) CREATE TITLE INDEX")
+    print("3) CREATE PATH INDICES                     -   4) CREATE TITLE INDEX")
     print()
-    print("5) DISPLAY LIBRARY TOTALS             -   6) TERMINAL GRAPH OPTIONS")
+    print("5) CREATE MEDIA INFORMATION INDICES        -   6) COMPARE TWO USERS INFORMATION INDICES")
     print()
-    print("7) CREATE MEDIA INFORMATION INDICES   -   8) COMPARE TWO USERS INFORMATION INDICES")
+    print("7) DISPLAY LIBRARY TOTALS                  -   8) MEDIA INFORMATION QUERIES")
+    print()
+    print("9) SORT OPTIONS                            -   10) TERMINAL GRAPH OPTIONS")
     print()
     print("0) EXIT")
     separator()
@@ -295,52 +298,186 @@ def media_index_home():
     elif lmi_input_action == 4:
         scrape_media_folders_for_csv()
     elif lmi_input_action == 5:
-        library_total_amount()
-    elif lmi_input_action == 6:
-        run_terminal_graphs()
-    elif lmi_input_action == 7:
         create_media_information_indices()
-    elif lmi_input_action == 8:
+    elif lmi_input_action == 6:
         select_users_indices_to_compare()
+    elif lmi_input_action == 7:
+        library_total_amount()
+    elif lmi_input_action == 8:
+        media_queries_sub_menu()
+    elif lmi_input_action == 9:
+        sort_options_sub_menu()
+    elif lmi_input_action == 10:
+        terminal_graphs_options_sub_menu()
 
 
-def run_terminal_graphs():
-    print(pyfiglet.figlet_format("TERMINAL_GRAPHS", font="cybermedium"))
+def media_queries_sub_menu():
+    print(pyfiglet.figlet_format("MEDIA_QUERIES", font="cybermedium"))
     separator()
 
-    print("1) MOVIES (TITLES PER YEAR)         - 2) TV SHOWS (TITLES PER YEAR)")
+    print("SEARCH FOR TITLES OF          -   1) MOVIES   -   2) TV SHOWS")
     print()
-    print("3) MOVIES (TITLES PER DECADE)       - 4) TV SHOWS (TITLES PER DECADE)")
+    print("SEARCH FOR INFORMATION OF:    -   3) MOVIES   -   4) TV SHOWS")
     print()
-    print("5) MOVIES (RESOLUTIONS PERCENTAGES) - 6) TV SHOWS (RESOLUTIONS PERCENTAGES)")
-    print()
-    print("7) MOVIES (FILE-TYPE AMOUNTS)       - 8) TV SHOWS (FILE-TYPE AMOUNTS)")
-    print()
-    print("0) MAIN MENU")
+    print("0) EXIT")
     separator()
 
-    terminal_graph_options = input("ENTER #")
+    title_search_type = input("ENTER #")
     separator()
-    terminal_graph_options_int = int(terminal_graph_options)
+    title_search_type_lower = int(title_search_type)
 
-    if terminal_graph_options_int == 1:
-        terminal_graph_options_base(terminal_graph_options_int=1)
-    elif terminal_graph_options_int == 2:
-        terminal_graph_options_base(terminal_graph_options_int=2)
-    elif terminal_graph_options_int == 3:
-        terminal_graph_options_base(terminal_graph_options_int=3)
-    elif terminal_graph_options_int == 4:
-        terminal_graph_options_base(terminal_graph_options_int=4)
-    elif terminal_graph_options_int == 5:
-        terminal_graph_options_advanced(terminal_graph_options_int=5)
-    elif terminal_graph_options_int == 6:
-        terminal_graph_options_advanced(terminal_graph_options_int=6)
-    elif terminal_graph_options_int == 7:
-        search_file_type_totals(terminal_graph_options_int=7)
-    elif terminal_graph_options_int == 8:
-        search_file_type_totals(terminal_graph_options_int=8)
-    elif terminal_graph_options_int == 0:
+    if title_search_type_lower == 0:
         media_index_home()
+    elif title_search_type_lower == 1:
+        search_movie_titles()
+    elif title_search_type_lower == 2:
+        search_tv_titles()
+    elif title_search_type_lower == 3:
+        query_movie_information_index()
+    elif title_search_type_lower == 4:
+        query_tv_information_index()
+
+
+def query_movie_information_index():
+    mv_files_results_list = csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF8'))
+
+    mv_query_action = input("ENTER SEARCH QUERY (MOVIES):")
+    separator()
+    mv_query_action_lower = str(mv_query_action.lower())
+
+    for movie_file in mv_files_results_list:
+
+        if mv_query_action_lower in movie_file[1].lower():
+
+            print()
+            print()
+            print("MOVIE FOLDER")
+            print()
+            print(movie_file[0])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("MOVIE TITLE")
+            print()
+            print(movie_file[1])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("MOVIE YEAR")
+            print()
+            print(movie_file[2])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("MOVIE RESOLUTION")
+            print()
+            print(movie_file[3])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("MOVIE FILE-TYPE")
+            print()
+            print(movie_file[4])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+
+
+def query_tv_information_index():
+    tv_files_results_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF8')))
+
+    tv_show_query_action = input("ENTER SEARCH QUERY (TV SHOWS):")
+    separator()
+    tv_show_query_action_lower = str(tv_show_query_action.lower())
+
+    for tv_file in tv_files_results_list:
+
+        if tv_show_query_action_lower in tv_file[1].lower():
+
+            print()
+            print()
+            print("TV SHOW FOLDER")
+            print()
+            print(tv_file[0])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("TV SHOW TITLE")
+            print()
+            print(tv_file[1])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("TV SHOW YEAR")
+            print()
+            print(tv_file[2])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("TV SHOW EPISODE TITLE")
+            print()
+            print(tv_file[3])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("SEASON NUMBER")
+            print()
+            print(tv_file[4])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("EPISODE NUMBER")
+            print()
+            print(tv_file[5])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("RESOLUTION")
+            print()
+            print(tv_file[6])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("FILE-TYPE")
+            print()
+            print(tv_file[7])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+
+        elif tv_show_query_action_lower in tv_file[3].lower():
+
+            print()
+            print()
+            print("TV SHOW FOLDER")
+            print()
+            print(tv_file[0])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("TV SHOW TITLE")
+            print()
+            print(tv_file[1])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("TV SHOW YEAR")
+            print()
+            print(tv_file[2])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("TV SHOW EPISODE TITLE")
+            print()
+            print(tv_file[3])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("SEASON NUMBER")
+            print()
+            print(tv_file[4])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("EPISODE NUMBER")
+            print()
+            print(tv_file[5])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("RESOLUTION")
+            print()
+            print(tv_file[6])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
+            print("FILE-TYPE")
+            print()
+            print(tv_file[7])
+            print("--------------------------------------------------------------------------------------------------")
+            print()
 
 
 def search_file_type_totals(terminal_graph_options_int):
@@ -398,6 +535,50 @@ def search_file_type_totals(terminal_graph_options_int):
             print()
             print(line)
         separator()
+
+
+def search_movie_titles():
+    media_index_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF8')))
+
+    movie_title_search_action = input("QUERY MOVIES:")
+    separator()
+    movie_title_search_action = movie_title_search_action.lower()
+
+    print("SEARCH RESULTS:")
+    print()
+    print("MOVIES:")
+    print()
+
+    for movie_search_result in media_index_list:
+        if str("MOVIE") in movie_search_result[0]:
+            movie_search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(movie_search_result), flags=0)
+            if movie_title_search_action in movie_search_info[0].lower():
+                print(movie_search_info[0])
+    separator()
+
+
+def search_tv_titles():
+    media_index_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF8')))
+
+    tv_title_search_action = input("QUERY TV SHOWS:")
+    separator()
+    tv_title_search_action = tv_title_search_action.lower()
+
+    print()
+    print()
+    print("SEARCH RESULTS:")
+    print()
+    print("TV SHOWS:")
+    print()
+
+    for tv_search_result in media_index_list:
+        if str("TV") in tv_search_result[0]:
+            tv_search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(tv_search_result), flags=0)
+            if tv_title_search_action in tv_search_info[0].lower():
+                print(tv_search_info[0])
+    separator()
 
 
 def select_users_indices_to_compare():
@@ -511,6 +692,143 @@ def scrape_media_folders_for_csv():
             csv_writer.writerow(file_row)
 
 
+def sort_function_base(sort_options_int):
+    media_index = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF8')))
+
+    sorted_title = sorted(media_index, key=lambda x: (x[0], x[1]))
+    sorted_title_r = sorted(media_index, key=lambda x: (x[0], x[1]), reverse=True)
+    sorted_year = sorted(media_index, key=lambda x: (x[0], x[2]))
+    sorted_year_r = sorted(media_index, key=lambda x: (x[0], x[2]), reverse=True)
+
+    if sort_options_int == 1:
+        for title_item in sorted_title:
+            print()
+            print(title_item)
+        separator()
+    elif sort_options_int == 2:
+        for title_item in sorted_title_r:
+            print()
+            print(title_item)
+        separator()
+    elif sort_options_int == 3:
+        for title_item in sorted_year:
+            print()
+            print(title_item)
+        separator()
+    elif sort_options_int == 4:
+        for title_item in sorted_year_r:
+            print()
+            print(title_item)
+        separator()
+
+
+def sort_options_sub_menu():
+    print(pyfiglet.figlet_format("SORT_OPTIONS", font="cybermedium"))
+    separator()
+
+    print("MOVIES & TV SHOWS TITLES  -   TITLE - 1) ASCENDING - 2) DESCENDING")
+    print()
+    print("MOVIES & TV SHOWS TITLES  -    YEAR - 3) ASCENDING - 4) DESCENDING")
+    print()
+    print("TV SHOW - EPISODES -          TITLE - 5) ASCENDING - 6) DESCENDING")
+    print()
+    print("TV SHOW - EPISODES -       EPISODES - 7) ASCENDING - 8) DESCENDING")
+    print()
+    print("0) EXIT")
+
+    separator()
+    sort_input = input("ENTER #")
+    separator()
+    sort_options_int = int(sort_input)
+
+    if sort_options_int == 0:
+        media_index_home()
+    elif sort_options_int == 1:
+        sort_function_base(sort_options_int=1)
+    elif sort_options_int == 2:
+        sort_function_base(sort_options_int=2)
+    elif sort_options_int == 3:
+        sort_function_base(sort_options_int=3)
+    elif sort_options_int == 4:
+        sort_function_base(sort_options_int=4)
+    elif sort_options_int == 5:
+        tv_episodes_sort_function(sort_options_int=5)
+    elif sort_options_int == 6:
+        tv_episodes_sort_function(sort_options_int=6)
+    elif sort_options_int == 7:
+        tv_episodes_sort_function(sort_options_int=7)
+    elif sort_options_int == 8:
+        tv_episodes_sort_function(sort_options_int=8)
+
+
+def terminal_graph_options_advanced(terminal_graph_options_int):
+    movie_files_results_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF8')))
+    tv_files_results_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF8')))
+
+    m_ten_eighty_found_list = []
+    m_seven_twenty_found_list = []
+    m_standard_def_found_list = []
+    m_empty_response_list = []
+    movies_total_list = []
+
+    tv_ten_eighty_found_list = []
+    tv_seven_twenty_found_list = []
+    tv_standard_def_found_list = []
+    tv_empty_response_list = []
+    tv_total_list = []
+
+    for res in movie_files_results_list:
+
+        if re.findall('19\d{2}x', res[3]):
+            m_ten_eighty_found_list.append(res)
+        elif re.findall('1[0-8]\d{2}x', res[3]):
+            m_seven_twenty_found_list.append(res)
+        elif re.findall('\d{3}x', res[3]):
+            m_standard_def_found_list.append(res)
+        else:
+            m_empty_response_list.append(+1)
+        movies_total_list.append(+1)
+
+    movies_graph_terminal_results = [('1080p', float(len(m_ten_eighty_found_list))),
+                                     ('720p', float(len(m_seven_twenty_found_list))),
+                                     ('SD (Below 720p)', float(len(m_standard_def_found_list)))]
+
+    for res in tv_files_results_list:
+
+        if re.findall('19\d{2}x', res[6]):
+            tv_ten_eighty_found_list.append(res)
+        elif re.findall('1[0-8]\d{2}x', res[6]):
+            tv_seven_twenty_found_list.append(res)
+        elif re.findall('\d{3}x', res[6]):
+            tv_standard_def_found_list.append(res)
+        else:
+            tv_empty_response_list.append(+1)
+        tv_total_list.append(+1)
+
+    tv_shows_graph_terminal_results = [('1080p', float(len(tv_ten_eighty_found_list))),
+                                       ('720p', float(len(tv_seven_twenty_found_list))),
+                                       ('SD (Below 720p)', float(len(tv_standard_def_found_list)))]
+
+    if terminal_graph_options_int == 5:
+
+        graph = Pyasciigraph()
+        for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES', movies_graph_terminal_results):
+            print()
+            print(line)
+        separator()
+
+    if terminal_graph_options_int == 6:
+
+        graph = Pyasciigraph()
+        for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES', tv_shows_graph_terminal_results):
+            print()
+            print(line)
+        separator()
+
+
 def terminal_graph_options_base(terminal_graph_options_int):
     media_index_list = list(csv.reader(open(os.path.expanduser(
         (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF8')))
@@ -616,71 +934,43 @@ def terminal_graph_options_base(terminal_graph_options_int):
         separator()
 
 
-def terminal_graph_options_advanced(terminal_graph_options_int):
-    movie_files_results_list = list(csv.reader(open(os.path.expanduser(
-        (media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF8')))
-    tv_files_results_list = list(csv.reader(open(os.path.expanduser(
-        (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF8')))
+def terminal_graphs_options_sub_menu():
+    print(pyfiglet.figlet_format("TERMINAL_GRAPHS", font="cybermedium"))
+    separator()
 
-    m_ten_eighty_found_list = []
-    m_seven_twenty_found_list = []
-    m_standard_def_found_list = []
-    m_empty_response_list = []
-    movies_total_list = []
+    print("1) MOVIES (TITLES PER YEAR)         - 2) TV SHOWS (TITLES PER YEAR)")
+    print()
+    print("3) MOVIES (TITLES PER DECADE)       - 4) TV SHOWS (TITLES PER DECADE)")
+    print()
+    print("5) MOVIES (RESOLUTIONS PERCENTAGES) - 6) TV SHOWS (RESOLUTIONS PERCENTAGES)")
+    print()
+    print("7) MOVIES (FILE-TYPE AMOUNTS)       - 8) TV SHOWS (FILE-TYPE AMOUNTS)")
+    print()
+    print("0) MAIN MENU")
+    separator()
 
-    tv_ten_eighty_found_list = []
-    tv_seven_twenty_found_list = []
-    tv_standard_def_found_list = []
-    tv_empty_response_list = []
-    tv_total_list = []
+    terminal_graph_options = input("ENTER #")
+    separator()
+    terminal_graph_options_int = int(terminal_graph_options)
 
-    for res in movie_files_results_list:
-
-        if re.findall('19\d{2}x', res[3]):
-            m_ten_eighty_found_list.append(res)
-        elif re.findall('1[0-8]\d{2}x', res[3]):
-            m_seven_twenty_found_list.append(res)
-        elif re.findall('\d{3}x', res[3]):
-            m_standard_def_found_list.append(res)
-        else:
-            m_empty_response_list.append(+1)
-        movies_total_list.append(+1)
-
-    movies_graph_terminal_results = [('1080p', float(len(m_ten_eighty_found_list))),
-                                     ('720p', float(len(m_seven_twenty_found_list))),
-                                     ('SD (Below 720p)', float(len(m_standard_def_found_list)))]
-
-    for res in tv_files_results_list:
-
-        if re.findall('19\d{2}x', res[6]):
-            tv_ten_eighty_found_list.append(res)
-        elif re.findall('1[0-8]\d{2}x', res[6]):
-            tv_seven_twenty_found_list.append(res)
-        elif re.findall('\d{3}x', res[6]):
-            tv_standard_def_found_list.append(res)
-        else:
-            tv_empty_response_list.append(+1)
-        tv_total_list.append(+1)
-
-    tv_shows_graph_terminal_results = [('1080p', float(len(tv_ten_eighty_found_list))),
-                                       ('720p', float(len(tv_seven_twenty_found_list))),
-                                       ('SD (Below 720p)', float(len(tv_standard_def_found_list)))]
-
-    if terminal_graph_options_int == 5:
-
-        graph = Pyasciigraph()
-        for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES', movies_graph_terminal_results):
-            print()
-            print(line)
-        separator()
-
-    if terminal_graph_options_int == 6:
-
-        graph = Pyasciigraph()
-        for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES', tv_shows_graph_terminal_results):
-            print()
-            print(line)
-        separator()
+    if terminal_graph_options_int == 1:
+        terminal_graph_options_base(terminal_graph_options_int=1)
+    elif terminal_graph_options_int == 2:
+        terminal_graph_options_base(terminal_graph_options_int=2)
+    elif terminal_graph_options_int == 3:
+        terminal_graph_options_base(terminal_graph_options_int=3)
+    elif terminal_graph_options_int == 4:
+        terminal_graph_options_base(terminal_graph_options_int=4)
+    elif terminal_graph_options_int == 5:
+        terminal_graph_options_advanced(terminal_graph_options_int=5)
+    elif terminal_graph_options_int == 6:
+        terminal_graph_options_advanced(terminal_graph_options_int=6)
+    elif terminal_graph_options_int == 7:
+        search_file_type_totals(terminal_graph_options_int=7)
+    elif terminal_graph_options_int == 8:
+        search_file_type_totals(terminal_graph_options_int=8)
+    elif terminal_graph_options_int == 0:
+        media_index_home()
 
 
 def tk_gui_file_browser_window():
@@ -699,6 +989,48 @@ def tk_gui_file_selection_window():
     selected_file = askopenfilename()
     root.destroy()
     return selected_file
+
+
+def tv_episodes_sort_function(sort_options_int):
+    tv_results_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF8')))
+
+    tv_amounts = []
+    tv_show_episodes_found = []
+    tv_show_found = {}
+
+    for tv_title in tv_results_list:
+        tv_amounts.append(tv_title[0])
+
+    for found_tv_title in tv_amounts:
+        tv_show_episodes_found.append(found_tv_title)
+        tv_show_found[found_tv_title] = tv_show_episodes_found.count(found_tv_title)
+
+    sorted_by_key_d = sorted(tv_show_found.items(), key=lambda kv: kv[0])
+    sorted_by_key_a = sorted(tv_show_found.items(), key=lambda kv: kv[0], reverse=True)
+    sorted_by_value_d = sorted(tv_show_found.items(), key=lambda kv: kv[1])
+    sorted_by_value_a = sorted(tv_show_found.items(), key=lambda kv: kv[1], reverse=True)
+
+    if sort_options_int == 5:
+        for item in sorted_by_key_d:
+            print()
+            print(item)
+        separator()
+    if sort_options_int == 6:
+        for item in sorted_by_key_a:
+            print()
+            print(item)
+        separator()
+    if sort_options_int == 7:
+        for item in sorted_by_value_d:
+            print()
+            print(item)
+        separator()
+    if sort_options_int == 8:
+        for item in sorted_by_value_a:
+            print()
+            print(item)
+        separator()
 
 
 def username_check_and_folder_creation():
