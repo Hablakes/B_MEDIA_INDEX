@@ -86,28 +86,9 @@ def create_movie_information_index():
                     movie_index_file_results[movie_title_key]["FILE-TYPE"] = title.get('container')
                     movie_index_file_results[movie_title_key]["FILENAME"] = movie_filename_key
 
-        elif movie_file[0].lower().endswith(".nfo"):
-
-            try:
-                with open(movie_file[0]) as f:
-                    for line in f.readlines():
-                        if '<plot>' in line:
-                            movie_index_file_results[movie_title_key]["PLOT"] = line
-
-                        if '<rating>' in line:
-                            movie_index_file_results[movie_title_key]["RATING"] = line
-
-                        if '<runtime>' in line:
-                            movie_index_file_results[movie_title_key]["RUN-TIME"] = line
-            except Exception as e:
-                print(e)
-                print(movie_file[0])
-                continue
-
     with open(os.path.expanduser((media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), "w",
               encoding='UTF8', newline="") as f:
-        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "RESOLUTION", "FILE-TYPE", "PLOT", "RATING",
-                                        "RUN-TIME", "FILENAME"])
+        csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "RESOLUTION", "FILE-TYPE", "FILENAME"])
         for movie_row in movie_index_file_results.values():
             csv_writer.writerow(movie_row)
 
@@ -153,32 +134,10 @@ def create_tv_information_index():
                     tv_index_file_results[tv_title_key]["FILE-TYPE"] = title.get('container')
                     tv_index_file_results[tv_title_key]["FILENAME"] = tv_filename_key
 
-        elif tv_file[0].lower().endswith(".nfo") and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
-
-            if tv_title_key not in tv_index_file_results:
-                tv_index_file_results[tv_title_key] = {}
-
-                try:
-                    with open(tv_file[0]) as f:
-                        for line in f.readlines():
-                            if '<plot>' in line:
-                                tv_index_file_results[tv_title_key]["PLOT"] = line
-
-                            if '<rating>' in line:
-                                tv_index_file_results[tv_title_key]["RATING"] = line
-
-                            if '<runtime>' in line:
-                                tv_index_file_results[tv_title_key]["RUN-TIME"] = line
-
-                except Exception as e:
-                    print(e)
-                    print(tv_file[0])
-                    continue
-
     with open(os.path.expanduser((media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), "w",
               encoding='UTF8', newline="") as f:
         csv_writer = csv.DictWriter(f, ["DIRECTORY", "TITLE", "YEAR", "EPISODE TITLE", "SEASON", "EPISODE NUMBER",
-                                        "RESOLUTION", "FILE-TYPE", "PLOT", "RATING", "RUN-TIME", "FILENAME"])
+                                        "RESOLUTION", "FILE-TYPE", "FILENAME"])
         for tv_row in tv_index_file_results.values():
             csv_writer.writerow(tv_row)
 
