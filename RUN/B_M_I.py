@@ -2,14 +2,10 @@ import csv
 import os
 import pathlib
 import re
-import textwrap
 
 import guessit
 import pyfiglet
 import pymediainfo
-
-import matplotlib.pylab as plt
-import numpy as np
 
 from ascii_graph import Pyasciigraph
 
