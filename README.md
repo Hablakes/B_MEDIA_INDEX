@@ -28,12 +28,11 @@ B-MEDIA-INDEX USAGE(S):
 1) /RUN/B_M_I.py
 2) Enter your Username
 3) Enter Directories for Movies and TV Show Libraries (OPTION #1)
-4) Enter any alternate Directories for Movies and TV Show Libraries (OPTION #1), Hit Cancel is None
-5) Allow the Program to create a new Folders Index (QUICK)
-6) From MAIN MENU, Hit (OPTION #3) "CREATE PATH INDICES" (QUICK)
-7) From MAIN MENU, Hit (OPTION #4) "CREATE TITLE INDEX" (QUICK)
-8) From MAIN MENU, Hit (OPTION #7) "CREATE MEDIA INFORMATION INDICES" (** LONG **)
-9) When step 8 is complete, you will have full functionality for the MEDIA_INDEX.
+   If no Alternate Directories, hit Cancel for both (The last two (2) of the four (4) folder-selection windows)
+4) From MAIN MENU, Hit (OPTION #3) "CREATE PATH INDICES" (** QUICK **)
+5) From MAIN MENU, Hit (OPTION #4) "CREATE TITLE INDEX" (** QUICK **)
+6) From MAIN MENU, Hit (OPTION #5) "CREATE MEDIA INFORMATION INDICES" (** LONG **)
+7) When step 6 is complete, you will have full functionality for the MEDIA_INDEX.
 
 * IF NOT FIRST TIME RUNNING
 
