@@ -2,7 +2,6 @@ import csv
 import os
 import pathlib
 import re
-import textwrap
 
 import guessit
 import pyfiglet
@@ -12,8 +11,6 @@ from ascii_graph import Pyasciigraph
 
 from tkinter import *
 from tkinter import filedialog
-from tkinter.filedialog import askopenfilename
-
 
 username_input = None
 
@@ -945,7 +942,7 @@ def tk_gui_file_selection_window():
     root = Tk()
     root.withdraw()
     root.update()
-    selected_file = askopenfilename()
+    selected_file = filedialog.askopenfilename()
     root.destroy()
     return selected_file
 
