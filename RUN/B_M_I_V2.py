@@ -1,8 +1,9 @@
 import csv
 import os
 import pathlib
-import re
 import textwrap
+
+import re
 
 import guessit
 import pyfiglet
@@ -224,7 +225,7 @@ def library_total_amount():
     for counted_tv_title in media_index_list:
         if str('TV') in counted_tv_title:
             tv_amounts_list.append(counted_tv_title)
-    for counted_episode_titles in tv_index_list:
+    for _ in tv_index_list:
         episode_amounts_list.append(+1)
 
     print()
@@ -254,17 +255,15 @@ def media_index_home():
     print(pyfiglet.figlet_format('MEDIA_INDEX', font='cybermedium'))
     separator()
 
-    print('1) ADD DATABASE DIRECTORIES                      2) CHANGE DATABASE DIRECTORIES')
+    print('1) CHANGE DATABASE DIRECTORIES                   2) CREATE PATH INDICES')
     print()
-    print('3) CREATE PATH INDICES                           4) CREATE TITLE INDEX')
+    print('3) CREATE TITLE INDEX                            4) CREATE MEDIA INFORMATION INDICES')
     print()
-    print('5) CREATE MEDIA INFORMATION INDICES              6) COMPARE TWO USERS INFORMATION INDICES')
+    print('5) COMPARE TWO USERS INFORMATION INDICES         6) DISPLAY LIBRARY TOTALS')
     print()
-    print('7) DISPLAY LIBRARY TOTALS                        8) MEDIA INFORMATION QUERIES')
+    print('7) MEDIA INFORMATION QUERIES                     8) SORT OPTIONS')
     print()
-    print('9) SORT OPTIONS                                  10) TERMINAL GRAPH OPTIONS')
-    print()
-    print('0) EXIT')
+    print('9) TERMINAL GRAPH OPTIONS                        0) EXIT')
     separator()
 
     try:
@@ -275,24 +274,22 @@ def media_index_home():
         if lmi_input_action == 0:
             exit()
         elif lmi_input_action == 1:
-            directory_selection()
-        elif lmi_input_action == 2:
             change_directory_selection()
-        elif lmi_input_action == 3:
+        elif lmi_input_action == 2:
             walk_directories_and_create_indices()
-        elif lmi_input_action == 4:
+        elif lmi_input_action == 3:
             scrape_media_folders_for_csv()
-        elif lmi_input_action == 5:
+        elif lmi_input_action == 4:
             create_media_information_indices()
-        elif lmi_input_action == 6:
+        elif lmi_input_action == 5:
             select_users_indices_to_compare()
-        elif lmi_input_action == 7:
+        elif lmi_input_action == 6:
             library_total_amount()
-        elif lmi_input_action == 8:
+        elif lmi_input_action == 7:
             media_queries_sub_menu()
-        elif lmi_input_action == 9:
+        elif lmi_input_action == 8:
             sort_options_sub_menu()
-        elif lmi_input_action == 10:
+        elif lmi_input_action == 9:
             terminal_graphs_options_sub_menu()
     except (TypeError, ValueError) as e:
         print('INPUT ERROR: ', e)
