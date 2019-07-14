@@ -60,13 +60,10 @@ def create_movie_information_index():
     for movie_file in sorted(movie_index):
         movie_title_key = movie_file[0].rsplit('/')[-2]
         movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
-
         if movie_title_key not in movie_index_file_results:
             movie_index_file_results[movie_title_key] = {}
-
         if movie_file[0].lower().endswith(extensions) and movie_filename_key.lower() != '.nfo':
             title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
-
             try:
                 test = pymediainfo.MediaInfo.parse(movie_file[0])
             except OSError as e:
@@ -74,7 +71,6 @@ def create_movie_information_index():
                 continue
 
             for track in test.tracks:
-
                 if track.track_type == 'Video':
                     movie_index_file_results[movie_title_key]['DIRECTORY'] = movie_title_key
                     movie_index_file_results[movie_title_key]['TITLE'] = title.get('title')
@@ -118,14 +114,10 @@ def create_tv_information_index():
         tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
         tv_folder_title = tv_file[0].rsplit('/')[-2]
         tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
-
+        if tv_title_key not in tv_index_file_results:
+            tv_index_file_results[tv_title_key] = {}
         if tv_file[0].lower().endswith(extensions) and tv_filename_key.lower() != '.nfo':
-
-            if tv_title_key not in tv_index_file_results:
-                tv_index_file_results[tv_title_key] = {}
-
             title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
-
             try:
                 test = pymediainfo.MediaInfo.parse(tv_file[0])
             except OSError as e:
@@ -133,7 +125,6 @@ def create_tv_information_index():
                 continue
 
             for track in test.tracks:
-
                 if track.track_type == 'Video':
                     tv_index_file_results[tv_title_key]['DIRECTORY'] = tv_folder_title
                     tv_index_file_results[tv_title_key]['TITLE'] = title.get('title')
@@ -148,7 +139,6 @@ def create_tv_information_index():
         elif tv_file[0].lower().endswith('.nfo') and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
             if tv_title_key not in tv_index_file_results:
                 tv_index_file_results[tv_title_key] = {}
-
                 try:
                     with open(tv_file[0]) as f:
                         for line in f.readlines():
@@ -199,7 +189,6 @@ def directory_selection():
             csv_writer = csv.writer(f)
             for user_data in user_info_dict.items():
                 csv_writer.writerow(user_data)
-
     except (TypeError, ValueError) as e:
         print('INPUT ERROR: ', e)
 
@@ -214,6 +203,7 @@ def launch_media_index():
     separator()
 
     global username_input
+
     username_input = input('ENTER YOUR USERNAME (CASE-SENSITIVE): ')
     separator()
     username_check_and_folder_creation()
@@ -231,11 +221,9 @@ def library_total_amount():
     for counted_movie_title in media_index_list:
         if str('MOVIE') in counted_movie_title:
             movie_amounts_list.append(counted_movie_title)
-
     for counted_tv_title in media_index_list:
         if str('TV') in counted_tv_title:
             tv_amounts_list.append(counted_tv_title)
-
     for counted_episode_titles in tv_index_list:
         episode_amounts_list.append(+1)
 
@@ -283,6 +271,7 @@ def media_index_home():
         lmi_input = input('ENTER #: ')
         separator()
         lmi_input_action = int(lmi_input)
+
         if lmi_input_action == 0:
             exit()
         elif lmi_input_action == 1:
@@ -377,7 +366,6 @@ def query_movie_information_index():
                 print()
                 print(movie_file[4])
                 divider()
-
                 if int(len(movie_file[7])) != 0:
                     print("RUN-TIME")
                     print()
@@ -389,7 +377,6 @@ def query_movie_information_index():
                         mv_runtime = re.findall("<runtime>(.*?)</runtime>", movie_file[7])
                         print(mv_runtime[0], ": Minutes")
                         divider()
-
                 if int(len(movie_file[6])) != 0:
                     print("RATING")
                     print()
@@ -401,7 +388,6 @@ def query_movie_information_index():
                         mv_rating = re.findall("<rating>(.*?)</rating>", movie_file[6])
                         print(mv_rating[0])
                         divider()
-
                 if int(len(movie_file[5])) != 0:
                     print("PLOT")
                     print()
@@ -409,7 +395,6 @@ def query_movie_information_index():
                         mv_plot = re.findall("<plot>(.*?)", movie_file[5])
                         print(textwrap.fill(mv_plot[0], 100))
                         divider()
-
                     elif '</plot>' in movie_file[5]:
                         mv_plot = re.findall("<plot>(.*?)</plot>", movie_file[5])
                         print(textwrap.fill(mv_plot[0], 100))
@@ -465,7 +450,6 @@ def query_tv_information_index():
                 print()
                 print(tv_file[7])
                 divider()
-
                 if int(len(tv_file[10])) != 0:
                     print("RUN-TIME")
                     print()
@@ -477,7 +461,6 @@ def query_tv_information_index():
                         tv_runtime = re.findall("<runtime>(.*?)</runtime>", tv_file[10])
                         print(tv_runtime[0], ": Minutes")
                         divider()
-
                 if int(len(tv_file[9])) != 0:
                     print("RATING")
                     print()
@@ -489,7 +472,6 @@ def query_tv_information_index():
                         tv_rating = re.findall("<rating>(.*?)</rating>", tv_file[9])
                         print(tv_rating[0])
                         divider()
-
                 if int(len(tv_file[8])) != 0:
                     print("PLOT")
                     print()
@@ -497,7 +479,6 @@ def query_tv_information_index():
                         tv_plot = re.findall("<plot>(.*?)", tv_file[8])
                         print(textwrap.fill(tv_plot[0], 100))
                         divider()
-
                     elif '</plot>' in tv_file[8]:
                         tv_plot = re.findall("<plot>(.*?)</plot>", tv_file[8])
                         print(textwrap.fill(tv_plot[0], 100))
@@ -524,11 +505,9 @@ def search_file_type_totals(terminal_graph_options_int):
             if file_type[4] not in movie_extensions_dict:
                 movie_extensions_dict[file_type[4]] = []
             movie_extensions_dict[file_type[4]].append(file_type[4])
-
     if terminal_graph_options_int == 7:
         for file_type_values, value in sorted(movie_extensions_dict.items()):
             movie_extensions_totals[file_type_values] = len(value)
-
         file_type_totals_terminal_graph_list = []
         for key, value in movie_extensions_totals.items():
             file_type_totals_terminal_graph_list.append((str(key), value))
@@ -544,11 +523,9 @@ def search_file_type_totals(terminal_graph_options_int):
             if file_type[7] not in tv_extensions_dict:
                 tv_extensions_dict[file_type[7]] = []
             tv_extensions_dict[file_type[7]].append(file_type[7])
-
     if terminal_graph_options_int == 8:
         for file_type_values, value in sorted(tv_extensions_dict.items()):
             tv_extensions_totals[file_type_values] = len(value)
-
         file_type_totals_terminal_graph_list = []
         for key, value in tv_extensions_totals.items():
             file_type_totals_terminal_graph_list.append((str(key), value))
@@ -568,6 +545,7 @@ def search_movie_titles():
         movie_title_search_action = input('QUERY MOVIES: ')
         separator()
         movie_title_search_action = movie_title_search_action.lower()
+
         print('SEARCH RESULTS: ')
         print()
         print('MOVIES: ')
@@ -596,6 +574,7 @@ def search_plots():
     try:
         print('SEARCH PLOTS OF:                                 1) MOVIES       2) TV SHOWS')
         print()
+
         plot_search = input('KEYWORD(S): ')
         plot_search_lower = plot_search.lower()
         separator()
@@ -604,7 +583,6 @@ def search_plots():
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
         for plot in tv_files_results_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[8])
-
         for items in plots_list:
             if plot_search_lower in items.lower():
                 print()
@@ -625,6 +603,7 @@ def search_tv_titles():
         tv_title_search_action = input('QUERY TV SHOWS: ')
         separator()
         tv_title_search_action = tv_title_search_action.lower()
+
         print()
         print()
         print('SEARCH RESULTS: ')
@@ -677,7 +656,6 @@ def select_users_indices_to_compare():
                     'w', encoding='UTF-8', newline='') as outFile_t:
                 for line in compare_results(user_tv_results, comparison_tv_results):
                     outFile_t.write(line)
-
     except (OSError, TypeError, ValueError) as e:
         print('INPUT ERROR: ', e)
         separator()
@@ -698,11 +676,9 @@ def scrape_media_folders_for_csv():
             for movie_found in sorted(movie_dir_list):
                 movie_scrape_info = guessit.guessit(movie_found)
                 title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
-
                 if "," in title_item_check[2]:
                     title_item_check.append(title_item_check[2][-5:-1])
                     title_item_check.remove(title_item_check[2])
-
                 movie_title_items.append(title_item_check)
 
         if movie_alt_dir_input is not str(''):
@@ -710,11 +686,9 @@ def scrape_media_folders_for_csv():
             for movie_found in sorted(movie_alt_dir_list):
                 movie_scrape_info = guessit.guessit(movie_found)
                 title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
-
                 if "," in title_item_check[2]:
                     title_item_check.append(title_item_check[2][-5:-1])
                     title_item_check.remove(title_item_check[2])
-
                 movie_title_items.append(title_item_check)
 
         if tv_dir_input is not str(''):
@@ -722,11 +696,9 @@ def scrape_media_folders_for_csv():
             for tv_found in sorted(tv_dir_list):
                 tv_scrape_info = guessit.guessit(tv_found)
                 title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
-
                 if "," in title_item_check[2]:
                     title_item_check.append(title_item_check[2][-5:-1])
                     title_item_check.remove(title_item_check[2])
-
                 tv_title_items.append(title_item_check)
 
         if tv_alt_dir_input is not str(''):
@@ -734,11 +706,9 @@ def scrape_media_folders_for_csv():
             for tv_found in sorted(tv_alt_dir_list):
                 tv_scrape_info = guessit.guessit(tv_found)
                 title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
-
                 if "," in title_item_check[2]:
                     title_item_check.append(title_item_check[2][-5:-1])
                     title_item_check.remove(title_item_check[2])
-
                 tv_title_items.append(title_item_check)
 
         with open(os.path.expanduser((media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), 'w',
@@ -751,7 +721,7 @@ def scrape_media_folders_for_csv():
     except (OSError, TypeError, ValueError) as e:
         print('INPUT ERROR: ', e)
         print()
-        print('INCORRECT OR MISSING DIRECTORIES, PLEASE RETRY')
+        print('INCORRECT DIRECTORY INPUT(S), PLEASE RETRY')
         separator()
 
 
@@ -858,7 +828,6 @@ def terminal_graph_options_advanced(terminal_graph_options_int):
         else:
             m_empty_response_list.append(+1)
         movies_total_list.append(+1)
-
     movies_graph_terminal_results = [('1080p', float(len(m_ten_eighty_found_list))),
                                      ('720p', float(len(m_seven_twenty_found_list))),
                                      ('SD (Below 720p)', float(len(m_standard_def_found_list)))]
@@ -873,7 +842,6 @@ def terminal_graph_options_advanced(terminal_graph_options_int):
         else:
             tv_empty_response_list.append(+1)
         tv_total_list.append(+1)
-
     tv_shows_graph_terminal_results = [('1080p', float(len(tv_ten_eighty_found_list))),
                                        ('720p', float(len(tv_seven_twenty_found_list))),
                                        ('SD (Below 720p)', float(len(tv_standard_def_found_list)))]
@@ -918,7 +886,6 @@ def terminal_graph_options_base(terminal_graph_options_int):
                 if title_item_decade_int not in movie_decades_dict:
                     movie_decades_dict[title_item_decade_int] = []
                 movie_decades_dict[title_item_decade_int].append(title_item)
-
             if str('TV') in title_item:
                 if title_item_year_int not in tv_years_dict:
                     tv_years_dict[title_item_year_int] = []
@@ -934,7 +901,6 @@ def terminal_graph_options_base(terminal_graph_options_int):
         movie_years_terminal_graph_list = []
         for key, value in movie_data:
             movie_years_terminal_graph_list.append((str(key), value))
-
         graph = Pyasciigraph()
 
         for line in graph.graph('MOVIES: YEAR AMOUNTS: ', movie_years_terminal_graph_list):
@@ -949,8 +915,8 @@ def terminal_graph_options_base(terminal_graph_options_int):
         tv_years_terminal_graph_list = []
         for key, value in tv_data:
             tv_years_terminal_graph_list.append((str(key), value))
-
         graph = Pyasciigraph()
+
         for line in graph.graph('TV SHOWS: YEAR AMOUNTS: ', tv_years_terminal_graph_list):
             print()
             print(line)
@@ -962,8 +928,8 @@ def terminal_graph_options_base(terminal_graph_options_int):
         movie_decades_terminal_graph_list = []
         for key, value in movie_decades_totals_dict.items():
             movie_decades_terminal_graph_list.append((str(key), value))
-
         graph = Pyasciigraph()
+
         for line in graph.graph('MOVIES: DECADE AMOUNTS: ', movie_decades_terminal_graph_list):
             print()
             print(line)
@@ -975,8 +941,8 @@ def terminal_graph_options_base(terminal_graph_options_int):
         tv_decades_terminal_graph_list = []
         for key, value in tv_decades_totals_dict.items():
             tv_decades_terminal_graph_list.append((str(key), value))
-
         graph = Pyasciigraph()
+
         for line in graph.graph('TV SHOWS: DECADE AMOUNTS: ', tv_decades_terminal_graph_list):
             print()
             print(line)
@@ -1055,7 +1021,6 @@ def tv_episodes_sort_function(sort_options_int):
 
     for tv_title in tv_results_list:
         tv_amounts.append(tv_title[0])
-
     for found_tv_title in tv_amounts:
         tv_show_episodes_found.append(found_tv_title)
         tv_show_found[found_tv_title] = tv_show_episodes_found.count(found_tv_title)
@@ -1119,7 +1084,6 @@ def walk_directories_and_create_indices():
             for movie_file in sorted(files):
                 if movie_file.lower().endswith(extensions):
                     movie_video_files_results.append([(pathlib.Path(root) / movie_file).as_posix()])
-
     if movie_alt_dir_input is not str(''):
         for root, dirs, files in os.walk(movie_alt_dir_input):
             for alt_file in sorted(files):
@@ -1139,7 +1103,6 @@ def walk_directories_and_create_indices():
             for tv_file in sorted(files):
                 if tv_file.lower().endswith(extensions):
                     tv_show_video_files_results.append([(pathlib.Path(root) / tv_file).as_posix()])
-
     if tv_alt_dir_input is not str(''):
         for root, dirs, files in os.walk(tv_alt_dir_input):
             for alt_file in sorted(files):
