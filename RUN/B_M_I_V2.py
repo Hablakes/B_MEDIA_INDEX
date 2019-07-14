@@ -115,9 +115,9 @@ def create_tv_information_index():
         tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
         tv_folder_title = tv_file[0].rsplit('/')[-2]
         tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
-        if tv_title_key not in tv_index_file_results:
-            tv_index_file_results[tv_title_key] = {}
         if tv_file[0].lower().endswith(extensions) and tv_filename_key.lower() != '.nfo':
+            if tv_title_key not in tv_index_file_results:
+                tv_index_file_results[tv_title_key] = {}
             title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
             try:
                 test = pymediainfo.MediaInfo.parse(tv_file[0])
