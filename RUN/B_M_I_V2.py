@@ -61,9 +61,9 @@ def create_movie_information_index():
     for movie_file in sorted(movie_index):
         movie_title_key = movie_file[0].rsplit('/')[-2]
         movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
-        if movie_title_key not in movie_index_file_results:
-            movie_index_file_results[movie_title_key] = {}
         if movie_file[0].lower().endswith(extensions) and movie_filename_key.lower() != '.nfo':
+            if movie_title_key not in movie_index_file_results:
+                movie_index_file_results[movie_title_key] = {}
             title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
             try:
                 test = pymediainfo.MediaInfo.parse(movie_file[0])
@@ -487,6 +487,65 @@ def query_tv_information_index():
         separator()
 
 
+def scrape_media_folders_for_csv():
+    movie_title_items = []
+    tv_title_items = []
+
+    try:
+        if movie_dir_input is not str(''):
+            movie_dir_list = os.listdir(movie_dir_input)
+            for movie_found in sorted(movie_dir_list):
+                movie_scrape_info = guessit.guessit(movie_found)
+                title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
+                if "," in title_item_check[2]:
+                    title_item_check.append(title_item_check[2][-5:-1])
+                    title_item_check.remove(title_item_check[2])
+                movie_title_items.append(title_item_check)
+
+        if movie_alt_dir_input is not str(''):
+            movie_alt_dir_list = os.listdir(movie_alt_dir_input)
+            for movie_found in sorted(movie_alt_dir_list):
+                movie_scrape_info = guessit.guessit(movie_found)
+                title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
+                if "," in title_item_check[2]:
+                    title_item_check.append(title_item_check[2][-5:-1])
+                    title_item_check.remove(title_item_check[2])
+                movie_title_items.append(title_item_check)
+
+        if tv_dir_input is not str(''):
+            tv_dir_list = os.listdir(tv_dir_input)
+            for tv_found in sorted(tv_dir_list):
+                tv_scrape_info = guessit.guessit(tv_found)
+                title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
+                if "," in title_item_check[2]:
+                    title_item_check.append(title_item_check[2][-5:-1])
+                    title_item_check.remove(title_item_check[2])
+                tv_title_items.append(title_item_check)
+
+        if tv_alt_dir_input is not str(''):
+            tv_alt_dir_list = os.listdir(tv_alt_dir_input)
+            for tv_found in sorted(tv_alt_dir_list):
+                tv_scrape_info = guessit.guessit(tv_found)
+                title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
+                if "," in title_item_check[2]:
+                    title_item_check.append(title_item_check[2][-5:-1])
+                    title_item_check.remove(title_item_check[2])
+                tv_title_items.append(title_item_check)
+
+        with open(os.path.expanduser((media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), 'w',
+                  encoding='UTF-8', newline='') as f:
+            csv_writer = csv.writer(f)
+            for file_row in movie_title_items:
+                csv_writer.writerow(file_row)
+            for file_row in tv_title_items:
+                csv_writer.writerow(file_row)
+    except (OSError, TypeError, ValueError) as e:
+        print('INPUT ERROR: ', e)
+        print()
+        print('INCORRECT DIRECTORY INPUT(S), PLEASE RETRY')
+        separator()
+
+
 def search_file_type_totals(terminal_graph_options_int):
     movie_files_results_list = list(csv.reader(open(os.path.expanduser(
         (media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
@@ -661,65 +720,6 @@ def select_users_indices_to_compare():
 def separator():
     for items in '\n', '-' * 100, '\n':
         print(items)
-
-
-def scrape_media_folders_for_csv():
-    movie_title_items = []
-    tv_title_items = []
-
-    try:
-        if movie_dir_input is not str(''):
-            movie_dir_list = os.listdir(movie_dir_input)
-            for movie_found in sorted(movie_dir_list):
-                movie_scrape_info = guessit.guessit(movie_found)
-                title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
-                if "," in title_item_check[2]:
-                    title_item_check.append(title_item_check[2][-5:-1])
-                    title_item_check.remove(title_item_check[2])
-                movie_title_items.append(title_item_check)
-
-        if movie_alt_dir_input is not str(''):
-            movie_alt_dir_list = os.listdir(movie_alt_dir_input)
-            for movie_found in sorted(movie_alt_dir_list):
-                movie_scrape_info = guessit.guessit(movie_found)
-                title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
-                if "," in title_item_check[2]:
-                    title_item_check.append(title_item_check[2][-5:-1])
-                    title_item_check.remove(title_item_check[2])
-                movie_title_items.append(title_item_check)
-
-        if tv_dir_input is not str(''):
-            tv_dir_list = os.listdir(tv_dir_input)
-            for tv_found in sorted(tv_dir_list):
-                tv_scrape_info = guessit.guessit(tv_found)
-                title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
-                if "," in title_item_check[2]:
-                    title_item_check.append(title_item_check[2][-5:-1])
-                    title_item_check.remove(title_item_check[2])
-                tv_title_items.append(title_item_check)
-
-        if tv_alt_dir_input is not str(''):
-            tv_alt_dir_list = os.listdir(tv_alt_dir_input)
-            for tv_found in sorted(tv_alt_dir_list):
-                tv_scrape_info = guessit.guessit(tv_found)
-                title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
-                if "," in title_item_check[2]:
-                    title_item_check.append(title_item_check[2][-5:-1])
-                    title_item_check.remove(title_item_check[2])
-                tv_title_items.append(title_item_check)
-
-        with open(os.path.expanduser((media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), 'w',
-                  encoding='UTF-8', newline='') as f:
-            csv_writer = csv.writer(f)
-            for file_row in movie_title_items:
-                csv_writer.writerow(file_row)
-            for file_row in tv_title_items:
-                csv_writer.writerow(file_row)
-    except (OSError, TypeError, ValueError) as e:
-        print('INPUT ERROR: ', e)
-        print()
-        print('INCORRECT DIRECTORY INPUT(S), PLEASE RETRY')
-        separator()
 
 
 def sort_function_base(sort_options_int):
