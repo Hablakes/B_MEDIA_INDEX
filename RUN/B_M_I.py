@@ -8,12 +8,10 @@ import pyfiglet
 import pymediainfo
 
 from ascii_graph import Pyasciigraph
-
 from tkinter import *
 from tkinter import filedialog
 
 username_input = None
-
 media_index_folder = '~/{0}_MEDIA_INDEX'
 
 extensions = ('.3gp', '.asf', '.asx', '.avc', '.avi', '.bdmv', '.bin', '.bivx', '.dat', '.disc', '.divx', '.dv',
@@ -24,7 +22,6 @@ extensions = ('.3gp', '.asf', '.asx', '.avc', '.avi', '.bdmv', '.bin', '.bivx', 
 
 def main():
     launch_media_index()
-
     while True:
         media_index_home()
 
@@ -506,36 +503,40 @@ def search_tv_titles():
 
 
 def select_users_indices_to_compare():
-    print()
-    print('SELECT THE MOVIE_INFORMATION_INDICES TO COMPARE: ')
-    separator()
-    print('SELECT USER MOVIE INFORMATION INDEX: ')
-    m_0 = tk_gui_file_selection_window()
-    print('SELECT COMPARISON MOVIE INFORMATION INDEX: ')
-    m_1 = tk_gui_file_selection_window()
-    print('SELECT USER TV INFORMATION INDEX: ')
-    t_0 = tk_gui_file_selection_window()
-    print('SELECT COMPARISON TV INFORMATION INDEX: ')
-    t_1 = tk_gui_file_selection_window()
-    separator()
+    try:
+        print()
+        print('SELECT THE MOVIE_INFORMATION_INDICES TO COMPARE: ')
+        separator()
+        print('SELECT USER MOVIE INFORMATION INDEX: ')
+        m_0 = tk_gui_file_selection_window()
+        print('SELECT COMPARISON MOVIE INFORMATION INDEX: ')
+        m_1 = tk_gui_file_selection_window()
+        print('SELECT USER TV INFORMATION INDEX: ')
+        t_0 = tk_gui_file_selection_window()
+        print('SELECT COMPARISON TV INFORMATION INDEX: ')
+        t_1 = tk_gui_file_selection_window()
+        separator()
 
-    with open(m_0, 'r', encoding='UTF-8') as movies_0, open(m_1, 'r', encoding='UTF-8') as movies_1:
-        user_movie_results = movies_0.readlines()
-        comparison_movie_results = movies_1.readlines()
-        with open(os.path.expanduser(
-                (media_index_folder + '/FILES/MOVIE_COMPARISON_INDEX.csv').format(username_input)),
-                'w', encoding='UTF-8', newline='') as outFile_m:
-            for line in compare_results(user_movie_results, comparison_movie_results):
-                outFile_m.write(line)
+        with open(m_0, 'r', encoding='UTF-8') as movies_0, open(m_1, 'r', encoding='UTF-8') as movies_1:
+            user_movie_results = movies_0.readlines()
+            comparison_movie_results = movies_1.readlines()
+            with open(os.path.expanduser(
+                    (media_index_folder + '/FILES/MOVIE_COMPARISON_INDEX.csv').format(username_input)),
+                    'w', encoding='UTF-8', newline='') as outFile_m:
+                for line in compare_results(user_movie_results, comparison_movie_results):
+                    outFile_m.write(line)
 
-    with open(t_0, 'r', encoding='UTF-8') as tv_0, open(t_1, 'r', encoding='UTF-8') as tv_1:
-        user_tv_results = tv_0.readlines()
-        comparison_tv_results = tv_1.readlines()
-        with open(os.path.expanduser(
-                (media_index_folder + '/FILES/TV_COMPARISON_INDEX.csv').format(username_input)),
-                'w', encoding='UTF-8', newline='') as outFile_t:
-            for line in compare_results(user_tv_results, comparison_tv_results):
-                outFile_t.write(line)
+        with open(t_0, 'r', encoding='UTF-8') as tv_0, open(t_1, 'r', encoding='UTF-8') as tv_1:
+            user_tv_results = tv_0.readlines()
+            comparison_tv_results = tv_1.readlines()
+            with open(os.path.expanduser(
+                    (media_index_folder + '/FILES/TV_COMPARISON_INDEX.csv').format(username_input)),
+                    'w', encoding='UTF-8', newline='') as outFile_t:
+                for line in compare_results(user_tv_results, comparison_tv_results):
+                    outFile_t.write(line)
+
+    except (TypeError, ValueError) as e:
+        print('INPUT ERROR: ', e)
 
 
 def separator():
