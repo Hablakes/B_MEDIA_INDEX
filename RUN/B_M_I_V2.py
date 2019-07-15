@@ -63,7 +63,7 @@ def create_movie_information_index():
         movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
         if movie_title_key not in movie_index_file_results:
             movie_index_file_results[movie_title_key] = {}
-        if movie_filename_key.lower() != '.nfo':
+        if not movie_filename_key.lower().endswith('.nfo'):
             title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
             try:
                 test = pymediainfo.MediaInfo.parse(movie_file[0])
@@ -80,9 +80,9 @@ def create_movie_information_index():
                     movie_index_file_results[movie_title_key]['FILE-TYPE'] = title.get('container')
                     movie_index_file_results[movie_title_key]['FILENAME'] = movie_filename_key
 
-        elif movie_file[0].lower().endswith('.nfo'):
+        elif movie_filename_key.lower().endswith('.nfo'):
             try:
-                with open(movie_file[0]) as f:
+                with open(str(movie_file[0])) as f:
                     for line_item in f.readlines():
                         if '<plot>' in line_item:
                             movie_index_file_results[movie_title_key]['PLOT'] = line_item
@@ -117,7 +117,7 @@ def create_tv_information_index():
         tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
         if tv_title_key not in tv_index_file_results:
             tv_index_file_results[tv_title_key] = {}
-        if tv_filename_key.lower() != '.nfo':
+        if not tv_filename_key.lower().endswith('.nfo'):
             title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
             try:
                 test = pymediainfo.MediaInfo.parse(tv_file[0])
@@ -137,7 +137,7 @@ def create_tv_information_index():
                     tv_index_file_results[tv_title_key]['FILE-TYPE'] = title.get('container')
                     tv_index_file_results[tv_title_key]['FILENAME'] = tv_filename_key
 
-        elif tv_file[0].lower().endswith('.nfo') and tv_file[0].rsplit('/', 1)[-1].lower() != 'tvshow.nfo':
+        elif tv_filename_key.lower().endswith('.nfo') and tv_filename_key.lower() != 'tvshow.nfo':
             if tv_title_key not in tv_index_file_results:
                 tv_index_file_results[tv_title_key] = {}
                 try:
