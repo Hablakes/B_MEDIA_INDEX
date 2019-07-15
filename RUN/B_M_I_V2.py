@@ -225,8 +225,9 @@ def library_total_amount():
     for counted_tv_title in media_index_list:
         if str('TV') in counted_tv_title:
             tv_amounts_list.append(counted_tv_title)
-    for _ in tv_index_list:
-        episode_amounts_list.append(+1)
+    for episodes in tv_index_list:
+        if not episodes[0].lower().endswith('.nfo'):
+            episode_amounts_list.append(+1)
 
     print()
     print('TOTAL AMOUNT OF MOVIES: ')
