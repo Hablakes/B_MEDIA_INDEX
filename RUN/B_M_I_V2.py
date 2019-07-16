@@ -112,6 +112,7 @@ def create_tv_information_index():
     tv_index = csv.reader(open(os.path.expanduser(
         (media_index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username_input)), encoding='UTF-8'))
     tv_index_file_results = {}
+    tv_show_plots_dictionary = {}
 
     for tv_file in sorted(tv_index):
         tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
@@ -139,9 +140,23 @@ def create_tv_information_index():
                     tv_index_file_results[tv_title_key]['FILE-TYPE'] = title.get('container')
                     tv_index_file_results[tv_title_key]['FILENAME'] = tv_filename_key
 
-        elif tv_filename_key.lower().endswith('.nfo') and tv_filename_key.lower() != 'tvshow.nfo':
+        elif tv_filename_key.lower().endswith('.nfo'):
             if tv_title_key not in tv_index_file_results:
                 tv_index_file_results[tv_title_key] = {}
+
+            if str(tv_filename_key.lower()) == str('tvshow.nfo').lower():
+                tv_show_plots_dictionary[tv_title_key] = {}
+                tv_show_plots_dictionary[tv_title_key]['SHOW'] = tv_folder_title
+                try:
+                    with open(tv_file[0]) as f:
+                        for line in f.readlines():
+                            if '<plot>' in line:
+                                tv_show_plots_dictionary[tv_title_key]['PLOT'] = line
+                except Exception as e:
+                    print('ERROR: ', e)
+                    print('FILE: ', tv_file[0])
+                    continue
+            else:
                 try:
                     with open(tv_file[0]) as f:
                         for line in f.readlines():
@@ -163,6 +178,12 @@ def create_tv_information_index():
         csv_writer = csv.DictWriter(f, ['DIRECTORY', 'TITLE', 'YEAR', 'EPISODE TITLE', 'SEASON', 'EPISODE NUMBER',
                                         'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING', 'RUN-TIME', 'FILENAME'])
         for tv_row in tv_index_file_results.values():
+            csv_writer.writerow(tv_row)
+
+    with open(os.path.expanduser((media_index_folder + '/TV_PLOTS_INDEX.csv').format(username_input)), 'w',
+              encoding='UTF-8', newline='') as f:
+        csv_writer = csv.DictWriter(f, ['SHOW', 'PLOT'])
+        for tv_row in tv_show_plots_dictionary.values():
             csv_writer.writerow(tv_row)
 
 
@@ -899,11 +920,17 @@ def search_plots():
         (media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
     tv_files_results_list = list(csv.reader(open(os.path.expanduser(
         (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
+    tv_plots_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/TV_PLOTS_INDEX.csv').format(username_input)), encoding='UTF-8')))
     plot_search_list = []
     plots_list = []
 
     try:
-        print('SEARCH PLOTS OF:                 1) MOVIES       2) TV SHOWS       3) BOTH')
+        print('SEARCH PLOTS OF:                             1) MOVIES       2) TV SHOW EPISODES')
+        print()
+        print('                                             3) MOVIES AND TV SHOW EPISODES')
+        print()
+        print('                                             4) TV SHOW GENERAL OVERVIEW')
         separator()
         plot_search_int = int(input('ENTER #: '))
         plot_search_list.append(plot_search_int)
@@ -944,6 +971,14 @@ def search_plots():
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
         for plot in tv_files_results_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[8])
+        for items in plots_list:
+            if plot_search_list[1] in items.lower():
+                print()
+                print(textwrap.fill(items, 100))
+        separator()
+    if plot_search_list[0] == 4:
+        for plot in tv_plots_list:
+            plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1])
         for items in plots_list:
             if plot_search_list[1] in items.lower():
                 print()
