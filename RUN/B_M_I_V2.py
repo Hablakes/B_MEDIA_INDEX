@@ -30,7 +30,7 @@ def main():
         media_index_home()
 
 
-def add_or_change_directory_selection():
+def change_directory_selection():
     print(pyfiglet.figlet_format('CHANGE_DIRECTORY', font='cybermedium'))
     separator()
     directory_selection()
@@ -501,7 +501,7 @@ def media_index_home():
     print(pyfiglet.figlet_format('MEDIA_INDEX', font='cybermedium'))
     separator()
 
-    print('1) ADD / CHANGE DATABASE DIRECTORIES             2) CREATE PATH INDICES')
+    print('1) CHANGE DATABASE DIRECTORIES                   2) CREATE PATH INDICES')
     print()
     print('3) CREATE TITLE INDEX                            4) CREATE MEDIA INFORMATION INDICES')
     print()
@@ -522,7 +522,7 @@ def media_index_home():
         if lmi_input_action == 0:
             exit()
         elif lmi_input_action == 1:
-            add_or_change_directory_selection()
+            change_directory_selection()
         elif lmi_input_action == 2:
             walk_directories_and_create_indices()
         elif lmi_input_action == 3:
