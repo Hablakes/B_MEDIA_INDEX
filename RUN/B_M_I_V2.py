@@ -30,71 +30,6 @@ def main():
         media_index_home()
 
 
-def bar_graph_options_base(picture_graph_options_int):
-    media_index_list = list(csv.reader(open(os.path.expanduser(
-        (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF-8')))
-    movie_years_dict = {}
-    movie_decades_dict = {}
-    tv_decades_amount_dict = {}
-    tv_years_dict = {}
-    movie_year_totals_dict = {}
-    movie_decades_totals_dict = {}
-    tv_year_totals_dict = {}
-    tv_decades_totals_dict = {}
-
-    for title_item in media_index_list:
-        title_item_year = re.split('(.+) \((\d{4})\)', title_item[2], flags=0)
-        title_item_year_int = int(title_item_year[0])
-        title_item_decade_int = int(title_item_year[0][:-1] + '0')
-        if title_item_year_int in range(1900, 2100, 1):
-            if str('MOVIE') in title_item:
-                if title_item_year_int not in movie_years_dict:
-                    movie_years_dict[title_item_year_int] = []
-                movie_years_dict[title_item_year_int].append(title_item)
-                if title_item_decade_int not in movie_decades_dict:
-                    movie_decades_dict[title_item_decade_int] = []
-                movie_decades_dict[title_item_decade_int].append(title_item)
-            if str('TV') in title_item:
-                if title_item_year_int not in tv_years_dict:
-                    tv_years_dict[title_item_year_int] = []
-                tv_years_dict[title_item_year_int].append(title_item)
-                if title_item_decade_int not in tv_decades_amount_dict:
-                    tv_decades_amount_dict[title_item_decade_int] = []
-                tv_decades_amount_dict[title_item_decade_int].append(title_item)
-
-    if picture_graph_options_int == 1:
-        for year_values, value in sorted(movie_years_dict.items()):
-            movie_year_totals_dict[year_values] = len(value)
-        x, y = zip(*sorted(movie_year_totals_dict.items()))
-        plt.bar(x, y)
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/MOVIE_YEAR_RESULTS.png'.format(username_input)))
-        plt.show()
-
-    if picture_graph_options_int == 2:
-        for year_values, value in sorted(tv_years_dict.items()):
-            tv_year_totals_dict[year_values] = len(value)
-        x, y = zip(*sorted(tv_year_totals_dict.items()))
-        plt.bar(x, y)
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/TV_YEAR_RESULTS.png'.format(username_input)))
-        plt.show()
-
-    if picture_graph_options_int == 3:
-        for year_values, value in sorted(movie_decades_dict.items()):
-            movie_decades_totals_dict[year_values] = len(value)
-        x, y = zip(*movie_decades_totals_dict.items())
-        plt.bar(x, y, width=5)
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/MOVIE_DECADE_RESULTS.png'.format(username_input)))
-        plt.show()
-
-    if picture_graph_options_int == 4:
-        for year_values, value in sorted(tv_decades_amount_dict.items()):
-            tv_decades_totals_dict[year_values] = len(value)
-        x, y = zip(*tv_decades_totals_dict.items())
-        plt.bar(x, y, width=5)
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/TV_DECADE_RESULTS.png'.format(username_input)))
-        plt.show()
-
-
 def change_directory_selection():
     print(pyfiglet.figlet_format('CHANGE_DIRECTORY', font='cybermedium'))
     separator()
@@ -266,13 +201,229 @@ def divider():
         print(items)
 
 
+def graph_options_advanced(username_input, picture_graph_options_int, terminal_graph_options_int):
+    movie_files_results_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
+    tv_files_results_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
+    m_ten_eighty_found_list = []
+    m_seven_twenty_found_list = []
+    m_standard_def_found_list = []
+    m_empty_response_list = []
+    movies_total_list = []
+    tv_ten_eighty_found_list = []
+    tv_seven_twenty_found_list = []
+    tv_standard_def_found_list = []
+    tv_empty_response_list = []
+    tv_total_list = []
+
+    for res in movie_files_results_list:
+        if re.findall('19\d{2}x', res[3]):
+            m_ten_eighty_found_list.append(res)
+        elif re.findall('1[0-8]\d{2}x', res[3]):
+            m_seven_twenty_found_list.append(res)
+        elif re.findall('\d{3}x', res[3]):
+            m_standard_def_found_list.append(res)
+        else:
+            m_empty_response_list.append(+1)
+        movies_total_list.append(+1)
+    movies_graph_terminal_results = [('1080p', float(len(m_ten_eighty_found_list))),
+                                     ('720p', float(len(m_seven_twenty_found_list))),
+                                     ('SD (Below 720p)', float(len(m_standard_def_found_list)))]
+    movie_data = [float(len(m_ten_eighty_found_list)), float(len(m_seven_twenty_found_list)),
+                  float(len(m_standard_def_found_list))]
+
+    for res in tv_files_results_list:
+        if re.findall('19\d{2}x', res[6]):
+            tv_ten_eighty_found_list.append(res)
+        elif re.findall('1[0-8]\d{2}x', res[6]):
+            tv_seven_twenty_found_list.append(res)
+        elif re.findall('\d{3}x', res[6]):
+            tv_standard_def_found_list.append(res)
+        else:
+            tv_empty_response_list.append(+1)
+        tv_total_list.append(+1)
+    tv_shows_graph_terminal_results = [('1080p', float(len(tv_ten_eighty_found_list))),
+                                       ('720p', float(len(tv_seven_twenty_found_list))),
+                                       ('SD (Below 720p)', float(len(tv_standard_def_found_list)))]
+    tv_data = [float(len(tv_ten_eighty_found_list)), float(len(tv_seven_twenty_found_list)),
+               float(len(tv_standard_def_found_list))]
+
+    def format_data(percent, all_values):
+        absolute = int(percent / 100. * np.sum(all_values))
+        return '{:.1f}%\n({:d})'.format(percent, absolute)
+
+    labels = ['1080p', '720p', 'SD (Below 720p)']
+    colors = ['#85c1e9', '#a569bd', '#808b96']
+
+    if picture_graph_options_int == 5:
+        fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect='equal'))
+        wedges, texts, auto_texts = ax.pie(movie_data, autopct=lambda pct: format_data(pct, movie_data),
+                                           shadow=True, colors=colors, textprops=dict(color='black'))
+
+        ax.legend(wedges, labels,
+                  title='RESOLUTIONS',
+                  loc='center left',
+                  bbox_to_anchor=(1, 0, 0.5, 1))
+
+        plt.setp(auto_texts, size=9, weight='bold')
+        ax.set_title('MOVIE_RESOLUTION_RESULTS')
+        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/MOVIE_RESOLUTION_RESULTS.png'.format(
+            username_input)))
+        plt.show()
+
+    if terminal_graph_options_int == 5:
+        graph = Pyasciigraph()
+        for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES: ', movies_graph_terminal_results):
+            print()
+            print(line)
+        separator()
+
+    if picture_graph_options_int == 6:
+        fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect='equal'))
+        wedges, texts, auto_texts = ax.pie(tv_data, autopct=lambda pct: format_data(pct, tv_data),
+                                           shadow=True, colors=colors, textprops=dict(color='black'))
+
+        ax.legend(wedges, labels,
+                  title='RESOLUTIONS',
+                  loc='center left',
+                  bbox_to_anchor=(1, 0, 0.5, 1))
+
+        plt.setp(auto_texts, size=9, weight='bold')
+        ax.set_title('TV_SHOW_RESOLUTION_RESULTS')
+        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/TV_RESOLUTION_RESULTS.png'.format(
+            username_input)))
+        plt.show()
+
+    if terminal_graph_options_int == 6:
+        graph = Pyasciigraph()
+        for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES: ', tv_shows_graph_terminal_results):
+            print()
+            print(line)
+        separator()
+
+
+def graph_options_base(username_input, picture_graph_options_int, terminal_graph_options_int):
+    media_index_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF-8')))
+    movie_years_dict = {}
+    movie_decades_dict = {}
+    tv_years_dict = {}
+    tv_decades_amount_dict = {}
+    movie_year_totals_dict = {}
+    movie_decades_totals_dict = {}
+    tv_year_totals_dict = {}
+    tv_decades_totals_dict = {}
+
+    for title_item in media_index_list:
+        title_item_year = re.split('(.+) \((\d{4})\)', title_item[2], flags=0)
+        title_item_year_int = int(title_item_year[0])
+        title_item_decade_int = int(title_item_year[0][:-1] + '0')
+
+        if title_item_year_int in range(1900, 2100, 1):
+            if str('MOVIE') in title_item:
+                if title_item_year_int not in movie_years_dict:
+                    movie_years_dict[title_item_year_int] = []
+                movie_years_dict[title_item_year_int].append(title_item)
+                if title_item_decade_int not in movie_decades_dict:
+                    movie_decades_dict[title_item_decade_int] = []
+                movie_decades_dict[title_item_decade_int].append(title_item)
+            if str('TV') in title_item:
+                if title_item_year_int not in tv_years_dict:
+                    tv_years_dict[title_item_year_int] = []
+                tv_years_dict[title_item_year_int].append(title_item)
+                if title_item_decade_int not in tv_decades_amount_dict:
+                    tv_decades_amount_dict[title_item_decade_int] = []
+                tv_decades_amount_dict[title_item_decade_int].append(title_item)
+
+    if picture_graph_options_int == 1:
+        for year_values, value in sorted(movie_years_dict.items()):
+            movie_year_totals_dict[year_values] = len(value)
+        x, y = zip(*sorted(movie_year_totals_dict.items()))
+        plt.bar(x, y)
+        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/MOVIE_YEAR_RESULTS.png'.format(username_input)))
+        plt.show()
+
+    if terminal_graph_options_int == 1:
+        for movie_year_values, value in sorted(movie_years_dict.items()):
+            movie_year_totals_dict[movie_year_values] = len(value)
+        movie_data = sorted(movie_year_totals_dict.items())
+        movie_years_terminal_graph_list = []
+        for key, value in movie_data:
+            movie_years_terminal_graph_list.append((str(key), value))
+        graph = Pyasciigraph()
+        for line in graph.graph('MOVIES: YEAR AMOUNTS: ', movie_years_terminal_graph_list):
+            print()
+            print(line)
+        separator()
+
+    if picture_graph_options_int == 2:
+        for year_values, value in sorted(tv_years_dict.items()):
+            tv_year_totals_dict[year_values] = len(value)
+        x, y = zip(*sorted(tv_year_totals_dict.items()))
+        plt.bar(x, y)
+        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/TV_YEAR_RESULTS.png'.format(username_input)))
+        plt.show()
+
+    if terminal_graph_options_int == 2:
+        for tv_year_values, value in sorted(tv_years_dict.items()):
+            tv_year_totals_dict[tv_year_values] = len(value)
+        tv_data = sorted(tv_year_totals_dict.items())
+        tv_years_terminal_graph_list = []
+        for key, value in tv_data:
+            tv_years_terminal_graph_list.append((str(key), value))
+        graph = Pyasciigraph()
+        for line in graph.graph('TV SHOWS: YEAR AMOUNTS: ', tv_years_terminal_graph_list):
+            print()
+            print(line)
+        separator()
+
+    if picture_graph_options_int == 3:
+        for year_values, value in sorted(movie_decades_dict.items()):
+            movie_decades_totals_dict[year_values] = len(value)
+        x, y = zip(*movie_decades_totals_dict.items())
+        plt.bar(x, y, width=5)
+        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/MOVIE_DECADE_RESULTS.png'.format(username_input)))
+        plt.show()
+
+    if terminal_graph_options_int == 3:
+        for movie_year_values, value in sorted(movie_decades_dict.items()):
+            movie_decades_totals_dict[movie_year_values] = len(value)
+        movie_decades_terminal_graph_list = []
+        for key, value in movie_decades_totals_dict.items():
+            movie_decades_terminal_graph_list.append((str(key), value))
+        graph = Pyasciigraph()
+        for line in graph.graph('MOVIES: DECADE AMOUNTS: ', movie_decades_terminal_graph_list):
+            print()
+            print(line)
+        separator()
+
+    if picture_graph_options_int == 4:
+        for year_values, value in sorted(tv_decades_amount_dict.items()):
+            tv_decades_totals_dict[year_values] = len(value)
+        x, y = zip(*tv_decades_totals_dict.items())
+        plt.bar(x, y, width=5)
+        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/TV_DECADE_RESULTS.png'.format(username_input)))
+        plt.show()
+
+    if terminal_graph_options_int == 4:
+        for tv_year_values, value in sorted(tv_decades_amount_dict.items()):
+            tv_decades_totals_dict[tv_year_values] = len(value)
+        tv_decades_terminal_graph_list = []
+        for key, value in tv_decades_totals_dict.items():
+            tv_decades_terminal_graph_list.append((str(key), value))
+        graph = Pyasciigraph()
+        for line in graph.graph('TV SHOWS: DECADE AMOUNTS: ', tv_decades_terminal_graph_list):
+            print()
+            print(line)
+        separator()
+
+
 def launch_media_index():
     print(pyfiglet.figlet_format('MEDIA_INDEX', font='cybermedium'))
     separator()
-
     try:
         global username_input
-
         username_input = input('ENTER YOUR USERNAME (CASE-SENSITIVE): ')
         separator()
         username_check_and_folder_creation()
@@ -427,120 +578,38 @@ def picture_graph_options_sub_menu():
     divider()
     print('0) MAIN MENU')
     separator()
-    picture_graph_options = input('ENTER #: ')
-    separator()
-    picture_graph_options_int = int(picture_graph_options)
-    if picture_graph_options_int == 1:
-        bar_graph_options_base(picture_graph_options_int=1)
-    elif picture_graph_options_int == 2:
-        bar_graph_options_base(picture_graph_options_int=2)
-    elif picture_graph_options_int == 3:
-        bar_graph_options_base(picture_graph_options_int=3)
-    elif picture_graph_options_int == 4:
-        bar_graph_options_base(picture_graph_options_int=4)
-    elif picture_graph_options_int == 5:
-        pie_chart_options_base(picture_graph_options_int=5)
-    elif picture_graph_options_int == 6:
-        pie_chart_options_base(picture_graph_options_int=6)
-    elif picture_graph_options_int == 7:
-        query_file_type_totals(picture_graph_options_int=7, terminal_graph_options_int='')
-    elif picture_graph_options_int == 8:
-        query_file_type_totals(picture_graph_options_int=8, terminal_graph_options_int='')
-    elif picture_graph_options_int == 9:
-        media_index_home()
+
+    try:
+        picture_graph_options = input('ENTER #: ')
+        separator()
+        picture_graph_options_int = int(picture_graph_options)
+
+        if picture_graph_options_int == 1:
+            graph_options_base(username_input, picture_graph_options_int=1, terminal_graph_options_int='')
+        elif picture_graph_options_int == 2:
+            graph_options_base(username_input, picture_graph_options_int=2, terminal_graph_options_int='')
+        elif picture_graph_options_int == 3:
+            graph_options_base(username_input, picture_graph_options_int=3, terminal_graph_options_int='')
+        elif picture_graph_options_int == 4:
+            graph_options_base(username_input, picture_graph_options_int=4, terminal_graph_options_int='')
+        elif picture_graph_options_int == 5:
+            graph_options_advanced(username_input, picture_graph_options_int=5, terminal_graph_options_int='')
+        elif picture_graph_options_int == 6:
+            graph_options_advanced(username_input, picture_graph_options_int=6, terminal_graph_options_int='')
+        elif picture_graph_options_int == 7:
+            query_file_type_totals(username_input, picture_graph_options_int=7, terminal_graph_options_int='')
+        elif picture_graph_options_int == 8:
+            query_file_type_totals(username_input, picture_graph_options_int=8, terminal_graph_options_int='')
+        elif picture_graph_options_int == 9:
+            media_index_home()
+    except (TypeError, ValueError) as e:
+        print('INPUT ERROR: ', e)
+        print()
+        print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        separator()
 
 
-def pie_chart_options_base(picture_graph_options_int):
-    movie_files_results_list = list(csv.reader(open(os.path.expanduser(
-        (media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
-    tv_files_results_list = list(csv.reader(open(os.path.expanduser(
-        (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
-
-    m_ten_eighty_found_list = []
-    m_seven_twenty_found_list = []
-    m_standard_def_found_list = []
-    m_empty_response_list = []
-    movies_total_list = []
-    tv_ten_eighty_found_list = []
-    tv_seven_twenty_found_list = []
-    tv_standard_def_found_list = []
-    tv_empty_response_list = []
-    tv_total_list = []
-
-    for res in movie_files_results_list:
-
-        if re.findall('19\d{2}x', res[3]):
-            m_ten_eighty_found_list.append(res)
-        elif re.findall('1[0-8]\d{2}x', res[3]):
-            m_seven_twenty_found_list.append(res)
-        elif re.findall('\d{3}x', res[3]):
-            m_standard_def_found_list.append(res)
-        else:
-            m_empty_response_list.append(+1)
-        movies_total_list.append(+1)
-
-    movie_data = [float(len(m_ten_eighty_found_list)), float(len(m_seven_twenty_found_list)),
-                  float(len(m_standard_def_found_list))]
-
-    for res in tv_files_results_list:
-
-        if re.findall('19\d{2}x', res[6]):
-            tv_ten_eighty_found_list.append(res)
-        elif re.findall('1[0-8]\d{2}x', res[6]):
-            tv_seven_twenty_found_list.append(res)
-        elif re.findall('\d{3}x', res[6]):
-            tv_standard_def_found_list.append(res)
-        else:
-            tv_empty_response_list.append(+1)
-        tv_total_list.append(+1)
-
-    tv_data = [float(len(tv_ten_eighty_found_list)), float(len(tv_seven_twenty_found_list)),
-               float(len(tv_standard_def_found_list))]
-
-    def format_data(percent, all_values):
-        absolute = int(percent / 100. * np.sum(all_values))
-        return '{:.1f}%\n({:d})'.format(percent, absolute)
-
-    labels = ['1080p', '720p', 'SD (Below 720p)']
-
-    colors = ['#85c1e9', '#a569bd', '#808b96']
-
-    if picture_graph_options_int == 5:
-        fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect='equal'))
-
-        wedges, texts, auto_texts = ax.pie(movie_data, autopct=lambda pct: format_data(pct, movie_data),
-                                           shadow=True, colors=colors, textprops=dict(color='black'))
-
-        ax.legend(wedges, labels,
-                  title='RESOLUTIONS',
-                  loc='center left',
-                  bbox_to_anchor=(1, 0, 0.5, 1))
-
-        plt.setp(auto_texts, size=9, weight='bold')
-        ax.set_title('MOVIE_RESOLUTION_RESULTS')
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/MOVIE_RESOLUTION_RESULTS.png'.format(
-            username_input)))
-        plt.show()
-
-    if picture_graph_options_int == 6:
-        fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect='equal'))
-
-        wedges, texts, auto_texts = ax.pie(tv_data, autopct=lambda pct: format_data(pct, tv_data),
-                                           shadow=True, colors=colors, textprops=dict(color='black'))
-
-        ax.legend(wedges, labels,
-                  title='RESOLUTIONS',
-                  loc='center left',
-                  bbox_to_anchor=(1, 0, 0.5, 1))
-
-        plt.setp(auto_texts, size=9, weight='bold')
-        ax.set_title('TV_SHOW_RESOLUTION_RESULTS')
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/TV_RESOLUTION_RESULTS.png'.format(
-            username_input)))
-        plt.show()
-
-
-def query_file_type_totals(picture_graph_options_int, terminal_graph_options_int):
+def query_file_type_totals(username_input, picture_graph_options_int, terminal_graph_options_int):
     movie_files_results_list = list(csv.reader(open(os.path.expanduser(
         (media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
     tv_files_results_list = list(csv.reader(open(os.path.expanduser(
@@ -558,10 +627,8 @@ def query_file_type_totals(picture_graph_options_int, terminal_graph_options_int
     movie_file_type_totals = {}
 
     if picture_graph_options_int == 7:
-
         for movie_file_type_values, value in sorted(movie_extensions_dictionary.items()):
             movie_file_type_totals[movie_file_type_values] = len(value)
-
         x, y = zip(*sorted(movie_file_type_totals.items()))
         plt.bar(x, y)
         plt.savefig(
@@ -569,15 +636,11 @@ def query_file_type_totals(picture_graph_options_int, terminal_graph_options_int
         plt.show()
 
     if terminal_graph_options_int == 7:
-
         for file_type_values, value in sorted(movie_extensions_dictionary.items()):
             movie_extensions_totals[file_type_values] = len(value)
-
         file_type_totals_terminal_graph_list = []
-
         for key, value in movie_extensions_totals.items():
             file_type_totals_terminal_graph_list.append((str(key), value))
-
         graph = Pyasciigraph()
         for line in graph.graph('MOVIES: FILE-TYPE AMOUNTS: ', file_type_totals_terminal_graph_list):
             print()
@@ -592,25 +655,19 @@ def query_file_type_totals(picture_graph_options_int, terminal_graph_options_int
     tv_file_type_totals = {}
 
     if picture_graph_options_int == 8:
-
         for tv_file_type_values, value in sorted(tv_extensions_dictionary.items()):
             tv_file_type_totals[tv_file_type_values] = len(value)
-
         x, y = zip(*sorted(tv_file_type_totals.items()))
         plt.bar(x, y)
         plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/TV_FILETYPE_RESULTS.png'.format(username_input)))
         plt.show()
 
     if terminal_graph_options_int == 8:
-
         for file_type_values, value in sorted(tv_extensions_dictionary.items()):
             tv_extensions_totals[file_type_values] = len(value)
-
         file_type_totals_terminal_graph_list = []
-
         for key, value in tv_extensions_totals.items():
             file_type_totals_terminal_graph_list.append((str(key), value))
-
         graph = Pyasciigraph()
         for line in graph.graph('TV SHOWS: FILE-TYPE AMOUNTS: ', file_type_totals_terminal_graph_list):
             print()
@@ -843,11 +900,9 @@ def search_plots():
     try:
         print('SEARCH PLOTS OF:                                 1) MOVIES       2) TV SHOWS')
         print()
-
         plot_search = input('KEYWORD(S): ')
         plot_search_lower = plot_search.lower()
         separator()
-
         for plot in movie_files_results_list:
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
         for plot in tv_files_results_list:
@@ -873,12 +928,10 @@ def search_titles(title_search_type):
             movie_title_search_action = input('QUERY MOVIES: ')
             separator()
             movie_title_search_action = movie_title_search_action.lower()
-
             print('SEARCH RESULTS: ')
             print()
             print('MOVIES: ')
             print()
-
             for movie_search_result in media_index_list:
                 if str('MOVIE') in movie_search_result[0]:
                     search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(movie_search_result), flags=0)
@@ -896,14 +949,12 @@ def search_titles(title_search_type):
             tv_title_search_action = input('QUERY TV SHOWS: ')
             separator()
             tv_title_search_action = tv_title_search_action.lower()
-
             print()
             print()
             print('SEARCH RESULTS: ')
             print()
             print('TV SHOWS: ')
             print()
-
             for tv_search_result in media_index_list:
                 if str('TV') in tv_search_result[0]:
                     search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(tv_search_result), flags=0)
@@ -970,7 +1021,6 @@ def sort_function_base(sort_options_int):
     sorted_title_r = sorted(media_index, key=lambda x: (x[0], x[1]), reverse=True)
     sorted_year = sorted(media_index, key=lambda x: (x[0], x[2]))
     sorted_year_r = sorted(media_index, key=lambda x: (x[0], x[2]), reverse=True)
-
     if sort_options_int == 1:
         for title_item in sorted_title:
             print()
@@ -1039,153 +1089,6 @@ def sort_options_sub_menu():
         separator()
 
 
-def terminal_graph_options_advanced(terminal_graph_options_int):
-    movie_files_results_list = list(csv.reader(open(os.path.expanduser(
-        (media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
-    tv_files_results_list = list(csv.reader(open(os.path.expanduser(
-        (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
-    m_ten_eighty_found_list = []
-    m_seven_twenty_found_list = []
-    m_standard_def_found_list = []
-    m_empty_response_list = []
-    movies_total_list = []
-    tv_ten_eighty_found_list = []
-    tv_seven_twenty_found_list = []
-    tv_standard_def_found_list = []
-    tv_empty_response_list = []
-    tv_total_list = []
-
-    for res in movie_files_results_list:
-        if re.findall('19\d{2}x', res[3]):
-            m_ten_eighty_found_list.append(res)
-        elif re.findall('1[0-8]\d{2}x', res[3]):
-            m_seven_twenty_found_list.append(res)
-        elif re.findall('\d{3}x', res[3]):
-            m_standard_def_found_list.append(res)
-        else:
-            m_empty_response_list.append(+1)
-        movies_total_list.append(+1)
-    movies_graph_terminal_results = [('1080p', float(len(m_ten_eighty_found_list))),
-                                     ('720p', float(len(m_seven_twenty_found_list))),
-                                     ('SD (Below 720p)', float(len(m_standard_def_found_list)))]
-
-    for res in tv_files_results_list:
-        if re.findall('19\d{2}x', res[6]):
-            tv_ten_eighty_found_list.append(res)
-        elif re.findall('1[0-8]\d{2}x', res[6]):
-            tv_seven_twenty_found_list.append(res)
-        elif re.findall('\d{3}x', res[6]):
-            tv_standard_def_found_list.append(res)
-        else:
-            tv_empty_response_list.append(+1)
-        tv_total_list.append(+1)
-    tv_shows_graph_terminal_results = [('1080p', float(len(tv_ten_eighty_found_list))),
-                                       ('720p', float(len(tv_seven_twenty_found_list))),
-                                       ('SD (Below 720p)', float(len(tv_standard_def_found_list)))]
-
-    if terminal_graph_options_int == 5:
-        graph = Pyasciigraph()
-        for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES: ', movies_graph_terminal_results):
-            print()
-            print(line)
-        separator()
-
-    if terminal_graph_options_int == 6:
-        graph = Pyasciigraph()
-        for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES: ', tv_shows_graph_terminal_results):
-            print()
-            print(line)
-        separator()
-
-
-def terminal_graph_options_base(terminal_graph_options_int):
-    media_index_list = list(csv.reader(open(os.path.expanduser(
-        (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF-8')))
-    movie_years_dict = {}
-    movie_decades_dict = {}
-    tv_years_dict = {}
-    tv_decades_amount_dict = {}
-    movie_year_totals_dict = {}
-    movie_decades_totals_dict = {}
-    tv_year_totals_dict = {}
-    tv_decades_totals_dict = {}
-
-    for title_item in media_index_list:
-        title_item_year = re.split('(.+) \((\d{4})\)', title_item[2], flags=0)
-        title_item_year_int = int(title_item_year[0])
-        title_item_decade_int = int(title_item_year[0][:-1] + '0')
-
-        if title_item_year_int in range(1900, 2100, 1):
-            if str('MOVIE') in title_item:
-                if title_item_year_int not in movie_years_dict:
-                    movie_years_dict[title_item_year_int] = []
-                movie_years_dict[title_item_year_int].append(title_item)
-                if title_item_decade_int not in movie_decades_dict:
-                    movie_decades_dict[title_item_decade_int] = []
-                movie_decades_dict[title_item_decade_int].append(title_item)
-            if str('TV') in title_item:
-                if title_item_year_int not in tv_years_dict:
-                    tv_years_dict[title_item_year_int] = []
-                tv_years_dict[title_item_year_int].append(title_item)
-                if title_item_decade_int not in tv_decades_amount_dict:
-                    tv_decades_amount_dict[title_item_decade_int] = []
-                tv_decades_amount_dict[title_item_decade_int].append(title_item)
-
-    if terminal_graph_options_int == 1:
-        for movie_year_values, value in sorted(movie_years_dict.items()):
-            movie_year_totals_dict[movie_year_values] = len(value)
-        movie_data = sorted(movie_year_totals_dict.items())
-        movie_years_terminal_graph_list = []
-        for key, value in movie_data:
-            movie_years_terminal_graph_list.append((str(key), value))
-        graph = Pyasciigraph()
-
-        for line in graph.graph('MOVIES: YEAR AMOUNTS: ', movie_years_terminal_graph_list):
-            print()
-            print(line)
-        separator()
-
-    if terminal_graph_options_int == 2:
-        for tv_year_values, value in sorted(tv_years_dict.items()):
-            tv_year_totals_dict[tv_year_values] = len(value)
-        tv_data = sorted(tv_year_totals_dict.items())
-        tv_years_terminal_graph_list = []
-        for key, value in tv_data:
-            tv_years_terminal_graph_list.append((str(key), value))
-        graph = Pyasciigraph()
-
-        for line in graph.graph('TV SHOWS: YEAR AMOUNTS: ', tv_years_terminal_graph_list):
-            print()
-            print(line)
-        separator()
-
-    if terminal_graph_options_int == 3:
-        for movie_year_values, value in sorted(movie_decades_dict.items()):
-            movie_decades_totals_dict[movie_year_values] = len(value)
-        movie_decades_terminal_graph_list = []
-        for key, value in movie_decades_totals_dict.items():
-            movie_decades_terminal_graph_list.append((str(key), value))
-        graph = Pyasciigraph()
-
-        for line in graph.graph('MOVIES: DECADE AMOUNTS: ', movie_decades_terminal_graph_list):
-            print()
-            print(line)
-        separator()
-
-    if terminal_graph_options_int == 4:
-        for tv_year_values, value in sorted(tv_decades_amount_dict.items()):
-            tv_decades_totals_dict[tv_year_values] = len(value)
-        tv_decades_terminal_graph_list = []
-        for key, value in tv_decades_totals_dict.items():
-            tv_decades_terminal_graph_list.append((str(key), value))
-        graph = Pyasciigraph()
-
-        for line in graph.graph('TV SHOWS: DECADE AMOUNTS: ', tv_decades_terminal_graph_list):
-            print()
-            print(line)
-        separator()
-
-
 def terminal_graph_options_sub_menu():
     print(pyfiglet.figlet_format('TERMINAL_GRAPHS', font='cybermedium'))
     separator()
@@ -1209,21 +1112,21 @@ def terminal_graph_options_sub_menu():
         terminal_graph_options_int = int(terminal_graph_options)
 
         if terminal_graph_options_int == 1:
-            terminal_graph_options_base(terminal_graph_options_int=1)
+            graph_options_base(username_input, picture_graph_options_int='', terminal_graph_options_int=1)
         elif terminal_graph_options_int == 2:
-            terminal_graph_options_base(terminal_graph_options_int=2)
+            graph_options_base(username_input, picture_graph_options_int='', terminal_graph_options_int=2)
         elif terminal_graph_options_int == 3:
-            terminal_graph_options_base(terminal_graph_options_int=3)
+            graph_options_base(username_input, picture_graph_options_int='', terminal_graph_options_int=3)
         elif terminal_graph_options_int == 4:
-            terminal_graph_options_base(terminal_graph_options_int=4)
+            graph_options_base(username_input, picture_graph_options_int='', terminal_graph_options_int=4)
         elif terminal_graph_options_int == 5:
-            terminal_graph_options_advanced(terminal_graph_options_int=5)
+            graph_options_advanced(username_input, picture_graph_options_int='', terminal_graph_options_int=5)
         elif terminal_graph_options_int == 6:
-            terminal_graph_options_advanced(terminal_graph_options_int=6)
+            graph_options_advanced(username_input, picture_graph_options_int='', terminal_graph_options_int=6)
         elif terminal_graph_options_int == 7:
-            query_file_type_totals(picture_graph_options_int='', terminal_graph_options_int=7)
+            query_file_type_totals(username_input, picture_graph_options_int='', terminal_graph_options_int=7)
         elif terminal_graph_options_int == 8:
-            query_file_type_totals(picture_graph_options_int='', terminal_graph_options_int=8)
+            query_file_type_totals(username_input, picture_graph_options_int='', terminal_graph_options_int=8)
         elif terminal_graph_options_int == 0:
             media_index_home()
     except (TypeError, ValueError) as e:
@@ -1268,7 +1171,6 @@ def total_tv_episodes_in_show_title():
         print()
         print('INVALID INPUT, PLEASE RETRY')
         total_tv_episodes_in_show_title()
-
     for tv_title in tv_results_list:
         tv_amounts.append(tv_title[0])
     for found_tv_title in tv_amounts:
@@ -1301,7 +1203,6 @@ def tv_episodes_sort_function(sort_options_int):
     sorted_by_key_a = sorted(tv_show_found.items(), key=lambda kv: kv[0], reverse=True)
     sorted_by_value_d = sorted(tv_show_found.items(), key=lambda kv: kv[1])
     sorted_by_value_a = sorted(tv_show_found.items(), key=lambda kv: kv[1], reverse=True)
-
     if sort_options_int == 5:
         for item in sorted_by_key_d:
             print()
