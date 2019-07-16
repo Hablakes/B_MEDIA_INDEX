@@ -30,7 +30,7 @@ def main():
         media_index_home()
 
 
-def change_directory_selection():
+def add_or_change_directory_selection():
     print(pyfiglet.figlet_format('CHANGE_DIRECTORY', font='cybermedium'))
     separator()
     directory_selection()
@@ -156,22 +156,22 @@ def create_tv_information_index():
                     print('ERROR: ', e)
                     print('FILE: ', tv_file[0])
                     continue
-            else:
-                try:
-                    with open(tv_file[0]) as f:
-                        for line in f.readlines():
-                            if '<plot>' in line:
-                                tv_index_file_results[tv_title_key]['PLOT'] = line
+        else:
+            try:
+                with open(tv_file[0]) as f:
+                    for line in f.readlines():
+                        if '<plot>' in line:
+                            tv_index_file_results[tv_title_key]['PLOT'] = line
 
-                            if '<rating>' in line:
-                                tv_index_file_results[tv_title_key]['RATING'] = line
+                        if '<rating>' in line:
+                            tv_index_file_results[tv_title_key]['RATING'] = line
 
-                            if '<runtime>' in line:
-                                tv_index_file_results[tv_title_key]['RUN-TIME'] = line
-                except Exception as e:
-                    print('ERROR: ', e)
-                    print('FILE: ', tv_file[0])
-                    continue
+                        if '<runtime>' in line:
+                            tv_index_file_results[tv_title_key]['RUN-TIME'] = line
+            except Exception as e:
+                print('ERROR: ', e)
+                print('FILE: ', tv_file[0])
+                continue
 
     with open(os.path.expanduser((media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), 'w',
               encoding='UTF-8', newline='') as f:
@@ -501,7 +501,7 @@ def media_index_home():
     print(pyfiglet.figlet_format('MEDIA_INDEX', font='cybermedium'))
     separator()
 
-    print('1) CHANGE DATABASE DIRECTORIES                   2) CREATE PATH INDICES')
+    print('1) ADD / CHANGE DATABASE DIRECTORIES             2) CREATE PATH INDICES')
     print()
     print('3) CREATE TITLE INDEX                            4) CREATE MEDIA INFORMATION INDICES')
     print()
@@ -522,7 +522,7 @@ def media_index_home():
         if lmi_input_action == 0:
             exit()
         elif lmi_input_action == 1:
-            change_directory_selection()
+            add_or_change_directory_selection()
         elif lmi_input_action == 2:
             walk_directories_and_create_indices()
         elif lmi_input_action == 3:
