@@ -28,6 +28,12 @@ def main():
         media_index_home()
 
 
+def change_directory_selection():
+    print(pyfiglet.figlet_format('CHANGE_DIRECTORY', font='cybermedium'))
+    separator()
+    directory_selection()
+
+
 def compare_results(results_user, results_other):
     output = []
 
@@ -40,12 +46,6 @@ def compare_results(results_user, results_other):
             output.append('DO NOT HAVE: ' + line)
 
     return output
-
-
-def change_directory_selection():
-    print(pyfiglet.figlet_format('CHANGE_DIRECTORY', font='cybermedium'))
-    separator()
-    directory_selection()
 
 
 def create_media_information_indices():
