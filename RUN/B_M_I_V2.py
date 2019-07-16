@@ -535,7 +535,9 @@ def media_queries_sub_menu():
     print()
     print('SEARCH FOR INFORMATION OF:                       3) MOVIES       4) TV SHOWS')
     divider()
-    print('5) QUERY TOTAL NUMBER (#) OF EPISODES IN A TV SHOW')
+    print('5) SEARCH PLOTS FOR KEYWORD(S): ')
+    divider()
+    print('6) QUERY TOTAL NUMBER (#) OF EPISODES IN A TV SHOW: ')
     divider()
     print('0) MAIN MENU')
     separator()
@@ -555,6 +557,8 @@ def media_queries_sub_menu():
         elif title_search_type == 4:
             query_tv_information_index()
         elif title_search_type == 5:
+            search_plots()
+        elif title_search_type == 6:
             total_tv_episodes_in_show_title()
     except (TypeError, ValueError) as e:
         print('INPUT ERROR: ', e)
@@ -895,27 +899,55 @@ def search_plots():
         (media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
     tv_files_results_list = list(csv.reader(open(os.path.expanduser(
         (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
+    plot_search_list = []
     plots_list = []
 
     try:
-        print('SEARCH PLOTS OF:                                 1) MOVIES       2) TV SHOWS')
-        print()
-        plot_search = input('KEYWORD(S): ')
-        plot_search_lower = plot_search.lower()
+        print('SEARCH PLOTS OF:                 1) MOVIES       2) TV SHOWS       3) BOTH')
         separator()
+        plot_search_int = int(input('ENTER #: '))
+        plot_search_list.append(plot_search_int)
+        separator()
+    except (TypeError, ValueError) as e:
+        print('INPUT ERROR: ', e)
+        print()
+        print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        separator()
+    try:
+        plot_search = input('KEYWORD(S): ')
+        plot_search_list.append(plot_search.lower())
+        separator()
+    except (OSError, TypeError, ValueError) as e:
+        print('INPUT ERROR: ', e)
+        print()
+        print('INVALID INPUT, PLEASE RETRY')
+        separator()
+
+    if plot_search_list[0] == 1:
+        for plot in movie_files_results_list:
+            plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
+        for items in plots_list:
+            if plot_search_list[1] in items.lower():
+                print()
+                print(textwrap.fill(items, 100))
+        separator()
+    if plot_search_list[0] == 2:
+        for plot in tv_files_results_list:
+            plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[8])
+        for items in plots_list:
+            if plot_search_list[1] in items.lower():
+                print()
+                print(textwrap.fill(items, 100))
+        separator()
+    if plot_search_list[0] == 3:
         for plot in movie_files_results_list:
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
         for plot in tv_files_results_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[8])
         for items in plots_list:
-            if plot_search_lower in items.lower():
+            if plot_search_list[1] in items.lower():
                 print()
                 print(textwrap.fill(items, 100))
-        separator()
-    except (TypeError, ValueError) as e:
-        print('INPUT ERROR: ', e)
-        print()
-        print('INVALID INPUT, PLEASE RETRY')
         separator()
 
 
