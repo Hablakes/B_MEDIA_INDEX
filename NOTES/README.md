@@ -17,6 +17,8 @@ PYTHON 3 - PIP DEPENDENCIES:
 -------------------------------------------------------------------------------------------------
 - ascii-graph
 - guessit
+- matplotlib
+- numpy
 - pyfiglet
 - pymediainfo
 - tkinter
