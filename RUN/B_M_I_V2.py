@@ -312,7 +312,9 @@ def media_queries_sub_menu():
     print('SEARCH FOR TITLES OF:                            1) MOVIES       2) TV SHOWS')
     print()
     print('SEARCH FOR INFORMATION OF:                       3) MOVIES       4) TV SHOWS')
-    print()
+    divider()
+    print('5) QUERY TOTAL NUMBER (#) OF EPISODES IN A TV SHOW')
+    divider()
     print('0) MAIN MENU')
     separator()
 
@@ -330,6 +332,8 @@ def media_queries_sub_menu():
             query_movie_information_index()
         elif title_search_type == 4:
             query_tv_information_index()
+        elif title_search_type == 5:
+            total_tv_episodes_in_show_title()
     except (TypeError, ValueError) as e:
         print('INPUT ERROR: ', e)
         print()
@@ -769,7 +773,7 @@ def sort_options_sub_menu():
     print('SORT TV SHOW EPISODE(S) BY:          TITLES:     5) ASCENDING    6) DESCENDING')
     print()
     print('                                     EPISODES:   7) ASCENDING    8) DESCENDING')
-    print()
+    divider()
     print('0) MAIN MENU')
     separator()
 
@@ -958,10 +962,12 @@ def terminal_graphs_options_sub_menu():
     print()
     print('3) MOVIES (TITLES PER DECADE)                    4) TV SHOWS (TITLES PER DECADE)')
     print()
+    print()
     print('5) MOVIES (RESOLUTIONS PERCENTAGES)              6) TV SHOWS (RESOLUTIONS PERCENTAGES)')
     print()
-    print('7) MOVIES (FILE-TYPE AMOUNTS)                    8) TV SHOWS (FILE-TYPE AMOUNTS)')
     print()
+    print('7) MOVIES (FILE-TYPE AMOUNTS)                    8) TV SHOWS (FILE-TYPE AMOUNTS)')
+    divider()
     print('0) MAIN MENU')
     separator()
 
@@ -1011,6 +1017,39 @@ def tk_gui_file_selection_window():
     selected_file = filedialog.askopenfilename()
     root.destroy()
     return selected_file
+
+
+def total_tv_episodes_in_show_title():
+    tv_results_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
+    total_query_action_list = []
+    tv_amounts = []
+    tv_show_episodes_found = []
+    tv_show_found = {}
+
+    try:
+        tv_total_query_action = input('ENTER TV SHOW TITLE: ')
+        separator()
+        total_query_action_list.append(tv_total_query_action.lower())
+    except (OSError, TypeError, ValueError) as e:
+        print('INPUT ERROR: ', e)
+        print()
+        print('INVALID INPUT, PLEASE RETRY')
+        total_tv_episodes_in_show_title()
+
+    for tv_title in tv_results_list:
+        tv_amounts.append(tv_title[0])
+    for found_tv_title in tv_amounts:
+        if total_query_action_list[0] in found_tv_title.lower():
+            tv_show_episodes_found.append(found_tv_title)
+            tv_show_found[found_tv_title] = tv_show_episodes_found.count(found_tv_title)
+    for episode in tv_show_found.items():
+        print('TITLE NAME: NUMBER (#) OF EPISODES: ')
+        print()
+        print(episode)
+        separator()
+    print('NUMBER (#) OF EPISODES TOTAL: ', sum(tv_show_found.values()))
+    separator()
 
 
 def tv_episodes_sort_function(sort_options_int):
