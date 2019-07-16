@@ -10,6 +10,8 @@ import pyfiglet
 import pymediainfo
 
 from ascii_graph import Pyasciigraph
+import matplotlib.pylab as plt
+import numpy as np
 from tkinter import *
 from tkinter import filedialog
 
@@ -603,59 +605,6 @@ def search_file_type_totals(terminal_graph_options_int):
         separator()
 
 
-def search_titles(title_search_type):
-    media_index_list = list(csv.reader(open(os.path.expanduser(
-        (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF-8')))
-
-    if title_search_type == 1:
-        try:
-            movie_title_search_action = input('QUERY MOVIES: ')
-            separator()
-            movie_title_search_action = movie_title_search_action.lower()
-
-            print('SEARCH RESULTS: ')
-            print()
-            print('MOVIES: ')
-            print()
-
-            for movie_search_result in media_index_list:
-                if str('MOVIE') in movie_search_result[0]:
-                    movie_search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(movie_search_result), flags=0)
-                    if movie_title_search_action in movie_search_info[0].lower():
-                        print(movie_search_info[0])
-            separator()
-        except (TypeError, ValueError) as e:
-            print('INPUT ERROR: ', e)
-            print()
-            print('INVALID INPUT, PLEASE RETRY')
-            separator()
-
-    elif title_search_type == 2:
-        try:
-            tv_title_search_action = input('QUERY TV SHOWS: ')
-            separator()
-            tv_title_search_action = tv_title_search_action.lower()
-
-            print()
-            print()
-            print('SEARCH RESULTS: ')
-            print()
-            print('TV SHOWS: ')
-            print()
-
-            for tv_search_result in media_index_list:
-                if str('TV') in tv_search_result[0]:
-                    tv_search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(tv_search_result), flags=0)
-                    if tv_title_search_action in tv_search_info[0].lower():
-                        print(tv_search_info[0])
-            separator()
-        except (TypeError, ValueError) as e:
-            print('INPUT ERROR: ', e)
-            print()
-            print('INVALID INPUT, PLEASE RETRY')
-            separator()
-
-
 def search_plots():
     movie_files_results_list = list(csv.reader(open(os.path.expanduser(
         (media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
@@ -685,6 +634,59 @@ def search_plots():
         print()
         print('INVALID INPUT, PLEASE RETRY')
         separator()
+
+
+def search_titles(title_search_type):
+    media_index_list = list(csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF-8')))
+
+    if title_search_type == 1:
+        try:
+            movie_title_search_action = input('QUERY MOVIES: ')
+            separator()
+            movie_title_search_action = movie_title_search_action.lower()
+
+            print('SEARCH RESULTS: ')
+            print()
+            print('MOVIES: ')
+            print()
+
+            for movie_search_result in media_index_list:
+                if str('MOVIE') in movie_search_result[0]:
+                    search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(movie_search_result), flags=0)
+                    if movie_title_search_action in search_info[0].lower():
+                        print(search_info[0])
+            separator()
+        except (TypeError, ValueError) as e:
+            print('INPUT ERROR: ', e)
+            print()
+            print('INVALID INPUT, PLEASE RETRY')
+            separator()
+
+    elif title_search_type == 2:
+        try:
+            tv_title_search_action = input('QUERY TV SHOWS: ')
+            separator()
+            tv_title_search_action = tv_title_search_action.lower()
+
+            print()
+            print()
+            print('SEARCH RESULTS: ')
+            print()
+            print('TV SHOWS: ')
+            print()
+
+            for tv_search_result in media_index_list:
+                if str('TV') in tv_search_result[0]:
+                    search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(tv_search_result), flags=0)
+                    if tv_title_search_action in search_info[0].lower():
+                        print(search_info[0])
+            separator()
+        except (TypeError, ValueError) as e:
+            print('INPUT ERROR: ', e)
+            print()
+            print('INVALID INPUT, PLEASE RETRY')
+            separator()
 
 
 def select_users_indices_to_compare():
@@ -721,8 +723,10 @@ def select_users_indices_to_compare():
                     outFile_t.write(line)
     except (OSError, TypeError, ValueError) as e:
         print('INPUT ERROR: ', e)
+        print()
+        print('INVALID INPUT, PLEASE RETRY')
         separator()
-        print('COMPLETE.')
+    print('COMPLETE: COMPARISON FILE(S) CAN BE FOUND IN THE USER MEDIA-INDEX FOLDER, FILES SUB-FOLDER')
 
 
 def separator():
