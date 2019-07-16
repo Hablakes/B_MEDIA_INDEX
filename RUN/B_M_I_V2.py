@@ -203,11 +203,17 @@ def launch_media_index():
     print(pyfiglet.figlet_format('MEDIA_INDEX', font='cybermedium'))
     separator()
 
-    global username_input
+    try:
+        global username_input
 
-    username_input = input('ENTER YOUR USERNAME (CASE-SENSITIVE): ')
-    separator()
-    username_check_and_folder_creation()
+        username_input = input('ENTER YOUR USERNAME (CASE-SENSITIVE): ')
+        separator()
+        username_check_and_folder_creation()
+    except (TypeError, ValueError) as e:
+        print('INPUT ERROR: ', e)
+        print()
+        print('INVALID INPUT, PLEASE RETRY')
+        launch_media_index()
 
 
 def library_total_amount():
@@ -307,7 +313,7 @@ def media_queries_sub_menu():
     print()
     print('SEARCH FOR INFORMATION OF:                       3) MOVIES       4) TV SHOWS')
     print()
-    print('                                                 0) EXIT')
+    print('0) MAIN MENU')
     separator()
 
     try:
@@ -413,7 +419,7 @@ def query_tv_information_index():
         tv_show_query_action_lower = str(tv_show_query_action.lower())
 
         for tv_file in tv_files_results_list:
-            if tv_show_query_action_lower in tv_file[1].lower() or tv_file[3].lower():
+            if tv_show_query_action_lower in (tv_file[1].lower(), tv_file[3].lower()):
                 divider()
                 print('TV SHOW FOLDER')
                 print()
@@ -712,6 +718,7 @@ def select_users_indices_to_compare():
     except (OSError, TypeError, ValueError) as e:
         print('INPUT ERROR: ', e)
         separator()
+        print('COMPLETE.')
 
 
 def separator():
@@ -763,7 +770,7 @@ def sort_options_sub_menu():
     print()
     print('                                     EPISODES:   7) ASCENDING    8) DESCENDING')
     print()
-    print('0) EXIT')
+    print('0) MAIN MENU')
     separator()
 
     try:
