@@ -75,7 +75,7 @@ def create_movie_information_index():
 
             for track in test.tracks:
                 if track.track_type == 'General':
-                    movie_index_file_results[movie_title_key]['RUNTIME'] = str(track.other_duration)
+                    movie_index_file_results[movie_title_key]['RUN-TIME'] = str(track.other_duration)
                 if track.track_type == 'Video':
                     movie_index_file_results[movie_title_key]['DIRECTORY'] = movie_title_key
                     movie_index_file_results[movie_title_key]['TITLE'] = title.get('title')
@@ -129,7 +129,7 @@ def create_tv_information_index():
 
             for track in test.tracks:
                 if track.track_type == 'General':
-                    tv_index_file_results[tv_title_key]['RUNTIME'] = str(track.other_duration)
+                    tv_index_file_results[tv_title_key]['RUN-TIME'] = str(track.other_duration)
                 if track.track_type == 'Video':
                     tv_index_file_results[tv_title_key]['DIRECTORY'] = tv_folder_title
                     tv_index_file_results[tv_title_key]['TITLE'] = title.get('title')
