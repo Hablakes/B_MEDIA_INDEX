@@ -757,11 +757,11 @@ def query_movie_information_index():
                     print()
                     if '</runtime>' not in movie_file[7]:
                         mv_runtime = re.findall("<runtime>(.*?)", movie_file[7])
-                        print(mv_runtime[0], ": Minutes")
+                        print(mv_runtime)
                         divider()
                     elif '</runtime>' in movie_file[7]:
                         mv_runtime = re.findall("<runtime>(.*?)</runtime>", movie_file[7])
-                        print(mv_runtime[0])
+                        print(mv_runtime)
                         divider()
                 if int(len(movie_file[6])) != 0:
                     print("RATING")
@@ -841,11 +841,11 @@ def query_tv_information_index():
                     print()
                     if '</runtime>' not in tv_file[10]:
                         tv_runtime = re.findall("<runtime>(.*?)", tv_file[10])
-                        print(tv_runtime[0], ": Minutes")
+                        print(tv_runtime)
                         divider()
                     elif '</runtime>' in tv_file[10]:
                         tv_runtime = re.findall("<runtime>(.*?)</runtime>", tv_file[10])
-                        print(tv_runtime[0])
+                        print(tv_runtime)
                         divider()
                 if int(len(tv_file[9])) != 0:
                     print("RATING")
