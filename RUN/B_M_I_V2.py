@@ -61,42 +61,51 @@ def create_movie_information_index():
     movie_index_file_results = {}
 
     for movie_file in sorted(movie_index):
-        movie_title_key = movie_file[0].rsplit('/')[-2]
-        movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
-        if movie_title_key not in movie_index_file_results:
-            movie_index_file_results[movie_title_key] = {}
-        if not movie_filename_key.lower().endswith('.nfo'):
-            title = guessit.guessit(movie_file[0].rsplit('/', 1)[-1], options={'type': 'movie'})
-            try:
-                test = pymediainfo.MediaInfo.parse(movie_file[0])
-            except OSError as e:
-                print('OS ERROR: ', e)
-                continue
+        try:
+            movie_title_key = movie_file[0].rsplit('/')[-2]
+            movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
 
-            for track in test.tracks:
-                if track.track_type == 'General':
-                    movie_index_file_results[movie_title_key]['RUN-TIME'] = str(track.other_duration)
-                if track.track_type == 'Video':
-                    movie_index_file_results[movie_title_key]['DIRECTORY'] = movie_title_key
-                    movie_index_file_results[movie_title_key]['TITLE'] = title.get('title')
-                    movie_index_file_results[movie_title_key]['YEAR'] = title.get('year')
-                    movie_index_file_results[movie_title_key]['RESOLUTION'] = str(track.width) + 'x' + str(track.height)
-                    movie_index_file_results[movie_title_key]['FILE-TYPE'] = title.get('container')
-                    movie_index_file_results[movie_title_key]['FILENAME'] = movie_filename_key
+            if not movie_filename_key.lower().endswith('.nfo'):
+                if movie_title_key not in movie_index_file_results:
+                    movie_index_file_results[movie_title_key] = {}
+                try:
+                    title = guessit.guessit(movie_filename_key, options={'type': 'movie'})
+                except OSError as e:
+                    print('OS ERROR: ', e)
+                    continue
+                try:
+                    test = pymediainfo.MediaInfo.parse(movie_file[0])
+                except OSError as e:
+                    print('OS ERROR: ', e)
+                    continue
 
-        elif movie_filename_key.lower().endswith('.nfo'):
-            try:
-                with open(str(movie_file[0])) as f:
-                    for line_item in f.readlines():
-                        if '<plot>' in line_item:
-                            movie_index_file_results[movie_title_key]['PLOT'] = line_item
+                for track in test.tracks:
+                    if track.track_type == 'General':
+                        duration = track.other_duration
+                        movie_index_file_results[movie_title_key]['RUN-TIME'] = duration[0]
+                    if track.track_type == 'Video':
+                        movie_index_file_results[movie_title_key]['DIRECTORY'] = movie_title_key
+                        movie_index_file_results[movie_title_key]['TITLE'] = title.get('title')
+                        movie_index_file_results[movie_title_key]['YEAR'] = title.get('year')
+                        movie_index_file_results[movie_title_key]['RESOLUTION'] = str(track.width) + 'x' + str(track.height)
+                        movie_index_file_results[movie_title_key]['FILE-TYPE'] = title.get('container')
+                        movie_index_file_results[movie_title_key]['FILENAME'] = movie_filename_key
 
-                        if '<rating>' in line_item:
-                            movie_index_file_results[movie_title_key]['RATING'] = line_item
-            except Exception as e:
-                print('ERROR: ', e)
-                print('FILE: ', movie_file[0])
-                continue
+            elif movie_filename_key.lower().endswith('.nfo'):
+                try:
+                    with open(str(movie_file[0])) as f:
+                        for line_item in f.readlines():
+                            if '<plot>' in line_item:
+                                movie_index_file_results[movie_title_key]['PLOT'] = line_item
+
+                            if '<rating>' in line_item:
+                                movie_index_file_results[movie_title_key]['RATING'] = line_item
+                except Exception as e:
+                    print('ERROR: ', e)
+                    print('FILE: ', movie_file[0])
+                    continue
+        except (OSError, TypeError, ValueError) as e:
+            print('INPUT ERROR: ', e)
 
     with open(os.path.expanduser((media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), 'w',
               encoding='UTF-8', newline='') as f:
@@ -114,40 +123,15 @@ def create_tv_information_index():
     tv_show_plots_dictionary = {}
 
     for tv_file in sorted(tv_index):
-        tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
-        tv_folder_title = tv_file[0].rsplit('/')[-2]
-        tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
-        if tv_title_key not in tv_index_file_results:
-            tv_index_file_results[tv_title_key] = {}
-        if not tv_filename_key.lower().endswith('.nfo'):
-            title = guessit.guessit(tv_file[0].rsplit('/', 1)[-1], options={'type': 'episode'})
-            try:
-                test = pymediainfo.MediaInfo.parse(tv_file[0])
-            except OSError as e:
-                print('OS ERROR: ', e)
-                continue
+        try:
+            tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
+            tv_folder_title = tv_file[0].rsplit('/')[-2]
+            tv_folder_year = tv_folder_title.rsplit('(')[-1][:-1]
+            tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
 
-            for track in test.tracks:
-                if track.track_type == 'General':
-                    tv_index_file_results[tv_title_key]['RUN-TIME'] = str(track.other_duration)
-                if track.track_type == 'Video':
-                    tv_index_file_results[tv_title_key]['DIRECTORY'] = tv_folder_title
-                    tv_index_file_results[tv_title_key]['TITLE'] = title.get('title')
-                    tv_index_file_results[tv_title_key]['YEAR'] = title.get('year')
-                    tv_index_file_results[tv_title_key]['EPISODE TITLE'] = title.get('episode_title')
-                    tv_index_file_results[tv_title_key]['SEASON'] = title.get('season')
-                    tv_index_file_results[tv_title_key]['EPISODE NUMBER'] = title.get('episode')
-                    tv_index_file_results[tv_title_key]['RESOLUTION'] = str(track.width) + 'x' + str(track.height)
-                    tv_index_file_results[tv_title_key]['FILE-TYPE'] = title.get('container')
-                    tv_index_file_results[tv_title_key]['FILENAME'] = tv_filename_key
-
-        elif tv_filename_key.lower().endswith('.nfo'):
-            if tv_title_key not in tv_index_file_results:
-                tv_index_file_results[tv_title_key] = {}
-
-            if str(tv_filename_key.lower()) == str('tvshow.nfo').lower():
-                tv_show_plots_dictionary[tv_title_key] = {}
-                tv_show_plots_dictionary[tv_title_key]['SHOW'] = tv_folder_title
+            if str(tv_filename_key.lower()) == str('tvshow.nfo'):
+                tv_show_plots_dictionary[tv_folder_title] = {}
+                tv_show_plots_dictionary[tv_folder_title]['SHOW'] = tv_folder_title
                 try:
                     with open(tv_file[0]) as f:
                         for line in f.readlines():
@@ -157,19 +141,53 @@ def create_tv_information_index():
                     print('ERROR: ', e)
                     print('FILE: ', tv_file[0])
                     continue
-        else:
-            try:
-                with open(tv_file[0]) as f:
-                    for line in f.readlines():
-                        if '<plot>' in line:
-                            tv_index_file_results[tv_title_key]['PLOT'] = line
+            if not tv_filename_key.lower().endswith('.nfo'):
+                if tv_title_key not in tv_index_file_results:
+                    tv_index_file_results[tv_title_key] = {}
+                try:
+                    title = guessit.guessit(tv_filename_key, options={'type': 'episode'})
+                except OSError as e:
+                    print('OS ERROR: ', e)
+                    continue
+                try:
+                    test = pymediainfo.MediaInfo.parse(tv_file[0])
+                except OSError as e:
+                    print('OS ERROR: ', e)
+                    continue
 
-                        if '<rating>' in line:
-                            tv_index_file_results[tv_title_key]['RATING'] = line
-            except Exception as e:
-                print('ERROR: ', e)
-                print('FILE: ', tv_file[0])
-                continue
+                for track in test.tracks:
+                    if track.track_type == 'General':
+                        duration = track.other_duration
+                        tv_index_file_results[tv_title_key]['RUN-TIME'] = duration[0]
+                    if track.track_type == 'Video':
+                        tv_index_file_results[tv_title_key]['DIRECTORY'] = tv_folder_title
+                        tv_index_file_results[tv_title_key]['TITLE'] = title.get('title')
+                        tv_index_file_results[tv_title_key]['YEAR'] = tv_folder_year
+                        tv_index_file_results[tv_title_key]['EPISODE TITLE'] = title.get('episode_title')
+                        tv_index_file_results[tv_title_key]['SEASON'] = title.get('season')
+                        tv_index_file_results[tv_title_key]['EPISODE NUMBER'] = title.get('episode')
+                        tv_index_file_results[tv_title_key]['RESOLUTION'] = str(track.width) + 'x' + str(track.height)
+                        tv_index_file_results[tv_title_key]['FILE-TYPE'] = title.get('container')
+                        tv_index_file_results[tv_title_key]['FILENAME'] = tv_filename_key
+
+            elif tv_filename_key.lower().endswith('.nfo'):
+                if tv_title_key not in tv_index_file_results:
+                    tv_index_file_results[tv_title_key] = {}
+                if str(tv_filename_key.lower()) != str('tvshow.nfo'):
+                    try:
+                        with open(tv_file[0]) as f:
+                            for line in f.readlines():
+                                if '<plot>' in line:
+                                    tv_index_file_results[tv_title_key]['PLOT'] = line
+
+                                if '<rating>' in line:
+                                    tv_index_file_results[tv_title_key]['RATING'] = line
+                    except Exception as e:
+                        print('ERROR: ', e)
+                        print('FILE: ', tv_file[0])
+                        continue
+        except (OSError, TypeError, ValueError) as e:
+            print('INPUT ERROR: ', e)
 
     with open(os.path.expanduser((media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), 'w',
               encoding='UTF-8', newline='') as f:
