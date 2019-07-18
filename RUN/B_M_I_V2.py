@@ -136,7 +136,7 @@ def create_tv_information_index():
                     with open(tv_file[0]) as f:
                         for line in f.readlines():
                             if '<plot>' in line:
-                                tv_show_plots_dictionary[tv_title_key]['PLOT'] = line
+                                tv_show_plots_dictionary[tv_folder_title]['PLOT'] = line
                 except Exception as e:
                     print('ERROR: ', e)
                     print('FILE: ', tv_file[0])
