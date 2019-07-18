@@ -106,6 +106,8 @@ def create_movie_information_index():
                     continue
         except (OSError, TypeError, ValueError) as e:
             print('INPUT ERROR: ', e)
+            print('FILE: ', movie_file[0])
+            continue
 
     with open(os.path.expanduser((media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), 'w',
               encoding='UTF-8', newline='') as f:
@@ -188,6 +190,8 @@ def create_tv_information_index():
                         continue
         except (OSError, TypeError, ValueError) as e:
             print('INPUT ERROR: ', e)
+            print('FILE: ', tv_file[0])
+            continue
 
     with open(os.path.expanduser((media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), 'w',
               encoding='UTF-8', newline='') as f:
