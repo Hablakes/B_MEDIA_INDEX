@@ -143,7 +143,7 @@ def create_tv_information_index():
                     print('ERROR: ', e)
                     print('FILE: ', tv_file[0])
                     continue
-            if not tv_filename_key.lower().endswith('.nfo'):
+            elif not tv_filename_key.lower().endswith('.nfo'):
                 if tv_title_key not in tv_index_file_results:
                     tv_index_file_results[tv_title_key] = {}
                 try:
@@ -572,15 +572,17 @@ def media_queries_sub_menu():
     print(pyfiglet.figlet_format('MEDIA_QUERIES', font='cybermedium'))
     separator()
 
-    print('SEARCH FOR TITLES OF:                            1) MOVIES       2) TV SHOWS')
+    print('SEARCH FOR TITLES OF:                        1) MOVIES       2) TV SHOWS')
     print()
-    print('SEARCH FOR INFORMATION OF:                       3) MOVIES (BY MOVIE TITLE)')
+    print('SEARCH FOR TITLES OF:                        3) TV SHOW EPISODES')
+    divider()
+    print('SEARCH FOR DETAILED INFORMATION OF:          4) MOVIES (BY MOVIE TITLE)')
     print()
-    print('SEARCH FOR INFORMATION OF:                       4) TV SHOWS (BY EPISODE TITLE)')
+    print('SEARCH FOR DETAILED INFORMATION OF:          5) TV SHOWS (BY EPISODE TITLE)')
     divider()
-    print('5) SEARCH PLOTS FOR KEYWORD(S): ')
+    print('                                             6) SEARCH PLOTS FOR KEYWORD(S)')
     divider()
-    print('6) QUERY TOTAL NUMBER (#) OF EPISODES IN A TV SHOW: ')
+    print('                                             7) QUERY TOTAL NUMBER (#) OF EPISODES IN A TV SHOW')
     divider()
     print('0) MAIN MENU')
     separator()
@@ -596,12 +598,14 @@ def media_queries_sub_menu():
         elif title_search_type == 2:
             search_titles(title_search_type=2)
         elif title_search_type == 3:
-            query_movie_information_index()
+            search_titles(title_search_type=3)
         elif title_search_type == 4:
-            query_tv_information_index()
+            query_movie_information_index()
         elif title_search_type == 5:
-            search_plots()
+            query_tv_information_index()
         elif title_search_type == 6:
+            search_plots()
+        elif title_search_type == 7:
             total_tv_episodes_in_show_title()
     except (TypeError, ValueError) as e:
         print('INPUT ERROR: ', e)
@@ -616,11 +620,9 @@ def picture_graph_options_sub_menu():
     print('1) MOVIES (TITLES PER YEAR)         - 2) TV SHOWS (TITLES PER YEAR)')
     print()
     print('3) MOVIES (TITLES PER DECADE)       - 4) TV SHOWS (TITLES PER DECADE)')
-    print()
-    print()
+    divider()
     print('5) MOVIES (RESOLUTIONS PERCENTAGES) - 6) TV SHOWS (RESOLUTIONS PERCENTAGES)')
-    print()
-    print()
+    divider()
     print('7) MOVIES (FILE-TYPE AMOUNTS)       - 8) TV SHOWS (FILE-TYPE AMOUNTS)')
     divider()
     print('0) MAIN MENU')
@@ -951,8 +953,10 @@ def search_plots():
         print('SEARCH PLOTS OF:                             1) MOVIES       2) TV SHOW EPISODES')
         print()
         print('                                             3) MOVIES AND TV SHOW EPISODES')
-        print()
+        divider()
         print('                                             4) TV SHOW GENERAL OVERVIEW')
+        divider()
+        print('0) MAIN MENU')
         separator()
         plot_search_int = int(input('ENTER #: '))
         plot_search_list.append(plot_search_int)
@@ -971,8 +975,9 @@ def search_plots():
         print()
         print('INVALID INPUT, PLEASE RETRY')
         separator()
-
-    if plot_search_list[0] == 1:
+    if plot_search_list[0] == 0:
+        media_index_home()
+    elif plot_search_list[0] == 1:
         for plot in movie_files_results_list:
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
         for items in plots_list:
@@ -980,7 +985,7 @@ def search_plots():
                 print()
                 print(textwrap.fill(items, 100))
         separator()
-    if plot_search_list[0] == 2:
+    elif plot_search_list[0] == 2:
         for plot in tv_files_results_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[8])
         for items in plots_list:
@@ -988,7 +993,7 @@ def search_plots():
                 print()
                 print(textwrap.fill(items, 100))
         separator()
-    if plot_search_list[0] == 3:
+    elif plot_search_list[0] == 3:
         for plot in movie_files_results_list:
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
         for plot in tv_files_results_list:
@@ -998,7 +1003,7 @@ def search_plots():
                 print()
                 print(textwrap.fill(items, 100))
         separator()
-    if plot_search_list[0] == 4:
+    elif plot_search_list[0] == 4:
         for plot in tv_plots_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1])
         for items in plots_list:
@@ -1011,6 +1016,9 @@ def search_plots():
 def search_titles(title_search_type):
     media_index_list = list(csv.reader(open(os.path.expanduser(
         (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF-8')))
+    tv_files_results_list = csv.reader(open(os.path.expanduser(
+        (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8'))
+    tv_show_episodes_dictionary = {}
 
     if title_search_type == 1:
         try:
@@ -1049,6 +1057,39 @@ def search_titles(title_search_type):
                     search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(tv_search_result), flags=0)
                     if tv_title_search_action_lower in search_info[0].lower():
                         print(search_info[0])
+            separator()
+        except (TypeError, ValueError) as e:
+            print('INPUT ERROR: ', e)
+            print()
+            print('INVALID INPUT, PLEASE RETRY')
+            separator()
+
+    elif title_search_type == 3:
+        try:
+            tv_show_query_action = input('ENTER SEARCH QUERY (TV SHOWS): ')
+            separator()
+            tv_show_query_action_lower = str(tv_show_query_action.lower())
+            for tv_file in tv_files_results_list:
+                tv_folder_key = tv_file[0]
+                tv_title_key = tv_file[1]
+                tv_episode_name_key = tv_file[3]
+
+                if tv_show_query_action_lower in tv_title_key.lower():
+                    if tv_folder_key not in tv_show_episodes_dictionary:
+                        tv_show_episodes_dictionary[tv_folder_key] = {}
+                        tv_show_episodes_dictionary[tv_folder_key]['EPISODES'] = []
+                    tv_show_episodes_dictionary[tv_folder_key]['EPISODES'].append(tv_episode_name_key)
+            print('SEARCH RESULTS: ')
+            for found_show, found_episodes in tv_show_episodes_dictionary.items():
+                divider()
+                print(found_show)
+                print('-' * 100)
+                print()
+                for episodes_values in found_episodes.values():
+                    for episodes in episodes_values:
+                        if str(episodes) == str(''):
+                            episodes = 'NO EPISODE TITLE IN MEDIA-INDEX FOR THIS FILE'
+                        print(episodes)
             separator()
         except (TypeError, ValueError) as e:
             print('INPUT ERROR: ', e)
@@ -1139,8 +1180,7 @@ def sort_options_sub_menu():
     print('SORT MOVIE & TV SHOWS BY:            TITLES:     1) ASCENDING    2) DESCENDING')
     print()
     print('                                     YEARS:      3) ASCENDING    4) DESCENDING')
-    print()
-    print()
+    divider()
     print('SORT NUMBER (#) OF TV EPISODES BY:   TITLES:     5) ASCENDING    6) DESCENDING')
     print()
     print('                                     AMOUNT:     7) ASCENDING    8) DESCENDING')
@@ -1185,11 +1225,9 @@ def terminal_graph_options_sub_menu():
     print('1) MOVIES (TITLES PER YEAR)                      2) TV SHOWS (TITLES PER YEAR)')
     print()
     print('3) MOVIES (TITLES PER DECADE)                    4) TV SHOWS (TITLES PER DECADE)')
-    print()
-    print()
+    divider()
     print('5) MOVIES (RESOLUTIONS PERCENTAGES)              6) TV SHOWS (RESOLUTIONS PERCENTAGES)')
-    print()
-    print()
+    divider()
     print('7) MOVIES (FILE-TYPE AMOUNTS)                    8) TV SHOWS (FILE-TYPE AMOUNTS)')
     divider()
     print('0) MAIN MENU')
