@@ -759,14 +759,8 @@ def query_movie_information_index():
                 if int(len(movie_file[7])) != 0:
                     print('RUN-TIME: ')
                     print()
-                    if '</runtime>' not in movie_file[7]:
-                        mv_runtime = re.findall('<runtime>(.*?)', movie_file[7])
-                        print(mv_runtime)
-                        divider()
-                    elif '</runtime>' in movie_file[7]:
-                        mv_runtime = re.findall('<runtime>(.*?)</runtime>', movie_file[7])
-                        print(mv_runtime)
-                        divider()
+                    print(movie_file[7])
+                    divider()
                 if int(len(movie_file[6])) != 0:
                     print('RATING: ')
                     print()
@@ -843,14 +837,8 @@ def query_tv_information_index():
                 if int(len(tv_file[10])) != 0:
                     print('RUN-TIME: ')
                     print()
-                    if '</runtime>' not in tv_file[10]:
-                        tv_runtime = re.findall('<runtime>(.*?)', tv_file[10])
-                        print(tv_runtime)
-                        divider()
-                    elif '</runtime>' in tv_file[10]:
-                        tv_runtime = re.findall('<runtime>(.*?)</runtime>', tv_file[10])
-                        print(tv_runtime)
-                        divider()
+                    print(tv_file[10])
+                    divider()
                 if int(len(tv_file[9])) != 0:
                     print('RATING: ')
                     print()
@@ -1297,7 +1285,6 @@ def total_tv_episodes_in_show_title():
         print('INPUT ERROR: ', e)
         print()
         print('INVALID INPUT, PLEASE RETRY')
-        total_tv_episodes_in_show_title()
     for tv_title in tv_results_list:
         tv_amounts.append(tv_title[0])
     for found_tv_title in tv_amounts:
