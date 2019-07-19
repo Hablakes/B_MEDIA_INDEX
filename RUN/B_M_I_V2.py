@@ -574,7 +574,9 @@ def media_queries_sub_menu():
 
     print('SEARCH FOR TITLES OF:                            1) MOVIES       2) TV SHOWS')
     print()
-    print('SEARCH FOR INFORMATION OF:                       3) MOVIES       4) TV SHOWS')
+    print('SEARCH FOR INFORMATION OF:                       3) MOVIES (BY MOVIE TITLE)')
+    print()
+    print('SEARCH FOR INFORMATION OF:                       4) TV SHOWS (BY EPISODE TITLE)')
     divider()
     print('5) SEARCH PLOTS FOR KEYWORD(S): ')
     divider()
@@ -802,7 +804,7 @@ def query_tv_information_index():
         tv_show_query_action_lower = str(tv_show_query_action.lower())
 
         for tv_file in tv_files_results_list:
-            if tv_show_query_action_lower in (tv_file[1].lower(), tv_file[3].lower()):
+            if tv_show_query_action_lower in tv_file[3].lower():
                 divider()
                 print('TV SHOW FOLDER: ')
                 print()
@@ -1014,7 +1016,7 @@ def search_titles(title_search_type):
         try:
             movie_title_search_action = input('QUERY MOVIES: ')
             separator()
-            movie_title_search_action = movie_title_search_action.lower()
+            movie_title_search_action_lower = movie_title_search_action.lower()
             print('SEARCH RESULTS: ')
             print()
             print('MOVIES: ')
@@ -1022,7 +1024,7 @@ def search_titles(title_search_type):
             for movie_search_result in media_index_list:
                 if str('MOVIE') in movie_search_result[0]:
                     search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(movie_search_result), flags=0)
-                    if movie_title_search_action in search_info[0].lower():
+                    if movie_title_search_action_lower in search_info[0].lower():
                         print(search_info[0])
             separator()
         except (TypeError, ValueError) as e:
@@ -1035,7 +1037,7 @@ def search_titles(title_search_type):
         try:
             tv_title_search_action = input('QUERY TV SHOWS: ')
             separator()
-            tv_title_search_action = tv_title_search_action.lower()
+            tv_title_search_action_lower = tv_title_search_action.lower()
             print()
             print()
             print('SEARCH RESULTS: ')
@@ -1045,7 +1047,7 @@ def search_titles(title_search_type):
             for tv_search_result in media_index_list:
                 if str('TV') in tv_search_result[0]:
                     search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(tv_search_result), flags=0)
-                    if tv_title_search_action in search_info[0].lower():
+                    if tv_title_search_action_lower in search_info[0].lower():
                         print(search_info[0])
             separator()
         except (TypeError, ValueError) as e:
