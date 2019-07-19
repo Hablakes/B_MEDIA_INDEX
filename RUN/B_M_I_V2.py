@@ -103,10 +103,12 @@ def create_movie_information_index():
                 except Exception as e:
                     print('ERROR: ', e)
                     print('FILE: ', movie_file[0])
+                    print('-' * 100)
                     continue
         except (OSError, TypeError, ValueError) as e:
             print('INPUT ERROR: ', e)
             print('FILE: ', movie_file[0])
+            print('-' * 100)
             continue
 
     with open(os.path.expanduser((media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), 'w',
@@ -142,6 +144,7 @@ def create_tv_information_index():
                 except Exception as e:
                     print('ERROR: ', e)
                     print('FILE: ', tv_file[0])
+                    print('-' * 100)
                     continue
             elif not tv_filename_key.lower().endswith('.nfo'):
                 if tv_title_key not in tv_index_file_results:
@@ -187,10 +190,12 @@ def create_tv_information_index():
                     except Exception as e:
                         print('ERROR: ', e)
                         print('FILE: ', tv_file[0])
+                        print('-' * 100)
                         continue
         except (OSError, TypeError, ValueError) as e:
             print('INPUT ERROR: ', e)
             print('FILE: ', tv_file[0])
+            print('-' * 100)
             continue
 
     with open(os.path.expanduser((media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), 'w',
@@ -544,11 +549,56 @@ def media_index_home():
         elif lmi_input_action == 1:
             change_directory_selection()
         elif lmi_input_action == 2:
-            walk_directories_and_create_indices()
+            try:
+                print('THIS OPERATION CAN TAKE A LONG TIME')
+                print()
+                print('0) MAIN MENU                             1) CONTINUE WITH SCAN')
+                print()
+                scan_sub_input = int(input('ENTER #: '))
+                separator()
+                if scan_sub_input == 0:
+                    media_index_home()
+                elif scan_sub_input == 1:
+                    walk_directories_and_create_indices()
+            except (TypeError, ValueError) as e:
+                print('INPUT ERROR: ', e)
+                print()
+                print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                separator()
         elif lmi_input_action == 3:
-            scrape_media_folders_for_csv()
+            try:
+                print('THIS OPERATION CAN TAKE A LONG TIME')
+                print()
+                print('0) MAIN MENU                             1) CONTINUE WITH SCAN')
+                print()
+                scan_sub_input = int(input('ENTER #: '))
+                separator()
+                if scan_sub_input == 0:
+                    media_index_home()
+                elif scan_sub_input == 1:
+                    scrape_media_folders_for_csv()
+            except (TypeError, ValueError) as e:
+                print('INPUT ERROR: ', e)
+                print()
+                print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                separator()
         elif lmi_input_action == 4:
-            create_media_information_indices()
+            try:
+                print('THIS OPERATION CAN TAKE A LONG TIME')
+                print()
+                print('0) MAIN MENU                             1) CONTINUE WITH SCAN')
+                print()
+                scan_sub_input = int(input('ENTER #: '))
+                separator()
+                if scan_sub_input == 0:
+                    media_index_home()
+                elif scan_sub_input == 1:
+                    create_media_information_indices()
+            except (TypeError, ValueError) as e:
+                print('INPUT ERROR: ', e)
+                print()
+                print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                separator()
         elif lmi_input_action == 5:
             select_users_indices_to_compare()
         elif lmi_input_action == 6:
