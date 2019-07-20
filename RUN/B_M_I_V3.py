@@ -87,7 +87,8 @@ def create_movie_information_index():
                         movie_index_file_results[movie_title_key]['DIRECTORY'] = movie_title_key
                         movie_index_file_results[movie_title_key]['TITLE'] = title.get('title')
                         movie_index_file_results[movie_title_key]['YEAR'] = title.get('year')
-                        movie_index_file_results[movie_title_key]['RESOLUTION'] = str(track.width) + 'x' + str(track.height)
+                        movie_index_file_results[movie_title_key]['RESOLUTION'] = \
+                            str(track.width) + 'x' + str(track.height)
                         movie_index_file_results[movie_title_key]['FILE-TYPE'] = title.get('container')
                         movie_index_file_results[movie_title_key]['FILENAME'] = movie_filename_key
 
@@ -311,8 +312,10 @@ def graph_options_advanced(username_input, picture_graph_options_int, terminal_g
 
         plt.setp(auto_texts, size=9, weight='bold')
         ax.set_title('MOVIE_RESOLUTION_RESULTS')
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/MOVIE_RESOLUTION_RESULTS.png'.format(
-            username_input)))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_RESOLUTION_RESULTS.png'.format(username_input))
+        plt.savefig(plt_path)
+        print('GRAPH SAVED: ', plt_path)
+        separator_3()
         plt.show()
 
     if terminal_graph_options_int == 5:
@@ -334,8 +337,10 @@ def graph_options_advanced(username_input, picture_graph_options_int, terminal_g
 
         plt.setp(auto_texts, size=9, weight='bold')
         ax.set_title('TV_SHOW_RESOLUTION_RESULTS')
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/TV_RESOLUTION_RESULTS.png'.format(
-            username_input)))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_RESOLUTION_RESULTS.png'.format(username_input))
+        plt.savefig(plt_path)
+        print('GRAPH SAVED: ', plt_path)
+        separator_3()
         plt.show()
 
     if terminal_graph_options_int == 6:
@@ -384,7 +389,10 @@ def graph_options_base(username_input, picture_graph_options_int, terminal_graph
             movie_year_totals_dict[year_values] = len(value)
         x, y = zip(*sorted(movie_year_totals_dict.items()))
         plt.bar(x, y)
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/MOVIE_YEAR_RESULTS.png'.format(username_input)))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_YEAR_RESULTS.png'.format(username_input))
+        plt.savefig(plt_path)
+        print('GRAPH SAVED: ', plt_path)
+        separator_3()
         plt.show()
 
     if terminal_graph_options_int == 1:
@@ -405,7 +413,10 @@ def graph_options_base(username_input, picture_graph_options_int, terminal_graph
             tv_year_totals_dict[year_values] = len(value)
         x, y = zip(*sorted(tv_year_totals_dict.items()))
         plt.bar(x, y)
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/TV_YEAR_RESULTS.png'.format(username_input)))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_YEAR_RESULTS.png'.format(username_input))
+        plt.savefig(plt_path)
+        print('GRAPH SAVED: ', plt_path)
+        separator_3()
         plt.show()
 
     if terminal_graph_options_int == 2:
@@ -426,7 +437,10 @@ def graph_options_base(username_input, picture_graph_options_int, terminal_graph
             movie_decades_totals_dict[year_values] = len(value)
         x, y = zip(*movie_decades_totals_dict.items())
         plt.bar(x, y, width=5)
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/MOVIE_DECADE_RESULTS.png'.format(username_input)))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_DECADE_RESULTS.png'.format(username_input))
+        plt.savefig(plt_path)
+        print('GRAPH SAVED: ', plt_path)
+        separator_3()
         plt.show()
 
     if terminal_graph_options_int == 3:
@@ -446,7 +460,10 @@ def graph_options_base(username_input, picture_graph_options_int, terminal_graph
             tv_decades_totals_dict[year_values] = len(value)
         x, y = zip(*tv_decades_totals_dict.items())
         plt.bar(x, y, width=5)
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/TV_DECADE_RESULTS.png'.format(username_input)))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_DECADE_RESULTS.png'.format(username_input))
+        plt.savefig(plt_path)
+        print('GRAPH SAVED: ', plt_path)
+        separator_3()
         plt.show()
 
     if terminal_graph_options_int == 4:
@@ -800,8 +817,10 @@ def query_file_type_totals(username_input, picture_graph_options_int, terminal_g
             movie_file_type_totals[movie_file_type_values] = len(value)
         x, y = zip(*sorted(movie_file_type_totals.items()))
         plt.bar(x, y)
-        plt.savefig(
-            os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/MOVIE_FILETYPE_RESULTS.png'.format(username_input)))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_FILETYPE_RESULTS.png'.format(username_input))
+        plt.savefig(plt_path)
+        print('GRAPH SAVED: ', plt_path)
+        separator_3()
         plt.show()
 
     if terminal_graph_options_int == 7:
@@ -828,7 +847,10 @@ def query_file_type_totals(username_input, picture_graph_options_int, terminal_g
             tv_file_type_totals[tv_file_type_values] = len(value)
         x, y = zip(*sorted(tv_file_type_totals.items()))
         plt.bar(x, y)
-        plt.savefig(os.path.expanduser('~/{0}_MEDIA_INDEX/FILES/TV_FILETYPE_RESULTS.png'.format(username_input)))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_FILETYPE_RESULTS.png'.format(username_input))
+        plt.savefig(plt_path)
+        print('GRAPH SAVED: ', plt_path)
+        separator_3()
         plt.show()
 
     if terminal_graph_options_int == 8:
@@ -1240,11 +1262,6 @@ def select_users_indices_to_compare():
     print('COMPLETE: COMPARISON FILE(S) CAN BE FOUND IN THE USER MEDIA-INDEX FOLDER, FILES SUB-FOLDER')
 
 
-def separator_0():
-    for items in '\n', '\n':
-        print(items)
-
-
 def separator_1():
     print('-' * 100)
 
@@ -1485,6 +1502,8 @@ def username_check_and_folder_creation():
         else:
             os.makedirs(os.path.expanduser((media_index_folder + '/').format(username_input)), exist_ok=True)
             os.makedirs(os.path.expanduser((media_index_folder + '/FILES').format(username_input)), exist_ok=True)
+            os.makedirs(os.path.expanduser((media_index_folder + '/GRAPHS').format(username_input)), exist_ok=True)
+            os.makedirs(os.path.expanduser((media_index_folder + '/SEARCH').format(username_input)), exist_ok=True)
             directory_selection()
     except (OSError, TypeError, ValueError) as e:
         print()
