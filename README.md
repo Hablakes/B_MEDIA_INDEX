@@ -29,7 +29,7 @@ MEDIA-INDEX USAGE(S):
 
 * IF FIRST TIME RUNNING
 
-1) /RUN/B_M_I_V2.py
+1) /RUN/B_M_I_V3.py
 2) Enter your Username
 3) Enter Directories for Movies and TV Show Libraries (OPTION #1) (If N/A for any of the 4 inputs, just hit Cancel)
 4) From MAIN MENU, Hit (OPTION #2) "CREATE PATH INDICES" (** QUICK **)
@@ -39,7 +39,7 @@ MEDIA-INDEX USAGE(S):
 
 * IF NOT FIRST TIME RUNNING
 
-1) /RUN/B_M_I_V2.py
+1) /RUN/B_M_I_V3.py
 2) Enter Username
 3) MAIN MENU
 
