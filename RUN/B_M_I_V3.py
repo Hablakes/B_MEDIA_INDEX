@@ -101,13 +101,11 @@ def create_movie_information_index():
                             if '<rating>' in line_item:
                                 movie_results_list[movie_title_key]['RATING'] = line_item
                 except Exception as e:
-                    print('ERROR: ', e)
-                    print('FILE: ', movie_file[0])
+                    print('ERROR: ', e, '\n', 'FILE: ', movie_file[0])
                     print('-' * 100)
                     continue
         except (OSError, TypeError, ValueError) as e:
-            print('INPUT ERROR: ', e)
-            print('FILE: ', movie_file[0])
+            print('INPUT ERROR: ', e, '\n', 'FILE: ', movie_file[0])
             print('-' * 100)
             continue
 
@@ -142,8 +140,7 @@ def create_tv_information_index():
                             if '<plot>' in line:
                                 tv_show_plots_dictionary[tv_folder_title]['PLOT'] = line
                 except Exception as e:
-                    print('ERROR: ', e)
-                    print('FILE: ', tv_file[0])
+                    print('ERROR: ', e, '\n', 'FILE: ', tv_file[0])
                     print('-' * 100)
                     continue
             elif not tv_filename_key.lower().endswith('.nfo'):
@@ -188,13 +185,11 @@ def create_tv_information_index():
                                 if '<rating>' in line:
                                     tv_results_list[tv_title_key]['RATING'] = line
                     except Exception as e:
-                        print('ERROR: ', e)
-                        print('FILE: ', tv_file[0])
+                        print('ERROR: ', e, '\n', 'FILE: ', tv_file[0])
                         print('-' * 100)
                         continue
         except (OSError, TypeError, ValueError) as e:
-            print('INPUT ERROR: ', e)
-            print('FILE: ', tv_file[0])
+            print('INPUT ERROR: ', e, '\n', 'FILE: ', tv_file[0])
             print('-' * 100)
             continue
 
@@ -218,16 +213,13 @@ def directory_selection():
     try:
         user_info_file = os.path.expanduser((index_folder + '/{0}_USER_INFO.csv').format(username))
 
-        print('ENTER PATH OF MOVIE DIRECTORY, IF NONE HIT CANCEL: ')
+        print('ENTER PATH OF MOVIE DIRECTORY, IF NONE HIT CANCEL: ', '\n')
         movie_dir_input = tk_gui_file_browser_window()
-        print()
-        print('ENTER PATH OF TV DIRECTORY, IF NONE HIT CANCEL: ')
+        print('ENTER PATH OF TV DIRECTORY, IF NONE HIT CANCEL: ', '\n')
         tv_dir_input = tk_gui_file_browser_window()
-        print()
-        print('ENTER PATH OF ALTERNATE MOVIE DIRECTORY, IF NONE HIT CANCEL: ')
+        print('ENTER PATH OF ALTERNATE MOVIE DIRECTORY, IF NONE HIT CANCEL: ', '\n')
         movie_alt_dir_input = tk_gui_file_browser_window()
-        print()
-        print('ENTER PATH OF ALTERNATE TV DIRECTORY, IF NONE HIT CANCEL: ')
+        print('ENTER PATH OF ALTERNATE TV DIRECTORY, IF NONE HIT CANCEL: ', '\n')
         tv_alt_dir_input = tk_gui_file_browser_window()
         separator_3()
 
@@ -239,9 +231,7 @@ def directory_selection():
             for user_data in user_info_dict.items():
                 csv_writer.writerow(user_data)
     except (TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
+        print('\n', 'INPUT ERROR: ', e, '\n')
 
 
 def graph_options_advanced(username, picture_graph_options_int, terminal_graph_options_int):
@@ -320,8 +310,7 @@ def graph_options_advanced(username, picture_graph_options_int, terminal_graph_o
     if terminal_graph_options_int == 5:
         graph = Pyasciigraph()
         for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES: ', movies_graph_terminal_results):
-            print()
-            print(line)
+            print('\n', line)
         separator_3()
 
     if picture_graph_options_int == 6:
@@ -345,8 +334,7 @@ def graph_options_advanced(username, picture_graph_options_int, terminal_graph_o
     if terminal_graph_options_int == 6:
         graph = Pyasciigraph()
         for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES: ', tv_shows_graph_terminal_results):
-            print()
-            print(line)
+            print('\n', line)
         separator_3()
 
 
@@ -403,8 +391,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             movie_years_terminal_graph_list.append((str(key), value))
         graph = Pyasciigraph()
         for line in graph.graph('MOVIES: YEAR AMOUNTS: ', movie_years_terminal_graph_list):
-            print()
-            print(line)
+            print('\n', line)
         separator_3()
 
     if picture_graph_options_int == 2:
@@ -427,8 +414,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             tv_years_terminal_graph_list.append((str(key), value))
         graph = Pyasciigraph()
         for line in graph.graph('TV SHOWS: YEAR AMOUNTS: ', tv_years_terminal_graph_list):
-            print()
-            print(line)
+            print('\n', line)
         separator_3()
 
     if picture_graph_options_int == 3:
@@ -450,8 +436,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             movie_decades_terminal_graph_list.append((str(key), value))
         graph = Pyasciigraph()
         for line in graph.graph('MOVIES: DECADE AMOUNTS: ', movie_decades_terminal_graph_list):
-            print()
-            print(line)
+            print('\n', line)
         separator_3()
 
     if picture_graph_options_int == 4:
@@ -473,8 +458,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             tv_decades_terminal_graph_list.append((str(key), value))
         graph = Pyasciigraph()
         for line in graph.graph('TV SHOWS: DECADE AMOUNTS: ', tv_decades_terminal_graph_list):
-            print()
-            print(line)
+            print('\n', line)
         separator_3()
 
 
@@ -487,10 +471,7 @@ def launch_media_index():
         separator_3()
         username_check_and_folder_creation()
     except (TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('INVALID INPUT, PLEASE RETRY')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
         launch_media_index()
 
 
@@ -513,24 +494,15 @@ def library_total_amount():
         if not episodes[0].lower().endswith('.nfo'):
             episode_amounts_list.append(+1)
 
-    print()
-    print('TOTAL AMOUNT OF MOVIES: ')
-    print()
+    print('\n', 'TOTAL AMOUNT OF MOVIES: ', '\n')
     print(len(movie_amounts_list))
     separator_3()
-    print()
-    print('TOTAL AMOUNT OF TV SHOWS: ')
-    print()
+    print('\n', 'TOTAL AMOUNT OF TV SHOWS: ', '\n')
     print(len(tv_amounts_list))
-    print()
-    print()
-    print('TOTAL AMOUNT OF TV EPISODES: ')
-    print()
+    print('\n', '\n', 'TOTAL AMOUNT OF TV EPISODES: ', '\n')
     print(len(episode_amounts_list))
     separator_3()
-    print()
-    print('TOTAL AMOUNT OF ITEMS IN MEDIA-LIBRARY: ')
-    print()
+    print('\n', 'TOTAL AMOUNT OF ITEMS IN MEDIA-LIBRARY: ', '\n')
     print(len(movie_amounts_list) + len(episode_amounts_list))
     separator_3()
 
@@ -540,16 +512,11 @@ def media_index_home():
     print(pyfiglet.figlet_format('MEDIA_INDEX', font='cybermedium'))
     separator_3()
 
-    print('1) CHANGE DATABASE DIRECTORIES                   2) CREATE PATH INDICES')
-    print()
-    print('3) CREATE TITLE INDEX                            4) CREATE MEDIA INFORMATION INDICES')
-    print()
-    print('5) COMPARE TWO USERS INFORMATION INDICES         6) DISPLAY LIBRARY TOTALS')
-    print()
-    print('7) MEDIA INFORMATION QUERIES                     8) SORT OPTIONS')
-    print()
-    print('9) PICTURE GRAPH OPTIONS                         10) TERMINAL GRAPH OPTIONS')
-    print()
+    print('1) CHANGE DATABASE DIRECTORIES                   2) CREATE PATH INDICES', '\n')
+    print('3) CREATE TITLE INDEX                            4) CREATE MEDIA INFORMATION INDICES', '\n')
+    print('5) COMPARE TWO USERS INFORMATION INDICES         6) DISPLAY LIBRARY TOTALS', '\n')
+    print('7) MEDIA INFORMATION QUERIES                     8) SORT OPTIONS', '\n')
+    print('9) PICTURE GRAPH OPTIONS                         10) TERMINAL GRAPH OPTIONS', '\n')
     print('11) SAVED SEARCHES')
     separator_2()
     print('0) EXIT MEDIA-INDEX')
@@ -575,10 +542,7 @@ def media_index_home():
                 elif scan_sub_input == 1:
                     change_directory_selection()
             except (TypeError, ValueError) as e:
-                print()
-                print('INPUT ERROR: ', e)
-                print()
-                print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
         elif lmi_input_action == 2:
             try:
@@ -595,10 +559,7 @@ def media_index_home():
                 elif scan_sub_input == 1:
                     walk_directories_and_create_indices()
             except (TypeError, ValueError) as e:
-                print()
-                print('INPUT ERROR: ', e)
-                print()
-                print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
         elif lmi_input_action == 3:
             try:
@@ -615,10 +576,7 @@ def media_index_home():
                 elif scan_sub_input == 1:
                     scrape_media_folders_for_csv()
             except (TypeError, ValueError) as e:
-                print()
-                print('INPUT ERROR: ', e)
-                print()
-                print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
         elif lmi_input_action == 4:
             try:
@@ -635,13 +593,23 @@ def media_index_home():
                 elif scan_sub_input == 1:
                     create_media_information_indices()
             except (TypeError, ValueError) as e:
-                print()
-                print('INPUT ERROR: ', e)
-                print()
-                print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
         elif lmi_input_action == 5:
-            select_users_indices_to_compare()
+            try:
+                print('CONFIRM: ')
+                separator_1()
+                print('0) MAIN MENU                             1) COMPARE USER(S) INFORMATION INDICES')
+                separator_3()
+                scan_sub_input = int(input('ENTER #: '))
+                separator_3()
+                if scan_sub_input == 0:
+                    media_index_home()
+                elif scan_sub_input == 1:
+                    select_users_indices_to_compare()
+            except (TypeError, ValueError) as e:
+                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                separator_3()
         elif lmi_input_action == 6:
             library_total_amount()
         elif lmi_input_action == 7:
@@ -655,10 +623,7 @@ def media_index_home():
         elif lmi_input_action == 11:
             saved_searches()
     except (TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
         separator_3()
 
 
@@ -666,12 +631,10 @@ def media_queries_sub_menu():
     print(pyfiglet.figlet_format('MEDIA_QUERIES', font='cybermedium'))
     separator_3()
 
-    print('SEARCH FOR TITLES OF:                            1) MOVIES       2) TV SHOWS')
-    print()
+    print('SEARCH FOR TITLES OF:                            1) MOVIES       2) TV SHOWS', '\n')
     print('SEARCH FOR TITLES OF:                            3) TV SHOW EPISODES')
     separator_2()
-    print('SEARCH FOR DETAILED INFORMATION OF:              4) MOVIES (BY MOVIE TITLE)')
-    print()
+    print('SEARCH FOR DETAILED INFORMATION OF:              4) MOVIES (BY MOVIE TITLE)', '\n')
     print('SEARCH FOR DETAILED INFORMATION OF:              5) TV SHOWS (BY EPISODE TITLE)')
     separator_2()
     print('                                                 6) SEARCH PLOTS FOR KEYWORD(S)')
@@ -713,8 +676,7 @@ def media_queries_sub_menu():
         elif title_search_type == 6:
             plot_search_list = []
             try:
-                print('SEARCH PLOTS OF:                             1) MOVIES       2) TV SHOW EPISODES')
-                print()
+                print('SEARCH PLOTS OF:                             1) MOVIES       2) TV SHOW EPISODES', '\n')
                 print('                                             3) MOVIES AND TV SHOW EPISODES')
                 separator_2()
                 print('                                             4) TV SHOW GENERAL OVERVIEW')
@@ -725,20 +687,14 @@ def media_queries_sub_menu():
                 plot_search_list.append(plot_search_int)
                 separator_3()
             except (TypeError, ValueError) as e:
-                print()
-                print('INPUT ERROR: ', e)
-                print()
-                print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
             try:
                 plot_search = input('KEYWORD(S): ')
                 plot_search_list.append(plot_search.lower())
                 separator_3()
             except (OSError, TypeError, ValueError) as e:
-                print()
-                print('INPUT ERROR: ', e)
-                print()
-                print('INVALID INPUT, PLEASE RETRY')
+                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
                 separator_3()
             plot_search_type_input = plot_search_list[0]
             plot_search_keywords_input = plot_search_list[1]
@@ -746,18 +702,14 @@ def media_queries_sub_menu():
         elif title_search_type == 7:
             total_tv_episodes_in_show_title()
     except (TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
         separator_3()
 
 
 def picture_graph_options_sub_menu():
     print(pyfiglet.figlet_format('PICTURE_GRAPHS', font='cybermedium'))
     separator_3()
-    print('1) MOVIES (TITLES PER YEAR)                      2) TV SHOWS (TITLES PER YEAR)')
-    print()
+    print('1) MOVIES (TITLES PER YEAR)                      2) TV SHOWS (TITLES PER YEAR)', '\n')
     print('3) MOVIES (TITLES PER DECADE)                    4) TV SHOWS (TITLES PER DECADE)')
     separator_2()
     print('5) MOVIES (RESOLUTIONS PERCENTAGES)              6) TV SHOWS (RESOLUTIONS PERCENTAGES)')
@@ -791,10 +743,7 @@ def picture_graph_options_sub_menu():
         elif picture_graph_options_int == 9:
             media_index_home()
     except (TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
         separator_3()
 
 
@@ -834,8 +783,7 @@ def query_file_type_totals(username, picture_graph_options_int, terminal_graph_o
             file_type_totals_terminal_graph_list.append((str(key), value))
         graph = Pyasciigraph()
         for line in graph.graph('MOVIES: FILE-TYPE AMOUNTS: ', file_type_totals_terminal_graph_list):
-            print()
-            print(line)
+            print('\n', line)
         separator_3()
 
     for file_type in tv_files_results_list:
@@ -864,8 +812,7 @@ def query_file_type_totals(username, picture_graph_options_int, terminal_graph_o
             file_type_totals_terminal_graph_list.append((str(key), value))
         graph = Pyasciigraph()
         for line in graph.graph('TV SHOWS: FILE-TYPE AMOUNTS: ', file_type_totals_terminal_graph_list):
-            print()
-            print(line)
+            print('\n', line)
         separator_3()
 
 
@@ -877,34 +824,21 @@ def query_movie_information_index(movie_query):
         for movie_file in mv_files_results_list:
             if str(movie_query.lower()) in str(movie_file[1].lower()):
                 separator_2()
-                print('MOVIE FOLDER: ')
-                print()
-                print(movie_file[0])
+                print('MOVIE FOLDER: ', '\n', movie_file[0])
                 separator_2()
-                print('MOVIE TITLE: ')
-                print()
-                print(movie_file[1])
+                print('MOVIE TITLE: ', '\n', movie_file[1])
                 separator_2()
-                print('MOVIE YEAR: ')
-                print()
-                print(movie_file[2])
+                print('MOVIE YEAR: ', '\n', movie_file[2])
                 separator_2()
-                print('MOVIE RESOLUTION: ')
-                print()
-                print(movie_file[3])
+                print('MOVIE RESOLUTION: ', '\n', movie_file[3])
                 separator_2()
-                print('MOVIE FILE-TYPE: ')
-                print()
-                print(movie_file[4])
+                print('MOVIE FILE-TYPE: ', '\n', movie_file[4])
                 separator_2()
                 if int(len(movie_file[7])) != 0:
-                    print('RUN-TIME: ')
-                    print()
-                    print(movie_file[7])
+                    print('RUN-TIME: ', '\n', movie_file[7])
                     separator_2()
                 if int(len(movie_file[6])) != 0:
-                    print('RATING: ')
-                    print()
+                    print('RATING: ', '\n')
                     if '</rating>' not in movie_file[6]:
                         mv_rating = re.findall('<rating>(.*?)', movie_file[6])
                         print(mv_rating[0])
@@ -914,8 +848,7 @@ def query_movie_information_index(movie_query):
                         print(mv_rating[0])
                         separator_2()
                 if int(len(movie_file[5])) != 0:
-                    print('PLOT: ')
-                    print()
+                    print('PLOT: ', '\n')
                     if '</plot>' not in movie_file[5]:
                         mv_plot = re.findall('<plot>(.*?)', movie_file[5])
                         print(textwrap.fill(mv_plot[0], 100))
@@ -925,10 +858,7 @@ def query_movie_information_index(movie_query):
                         print(textwrap.fill(mv_plot[0], 100))
                         separator_2()
     except (TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('INVALID QUERY, PLEASE RETRY')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID QUERY, PLEASE RETRY')
         separator_3()
 
 
@@ -940,46 +870,27 @@ def query_tv_information_index(tv_episode_query):
         for tv_file in tv_files_results_list:
             if str(tv_episode_query.lower()) in str(tv_file[3].lower()):
                 separator_2()
-                print('TV SHOW FOLDER: ')
-                print()
-                print(tv_file[0])
+                print('TV SHOW FOLDER: ', '\n', tv_file[0])
                 separator_2()
-                print('TV SHOW TITLE: ')
-                print()
-                print(tv_file[1])
+                print('TV SHOW TITLE: ', '\n', tv_file[1])
                 separator_2()
-                print('TV SHOW YEAR: ')
-                print()
-                print(tv_file[2])
+                print('TV SHOW YEAR: ', '\n', tv_file[2])
                 separator_2()
-                print('TV SHOW EPISODE TITLE: ')
-                print()
-                print(tv_file[3])
+                print('TV SHOW EPISODE TITLE: ', '\n', tv_file[3])
                 separator_2()
-                print('SEASON NUMBER: ')
-                print()
-                print(tv_file[4])
+                print('SEASON NUMBER: ', '\n', tv_file[4])
                 separator_2()
-                print('EPISODE NUMBER: ')
-                print()
-                print(tv_file[5])
+                print('EPISODE NUMBER: ', '\n', tv_file[5])
                 separator_2()
-                print('RESOLUTION: ')
-                print()
-                print(tv_file[6])
+                print('RESOLUTION: ', '\n', tv_file[6])
                 separator_2()
-                print('FILE-TYPE: ')
-                print()
-                print(tv_file[7])
+                print('FILE-TYPE: ', '\n', tv_file[7])
                 separator_2()
                 if int(len(tv_file[10])) != 0:
-                    print('RUN-TIME: ')
-                    print()
-                    print(tv_file[10])
+                    print('RUN-TIME: ', '\n', tv_file[10])
                     separator_2()
                 if int(len(tv_file[9])) != 0:
-                    print('RATING: ')
-                    print()
+                    print('RATING: ', '\n')
                     if '</rating>' not in tv_file[9]:
                         tv_rating = re.findall('<rating>(.*?)', tv_file[9])
                         print(tv_rating[0])
@@ -989,8 +900,7 @@ def query_tv_information_index(tv_episode_query):
                         print(tv_rating[0])
                         separator_2()
                 if int(len(tv_file[8])) != 0:
-                    print('PLOT: ')
-                    print()
+                    print('PLOT: ', '\n')
                     if '</plot>' not in tv_file[8]:
                         tv_plot = re.findall('<plot>(.*?)', tv_file[8])
                         print(textwrap.fill(tv_plot[0], 100))
@@ -1000,10 +910,7 @@ def query_tv_information_index(tv_episode_query):
                         print(textwrap.fill(tv_plot[0], 100))
                         separator_2()
     except (TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('INVALID QUERY, PLEASE RETRY')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID QUERY, PLEASE RETRY')
         separator_3()
 
 
@@ -1053,10 +960,7 @@ def saved_searches():
                     csv_writer.writerow(user_data)
             saved_searches()
     except (TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
         separator_3()
 
 
@@ -1113,10 +1017,7 @@ def scrape_media_folders_for_csv():
             for file_row in tv_title_items:
                 csv_writer.writerow(file_row)
     except (OSError, TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('INCORRECT DIRECTORY INPUT(S), PLEASE RETRY')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INCORRECT DIRECTORY INPUT(S), PLEASE RETRY')
         separator_3()
 
 
@@ -1136,16 +1037,14 @@ def search_plots(plot_search_type, plot_search_keywords):
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
         for items in plots_list:
             if plot_search_keywords.lower() in items.lower():
-                print()
-                print(textwrap.fill(items, 100))
+                print('\n', textwrap.fill(items, 100))
         separator_3()
     elif int(plot_search_type) == 2:
         for plot in tv_files_results_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[8])
         for items in plots_list:
             if plot_search_keywords.lower() in items.lower():
-                print()
-                print(textwrap.fill(items, 100))
+                print('\n', textwrap.fill(items, 100))
         separator_3()
     elif int(plot_search_type) == 3:
         for plot in movie_files_results_list:
@@ -1154,16 +1053,14 @@ def search_plots(plot_search_type, plot_search_keywords):
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[8])
         for items in plots_list:
             if plot_search_keywords.lower() in items.lower():
-                print()
-                print(textwrap.fill(items, 100))
+                print('\n', textwrap.fill(items, 100))
         separator_3()
     elif int(plot_search_type) == 4:
         for plot in tv_plots_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1])
         for items in plots_list:
             if plot_search_keywords.lower() in items.lower():
-                print()
-                print(textwrap.fill(items, 100))
+                print('\n', textwrap.fill(items, 100))
         separator_3()
 
 
@@ -1181,8 +1078,7 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
         try:
             print('SEARCH RESULTS: ')
             separator_1()
-            print('MOVIES: ')
-            print()
+            print('MOVIES: ', '\n')
             for movie_search_result in media_index_list:
                 if str('MOVIE') in movie_search_result[0]:
                     search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(movie_search_result), flags=0)
@@ -1190,18 +1086,14 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                         print(search_info[0])
             separator_3()
         except (TypeError, ValueError) as e:
-            print()
-            print('INPUT ERROR: ', e)
-            print()
-            print('INVALID INPUT, PLEASE RETRY')
+            print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
             separator_3()
 
     elif title_search_type == 2:
         try:
             print('SEARCH RESULTS: ')
             separator_1()
-            print('TV SHOWS: ')
-            print()
+            print('TV SHOWS: ', '\n')
             for tv_search_result in media_index_list:
                 if str('TV') in tv_search_result[0]:
                     search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(tv_search_result), flags=0)
@@ -1209,10 +1101,7 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                         print(search_info[0])
             separator_3()
         except (TypeError, ValueError) as e:
-            print()
-            print('INPUT ERROR: ', e)
-            print()
-            print('INVALID INPUT, PLEASE RETRY')
+            print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
             separator_3()
 
     elif title_search_type == 3:
@@ -1264,23 +1153,16 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                     separator_2()
                     query_tv_information_index(tv_episode_query=episode_to_query_lower)
             except (TypeError, ValueError) as e:
-                print()
-                print('INPUT ERROR: ', e)
-                print()
-                print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
         except (TypeError, ValueError) as e:
-            print()
-            print('INPUT ERROR: ', e)
-            print()
-            print('INVALID INPUT, PLEASE RETRY')
+            print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
             separator_3()
 
 
 def select_users_indices_to_compare():
     try:
-        print()
-        print('SELECT THE MOVIE_INFORMATION_INDICES TO COMPARE: ')
+        print('\n', 'SELECT THE MOVIE_INFORMATION_INDICES TO COMPARE: ')
         separator_3()
         print('SELECT USER MOVIE INFORMATION INDEX: ')
         m_0 = tk_gui_file_selection_window()
@@ -1310,12 +1192,10 @@ def select_users_indices_to_compare():
                 for line in compare_results(user_tv_results, comparison_tv_results):
                     outFile_t.write(line)
     except (OSError, TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('INVALID INPUT, PLEASE RETRY')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
         separator_3()
     print('COMPLETE: COMPARISON FILE(S) CAN BE FOUND IN THE USER MEDIA-INDEX FOLDER, FILES SUB-FOLDER')
+    separator_3()
 
 
 def separator_1():
@@ -1342,23 +1222,19 @@ def sort_function_base(sort_options_int):
     sorted_year_r = sorted(media_index, key=lambda x: (x[0], x[2]), reverse=True)
     if sort_options_int == 1:
         for title_item in sorted_title:
-            print()
-            print(title_item)
+            print('\n', title_item)
         separator_3()
     elif sort_options_int == 2:
         for title_item in sorted_title_r:
-            print()
-            print(title_item)
+            print('\n', title_item)
         separator_3()
     elif sort_options_int == 3:
         for title_item in sorted_year:
-            print()
-            print(title_item)
+            print('\n', title_item)
         separator_3()
     elif sort_options_int == 4:
         for title_item in sorted_year_r:
-            print()
-            print(title_item)
+            print('\n', title_item)
         separator_3()
 
 
@@ -1366,12 +1242,10 @@ def sort_options_sub_menu():
     print(pyfiglet.figlet_format('SORT_OPTIONS', font='cybermedium'))
     separator_3()
 
-    print('SORT MOVIE & TV SHOWS BY:            TITLES:     1) ASCENDING    2) DESCENDING')
-    print()
+    print('SORT MOVIE & TV SHOWS BY:            TITLES:     1) ASCENDING    2) DESCENDING', '\n')
     print('                                     YEARS:      3) ASCENDING    4) DESCENDING')
     separator_2()
-    print('SORT NUMBER (#) OF TV EPISODES BY:   TITLES:     5) ASCENDING    6) DESCENDING')
-    print()
+    print('SORT NUMBER (#) OF TV EPISODES BY:   TITLES:     5) ASCENDING    6) DESCENDING', '\n')
     print('                                     AMOUNT:     7) ASCENDING    8) DESCENDING')
     separator_2()
     print('0) MAIN MENU')
@@ -1401,10 +1275,7 @@ def sort_options_sub_menu():
         elif sort_options_int == 8:
             tv_episodes_sort_function(sort_options_int=8)
     except (TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
         separator_3()
 
 
@@ -1412,8 +1283,7 @@ def terminal_graph_options_sub_menu():
     print(pyfiglet.figlet_format('TERMINAL_GRAPHS', font='cybermedium'))
     separator_3()
 
-    print('1) MOVIES (TITLES PER YEAR)                      2) TV SHOWS (TITLES PER YEAR)')
-    print()
+    print('1) MOVIES (TITLES PER YEAR)                      2) TV SHOWS (TITLES PER YEAR)', '\n')
     print('3) MOVIES (TITLES PER DECADE)                    4) TV SHOWS (TITLES PER DECADE)')
     separator_2()
     print('5) MOVIES (RESOLUTIONS PERCENTAGES)              6) TV SHOWS (RESOLUTIONS PERCENTAGES)')
@@ -1447,10 +1317,7 @@ def terminal_graph_options_sub_menu():
         elif terminal_graph_options_int == 0:
             media_index_home()
     except (TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
         separator_3()
 
 
@@ -1485,10 +1352,7 @@ def total_tv_episodes_in_show_title():
         separator_3()
         total_query_action_list.append(tv_total_query_action.lower())
     except (OSError, TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('INVALID INPUT, PLEASE RETRY')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
     for tv_title in tv_results_list:
         tv_amounts.append(tv_title[0])
     for found_tv_title in tv_amounts:
@@ -1496,9 +1360,7 @@ def total_tv_episodes_in_show_title():
             tv_show_episodes_found.append(found_tv_title)
             tv_show_found[found_tv_title] = tv_show_episodes_found.count(found_tv_title)
     for episode in tv_show_found.items():
-        print('TITLE NAME: NUMBER (#) OF EPISODES: ')
-        print()
-        print(episode)
+        print('TITLE NAME: NUMBER (#) OF EPISODES: ', '\n', episode)
         separator_3()
     print('NUMBER (#) OF EPISODES TOTAL: ', sum(tv_show_found.values()))
     separator_3()
@@ -1523,23 +1385,19 @@ def tv_episodes_sort_function(sort_options_int):
     sorted_by_value_a = sorted(tv_show_found.items(), key=lambda kv: kv[1], reverse=True)
     if sort_options_int == 5:
         for item in sorted_by_key_d:
-            print()
-            print(item)
+            print('\n', item)
         separator_3()
     if sort_options_int == 6:
         for item in sorted_by_key_a:
-            print()
-            print(item)
+            print('\n', item)
         separator_3()
     if sort_options_int == 7:
         for item in sorted_by_value_d:
-            print()
-            print(item)
+            print('\n', item)
         separator_3()
     if sort_options_int == 8:
         for item in sorted_by_value_a:
-            print()
-            print(item)
+            print('\n', item)
         separator_3()
 
 
@@ -1562,10 +1420,7 @@ def username_check_and_folder_creation():
             os.makedirs(os.path.expanduser((index_folder + '/SEARCH').format(username)), exist_ok=True)
             directory_selection()
     except (OSError, TypeError, ValueError) as e:
-        print()
-        print('INPUT ERROR: ', e)
-        print()
-        print('INVALID INPUT, PLEASE RETRY')
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
         separator_3()
         main()
 
