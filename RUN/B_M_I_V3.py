@@ -1077,8 +1077,10 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
         (media_index_folder + '/MEDIA_TITLE_INDEX.csv').format(username_input)), encoding='UTF-8')))
     tv_files_results_list = csv.reader(open(os.path.expanduser(
         (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8'))
-    tv_show_episodes_dictionary = {}
-    episode_information_request_list = []
+    episode_information_list = []
+    episode_information_search_list = []
+    episode_folder_titles_dictionary = {}
+    episode_folder_titles_list = []
 
     if title_search_type == 1:
         try:
@@ -1089,7 +1091,7 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
             for movie_search_result in media_index_list:
                 if str('MOVIE') in movie_search_result[0]:
                     search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(movie_search_result), flags=0)
-                    if movie_title_query in search_info[0].lower():
+                    if movie_title_query.lower() in search_info[0].lower():
                         print(search_info[0])
             separator()
         except (TypeError, ValueError) as e:
@@ -1110,7 +1112,7 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
             for tv_search_result in media_index_list:
                 if str('TV') in tv_search_result[0]:
                     search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(tv_search_result), flags=0)
-                    if tv_show_query in search_info[0].lower():
+                    if tv_show_query.lower() in search_info[0].lower():
                         print(search_info[0])
             separator()
         except (TypeError, ValueError) as e:
@@ -1124,26 +1126,32 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
         try:
             for tv_file in tv_files_results_list:
                 tv_folder_key = tv_file[0]
-                tv_title_key = tv_file[1]
+                tv_title_key = tv_folder_key[:-7]
                 tv_episode_name_key = tv_file[3]
-
-                if tv_show_query in tv_title_key.lower():
-                    if tv_folder_key not in tv_show_episodes_dictionary:
-                        tv_show_episodes_dictionary[tv_folder_key] = {}
-                        tv_show_episodes_dictionary[tv_folder_key]['EPISODES'] = []
-                    tv_show_episodes_dictionary[tv_folder_key]['EPISODES'].append(tv_episode_name_key)
-            print('SEARCH RESULTS: ')
-            for found_show, found_episodes in tv_show_episodes_dictionary.items():
-                divider()
-                print(found_show)
-                print('-' * 100)
-                print()
-                for episodes_values in found_episodes.values():
-                    for enumeration_number, episodes in enumerate(episodes_values):
-                        if str(episodes) == str(''):
-                            episodes = 'NO EPISODE TITLE IN MEDIA-INDEX FOR THIS FILE'
-                        episode_information_request_list.append([enumeration_number, episodes])
-                        print(str(enumeration_number) + ') - ', episodes)
+                if tv_show_query.lower() in tv_title_key.lower():
+                    if str(tv_episode_name_key) == str(''):
+                        tv_episode_name_key = 'NO EPISODE TITLE IN MEDIA-INDEX FOR THIS FILE'
+                    episode_information_list.append([tv_title_key, tv_episode_name_key])
+                    if tv_folder_key not in episode_folder_titles_dictionary:
+                        episode_folder_titles_dictionary[tv_folder_key] = {}
+                        episode_folder_titles_dictionary[tv_folder_key]['EPISODES'] = []
+                    episode_folder_titles_dictionary[tv_folder_key]['EPISODES'].append(tv_episode_name_key)
+            for enumeration_number, found_episodes in enumerate(episode_information_list):
+                found_tv_folder_key = found_episodes[0]
+                found_tv_episode_name_key = found_episodes[1]
+                episode_information_search_list.append([(str(enumeration_number) + ') '),
+                                                        (str(found_tv_folder_key) + ' - '), found_tv_episode_name_key])
+            print('TV SHOWS FOUND: ')
+            print()
+            for found_tv_shows in episode_folder_titles_dictionary.keys():
+                episode_folder_titles_list.append(found_tv_shows)
+            for show_titles in episode_folder_titles_list:
+                print('-', show_titles)
+            separator()
+            print('EPISODES: ')
+            print()
+            for search_results in episode_information_search_list:
+                print(''.join(search_results))
             divider()
             print('DETAILED EPISODE INFORMATION AVAILABLE')
             print()
@@ -1156,11 +1164,12 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                     media_index_home()
                 elif title_search_sub_query_input == 1:
                     episode_sub_query_input = int(input('ENTER EPISODE NUMBER (#): '))
-                    episode_to_query = str(episode_information_request_list[episode_sub_query_input][1].lower())
+                    episode_to_query = str(episode_information_search_list[episode_sub_query_input][2])
+                    episode_to_query_lower = episode_to_query.lower()
                     separator()
                     print('QUERYING INFORMATION FOR EPISODE TITLED: ', episode_to_query)
                     divider()
-                    query_tv_information_index(tv_episode_query=episode_to_query)
+                    query_tv_information_index(tv_episode_query=episode_to_query_lower)
             except (TypeError, ValueError) as e:
                 print()
                 print('INPUT ERROR: ', e)
