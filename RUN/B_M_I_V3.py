@@ -1040,7 +1040,7 @@ def search_plots(plot_search_type, plot_search_keywords):
         for plot in movie_files_results_list:
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
         for items in plots_list:
-            if plot_search_keywords in items.lower():
+            if plot_search_keywords.lower() in items.lower():
                 print()
                 print(textwrap.fill(items, 100))
         separator()
@@ -1048,7 +1048,7 @@ def search_plots(plot_search_type, plot_search_keywords):
         for plot in tv_files_results_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[8])
         for items in plots_list:
-            if plot_search_keywords in items.lower():
+            if plot_search_keywords.lower() in items.lower():
                 print()
                 print(textwrap.fill(items, 100))
         separator()
@@ -1058,7 +1058,7 @@ def search_plots(plot_search_type, plot_search_keywords):
         for plot in tv_files_results_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[8])
         for items in plots_list:
-            if plot_search_keywords in items.lower():
+            if plot_search_keywords.lower() in items.lower():
                 print()
                 print(textwrap.fill(items, 100))
         separator()
@@ -1066,7 +1066,7 @@ def search_plots(plot_search_type, plot_search_keywords):
         for plot in tv_plots_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1])
         for items in plots_list:
-            if plot_search_keywords in items.lower():
+            if plot_search_keywords.lower() in items.lower():
                 print()
                 print(textwrap.fill(items, 100))
         separator()
