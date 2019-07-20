@@ -661,13 +661,42 @@ def media_queries_sub_menu():
         elif title_search_type == 4:
             movie_title_query_input = str(input('ENTER SEARCH QUERY (MOVIES): ').lower())
             separator()
-            query_movie_information_index(movie_title_query_input)
+            query_movie_information_index(movie_query=movie_title_query_input)
         elif title_search_type == 5:
-            tv_show_query_input = str(input('ENTER SEARCH QUERY (MOVIES): ').lower())
+            tv_episode_query_input = str(input('ENTER SEARCH QUERY (MOVIES): ').lower())
             separator()
-            query_tv_information_index(tv_show_query_input)
+            query_tv_information_index(tv_episode_query=tv_episode_query_input)
         elif title_search_type == 6:
-            search_plots()
+            plot_search_list = []
+            try:
+                print('SEARCH PLOTS OF:                             1) MOVIES       2) TV SHOW EPISODES')
+                print()
+                print('                                             3) MOVIES AND TV SHOW EPISODES')
+                divider()
+                print('                                             4) TV SHOW GENERAL OVERVIEW')
+                divider()
+                print('0) MAIN MENU')
+                separator()
+                plot_search_int = int(input('ENTER #: '))
+                plot_search_list.append(plot_search_int)
+                separator()
+            except (TypeError, ValueError) as e:
+                print('INPUT ERROR: ', e)
+                print()
+                print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                separator()
+            try:
+                plot_search = input('KEYWORD(S): ')
+                plot_search_list.append(plot_search.lower())
+                separator()
+            except (OSError, TypeError, ValueError) as e:
+                print('INPUT ERROR: ', e)
+                print()
+                print('INVALID INPUT, PLEASE RETRY')
+                separator()
+            plot_search_type_input = plot_search_list[0]
+            plot_search_keywords_input = plot_search_list[1]
+            search_plots(plot_search_type=plot_search_type_input, plot_search_keywords=plot_search_keywords_input)
         elif title_search_type == 7:
             total_tv_episodes_in_show_title()
     except (TypeError, ValueError) as e:
@@ -793,7 +822,7 @@ def query_movie_information_index(movie_query):
 
     try:
         for movie_file in mv_files_results_list:
-            if movie_query in movie_file[1].lower():
+            if str(movie_query.lower()) in str(movie_file[1].lower()):
                 divider()
                 print('MOVIE FOLDER: ')
                 print()
@@ -849,13 +878,13 @@ def query_movie_information_index(movie_query):
         separator()
 
 
-def query_tv_information_index(tv_show_query):
+def query_tv_information_index(tv_episode_query):
     tv_files_results_list = list(csv.reader(open(os.path.expanduser(
         (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
 
     try:
         for tv_file in tv_files_results_list:
-            if tv_show_query in tv_file[3].lower():
+            if str(tv_episode_query.lower()) in str(tv_file[3].lower()):
                 divider()
                 print('TV SHOW FOLDER: ')
                 print()
@@ -982,75 +1011,48 @@ def scrape_media_folders_for_csv():
         separator()
 
 
-def search_plots():
+def search_plots(plot_search_type, plot_search_keywords):
     movie_files_results_list = list(csv.reader(open(os.path.expanduser(
         (media_index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
     tv_files_results_list = list(csv.reader(open(os.path.expanduser(
         (media_index_folder + '/TV_INFORMATION_INDEX.csv').format(username_input)), encoding='UTF-8')))
     tv_plots_list = list(csv.reader(open(os.path.expanduser(
         (media_index_folder + '/TV_PLOTS_INDEX.csv').format(username_input)), encoding='UTF-8')))
-    plot_search_list = []
     plots_list = []
 
-    try:
-        print('SEARCH PLOTS OF:                             1) MOVIES       2) TV SHOW EPISODES')
-        print()
-        print('                                             3) MOVIES AND TV SHOW EPISODES')
-        divider()
-        print('                                             4) TV SHOW GENERAL OVERVIEW')
-        divider()
-        print('0) MAIN MENU')
-        separator()
-        plot_search_int = int(input('ENTER #: '))
-        plot_search_list.append(plot_search_int)
-        separator()
-    except (TypeError, ValueError) as e:
-        print('INPUT ERROR: ', e)
-        print()
-        print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
-        separator()
-    try:
-        plot_search = input('KEYWORD(S): ')
-        plot_search_list.append(plot_search.lower())
-        separator()
-    except (OSError, TypeError, ValueError) as e:
-        print('INPUT ERROR: ', e)
-        print()
-        print('INVALID INPUT, PLEASE RETRY')
-        separator()
-    if plot_search_list[0] == 0:
+    if int(plot_search_type) == 0:
         media_index_home()
-    elif plot_search_list[0] == 1:
+    elif int(plot_search_type) == 1:
         for plot in movie_files_results_list:
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
         for items in plots_list:
-            if plot_search_list[1] in items.lower():
+            if plot_search_keywords in items.lower():
                 print()
                 print(textwrap.fill(items, 100))
         separator()
-    elif plot_search_list[0] == 2:
+    elif int(plot_search_type) == 2:
         for plot in tv_files_results_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[8])
         for items in plots_list:
-            if plot_search_list[1] in items.lower():
+            if plot_search_keywords in items.lower():
                 print()
                 print(textwrap.fill(items, 100))
         separator()
-    elif plot_search_list[0] == 3:
+    elif int(plot_search_type) == 3:
         for plot in movie_files_results_list:
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
         for plot in tv_files_results_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[8])
         for items in plots_list:
-            if plot_search_list[1] in items.lower():
+            if plot_search_keywords in items.lower():
                 print()
                 print(textwrap.fill(items, 100))
         separator()
-    elif plot_search_list[0] == 4:
+    elif int(plot_search_type) == 4:
         for plot in tv_plots_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1])
         for items in plots_list:
-            if plot_search_list[1] in items.lower():
+            if plot_search_keywords in items.lower():
                 print()
                 print(textwrap.fill(items, 100))
         separator()
@@ -1126,7 +1128,7 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                             episodes = 'NO EPISODE TITLE IN MEDIA-INDEX FOR THIS FILE'
                         episode_information_request_list.append([enumeration_number, episodes])
                         print(str(enumeration_number) + ') - ', episodes)
-            separator()
+            divider()
             print('DETAILED EPISODE INFORMATION AVAILABLE')
             print()
             print('0) MAIN MENU                                 1) QUERY AN EPISODES INFORMATION')
@@ -1137,18 +1139,12 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                 if title_search_sub_query_input == 0:
                     media_index_home()
                 elif title_search_sub_query_input == 1:
-                    try:
-                        episode_sub_query_input = int(input('ENTER EPISODE NUMBER (#): '))
-                        episode_to_query = str(episode_information_request_list[episode_sub_query_input][1])
-                        print()
-                        print('QUERYING INFORMATION FOR EPISODE TITLED: ', episode_to_query)
-                        separator()
-                        query_tv_information_index(tv_show_query=episode_to_query)
-                    except (TypeError, ValueError) as e:
-                        print('INPUT ERROR: ', e)
-                        print()
-                        print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
-                        separator()
+                    episode_sub_query_input = int(input('ENTER EPISODE NUMBER (#): '))
+                    episode_to_query = str(episode_information_request_list[episode_sub_query_input][1])
+                    separator()
+                    print('QUERYING INFORMATION FOR EPISODE TITLED: ', episode_to_query)
+                    divider()
+                    query_tv_information_index(tv_episode_query=episode_to_query)
             except (TypeError, ValueError) as e:
                 print('INPUT ERROR: ', e)
                 print()
