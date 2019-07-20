@@ -920,7 +920,7 @@ def saved_searches():
     saved_searches_list = []
 
     separator_2()
-    print('1) VIEW SAVED SEARCH TERMS (GENRE(S), KEYWORD(S)')
+    print('1) VIEW SAVED SEARCH TERMS (GENRE(S), KEYWORD(S))')
     separator_2()
     print('2) ADD A NEW SEARCH TERM')
     separator_2()
@@ -938,11 +938,21 @@ def saved_searches():
             with open(saved_searches_file, 'r', encoding='UTF-8', newline='') as f:
                 for search_rows in f:
                     saved_searches_list.append(search_rows)
+            print('SELECT GENRE, KEYWORD(S) TO SEARCH: ', '\n')
             for enumeration_number, searches in enumerate(saved_searches_list):
                 genres = searches.rsplit(',')[0]
                 keywords = searches.rsplit(',')[1]
                 print((str(enumeration_number) + ') '), '\n', '\n', 'GENRE: ', genres, '\n', 'KEYWORD(S): ', keywords)
             separator_3()
+            saved_search_sub_query_input = int(input('ENTER #: '))
+            separator_3()
+            search_term = str(saved_searches_list[saved_search_sub_query_input].rsplit(',')[1]).lower()
+            search_term_to_query = search_term[:-2]
+            separator_3()
+            print('QUERYING INFORMATION FOR SELECTION: ', search_term_to_query)
+            separator_2()
+            search_plots(plot_search_type=3, plot_search_keywords=search_term_to_query)
+
         elif saved_search_type_input == 2:
             saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/{0}_SAVED_SEARCHES.csv').format(username))
 
