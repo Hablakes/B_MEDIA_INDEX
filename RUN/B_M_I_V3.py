@@ -25,6 +25,7 @@ extensions = ('.3gp', '.asf', '.asx', '.avc', '.avi', '.bdmv', '.bin', '.bivx', 
 
 
 def main():
+    separator_3()
     launch_media_index()
     while True:
         media_index_home()
