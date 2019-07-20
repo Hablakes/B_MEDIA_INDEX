@@ -239,7 +239,9 @@ def directory_selection():
             for user_data in user_info_dict.items():
                 csv_writer.writerow(user_data)
     except (TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
+        print()
 
 
 def divider():
@@ -474,6 +476,7 @@ def launch_media_index():
         separator()
         username_check_and_folder_creation()
     except (TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
         print()
         print('INVALID INPUT, PLEASE RETRY')
@@ -561,6 +564,7 @@ def media_index_home():
                 elif scan_sub_input == 1:
                     walk_directories_and_create_indices()
             except (TypeError, ValueError) as e:
+                print()
                 print('INPUT ERROR: ', e)
                 print()
                 print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -578,6 +582,7 @@ def media_index_home():
                 elif scan_sub_input == 1:
                     scrape_media_folders_for_csv()
             except (TypeError, ValueError) as e:
+                print()
                 print('INPUT ERROR: ', e)
                 print()
                 print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -595,6 +600,7 @@ def media_index_home():
                 elif scan_sub_input == 1:
                     create_media_information_indices()
             except (TypeError, ValueError) as e:
+                print()
                 print('INPUT ERROR: ', e)
                 print()
                 print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -612,6 +618,7 @@ def media_index_home():
         elif lmi_input_action == 10:
             terminal_graph_options_sub_menu()
     except (TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
         print()
         print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -681,6 +688,7 @@ def media_queries_sub_menu():
                 plot_search_list.append(plot_search_int)
                 separator()
             except (TypeError, ValueError) as e:
+                print()
                 print('INPUT ERROR: ', e)
                 print()
                 print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -690,6 +698,7 @@ def media_queries_sub_menu():
                 plot_search_list.append(plot_search.lower())
                 separator()
             except (OSError, TypeError, ValueError) as e:
+                print()
                 print('INPUT ERROR: ', e)
                 print()
                 print('INVALID INPUT, PLEASE RETRY')
@@ -700,6 +709,7 @@ def media_queries_sub_menu():
         elif title_search_type == 7:
             total_tv_episodes_in_show_title()
     except (TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
         print()
         print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -744,6 +754,7 @@ def picture_graph_options_sub_menu():
         elif picture_graph_options_int == 9:
             media_index_home()
     except (TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
         print()
         print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -872,6 +883,7 @@ def query_movie_information_index(movie_query):
                         print(textwrap.fill(mv_plot[0], 100))
                         divider()
     except (TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
         print()
         print('INVALID QUERY, PLEASE RETRY')
@@ -946,6 +958,7 @@ def query_tv_information_index(tv_episode_query):
                         print(textwrap.fill(tv_plot[0], 100))
                         divider()
     except (TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
         print()
         print('INVALID QUERY, PLEASE RETRY')
@@ -1005,6 +1018,7 @@ def scrape_media_folders_for_csv():
             for file_row in tv_title_items:
                 csv_writer.writerow(file_row)
     except (OSError, TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
         print()
         print('INCORRECT DIRECTORY INPUT(S), PLEASE RETRY')
@@ -1079,6 +1093,7 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                         print(search_info[0])
             separator()
         except (TypeError, ValueError) as e:
+            print()
             print('INPUT ERROR: ', e)
             print()
             print('INVALID INPUT, PLEASE RETRY')
@@ -1099,6 +1114,7 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                         print(search_info[0])
             separator()
         except (TypeError, ValueError) as e:
+            print()
             print('INPUT ERROR: ', e)
             print()
             print('INVALID INPUT, PLEASE RETRY')
@@ -1140,17 +1156,19 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                     media_index_home()
                 elif title_search_sub_query_input == 1:
                     episode_sub_query_input = int(input('ENTER EPISODE NUMBER (#): '))
-                    episode_to_query = str(episode_information_request_list[episode_sub_query_input][1])
+                    episode_to_query = str(episode_information_request_list[episode_sub_query_input][1].lower())
                     separator()
                     print('QUERYING INFORMATION FOR EPISODE TITLED: ', episode_to_query)
                     divider()
                     query_tv_information_index(tv_episode_query=episode_to_query)
             except (TypeError, ValueError) as e:
+                print()
                 print('INPUT ERROR: ', e)
                 print()
                 print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator()
         except (TypeError, ValueError) as e:
+            print()
             print('INPUT ERROR: ', e)
             print()
             print('INVALID INPUT, PLEASE RETRY')
@@ -1190,6 +1208,7 @@ def select_users_indices_to_compare():
                 for line in compare_results(user_tv_results, comparison_tv_results):
                     outFile_t.write(line)
     except (OSError, TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
         print()
         print('INVALID INPUT, PLEASE RETRY')
@@ -1271,6 +1290,7 @@ def sort_options_sub_menu():
         elif sort_options_int == 8:
             tv_episodes_sort_function(sort_options_int=8)
     except (TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
         print()
         print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -1316,6 +1336,7 @@ def terminal_graph_options_sub_menu():
         elif terminal_graph_options_int == 0:
             media_index_home()
     except (TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
         print()
         print('PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -1353,6 +1374,7 @@ def total_tv_episodes_in_show_title():
         separator()
         total_query_action_list.append(tv_total_query_action.lower())
     except (OSError, TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
         print()
         print('INVALID INPUT, PLEASE RETRY')
@@ -1427,6 +1449,7 @@ def username_check_and_folder_creation():
             os.makedirs(os.path.expanduser((media_index_folder + '/FILES').format(username_input)), exist_ok=True)
             directory_selection()
     except (OSError, TypeError, ValueError) as e:
+        print()
         print('INPUT ERROR: ', e)
         print()
         print('INVALID INPUT, PLEASE RETRY')
