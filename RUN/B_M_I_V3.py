@@ -2,20 +2,24 @@ import csv
 import os
 import pathlib
 import textwrap
-
 import re
 
 import guessit
+import numpy
 import pyfiglet
 import pymediainfo
 
-from ascii_graph import Pyasciigraph
 import matplotlib.pylab as plt
-import numpy as np
+
+from ascii_graph import Pyasciigraph
+from datetime import datetime
 from tkinter import *
 from tkinter import filedialog
 
 username = None
+
+date_string = str(datetime.today().strftime('%Y_%m_%d'))
+
 index_folder = '~/{0}_MEDIA_INDEX'
 
 extensions = ('.3gp', '.asf', '.asx', '.avc', '.avi', '.bdmv', '.bin', '.bivx', '.dat', '.disc', '.divx', '.dv',
@@ -284,7 +288,7 @@ def graph_options_advanced(username, picture_graph_options_int, terminal_graph_o
                float(len(tv_standard_def_found_list))]
 
     def format_data(percent, all_values):
-        absolute = int(percent / 100. * np.sum(all_values))
+        absolute = int(percent / 100. * numpy.sum(all_values))
         return '{:.1f}%\n({:d})'.format(percent, absolute)
 
     labels = ['1080p', '720p', 'SD (Below 720p)']
@@ -302,7 +306,8 @@ def graph_options_advanced(username, picture_graph_options_int, terminal_graph_o
 
         plt.setp(auto_texts, size=9, weight='bold')
         ax.set_title('MOVIE_RESOLUTION_RESULTS')
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_RESOLUTION_RESULTS.png'.format(username))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_RESOLUTION_RESULTS_'.format(username) +
+                                      date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
         separator_3()
@@ -326,7 +331,8 @@ def graph_options_advanced(username, picture_graph_options_int, terminal_graph_o
 
         plt.setp(auto_texts, size=9, weight='bold')
         ax.set_title('TV_SHOW_RESOLUTION_RESULTS')
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_RESOLUTION_RESULTS.png'.format(username))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_RESOLUTION_RESULTS_'.format(username) +
+                                      date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
         separator_3()
@@ -377,7 +383,8 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             movie_year_totals_dict[year_values] = len(value)
         x, y = zip(*sorted(movie_year_totals_dict.items()))
         plt.bar(x, y)
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_YEAR_RESULTS.png'.format(username))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_YEAR_RESULTS_'.format(username) +
+                                      date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
         separator_3()
@@ -400,7 +407,8 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             tv_year_totals_dict[year_values] = len(value)
         x, y = zip(*sorted(tv_year_totals_dict.items()))
         plt.bar(x, y)
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_YEAR_RESULTS.png'.format(username))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_YEAR_RESULTS_'.format(username) +
+                                      date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
         separator_3()
@@ -423,7 +431,8 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             movie_decades_totals_dict[year_values] = len(value)
         x, y = zip(*movie_decades_totals_dict.items())
         plt.bar(x, y, width=5)
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_DECADE_RESULTS.png'.format(username))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_DECADE_RESULTS_'.format(username) +
+                                      date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
         separator_3()
@@ -445,7 +454,8 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             tv_decades_totals_dict[year_values] = len(value)
         x, y = zip(*tv_decades_totals_dict.items())
         plt.bar(x, y, width=5)
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_DECADE_RESULTS.png'.format(username))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_DECADE_RESULTS_'.format(username) +
+                                      date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
         separator_3()
@@ -773,7 +783,8 @@ def query_file_type_totals(username, picture_graph_options_int, terminal_graph_o
             movie_file_type_totals[movie_file_type_values] = len(value)
         x, y = zip(*sorted(movie_file_type_totals.items()))
         plt.bar(x, y)
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_FILETYPE_RESULTS.png'.format(username))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_FILETYPE_RESULTS_'.format(username) +
+                                      date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
         separator_3()
@@ -802,7 +813,8 @@ def query_file_type_totals(username, picture_graph_options_int, terminal_graph_o
             tv_file_type_totals[tv_file_type_values] = len(value)
         x, y = zip(*sorted(tv_file_type_totals.items()))
         plt.bar(x, y)
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_FILETYPE_RESULTS.png'.format(username))
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_FILETYPE_RESULTS_'.format(username) +
+                                      date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
         separator_3()
