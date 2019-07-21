@@ -915,10 +915,6 @@ def query_tv_information_index(tv_episode_query):
         separator_3()
 
 
-def return_iterated_list_items(name_of_list):
-    return [word for word in name_of_list]
-
-
 def saved_searches():
     print(pyfiglet.figlet_format('SAVED_SEARCHES', font='cybermedium'))
 
