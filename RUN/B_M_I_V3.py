@@ -690,19 +690,19 @@ def media_queries_sub_menu():
                 plot_search_type_input = plot_search_list[0]
                 if int(plot_search_list[0]) == 0:
                     media_index_home()
+                else:
+                    try:
+                        plot_search = input('KEYWORD(S): ')
+                        plot_search_list.append(plot_search.lower())
+                        separator_3()
+                    except (OSError, TypeError, ValueError) as e:
+                        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
+                        separator_3()
+                plot_search_keywords_input = plot_search_list[1]
+                search_plots(plot_search_type=plot_search_type_input, plot_search_keywords=plot_search_keywords_input)
             except (TypeError, ValueError) as e:
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
-            else:
-                try:
-                    plot_search = input('KEYWORD(S): ')
-                    plot_search_list.append(plot_search.lower())
-                    separator_3()
-                except (OSError, TypeError, ValueError) as e:
-                    print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
-                    separator_3()
-                plot_search_keywords_input = plot_search_list[1]
-                search_plots(plot_search_type=plot_search_type_input, plot_search_keywords=plot_search_keywords_input)
         elif title_search_type == 7:
             total_tv_episodes_in_show_title()
     except (TypeError, ValueError) as e:
