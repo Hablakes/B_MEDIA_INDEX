@@ -84,7 +84,7 @@ def create_movie_information_index():
                     if track.track_type == 'General':
                         duration = track.other_duration
                         movie_results_list[movie_title_key]['RUN-TIME'] = duration[0]
-                    if track.track_type == 'Video':
+                    elif track.track_type == 'Video':
                         movie_results_list[movie_title_key]['DIRECTORY'] = movie_title_key
                         movie_results_list[movie_title_key]['TITLE'] = title.get('title')
                         movie_results_list[movie_title_key]['YEAR'] = title.get('year')
@@ -99,7 +99,7 @@ def create_movie_information_index():
                             if '<plot>' in line_item:
                                 movie_results_list[movie_title_key]['PLOT'] = line_item
 
-                            if '<rating>' in line_item:
+                            elif '<rating>' in line_item:
                                 movie_results_list[movie_title_key]['RATING'] = line_item
                 except Exception as e:
                     print('ERROR: ', e, '\n', 'FILE: ', movie_file[0])
@@ -162,7 +162,7 @@ def create_tv_information_index():
                     if track.track_type == 'General':
                         duration = track.other_duration
                         tv_results_list[tv_title_key]['RUN-TIME'] = duration[0]
-                    if track.track_type == 'Video':
+                    elif track.track_type == 'Video':
                         tv_results_list[tv_title_key]['DIRECTORY'] = tv_folder_title
                         tv_results_list[tv_title_key]['TITLE'] = title.get('title')
                         tv_results_list[tv_title_key]['YEAR'] = tv_folder_year
@@ -183,7 +183,7 @@ def create_tv_information_index():
                                 if '<plot>' in line:
                                     tv_results_list[tv_title_key]['PLOT'] = line
 
-                                if '<rating>' in line:
+                                elif '<rating>' in line:
                                     tv_results_list[tv_title_key]['RATING'] = line
                     except Exception as e:
                         print('ERROR: ', e, '\n', 'FILE: ', tv_file[0])
@@ -308,13 +308,13 @@ def graph_options_advanced(username, picture_graph_options_int, terminal_graph_o
         separator_3()
         plt.show()
 
-    if terminal_graph_options_int == 5:
+    elif terminal_graph_options_int == 5:
         graph = Pyasciigraph()
         for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES: ', movies_graph_terminal_results):
             print('\n', line)
         separator_3()
 
-    if picture_graph_options_int == 6:
+    elif picture_graph_options_int == 6:
         fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect='equal'))
         wedges, texts, auto_texts = ax.pie(tv_data, autopct=lambda pct: format_data(pct, tv_data),
                                            shadow=True, colors=colors, textprops=dict(color='black'))
@@ -332,7 +332,7 @@ def graph_options_advanced(username, picture_graph_options_int, terminal_graph_o
         separator_3()
         plt.show()
 
-    if terminal_graph_options_int == 6:
+    elif terminal_graph_options_int == 6:
         graph = Pyasciigraph()
         for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES: ', tv_shows_graph_terminal_results):
             print('\n', line)
@@ -383,7 +383,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
         separator_3()
         plt.show()
 
-    if terminal_graph_options_int == 1:
+    elif terminal_graph_options_int == 1:
         for movie_year_values, value in sorted(movie_years_dict.items()):
             movie_year_totals_dict[movie_year_values] = len(value)
         movie_data = sorted(movie_year_totals_dict.items())
@@ -395,7 +395,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             print('\n', line)
         separator_3()
 
-    if picture_graph_options_int == 2:
+    elif picture_graph_options_int == 2:
         for year_values, value in sorted(tv_years_dict.items()):
             tv_year_totals_dict[year_values] = len(value)
         x, y = zip(*sorted(tv_year_totals_dict.items()))
@@ -406,7 +406,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
         separator_3()
         plt.show()
 
-    if terminal_graph_options_int == 2:
+    elif terminal_graph_options_int == 2:
         for tv_year_values, value in sorted(tv_years_dict.items()):
             tv_year_totals_dict[tv_year_values] = len(value)
         tv_data = sorted(tv_year_totals_dict.items())
@@ -418,7 +418,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             print('\n', line)
         separator_3()
 
-    if picture_graph_options_int == 3:
+    elif picture_graph_options_int == 3:
         for year_values, value in sorted(movie_decades_dict.items()):
             movie_decades_totals_dict[year_values] = len(value)
         x, y = zip(*movie_decades_totals_dict.items())
@@ -429,7 +429,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
         separator_3()
         plt.show()
 
-    if terminal_graph_options_int == 3:
+    elif terminal_graph_options_int == 3:
         for movie_year_values, value in sorted(movie_decades_dict.items()):
             movie_decades_totals_dict[movie_year_values] = len(value)
         movie_decades_terminal_graph_list = []
@@ -440,7 +440,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             print('\n', line)
         separator_3()
 
-    if picture_graph_options_int == 4:
+    elif picture_graph_options_int == 4:
         for year_values, value in sorted(tv_decades_amount_dict.items()):
             tv_decades_totals_dict[year_values] = len(value)
         x, y = zip(*tv_decades_totals_dict.items())
@@ -451,7 +451,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
         separator_3()
         plt.show()
 
-    if terminal_graph_options_int == 4:
+    elif terminal_graph_options_int == 4:
         for tv_year_values, value in sorted(tv_decades_amount_dict.items()):
             tv_decades_totals_dict[tv_year_values] = len(value)
         tv_decades_terminal_graph_list = []
@@ -687,19 +687,22 @@ def media_queries_sub_menu():
                 plot_search_int = int(input('ENTER #: '))
                 plot_search_list.append(plot_search_int)
                 separator_3()
+                plot_search_type_input = plot_search_list[0]
+                if int(plot_search_list[0]) == 0:
+                    media_index_home()
             except (TypeError, ValueError) as e:
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
-            try:
-                plot_search = input('KEYWORD(S): ')
-                plot_search_list.append(plot_search.lower())
-                separator_3()
-            except (OSError, TypeError, ValueError) as e:
-                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
-                separator_3()
-            plot_search_type_input = plot_search_list[0]
-            plot_search_keywords_input = plot_search_list[1]
-            search_plots(plot_search_type=plot_search_type_input, plot_search_keywords=plot_search_keywords_input)
+            else:
+                try:
+                    plot_search = input('KEYWORD(S): ')
+                    plot_search_list.append(plot_search.lower())
+                    separator_3()
+                except (OSError, TypeError, ValueError) as e:
+                    print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
+                    separator_3()
+                plot_search_keywords_input = plot_search_list[1]
+                search_plots(plot_search_type=plot_search_type_input, plot_search_keywords=plot_search_keywords_input)
         elif title_search_type == 7:
             total_tv_episodes_in_show_title()
     except (TypeError, ValueError) as e:
@@ -776,7 +779,7 @@ def query_file_type_totals(username, picture_graph_options_int, terminal_graph_o
         separator_3()
         plt.show()
 
-    if terminal_graph_options_int == 7:
+    elif terminal_graph_options_int == 7:
         for file_type_values, value in sorted(movie_extensions_dictionary.items()):
             movie_extensions_totals[file_type_values] = len(value)
         file_type_totals_terminal_graph_list = []
@@ -805,7 +808,7 @@ def query_file_type_totals(username, picture_graph_options_int, terminal_graph_o
         separator_3()
         plt.show()
 
-    if terminal_graph_options_int == 8:
+    elif terminal_graph_options_int == 8:
         for file_type_values, value in sorted(tv_extensions_dictionary.items()):
             tv_extensions_totals[file_type_values] = len(value)
         file_type_totals_terminal_graph_list = []
@@ -990,7 +993,7 @@ def scrape_media_folders_for_csv():
                     title_item_check.remove(title_item_check[2])
                 movie_title_items.append(title_item_check)
 
-        if movie_alt_dir_input is not str(''):
+        elif movie_alt_dir_input is not str(''):
             movie_alt_dir_list = os.listdir(movie_alt_dir_input)
             for movie_found in sorted(movie_alt_dir_list):
                 movie_scrape_info = guessit.guessit(movie_found)
@@ -1000,7 +1003,7 @@ def scrape_media_folders_for_csv():
                     title_item_check.remove(title_item_check[2])
                 movie_title_items.append(title_item_check)
 
-        if tv_dir_input is not str(''):
+        elif tv_dir_input is not str(''):
             tv_dir_list = os.listdir(tv_dir_input)
             for tv_found in sorted(tv_dir_list):
                 tv_scrape_info = guessit.guessit(tv_found)
@@ -1010,7 +1013,7 @@ def scrape_media_folders_for_csv():
                     title_item_check.remove(title_item_check[2])
                 tv_title_items.append(title_item_check)
 
-        if tv_alt_dir_input is not str(''):
+        elif tv_alt_dir_input is not str(''):
             tv_alt_dir_list = os.listdir(tv_alt_dir_input)
             for tv_found in sorted(tv_alt_dir_list):
                 tv_scrape_info = guessit.guessit(tv_found)
@@ -1041,9 +1044,7 @@ def search_plots(plot_search_type, plot_search_keywords):
         (index_folder + '/TV_PLOTS_INDEX.csv').format(username)), encoding='UTF-8')))
     plots_list = []
 
-    if int(plot_search_type) == 0:
-        media_index_home()
-    elif int(plot_search_type) == 1:
+    if int(plot_search_type) == 1:
         for plot in movie_files_results_list:
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
         for items in plots_list:
@@ -1398,15 +1399,15 @@ def tv_episodes_sort_function(sort_options_int):
         for item in sorted_by_key_d:
             print('\n', item)
         separator_3()
-    if sort_options_int == 6:
+    elif sort_options_int == 6:
         for item in sorted_by_key_a:
             print('\n', item)
         separator_3()
-    if sort_options_int == 7:
+    elif sort_options_int == 7:
         for item in sorted_by_value_d:
             print('\n', item)
         separator_3()
-    if sort_options_int == 8:
+    elif sort_options_int == 8:
         for item in sorted_by_value_a:
             print('\n', item)
         separator_3()
@@ -1444,7 +1445,7 @@ def walk_directories_and_create_indices():
             for movie_file in sorted(files):
                 if movie_file.lower().endswith(extensions):
                     movie_video_files_results.append([(pathlib.Path(root) / movie_file).as_posix()])
-    if movie_alt_dir_input is not str(''):
+    elif movie_alt_dir_input is not str(''):
         for root, dirs, files in os.walk(movie_alt_dir_input):
             for alt_file in sorted(files):
                 if alt_file.lower().endswith(extensions):
@@ -1463,7 +1464,7 @@ def walk_directories_and_create_indices():
             for tv_file in sorted(files):
                 if tv_file.lower().endswith(extensions):
                     tv_show_video_files_results.append([(pathlib.Path(root) / tv_file).as_posix()])
-    if tv_alt_dir_input is not str(''):
+    elif tv_alt_dir_input is not str(''):
         for root, dirs, files in os.walk(tv_alt_dir_input):
             for alt_file in sorted(files):
                 if alt_file.lower().endswith(extensions):
