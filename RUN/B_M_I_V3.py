@@ -915,10 +915,15 @@ def query_tv_information_index(tv_episode_query):
         separator_3()
 
 
+def return_iterated_list_items(name_of_list):
+    return [word for word in name_of_list]
+
+
 def saved_searches():
     print(pyfiglet.figlet_format('SAVED_SEARCHES', font='cybermedium'))
 
     saved_searches_list = []
+    search_keywords_list = []
 
     separator_2()
     print('1) VIEW SAVED SEARCH TERMS (GENRE(S), KEYWORD(S))')
@@ -935,7 +940,6 @@ def saved_searches():
             media_index_home()
         elif saved_search_type_input == 1:
             saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/{0}_SAVED_SEARCHES.csv').format(username))
-
             with open(saved_searches_file, 'r', encoding='UTF-8', newline='') as f:
                 for search_rows in f:
                     saved_searches_list.append(search_rows)
@@ -946,17 +950,18 @@ def saved_searches():
                 print((str(enumeration_number) + ') '), '\n', '\n', 'GENRE: ', genres, '\n', 'KEYWORD(S): ', keywords)
             separator_3()
             saved_search_sub_query_input = int(input('ENTER #: '))
-            separator_3()
             search_term = str(saved_searches_list[saved_search_sub_query_input].rsplit(',')[1]).lower()
-            search_term_to_query = search_term[:-2]
-            separator_3()
-            print('QUERYING INFORMATION FOR SELECTION: ', search_term_to_query)
-            separator_2()
-            search_plots(plot_search_type=3, plot_search_keywords=search_term_to_query)
+            for words in search_term.split(' '):
+                words = words.replace('\r\n', '')
+                search_keywords_list.append(words)
+            for found_search_terms in search_keywords_list:
+                separator_3()
+                print('QUERYING INFORMATION FOR SELECTED KEYWORD(S): ', found_search_terms)
+                separator_3()
+                search_plots(plot_search_type=3, plot_search_keywords=found_search_terms)
 
         elif saved_search_type_input == 2:
             saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/{0}_SAVED_SEARCHES.csv').format(username))
-
             print('SELECT TITLE FOR GENRE, ADD KEYWORD(S) FOR SEARCH TERM(S))')
             separator_2()
             new_genre = str(input('ENTER TITLE FOR NEW GENRE: '))
@@ -964,7 +969,6 @@ def saved_searches():
             new_search_term = str(input('ENTER KEYWORD(S): ')).lower()
             separator_3()
             saved_searches_list.append([new_genre, new_search_term])
-
             with open(saved_searches_file, 'a', encoding='UTF-8', newline='') as f:
                 csv_writer = csv.writer(f)
                 for user_data in saved_searches_list:
