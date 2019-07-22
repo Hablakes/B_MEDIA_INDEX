@@ -13,8 +13,7 @@ import matplotlib.pylab as plt
 
 from ascii_graph import Pyasciigraph
 from datetime import datetime
-from tkinter import *
-from tkinter import filedialog
+from tkinter import filedialog, Tk
 
 username = None
 
@@ -239,11 +238,11 @@ def directory_selection():
         print('\n', 'INPUT ERROR: ', e, '\n')
 
 
-def graph_options_advanced(username, picture_graph_options_int, terminal_graph_options_int):
+def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_options_int):
     movie_files_results_list = list(csv.reader(open(os.path.expanduser(
-        (index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)), encoding='UTF-8')))
+        (index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(user_name)), encoding='UTF-8')))
     tv_files_results_list = list(csv.reader(open(os.path.expanduser(
-        (index_folder + '/TV_INFORMATION_INDEX.csv').format(username)), encoding='UTF-8')))
+        (index_folder + '/TV_INFORMATION_INDEX.csv').format(user_name)), encoding='UTF-8')))
     m_ten_eighty_found_list = []
     m_seven_twenty_found_list = []
     m_standard_def_found_list = []
@@ -256,11 +255,11 @@ def graph_options_advanced(username, picture_graph_options_int, terminal_graph_o
     tv_total_list = []
 
     for res in movie_files_results_list:
-        if re.findall('19\d{2}x', res[3]):
+        if re.findall(r'19\d{2}x', res[3]):
             m_ten_eighty_found_list.append(res)
-        elif re.findall('1[0-8]\d{2}x', res[3]):
+        elif re.findall(r'1[0-8]\d{2}x', res[3]):
             m_seven_twenty_found_list.append(res)
-        elif re.findall('\d{3}x', res[3]):
+        elif re.findall(r'\d{3}x', res[3]):
             m_standard_def_found_list.append(res)
         else:
             m_empty_response_list.append(+1)
@@ -272,11 +271,11 @@ def graph_options_advanced(username, picture_graph_options_int, terminal_graph_o
                   float(len(m_standard_def_found_list))]
 
     for res in tv_files_results_list:
-        if re.findall('19\d{2}x', res[6]):
+        if re.findall(r'19\d{2}x', res[6]):
             tv_ten_eighty_found_list.append(res)
-        elif re.findall('1[0-8]\d{2}x', res[6]):
+        elif re.findall(r'1[0-8]\d{2}x', res[6]):
             tv_seven_twenty_found_list.append(res)
-        elif re.findall('\d{3}x', res[6]):
+        elif re.findall(r'\d{3}x', res[6]):
             tv_standard_def_found_list.append(res)
         else:
             tv_empty_response_list.append(+1)
@@ -306,7 +305,7 @@ def graph_options_advanced(username, picture_graph_options_int, terminal_graph_o
 
         plt.setp(auto_texts, size=9, weight='bold')
         ax.set_title('MOVIE_RESOLUTION_RESULTS')
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_RESOLUTION_RESULTS_'.format(username) +
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_RESOLUTION_RESULTS_'.format(user_name) +
                                       date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
@@ -331,7 +330,7 @@ def graph_options_advanced(username, picture_graph_options_int, terminal_graph_o
 
         plt.setp(auto_texts, size=9, weight='bold')
         ax.set_title('TV_SHOW_RESOLUTION_RESULTS')
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_RESOLUTION_RESULTS_'.format(username) +
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_RESOLUTION_RESULTS_'.format(user_name) +
                                       date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
@@ -345,9 +344,9 @@ def graph_options_advanced(username, picture_graph_options_int, terminal_graph_o
         separator_3()
 
 
-def graph_options_base(username, picture_graph_options_int, terminal_graph_options_int):
+def graph_options_base(user_name, picture_graph_options_int, terminal_graph_options_int):
     media_index_list = list(csv.reader(open(os.path.expanduser(
-        (index_folder + '/MEDIA_TITLE_INDEX.csv').format(username)), encoding='UTF-8')))
+        (index_folder + '/MEDIA_TITLE_INDEX.csv').format(user_name)), encoding='UTF-8')))
     movie_years_dict = {}
     movie_decades_dict = {}
     tv_years_dict = {}
@@ -358,7 +357,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
     tv_decades_totals_dict = {}
 
     for title_item in media_index_list:
-        title_item_year = re.split('(.+) \((\d{4})\)', title_item[2], flags=0)
+        title_item_year = re.split(r'(.+) \((\d{4})\)', title_item[2], flags=0)
         title_item_year_int = int(title_item_year[0])
         title_item_decade_int = int(title_item_year[0][:-1] + '0')
 
@@ -383,7 +382,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             movie_year_totals_dict[year_values] = len(value)
         x, y = zip(*sorted(movie_year_totals_dict.items()))
         plt.bar(x, y)
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_YEAR_RESULTS_'.format(username) +
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_YEAR_RESULTS_'.format(user_name) +
                                       date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
@@ -407,7 +406,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             tv_year_totals_dict[year_values] = len(value)
         x, y = zip(*sorted(tv_year_totals_dict.items()))
         plt.bar(x, y)
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_YEAR_RESULTS_'.format(username) +
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_YEAR_RESULTS_'.format(user_name) +
                                       date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
@@ -431,7 +430,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             movie_decades_totals_dict[year_values] = len(value)
         x, y = zip(*movie_decades_totals_dict.items())
         plt.bar(x, y, width=5)
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_DECADE_RESULTS_'.format(username) +
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_DECADE_RESULTS_'.format(user_name) +
                                       date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
@@ -454,7 +453,7 @@ def graph_options_base(username, picture_graph_options_int, terminal_graph_optio
             tv_decades_totals_dict[year_values] = len(value)
         x, y = zip(*tv_decades_totals_dict.items())
         plt.bar(x, y, width=5)
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_DECADE_RESULTS_'.format(username) +
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_DECADE_RESULTS_'.format(user_name) +
                                       date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
@@ -761,11 +760,11 @@ def picture_graph_options_sub_menu():
         separator_3()
 
 
-def query_file_type_totals(username, picture_graph_options_int, terminal_graph_options_int):
+def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_options_int):
     movie_files_results_list = list(csv.reader(open(os.path.expanduser(
-        (index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)), encoding='UTF-8')))
+        (index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(user_name)), encoding='UTF-8')))
     tv_files_results_list = list(csv.reader(open(os.path.expanduser(
-        (index_folder + '/TV_INFORMATION_INDEX.csv').format(username)), encoding='UTF-8')))
+        (index_folder + '/TV_INFORMATION_INDEX.csv').format(user_name)), encoding='UTF-8')))
     movie_extensions_dictionary = {}
     movie_extensions_totals = {}
     tv_extensions_dictionary = {}
@@ -783,7 +782,7 @@ def query_file_type_totals(username, picture_graph_options_int, terminal_graph_o
             movie_file_type_totals[movie_file_type_values] = len(value)
         x, y = zip(*sorted(movie_file_type_totals.items()))
         plt.bar(x, y)
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_FILETYPE_RESULTS_'.format(username) +
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_FILETYPE_RESULTS_'.format(user_name) +
                                       date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
@@ -813,7 +812,7 @@ def query_file_type_totals(username, picture_graph_options_int, terminal_graph_o
             tv_file_type_totals[tv_file_type_values] = len(value)
         x, y = zip(*sorted(tv_file_type_totals.items()))
         plt.bar(x, y)
-        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_FILETYPE_RESULTS_'.format(username) +
+        plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_FILETYPE_RESULTS_'.format(user_name) +
                                       date_string + '.png')
         plt.savefig(plt_path)
         print('GRAPH SAVED: ', plt_path)
@@ -1105,7 +1104,7 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
             print('MOVIES: ', '\n')
             for movie_search_result in media_index_list:
                 if str('MOVIE') in movie_search_result[0]:
-                    search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(movie_search_result), flags=0)
+                    search_info = re.split(r'(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(movie_search_result), flags=0)
                     if movie_title_query.lower() in search_info[0].lower():
                         print(search_info[0])
             separator_3()
@@ -1120,7 +1119,7 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
             print('TV SHOWS: ', '\n')
             for tv_search_result in media_index_list:
                 if str('TV') in tv_search_result[0]:
-                    search_info = re.split('(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(tv_search_result), flags=0)
+                    search_info = re.split(r'(.+) \((\d{4})\) \((.+)x(.+)\)\.(.+)', str(tv_search_result), flags=0)
                     if tv_show_query.lower() in search_info[0].lower():
                         print(search_info[0])
             separator_3()
