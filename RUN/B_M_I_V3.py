@@ -737,24 +737,18 @@ def picture_graph_options_sub_menu():
         separator_3()
         picture_graph_options_int = int(picture_graph_options)
 
-        if picture_graph_options_int == 1:
-            graph_options_base(username, picture_graph_options_int=1, terminal_graph_options_int='')
-        elif picture_graph_options_int == 2:
-            graph_options_base(username, picture_graph_options_int=2, terminal_graph_options_int='')
-        elif picture_graph_options_int == 3:
-            graph_options_base(username, picture_graph_options_int=3, terminal_graph_options_int='')
-        elif picture_graph_options_int == 4:
-            graph_options_base(username, picture_graph_options_int=4, terminal_graph_options_int='')
-        elif picture_graph_options_int == 5:
-            graph_options_advanced(username, picture_graph_options_int=5, terminal_graph_options_int='')
-        elif picture_graph_options_int == 6:
-            graph_options_advanced(username, picture_graph_options_int=6, terminal_graph_options_int='')
-        elif picture_graph_options_int == 7:
-            query_file_type_totals(username, picture_graph_options_int=7, terminal_graph_options_int='')
-        elif picture_graph_options_int == 8:
-            query_file_type_totals(username, picture_graph_options_int=8, terminal_graph_options_int='')
-        elif picture_graph_options_int == 9:
+        if picture_graph_options_int == 0:
             media_index_home()
+        elif 1 <= picture_graph_options_int <= 4:
+            graph_options_base(username, picture_graph_options_int=picture_graph_options_int,
+                               terminal_graph_options_int='')
+        elif 5 <= picture_graph_options_int <= 6:
+            graph_options_advanced(username, picture_graph_options_int=picture_graph_options_int,
+                                   terminal_graph_options_int='')
+        elif 7 <= picture_graph_options_int <= 8:
+            query_file_type_totals(username, picture_graph_options_int=picture_graph_options_int,
+                                   terminal_graph_options_int='')
+
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
         separator_3()
@@ -962,7 +956,7 @@ def saved_searches():
             saved_search_sub_query_input = int(input('ENTER #: '))
             search_term = str(saved_searches_list[saved_search_sub_query_input].rsplit(',')[1]).lower()
             for words in search_term.split(' '):
-                words = words.replace('\r\n', '')
+                words = words.strip()
                 search_keywords_list.append(words)
             for found_search_terms in search_keywords_list:
                 separator_3()
@@ -1281,22 +1275,10 @@ def sort_options_sub_menu():
 
         if sort_options_int == 0:
             media_index_home()
-        elif sort_options_int == 1:
-            sort_function_base(sort_options_int=1)
-        elif sort_options_int == 2:
-            sort_function_base(sort_options_int=2)
-        elif sort_options_int == 3:
-            sort_function_base(sort_options_int=3)
-        elif sort_options_int == 4:
-            sort_function_base(sort_options_int=4)
-        elif sort_options_int == 5:
-            tv_episodes_sort_function(sort_options_int=5)
-        elif sort_options_int == 6:
-            tv_episodes_sort_function(sort_options_int=6)
-        elif sort_options_int == 7:
-            tv_episodes_sort_function(sort_options_int=7)
-        elif sort_options_int == 8:
-            tv_episodes_sort_function(sort_options_int=8)
+        elif 1 <= sort_options_int <= 4:
+            sort_function_base(sort_options_int=sort_options_int)
+        elif 5 <= sort_options_int <= 8:
+            tv_episodes_sort_function(sort_options_int=sort_options_int)
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
         separator_3()
@@ -1321,24 +1303,18 @@ def terminal_graph_options_sub_menu():
         separator_3()
         terminal_graph_options_int = int(terminal_graph_options)
 
-        if terminal_graph_options_int == 1:
-            graph_options_base(username, picture_graph_options_int='', terminal_graph_options_int=1)
-        elif terminal_graph_options_int == 2:
-            graph_options_base(username, picture_graph_options_int='', terminal_graph_options_int=2)
-        elif terminal_graph_options_int == 3:
-            graph_options_base(username, picture_graph_options_int='', terminal_graph_options_int=3)
-        elif terminal_graph_options_int == 4:
-            graph_options_base(username, picture_graph_options_int='', terminal_graph_options_int=4)
-        elif terminal_graph_options_int == 5:
-            graph_options_advanced(username, picture_graph_options_int='', terminal_graph_options_int=5)
-        elif terminal_graph_options_int == 6:
-            graph_options_advanced(username, picture_graph_options_int='', terminal_graph_options_int=6)
-        elif terminal_graph_options_int == 7:
-            query_file_type_totals(username, picture_graph_options_int='', terminal_graph_options_int=7)
-        elif terminal_graph_options_int == 8:
-            query_file_type_totals(username, picture_graph_options_int='', terminal_graph_options_int=8)
-        elif terminal_graph_options_int == 0:
+        if terminal_graph_options_int == 0:
             media_index_home()
+        elif 1 <= terminal_graph_options_int <= 4:
+            graph_options_base(username, picture_graph_options_int='',
+                               terminal_graph_options_int=terminal_graph_options_int)
+        elif 5 <= terminal_graph_options_int <= 6:
+            graph_options_advanced(username, picture_graph_options_int='',
+                                   terminal_graph_options_int=terminal_graph_options_int)
+        elif 7 <= terminal_graph_options_int <= 8:
+            query_file_type_totals(username, picture_graph_options_int='',
+                                   terminal_graph_options_int=terminal_graph_options_int)
+
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
         separator_3()
