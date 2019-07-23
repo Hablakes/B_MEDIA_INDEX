@@ -926,6 +926,7 @@ def query_tv_information_index(tv_episode_query):
 def saved_searches():
     print(pyfiglet.figlet_format('SAVED_SEARCHES', font='cybermedium'))
 
+    saved_search_inputs_list = []
     saved_searches_list = []
     search_keywords_list = []
 
@@ -937,21 +938,40 @@ def saved_searches():
     print('0) MAIN MENU')
     separator_3()
     saved_search_type_input = int(input('ENTER #: '))
+    saved_search_inputs_list.append(saved_search_type_input)
     separator_3()
 
     try:
-        if saved_search_type_input == 0:
+        if saved_search_inputs_list[0] == 0:
             media_index_home()
-        elif saved_search_type_input == 1:
+        elif saved_search_inputs_list[0] == 1:
             saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/{0}_SAVED_SEARCHES.csv').format(username))
             with open(saved_searches_file, 'r', encoding='UTF-8', newline='') as f:
                 for search_rows in f:
                     saved_searches_list.append(search_rows)
-            print('SELECT GENRE, KEYWORD(S) TO SEARCH: ', '\n')
             for enumeration_number, searches in enumerate(saved_searches_list):
                 genres = searches.rsplit(',')[0]
                 keywords = searches.rsplit(',')[1]
                 print((str(enumeration_number) + ') '), '\n', '\n', 'GENRE: ', genres, '\n', 'KEYWORD(S): ', keywords)
+
+    except (TypeError, ValueError) as e:
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        separator_3()
+
+    separator_3()
+    print('1) QUERY DATABASE WITH SAVED SEARCH TERM(S): ')
+    separator_2()
+    print('0) MAIN MENU')
+    separator_3()
+    saved_search_sub_query_type_input = int(input('ENTER #: '))
+    saved_search_inputs_list.append(saved_search_sub_query_type_input)
+    separator_3()
+
+    try:
+        if saved_search_inputs_list[1] == 0:
+            media_index_home()
+        elif saved_search_inputs_list[1] == 1:
+            print('SELECT NUMBER (#) FOR GENRE, KEYWORD(S) TO SEARCH: ', '\n')
             separator_3()
             saved_search_sub_query_input = int(input('ENTER #: '))
             search_term = str(saved_searches_list[saved_search_sub_query_input].rsplit(',')[1]).lower()
@@ -963,8 +983,11 @@ def saved_searches():
                 print('QUERYING INFORMATION FOR SELECTED KEYWORD(S): ', found_search_terms)
                 separator_3()
                 search_plots(plot_search_type=3, plot_search_keywords=found_search_terms)
-
-        elif saved_search_type_input == 2:
+    except (TypeError, ValueError) as e:
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        separator_3()
+    try:
+        if saved_search_inputs_list[1] == 2:
             saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/{0}_SAVED_SEARCHES.csv').format(username))
             print('SELECT TITLE FOR GENRE, ADD KEYWORD(S) FOR SEARCH TERM(S))')
             separator_2()
