@@ -29,9 +29,10 @@ MEDIA-INDEX USAGE(S):
 
 * IF FIRST TIME RUNNING
 
-1) /RUN/B_M_I_V3.py
+1) /RUN/B_M_I_V4.py
 2) Enter your Username
-3) Enter Directories for Movies and TV Show Libraries (OPTION #1) (If N/A for any of the 4 inputs, just hit Cancel)
+3) Enter Directories for Movies and TV Show Libraries (OPTION #1) 
+   (If entering Alternate Directories, when complete, just hit Cancel after finishing selection of both the Alternate Movie Path's, then     the same for Alternate TV Show Path's)
 4) From MAIN MENU, Hit (OPTION #2) "CREATE PATH INDICES" (** QUICK **)
 5) From MAIN MENU, Hit (OPTION #3) "CREATE TITLE INDEX" (** QUICK **)
 6) From MAIN MENU, Hit (OPTION #4) "CREATE MEDIA INFORMATION INDICES" (** LONG **)
@@ -39,7 +40,7 @@ MEDIA-INDEX USAGE(S):
 
 * IF NOT FIRST TIME RUNNING
 
-1) /RUN/B_M_I_V3.py
+1) /RUN/B_M_I_V4.py
 2) Enter Username
 3) MAIN MENU
 
