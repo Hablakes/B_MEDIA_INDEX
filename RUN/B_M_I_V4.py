@@ -16,16 +16,17 @@ from ascii_graph import Pyasciigraph
 from datetime import datetime
 from tkinter import filedialog, Tk
 
-username = None
 
 date_string = str(datetime.today().strftime('%Y_%m_%d'))
-
-index_folder = '~/{0}_MEDIA_INDEX'
 
 extensions = ('.3gp', '.asf', '.asx', '.avc', '.avi', '.bdmv', '.bin', '.bivx', '.dat', '.disc', '.divx', '.dv',
               '.dvr-ms', '.evo', '.fli', '.flv', '.h264', '.img', '.iso', '.m2ts', '.m2v', '.m4v', '.mkv', '.mov',
               '.mp4', '.mpeg', '.mpg', '.mt2s', '.mts', '.nfo', '.nrg', '.nsv', '.nuv', '.ogm', '.pva', '.qt', '.rm',
               '.rmvb', '.strm', '.svq3', '.ts', '.ty', '.viv', '.vob', '.vp3', '.wmv', '.xvid', '.webm')
+
+index_folder = '~/{0}_MEDIA_INDEX'
+
+username = None
 
 
 def main():
@@ -115,7 +116,6 @@ def create_movie_information_index():
                         for line_item in f.readlines():
                             if '<plot>' in line_item:
                                 movie_results_list[movie_title_key]['PLOT'] = line_item
-
                             elif '<rating>' in line_item:
                                 movie_results_list[movie_title_key]['RATING'] = line_item
 
@@ -222,7 +222,6 @@ def create_tv_information_index():
                             for line in f.readlines():
                                 if '<plot>' in line:
                                     tv_results_list[tv_title_key]['PLOT'] = line
-
                                 elif '<rating>' in line:
                                     tv_results_list[tv_title_key]['RATING'] = line
 
@@ -622,14 +621,11 @@ def library_total_amount():
     print('\n', 'TOTAL AMOUNT OF MOVIES: ', '\n')
     print(len(movie_amounts_list))
     separator_3()
-
     print('\n', 'TOTAL AMOUNT OF TV SHOWS: ', '\n')
     print(len(tv_amounts_list))
-
     print('\n', '\n', 'TOTAL AMOUNT OF TV EPISODES: ', '\n')
     print(len(episode_amounts_list))
     separator_3()
-
     print('\n', 'TOTAL AMOUNT OF ITEMS IN MEDIA-LIBRARY: ', '\n')
     print(len(movie_amounts_list) + len(episode_amounts_list))
     separator_3()
@@ -671,7 +667,6 @@ def media_index_home():
 
                 if scan_sub_input == 0:
                     media_index_home()
-
                 elif scan_sub_input == 1:
                     change_directory_selection()
 
@@ -694,7 +689,6 @@ def media_index_home():
 
                 if scan_sub_input == 0:
                     media_index_home()
-
                 elif scan_sub_input == 1:
                     walk_directories_and_create_indices()
 
@@ -739,7 +733,6 @@ def media_index_home():
 
                 if scan_sub_input == 0:
                     media_index_home()
-
                 elif scan_sub_input == 1:
                     create_media_information_indices()
 
@@ -760,7 +753,6 @@ def media_index_home():
 
                 if scan_sub_input == 0:
                     media_index_home()
-
                 elif scan_sub_input == 1:
                     select_users_indices_to_compare()
 
@@ -1057,7 +1049,6 @@ def query_movie_information_index(movie_query):
                         mv_rating = re.findall('<rating>(.*?)', movie_file[6])
                         print(mv_rating[0])
                         separator_2()
-
                     elif '</rating>' in movie_file[6]:
                         mv_rating = re.findall('<rating>(.*?)</rating>', movie_file[6])
                         print(mv_rating[0])
@@ -1070,7 +1061,6 @@ def query_movie_information_index(movie_query):
                         mv_plot = re.findall('<plot>(.*?)', movie_file[5])
                         print(textwrap.fill(mv_plot[0], 100))
                         separator_2()
-
                     elif '</plot>' in movie_file[5]:
                         mv_plot = re.findall('<plot>(.*?)</plot>', movie_file[5])
                         print(textwrap.fill(mv_plot[0], 100))
@@ -1126,7 +1116,6 @@ def query_tv_information_index(tv_episode_query):
                         tv_rating = re.findall('<rating>(.*?)', tv_file[9])
                         print(tv_rating[0])
                         separator_2()
-
                     elif '</rating>' in tv_file[9]:
                         tv_rating = re.findall('<rating>(.*?)</rating>', tv_file[9])
                         print(tv_rating[0])
@@ -1139,7 +1128,6 @@ def query_tv_information_index(tv_episode_query):
                         tv_plot = re.findall('<plot>(.*?)', tv_file[8])
                         print(textwrap.fill(tv_plot[0], 100))
                         separator_2()
-
                     elif '</plot>' in tv_file[8]:
                         tv_plot = re.findall('<plot>(.*?)</plot>', tv_file[8])
                         print(textwrap.fill(tv_plot[0], 100))
@@ -1258,6 +1246,7 @@ def scrape_media_folders_for_csv():
             for movie_found in sorted(movie_dir_list):
                 movie_scrape_info = guessit.guessit(movie_found)
                 title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
+
                 if "," in title_item_check[2]:
                     title_item_check.append(title_item_check[2][-5:-1])
                     title_item_check.remove(title_item_check[2])
@@ -1268,6 +1257,7 @@ def scrape_media_folders_for_csv():
             for movie_found in sorted(movie_alt_dir_list):
                 movie_scrape_info = guessit.guessit(movie_found)
                 title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
+
                 if "," in title_item_check[2]:
                     title_item_check.append(title_item_check[2][-5:-1])
                     title_item_check.remove(title_item_check[2])
@@ -1278,6 +1268,7 @@ def scrape_media_folders_for_csv():
             for tv_found in sorted(tv_dir_list):
                 tv_scrape_info = guessit.guessit(tv_found)
                 title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
+
                 if "," in title_item_check[2]:
                     title_item_check.append(title_item_check[2][-5:-1])
                     title_item_check.remove(title_item_check[2])
@@ -1288,6 +1279,7 @@ def scrape_media_folders_for_csv():
             for tv_found in sorted(tv_alt_dir_list):
                 tv_scrape_info = guessit.guessit(tv_found)
                 title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
+
                 if "," in title_item_check[2]:
                     title_item_check.append(title_item_check[2][-5:-1])
                     title_item_check.remove(title_item_check[2])
@@ -1463,7 +1455,6 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                 separator_3()
                 if title_search_sub_query_input == 0:
                     media_index_home()
-
                 elif title_search_sub_query_input == 1:
 
                     episode_sub_query_input = int(input('ENTER EPISODE NUMBER (#): '))
