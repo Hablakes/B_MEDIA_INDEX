@@ -1164,26 +1164,43 @@ def saved_searches():
 
         elif saved_search_inputs_list[0] == 1:
 
-            saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/{0}_SAVED_SEARCHES.csv').format(username))
+            saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/SAVED_SEARCHES.csv').format(username))
 
-            with open(saved_searches_file, 'r', encoding='UTF-8', newline='') as f:
-                for search_rows in f:
-                    saved_searches_list.append(search_rows)
+            if os.path.isfile(saved_searches_file):
 
-            for enumeration_number, searches in enumerate(saved_searches_list):
-                genres = searches.rsplit(',')[0]
-                keywords = searches.rsplit(',')[1]
-                print((str(enumeration_number) + ') '), '\n', '\n', 'GENRE: ', genres, '\n', 'KEYWORD(S): ', keywords)
+                with open(saved_searches_file, 'r', encoding='UTF-8', newline='') as f:
+                    for search_rows in f:
+                        saved_searches_list.append(search_rows)
+
+                for enumeration_number, searches in enumerate(saved_searches_list):
+                    genres = searches.rsplit(',')[0]
+                    keywords = searches.rsplit(',')[1]
+                    print((str(enumeration_number) + ') '), '\n', '\n', 'GENRE: ', genres, '\n', 'KEYWORD(S): ',
+                          keywords)
+
+                if not saved_searches_list:
+                    print('NO SAVED SEARCH TERMS: ')
+                    separator_3()
+                    saved_searches()
+
+            else:
+
+                with open(saved_searches_file, 'w', encoding='UTF-8', newline='') as f:
+                    pass
+
+                print('NO SAVED SEARCH TERMS: ')
+                separator_3()
+                saved_searches()
 
         elif saved_search_inputs_list[0] == 2:
-            saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/{0}_SAVED_SEARCHES.csv').format(username))
+            saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/SAVED_SEARCHES.csv').format(username))
             print('SELECT TITLE FOR GENRE, ADD KEYWORD(S) FOR SEARCH TERM(S))')
             separator_2()
 
             new_genre = str(input('ENTER TITLE FOR NEW GENRE: '))
             separator_2()
 
-            new_search_term = str(input('ENTER KEYWORD(S): ')).lower()
+            new_search_term = str(input('ENTER KEYWORD(S) (SEPERATE KEYWORD(S) BY SPACES, NOT COMMAS): ')).lower()
             separator_3()
 
             saved_searches_list.append([new_genre, new_search_term])
@@ -1229,6 +1246,7 @@ def saved_searches():
                 print('QUERYING INFORMATION FOR SELECTED KEYWORD(S): ', found_search_terms)
                 separator_3()
                 search_plots(plot_search_type=3, plot_search_keywords=found_search_terms)
+            saved_searches()
 
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
