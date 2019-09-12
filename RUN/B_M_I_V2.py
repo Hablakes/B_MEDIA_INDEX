@@ -4,6 +4,7 @@ import os
 import pathlib
 import textwrap
 import re
+import time
 
 import guessit
 import numpy
@@ -66,6 +67,8 @@ def create_movie_information_index():
     movie_index = csv.reader(open(os.path.expanduser(
         (index_folder + '/MOVIE_VIDEO_FILES_PATHS.csv').format(username)), encoding='UTF-8'))
     movie_results_list = {}
+
+    movie_scan_start = time.time()
 
     for movie_file in sorted(movie_index):
 
@@ -137,12 +140,18 @@ def create_movie_information_index():
         for movie_row in movie_results_list.values():
             csv_writer.writerow(movie_row)
 
+    movie_scan_end = time.time()
+    print("TIME ELAPSED:", movie_scan_end - movie_scan_start)
+    separator_2()
+
 
 def create_tv_information_index():
     tv_index = csv.reader(open(os.path.expanduser(
         (index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username)), encoding='UTF-8'))
     tv_results_list = {}
     tv_show_plots_dictionary = {}
+
+    tv_scan_start = time.time()
 
     for tv_file in sorted(tv_index):
 
@@ -247,6 +256,10 @@ def create_tv_information_index():
         csv_writer = csv.DictWriter(f, ['SHOW', 'PLOT'])
         for tv_row in tv_show_plots_dictionary.values():
             csv_writer.writerow(tv_row)
+
+    tv_scan_end = time.time()
+    print("TIME ELAPSED:", tv_scan_end - tv_scan_start)
+    separator_2()
 
 
 def directory_selection():
@@ -1257,6 +1270,8 @@ def scrape_media_folders_for_csv():
     movie_title_items = []
     tv_title_items = []
 
+    naming_scan_start = time.time()
+
     try:
 
         if movie_dir_input != '':
@@ -1323,6 +1338,10 @@ def scrape_media_folders_for_csv():
     except (OSError, TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INCORRECT DIRECTORY INPUT(S), PLEASE RETRY')
         separator_3()
+
+    naming_scan_end = time.time()
+    print("TIME ELAPSED:", naming_scan_end - naming_scan_start)
+    separator_2()
 
 
 def search_plots(plot_search_type, plot_search_keywords):
@@ -1790,6 +1809,8 @@ def username_check_and_folder_creation():
 def walk_directories_and_create_indices():
     movie_video_files_results = []
 
+    path_scan_start = time.time()
+
     if movie_dir_input != '':
         for root, dirs, files in os.walk(movie_dir_input):
             for movie_file in sorted(files):
@@ -1829,6 +1850,10 @@ def walk_directories_and_create_indices():
         csv_writer = csv.writer(f)
         for tv_row in sorted(tv_show_video_files_results):
             csv_writer.writerow(tv_row)
+
+    path_scan_end = time.time()
+    print("TIME ELAPSED:", path_scan_end - path_scan_start)
+    separator_2()
 
 
 if __name__ == '__main__':
