@@ -291,9 +291,13 @@ def directory_selection():
                 tv_alt_dir_input = tk_gui_file_browser_window()
             print('DIRECTORIES ENTERED: ', '\n', '\n', tv_alt_directories_list)
             separator_3()
+
+            movie_alt_dir_input = movie_alt_directories_list
+            tv_alt_dir_input = tv_alt_directories_list
+
             user_info_dict = {'user:': username, 'movie_dir:': movie_dir_input,
-                              'tv_dir:': tv_dir_input, 'movie_alt_dir:': movie_alt_directories_list,
-                              'tv_alt_dir:': tv_alt_directories_list}
+                              'tv_dir:': tv_dir_input, 'movie_alt_dir:': movie_alt_dir_input,
+                              'tv_alt_dir:': tv_alt_dir_input}
 
             with open(user_info_file, 'w', encoding='UTF-8') as json_file:
                 json.dump(user_info_dict, json_file, ensure_ascii=False, indent=4, sort_keys=True)
