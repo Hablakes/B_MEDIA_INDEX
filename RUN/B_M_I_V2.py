@@ -1212,8 +1212,7 @@ def saved_searches():
 
             new_genre = str(input('ENTER TITLE FOR NEW GENRE: '))
             separator_2()
-
-            new_search_term = str(input('ENTER KEYWORD(S) (SEPERATE KEYWORD(S) BY SPACES, NOT COMMAS): ')).lower()
+            new_search_term = str(input('ENTER KEYWORD(S) (SEPARATE KEYWORD(S) BY SPACES, NOT COMMAS): ')).lower()
             separator_3()
 
             saved_searches_list.append([new_genre, new_search_term])
