@@ -86,7 +86,7 @@ def create_movie_information_index():
                     title = guessit.guessit(movie_filename_key, options={'type': 'movie'})
 
                 except OSError as e:
-                    print('OS ERROR: ', e)
+                    print('OS ERROR / GUESSIT: ', e)
                     continue
 
                 try:
@@ -94,7 +94,7 @@ def create_movie_information_index():
                     test = pymediainfo.MediaInfo.parse(movie_file[0])
 
                 except OSError as e:
-                    print('OS ERROR: ', e)
+                    print('OS ERROR / PY_MEDIA_INFO: ', e)
                     continue
 
                 for track in test.tracks:
@@ -123,7 +123,7 @@ def create_movie_information_index():
                                 movie_results_list[movie_title_key]['RATING'] = line_item
 
                 except Exception as e:
-                    print('ERROR: ', e, '\n', 'FILE: ', movie_file[0])
+                    print('NFO ERROR: ', e, '\n', 'FILE: ', movie_file[0])
                     print('-' * 100)
                     continue
 
@@ -175,7 +175,7 @@ def create_tv_information_index():
                                 tv_show_plots_dictionary[tv_folder_title]['PLOT'] = line
 
                 except Exception as e:
-                    print('ERROR: ', e, '\n', 'FILE: ', tv_file[0])
+                    print('NFO ERROR: ', e, '\n', 'FILE: ', tv_file[0])
                     print('-' * 100)
                     continue
 
@@ -189,7 +189,7 @@ def create_tv_information_index():
                     title = guessit.guessit(tv_filename_key, options={'type': 'episode'})
 
                 except OSError as e:
-                    print('OS ERROR: ', e)
+                    print('OS ERROR / GUESSIT: ', e)
                     continue
 
                 try:
@@ -197,7 +197,7 @@ def create_tv_information_index():
                     test = pymediainfo.MediaInfo.parse(tv_file[0])
 
                 except OSError as e:
-                    print('OS ERROR: ', e)
+                    print('OS ERROR / PY_MEDIA_INFO: ', e)
                     continue
 
                 for track in test.tracks:
@@ -235,7 +235,7 @@ def create_tv_information_index():
                                     tv_results_list[tv_title_key]['RATING'] = line
 
                     except Exception as e:
-                        print('ERROR: ', e, '\n', 'FILE: ', tv_file[0])
+                        print('NFO ERROR: ', e, '\n', 'FILE: ', tv_file[0])
                         print('-' * 100)
                         continue
 
