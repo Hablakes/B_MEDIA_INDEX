@@ -1201,35 +1201,6 @@ def saved_searches():
 
             saved_searches()
 
-        elif saved_search_inputs_list[0] == 3:
-            saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/SAVED_SEARCHES.csv').format(username))
-
-            if os.path.isfile(saved_searches_file):
-
-                with open(saved_searches_file, 'a', encoding='UTF-8', newline='') as f:
-                    for search_rows in f:
-                        saved_searches_list.append(search_rows)
-
-                for enumeration_number, searches in enumerate(saved_searches_list):
-                    genres = searches.rsplit(',')[0]
-                    keywords = searches.rsplit(',')[1]
-                    print((str(enumeration_number) + ') '), '\n', '\n', 'GENRE: ', genres, '\n', 'KEYWORD(S): ',
-                          keywords)
-
-                if not saved_searches_list:
-                    print('NO SAVED SEARCH TERMS: ')
-                    separator_3()
-                    saved_searches()
-
-            else:
-
-                with open(saved_searches_file, 'w', encoding='UTF-8', newline='') as _:
-                    pass
-
-                print('NO SAVED SEARCH TERMS: ')
-                separator_3()
-                saved_searches()
-
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
         separator_3()
