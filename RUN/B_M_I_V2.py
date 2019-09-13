@@ -1198,7 +1198,7 @@ def saved_searches():
 
             else:
 
-                with open(saved_searches_file, 'w', encoding='UTF-8', newline='') as f:
+                with open(saved_searches_file, 'w', encoding='UTF-8', newline='') as _:
                     pass
 
                 print('NO SAVED SEARCH TERMS: ')
