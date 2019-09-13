@@ -413,14 +413,12 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
         plt.show()
 
     elif terminal_graph_options_int == 5:
-
         graph = Pyasciigraph()
         for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES: ', movies_graph_terminal_results):
             print('\n', line)
         separator_3()
 
     elif picture_graph_options_int == 6:
-
         fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect='equal'))
         wedges, texts, auto_texts = ax.pie(tv_data, autopct=lambda pct: format_data(pct, tv_data),
                                            shadow=True, colors=colors, textprops=dict(color='black'))
@@ -440,7 +438,6 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
         plt.show()
 
     elif terminal_graph_options_int == 6:
-
         graph = Pyasciigraph()
         for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES: ', tv_shows_graph_terminal_results):
             print('\n', line)
@@ -484,7 +481,6 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
                 tv_decades_amount_dict[title_item_decade_int].append(title_item)
 
     if picture_graph_options_int == 1:
-
         for year_values, value in sorted(movie_years_dict.items()):
             movie_year_totals_dict[year_values] = len(value)
         x, y = zip(*sorted(movie_year_totals_dict.items()))
@@ -497,7 +493,6 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
         plt.show()
 
     elif terminal_graph_options_int == 1:
-
         for movie_year_values, value in sorted(movie_years_dict.items()):
             movie_year_totals_dict[movie_year_values] = len(value)
         movie_data = sorted(movie_year_totals_dict.items())
@@ -512,7 +507,6 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
         separator_3()
 
     elif picture_graph_options_int == 2:
-
         for year_values, value in sorted(tv_years_dict.items()):
             tv_year_totals_dict[year_values] = len(value)
         x, y = zip(*sorted(tv_year_totals_dict.items()))
@@ -525,7 +519,6 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
         plt.show()
 
     elif terminal_graph_options_int == 2:
-
         for tv_year_values, value in sorted(tv_years_dict.items()):
             tv_year_totals_dict[tv_year_values] = len(value)
         tv_data = sorted(tv_year_totals_dict.items())
@@ -540,7 +533,6 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
         separator_3()
 
     elif picture_graph_options_int == 3:
-
         for year_values, value in sorted(movie_decades_dict.items()):
             movie_decades_totals_dict[year_values] = len(value)
         x, y = zip(*movie_decades_totals_dict.items())
@@ -553,7 +545,6 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
         plt.show()
 
     elif terminal_graph_options_int == 3:
-
         for movie_year_values, value in sorted(movie_decades_dict.items()):
             movie_decades_totals_dict[movie_year_values] = len(value)
         movie_decades_terminal_graph_list = []
@@ -567,7 +558,6 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
         separator_3()
 
     elif picture_graph_options_int == 4:
-
         for year_values, value in sorted(tv_decades_amount_dict.items()):
             tv_decades_totals_dict[year_values] = len(value)
         x, y = zip(*tv_decades_totals_dict.items())
@@ -580,7 +570,6 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
         plt.show()
 
     elif terminal_graph_options_int == 4:
-
         for tv_year_values, value in sorted(tv_decades_amount_dict.items()):
             tv_decades_totals_dict[tv_year_values] = len(value)
         tv_decades_terminal_graph_list = []
@@ -822,34 +811,29 @@ def media_queries_sub_menu():
             media_index_home()
 
         elif title_search_type == 1:
-
             movie_title_query_input = str(input('QUERY MOVIES: ').lower())
             separator_3()
             search_titles(title_search_type=1, movie_title_query=movie_title_query_input,
                           tv_show_query='')
 
         elif title_search_type == 2:
-
             tv_show_query_input = str(input('ENTER SEARCH QUERY (TV SHOWS): ').lower())
             separator_3()
             search_titles(title_search_type=2, movie_title_query='',
                           tv_show_query=tv_show_query_input)
 
         elif title_search_type == 3:
-
             tv_show_query_input = str(input('ENTER SEARCH QUERY (TV SHOWS): ').lower())
             separator_3()
             search_titles(title_search_type=3, movie_title_query='',
                           tv_show_query=tv_show_query_input)
 
         elif title_search_type == 4:
-
             movie_title_query_input = str(input('ENTER SEARCH QUERY (MOVIES): ').lower())
             separator_3()
             query_movie_information_index(movie_query=movie_title_query_input)
 
         elif title_search_type == 5:
-
             tv_episode_query_input = str(input('ENTER SEARCH QUERY (MOVIES): ').lower())
             separator_3()
             query_tv_information_index(tv_episode_query=tv_episode_query_input)
@@ -895,7 +879,6 @@ def media_queries_sub_menu():
                 separator_3()
 
         elif title_search_type == 7:
-
             total_tv_episodes_in_show_title()
 
     except (TypeError, ValueError) as e:
@@ -927,17 +910,14 @@ def picture_graph_options_sub_menu():
             media_index_home()
 
         elif 1 <= picture_graph_options_int <= 4:
-
             graph_options_base(username, picture_graph_options_int=picture_graph_options_int,
                                terminal_graph_options_int='')
 
         elif 5 <= picture_graph_options_int <= 6:
-
             graph_options_advanced(username, picture_graph_options_int=picture_graph_options_int,
                                    terminal_graph_options_int='')
 
         elif 7 <= picture_graph_options_int <= 8:
-
             query_file_type_totals(username, picture_graph_options_int=picture_graph_options_int,
                                    terminal_graph_options_int='')
 
@@ -1056,7 +1036,6 @@ def query_movie_information_index(movie_query):
                     separator_2()
 
                 if int(len(movie_file[6])) != 0:
-
                     print('RATING: ', '\n')
                     if '</rating>' not in movie_file[6]:
                         mv_rating = re.findall('<rating>(.*?)', movie_file[6])
@@ -1068,7 +1047,6 @@ def query_movie_information_index(movie_query):
                         separator_2()
 
                 if int(len(movie_file[5])) != 0:
-
                     print('PLOT: ', '\n')
                     if '</plot>' not in movie_file[5]:
                         mv_plot = re.findall('<plot>(.*?)', movie_file[5])
@@ -1123,7 +1101,6 @@ def query_tv_information_index(tv_episode_query):
                     separator_2()
 
                 if int(len(tv_file[9])) != 0:
-
                     print('RATING: ', '\n')
                     if '</rating>' not in tv_file[9]:
                         tv_rating = re.findall('<rating>(.*?)', tv_file[9])
@@ -1135,7 +1112,6 @@ def query_tv_information_index(tv_episode_query):
                         separator_2()
 
                 if int(len(tv_file[8])) != 0:
-
                     print('PLOT: ', '\n')
                     if '</plot>' not in tv_file[8]:
                         tv_plot = re.findall('<plot>(.*?)', tv_file[8])
@@ -1163,6 +1139,8 @@ def saved_searches():
     separator_2()
     print('2) ADD A NEW SEARCH TERM')
     separator_2()
+    print('3) REMOVE A SEARCH TERM')
+    separator_2()
     print('0) MAIN MENU')
 
     separator_3()
@@ -1176,7 +1154,6 @@ def saved_searches():
             media_index_home()
 
         elif saved_search_inputs_list[0] == 1:
-
             saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/SAVED_SEARCHES.csv').format(username))
 
             if os.path.isfile(saved_searches_file):
@@ -1223,6 +1200,35 @@ def saved_searches():
                     csv_writer.writerow(user_data)
 
             saved_searches()
+
+        elif saved_search_inputs_list[0] == 3:
+            saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/SAVED_SEARCHES.csv').format(username))
+
+            if os.path.isfile(saved_searches_file):
+
+                with open(saved_searches_file, 'a', encoding='UTF-8', newline='') as f:
+                    for search_rows in f:
+                        saved_searches_list.append(search_rows)
+
+                for enumeration_number, searches in enumerate(saved_searches_list):
+                    genres = searches.rsplit(',')[0]
+                    keywords = searches.rsplit(',')[1]
+                    print((str(enumeration_number) + ') '), '\n', '\n', 'GENRE: ', genres, '\n', 'KEYWORD(S): ',
+                          keywords)
+
+                if not saved_searches_list:
+                    print('NO SAVED SEARCH TERMS: ')
+                    separator_3()
+                    saved_searches()
+
+            else:
+
+                with open(saved_searches_file, 'w', encoding='UTF-8', newline='') as _:
+                    pass
+
+                print('NO SAVED SEARCH TERMS: ')
+                separator_3()
+                saved_searches()
 
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -1353,7 +1359,6 @@ def search_plots(plot_search_type, plot_search_keywords):
     plots_list = []
 
     if int(plot_search_type) == 1:
-
         for plot in movie_files_results_list:
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
 
@@ -1363,7 +1368,6 @@ def search_plots(plot_search_type, plot_search_keywords):
         separator_3()
 
     elif int(plot_search_type) == 2:
-
         for plot in tv_files_results_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[8])
 
@@ -1373,7 +1377,6 @@ def search_plots(plot_search_type, plot_search_keywords):
         separator_3()
 
     elif int(plot_search_type) == 3:
-
         for plot in movie_files_results_list:
             plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[5])
 
@@ -1386,7 +1389,6 @@ def search_plots(plot_search_type, plot_search_keywords):
         separator_3()
 
     elif int(plot_search_type) == 4:
-
         for plot in tv_plots_list:
             plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1])
 
@@ -1632,11 +1634,9 @@ def sort_options_sub_menu():
             media_index_home()
 
         elif 1 <= sort_options_int <= 4:
-
             sort_function_base(sort_options_int=sort_options_int)
 
         elif 5 <= sort_options_int <= 8:
-
             tv_episodes_sort_function(sort_options_int=sort_options_int)
 
     except (TypeError, ValueError) as e:
@@ -1668,17 +1668,14 @@ def terminal_graph_options_sub_menu():
             media_index_home()
 
         elif 1 <= terminal_graph_options_int <= 4:
-
             graph_options_base(username, picture_graph_options_int='',
                                terminal_graph_options_int=terminal_graph_options_int)
 
         elif 5 <= terminal_graph_options_int <= 6:
-
             graph_options_advanced(username, picture_graph_options_int='',
                                    terminal_graph_options_int=terminal_graph_options_int)
 
         elif 7 <= terminal_graph_options_int <= 8:
-
             query_file_type_totals(username, picture_graph_options_int='',
                                    terminal_graph_options_int=terminal_graph_options_int)
 
