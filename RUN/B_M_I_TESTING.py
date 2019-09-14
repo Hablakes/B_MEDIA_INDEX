@@ -2,8 +2,8 @@ import csv
 import json
 import os
 import pathlib
-import textwrap
 import re
+import textwrap
 import time
 
 import guessit
@@ -669,7 +669,7 @@ def media_index_home():
 
                 print('CONFIRM: ')
                 separator_1()
-                print('0) MAIN MENU                             1) CHANGE DATABASE DIRECTORIES')
+                print('1) CHANGE DATABASE DIRECTORIES                   0) MAIN MENU')
                 separator_3()
                 scan_sub_input = int(input('ENTER #: '))
                 separator_3()
@@ -691,7 +691,7 @@ def media_index_home():
                 separator_1()
                 print('THIS OPERATION MAY TAKE A LONG TIME (SEVERAL MINUTES FOR LARGE LIBRARIES)')
                 separator_2()
-                print('0) MAIN MENU                             1) CONTINUE WITH MEDIA PATH(S) SCAN')
+                print('1) CONTINUE WITH MEDIA PATH(S) SCAN              0) MAIN MENU')
                 separator_3()
                 scan_sub_input = int(input('ENTER #: '))
                 separator_3()
@@ -713,7 +713,7 @@ def media_index_home():
                 separator_1()
                 print('THIS OPERATION CAN TAKE A LONG TIME (SEVERAL MINUTES FOR LARGE LIBRARIES)')
                 separator_2()
-                print('0) MAIN MENU                             1) CONTINUE BUILDING TITLE INDEX')
+                print('1) CONTINUE BUILDING TITLE INDEX                 0) MAIN MENU')
                 separator_3()
                 scan_sub_input = int(input('ENTER #: '))
                 separator_3()
@@ -735,7 +735,7 @@ def media_index_home():
                 separator_1()
                 print('THIS OPERATION CAN TAKE A LONG TIME (SEVERAL HOURS FOR LARGE LIBRARIES)')
                 separator_2()
-                print('0) MAIN MENU                             1) CONTINUE WITH MEDIA INFORMATION SCAN')
+                print('1) CONTINUE WITH MEDIA INFORMATION SCAN          0) MAIN MENU')
                 separator_3()
                 scan_sub_input = int(input('ENTER #: '))
                 separator_3()
@@ -755,7 +755,7 @@ def media_index_home():
 
                 print('CONFIRM: ')
                 separator_1()
-                print('0) MAIN MENU                             1) COMPARE USER(S) INFORMATION INDICES')
+                print('1) COMPARE USER(S) INFORMATION INDICES           0) MAIN MENU')
                 separator_3()
                 scan_sub_input = int(input('ENTER #: '))
                 separator_3()
