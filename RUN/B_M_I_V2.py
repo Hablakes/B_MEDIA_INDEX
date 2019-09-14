@@ -142,7 +142,7 @@ def create_movie_information_index():
             csv_writer.writerow(movie_row)
 
     movie_scan_end = time.time()
-    print("TIME ELAPSED: ", movie_scan_end - movie_scan_start)
+    print('TIME ELAPSED: ', movie_scan_end - movie_scan_start)
     separator_2()
 
 
@@ -259,7 +259,7 @@ def create_tv_information_index():
             csv_writer.writerow(tv_row)
 
     tv_scan_end = time.time()
-    print("TIME ELAPSED: ", tv_scan_end - tv_scan_start)
+    print('TIME ELAPSED: ', tv_scan_end - tv_scan_start)
     separator_2()
 
 
@@ -675,6 +675,7 @@ def media_index_home():
 
                 if scan_sub_input == 0:
                     media_index_home()
+
                 elif scan_sub_input == 1:
                     change_directory_selection()
 
@@ -697,6 +698,7 @@ def media_index_home():
 
                 if scan_sub_input == 0:
                     media_index_home()
+
                 elif scan_sub_input == 1:
                     walk_directories_and_create_indices()
 
@@ -719,6 +721,7 @@ def media_index_home():
 
                 if scan_sub_input == 0:
                     media_index_home()
+
                 elif scan_sub_input == 1:
                     scrape_media_folders_for_csv()
 
@@ -741,6 +744,7 @@ def media_index_home():
 
                 if scan_sub_input == 0:
                     media_index_home()
+
                 elif scan_sub_input == 1:
                     create_media_information_indices()
 
@@ -761,6 +765,7 @@ def media_index_home():
 
                 if scan_sub_input == 0:
                     media_index_home()
+
                 elif scan_sub_input == 1:
                     select_users_indices_to_compare()
 
@@ -1314,7 +1319,7 @@ def scrape_media_folders_for_csv():
                 movie_scrape_info = guessit.guessit(movie_found)
                 title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
 
-                if "," in title_item_check[2]:
+                if ',' in title_item_check[2]:
                     title_item_check.append(title_item_check[2][-5:-1])
                     title_item_check.remove(title_item_check[2])
                 movie_title_items.append(title_item_check)
@@ -1329,7 +1334,7 @@ def scrape_media_folders_for_csv():
                     movie_scrape_info = guessit.guessit(movie_found)
                     title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
 
-                    if "," in title_item_check[2]:
+                    if ',' in title_item_check[2]:
                         title_item_check.append(title_item_check[2][-5:-1])
                         title_item_check.remove(title_item_check[2])
                     movie_title_items.append(title_item_check)
@@ -1340,7 +1345,7 @@ def scrape_media_folders_for_csv():
                 tv_scrape_info = guessit.guessit(tv_found)
                 title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
 
-                if "," in title_item_check[2]:
+                if ',' in title_item_check[2]:
                     title_item_check.append(title_item_check[2][-5:-1])
                     title_item_check.remove(title_item_check[2])
                 tv_title_items.append(title_item_check)
@@ -1355,7 +1360,7 @@ def scrape_media_folders_for_csv():
                     tv_scrape_info = guessit.guessit(tv_found)
                     title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
 
-                    if "," in title_item_check[2]:
+                    if ',' in title_item_check[2]:
                         title_item_check.append(title_item_check[2][-5:-1])
                         title_item_check.remove(title_item_check[2])
                     tv_title_items.append(title_item_check)
@@ -1374,7 +1379,7 @@ def scrape_media_folders_for_csv():
         separator_3()
 
     naming_scan_end = time.time()
-    print("TIME ELAPSED: ", naming_scan_end - naming_scan_start)
+    print('TIME ELAPSED: ', naming_scan_end - naming_scan_start)
     separator_2()
 
 
@@ -1601,6 +1606,7 @@ def select_users_indices_to_compare():
     except (OSError, TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
         separator_3()
+
     print('COMPLETE: COMPARISON FILE(S) CAN BE FOUND IN THE USER MEDIA-INDEX FOLDER, FILES SUB-FOLDER')
     separator_3()
 
@@ -1887,7 +1893,7 @@ def walk_directories_and_create_indices():
             csv_writer.writerow(tv_row)
 
     path_scan_end = time.time()
-    print("TIME ELAPSED: ", path_scan_end - path_scan_start)
+    print('TIME ELAPSED: ', path_scan_end - path_scan_start)
     separator_2()
 
 
