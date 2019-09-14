@@ -17,7 +17,6 @@ from ascii_graph import Pyasciigraph
 from datetime import datetime
 from tkinter import filedialog, Tk
 
-
 date_string = str(datetime.today().strftime('%Y_%m_%d'))
 
 extensions = ('.3gp', '.asf', '.asx', '.avc', '.avi', '.bdmv', '.bin', '.bivx', '.dat', '.disc', '.divx', '.dv',
@@ -1536,8 +1535,10 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
 
                     title_search_sub_query_input = int(input('ENTER #: '))
                     separator_3()
+
                     if title_search_sub_query_input == 0:
                         media_index_home()
+
                     elif title_search_sub_query_input == 1:
 
                         episode_sub_query_input = int(input('ENTER EPISODE NUMBER (#): '))
