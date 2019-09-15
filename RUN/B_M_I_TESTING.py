@@ -84,7 +84,9 @@ def create_movie_information_index():
                     try:
 
                         movie_file_size = os.path.getsize(movie_file[0])
-                        movie_results_list[movie_title_key]['FILE-SIZE'] = movie_file_size
+                        movie_file_size_in_mb = (int(movie_file_size) / 1048576)
+                        movie_file_size_in_mb_rounded = str(round(movie_file_size_in_mb, 2))
+                        movie_results_list[movie_title_key]['FILE-SIZE'] = movie_file_size_in_mb_rounded
 
                     except OSError as e:
                         print('OS ERROR / FILE-SIZE: ', e)
@@ -199,7 +201,9 @@ def create_tv_information_index():
                     try:
 
                         tv_show_file_size = os.path.getsize(tv_file[0])
-                        tv_results_list[tv_title_key]['FILE-SIZE'] = tv_show_file_size
+                        tv_show_file_size_in_mb = (int(tv_show_file_size) / 1048576)
+                        tv_show_file_size_in_mb_rounded = str(round(tv_show_file_size_in_mb, 2))
+                        tv_results_list[tv_title_key]['FILE-SIZE'] = tv_show_file_size_in_mb_rounded
 
                     except OSError as e:
                         print('OS ERROR / FILE-SIZE: ', e)
