@@ -532,7 +532,9 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
             for year_values, value in sorted(movie_years_dict.items()):
                 movie_year_totals_dict[year_values] = len(value)
             x, y = zip(*sorted(movie_year_totals_dict.items()))
-            plt.bar(x, y)
+
+            plt.figure(figsize=[12, 6])
+            plt.bar(x, y, color='#A569BD')
             plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_YEAR_RESULTS_'.format(user_name) +
                                           date_string + '.png')
             plt.savefig(plt_path)
@@ -558,7 +560,9 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
             for year_values, value in sorted(tv_years_dict.items()):
                 tv_year_totals_dict[year_values] = len(value)
             x, y = zip(*sorted(tv_year_totals_dict.items()))
-            plt.bar(x, y)
+
+            plt.figure(figsize=[12, 6])
+            plt.bar(x, y, color='#A569BD')
             plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_YEAR_RESULTS_'.format(user_name) +
                                           date_string + '.png')
             plt.savefig(plt_path)
@@ -584,7 +588,9 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
             for year_values, value in sorted(movie_decades_dict.items()):
                 movie_decades_totals_dict[year_values] = len(value)
             x, y = zip(*movie_decades_totals_dict.items())
-            plt.bar(x, y, width=5)
+
+            plt.figure(figsize=[12, 6])
+            plt.bar(x, y, width=5, color='#A569BD')
             plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_DECADE_RESULTS_'.format(user_name) +
                                           date_string + '.png')
             plt.savefig(plt_path)
@@ -609,7 +615,9 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
             for year_values, value in sorted(tv_decades_amount_dict.items()):
                 tv_decades_totals_dict[year_values] = len(value)
             x, y = zip(*tv_decades_totals_dict.items())
-            plt.bar(x, y, width=5)
+
+            plt.figure(figsize=[12, 6])
+            plt.bar(x, y, width=5, color='#A569BD')
             plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_DECADE_RESULTS_'.format(user_name) +
                                           date_string + '.png')
             plt.savefig(plt_path)
@@ -1006,7 +1014,9 @@ def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_
             for movie_file_type_values, value in sorted(movie_extensions_dictionary.items()):
                 movie_file_type_totals[movie_file_type_values] = len(value)
             x, y = zip(*sorted(movie_file_type_totals.items()))
-            plt.bar(x, y)
+
+            plt.figure(figsize=[12, 6])
+            plt.bar(x, y, width=0.3, color='#A569BD')
             plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_FILETYPE_RESULTS_'.format(user_name) +
                                           date_string + '.png')
             plt.savefig(plt_path)
@@ -1040,7 +1050,10 @@ def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_
             for tv_file_type_values, value in sorted(tv_extensions_dictionary.items()):
                 tv_file_type_totals[tv_file_type_values] = len(value)
             x, y = zip(*sorted(tv_file_type_totals.items()))
-            plt.bar(x, y)
+
+            plt.figure(figsize=[12, 6])
+            plt.bar(x, y, width=0.3, color='#A569BD')
+
             plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_FILETYPE_RESULTS_'.format(user_name) +
                                           date_string + '.png')
             plt.savefig(plt_path)
