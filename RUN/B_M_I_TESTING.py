@@ -871,7 +871,7 @@ def media_queries_sub_menu():
             query_movie_information_index(movie_query=movie_title_query_input)
 
         elif title_search_type == 5:
-            tv_episode_query_input = str(input('ENTER SEARCH QUERY (MOVIES): ').lower())
+            tv_episode_query_input = str(input('ENTER SEARCH QUERY (TV SHOWS): ').lower())
             separator_3()
             query_tv_information_index(tv_episode_query=tv_episode_query_input)
 
@@ -1068,6 +1068,10 @@ def query_movie_information_index(movie_query):
                     print('MOVIE FILE-TYPE: ', '\n', movie_file[4])
                     separator_2()
 
+                    if int(len(movie_file[8])) != 0:
+                        print('FILE-SIZE: ', '\n', movie_file[8], 'MB')
+                        separator_2()
+
                     if int(len(movie_file[7])) != 0:
                         print('RUN-TIME: ', '\n', movie_file[7])
                         separator_2()
@@ -1101,7 +1105,7 @@ def query_movie_information_index(movie_query):
 
 def query_tv_information_index(tv_episode_query):
     with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)), encoding='UTF-8') as f:
-        tv_files_results_list = list(csv.reader(f))
+        tv_files_results_list = csv.reader(f)
 
         try:
 
@@ -1125,6 +1129,10 @@ def query_tv_information_index(tv_episode_query):
                     separator_2()
                     print('FILE-TYPE: ', '\n', tv_file[7])
                     separator_2()
+
+                    if int(len(tv_file[11])) != 0:
+                        print('FILE-SIZE: ', '\n', tv_file[11], 'MB')
+                        separator_2()
 
                     if int(len(tv_file[10])) != 0:
                         print('RUN-TIME: ', '\n', tv_file[10])
