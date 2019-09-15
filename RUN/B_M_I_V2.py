@@ -360,14 +360,17 @@ def directory_selection():
 
 
 def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_options_int):
-    m_ten_eighty_found_list = []
-    m_seven_twenty_found_list = []
-    m_standard_def_found_list = []
+    m_4k_found_list = []
+    m_1080_found_list = []
+    m_720_found_list = []
+    m_640_found_list = []
     m_empty_response_list = []
     movies_total_list = []
-    tv_ten_eighty_found_list = []
-    tv_seven_twenty_found_list = []
-    tv_standard_def_found_list = []
+
+    tv_4k_found_list = []
+    tv_1080_found_list = []
+    tv_720_found_list = []
+    tv_640_found_list = []
     tv_empty_response_list = []
     tv_total_list = []
 
@@ -379,61 +382,74 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
         tv_files_results_list = list(csv.reader(f))
 
         for res in movie_files_results_list:
-            if re.findall(r'19\d{2}x', res[3]):
-                m_ten_eighty_found_list.append(res)
+            if re.findall(r'[2-9]\d{3}x', res[3]):
+                m_4k_found_list.append(res)
+
+            elif re.findall(r'19\d{2}x', res[3]):
+                m_1080_found_list.append(res)
 
             elif re.findall(r'1[0-8]\d{2}x', res[3]):
-                m_seven_twenty_found_list.append(res)
+                m_720_found_list.append(res)
 
             elif re.findall(r'\d{3}x', res[3]):
-                m_standard_def_found_list.append(res)
+                m_640_found_list.append(res)
 
             else:
                 m_empty_response_list.append(+1)
             movies_total_list.append(+1)
-        movies_graph_terminal_results = [('1080p', float(len(m_ten_eighty_found_list))),
-                                         ('720p', float(len(m_seven_twenty_found_list))),
-                                         ('SD (Below 720p)', float(len(m_standard_def_found_list)))]
-        movie_data = [float(len(m_ten_eighty_found_list)), float(len(m_seven_twenty_found_list)),
-                      float(len(m_standard_def_found_list))]
+
+        movies_graph_terminal_results = [('1080p', float(len(m_1080_found_list))),
+                                         ('720p', float(len(m_720_found_list))),
+                                         ('640p', float(len(m_640_found_list))),
+                                         ('4k', float(len(m_4k_found_list)))]
+
+        movie_data = [float(len(m_1080_found_list)), float(len(m_720_found_list)),
+                      float(len(m_640_found_list)), float(len(m_4k_found_list))]
 
         for res in tv_files_results_list:
-            if re.findall(r'19\d{2}x', res[6]):
-                tv_ten_eighty_found_list.append(res)
+            if re.findall(r'[2-9]\d{3}x', res[6]):
+                tv_4k_found_list.append(res)
+
+            elif re.findall(r'19\d{2}x', res[6]):
+                tv_1080_found_list.append(res)
 
             elif re.findall(r'1[0-8]\d{2}x', res[6]):
-                tv_seven_twenty_found_list.append(res)
+                tv_720_found_list.append(res)
 
             elif re.findall(r'\d{3}x', res[6]):
-                tv_standard_def_found_list.append(res)
+                tv_640_found_list.append(res)
 
             else:
                 tv_empty_response_list.append(+1)
             tv_total_list.append(+1)
-        tv_shows_graph_terminal_results = [('1080p', float(len(tv_ten_eighty_found_list))),
-                                           ('720p', float(len(tv_seven_twenty_found_list))),
-                                           ('SD (Below 720p)', float(len(tv_standard_def_found_list)))]
-        tv_data = [float(len(tv_ten_eighty_found_list)), float(len(tv_seven_twenty_found_list)),
-                   float(len(tv_standard_def_found_list))]
+
+        tv_shows_graph_terminal_results = [('1080p', float(len(tv_1080_found_list))),
+                                           ('720p', float(len(tv_720_found_list))),
+                                           ('640p', float(len(tv_640_found_list))),
+                                           ('4k', float(len(tv_4k_found_list)))]
+
+        tv_data = [float(len(tv_1080_found_list)), float(len(tv_720_found_list)),
+                   float(len(tv_640_found_list)), float(len(tv_4k_found_list))]
 
         def format_data(percent, all_values):
             absolute = int(percent / 100. * numpy.sum(all_values))
             return '{:.1f}%\n({:d})'.format(percent, absolute)
 
-        labels = ['1080p', '720p', 'SD (Below 720p)']
-        colors = ['#85c1e9', '#a569bd', '#808b96']
+        labels = ['1080p', '720p', '640p', '4k']
+        colors = ['#5C68FC', '#85C1E9', '#A569BD', '#808B96']
 
         if picture_graph_options_int == 5:
-            fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect='equal'))
+            fig, ax = plt.subplots(figsize=(12, 6), subplot_kw=dict(aspect='equal'))
             wedges, texts, auto_texts = ax.pie(movie_data, autopct=lambda pct: format_data(pct, movie_data),
-                                               shadow=True, colors=colors, textprops=dict(color='black'))
+                                               shadow=True, colors=colors, textprops=dict(color='black'),
+                                               pctdistance=1.2, labeldistance=1.0)
 
             ax.legend(wedges, labels,
                       title='RESOLUTIONS',
-                      loc='center left',
+                      loc='center right',
                       bbox_to_anchor=(1, 0, 0.5, 1))
 
-            plt.setp(auto_texts, size=9, weight='bold')
+            plt.setp(auto_texts, size=8, weight='bold')
             ax.set_title('MOVIE_RESOLUTION_RESULTS')
             plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_RESOLUTION_RESULTS_'.format(user_name) +
                                           date_string + '.png')
@@ -449,16 +465,17 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
             separator_3()
 
         elif picture_graph_options_int == 6:
-            fig, ax = plt.subplots(figsize=(20, 10), subplot_kw=dict(aspect='equal'))
+            fig, ax = plt.subplots(figsize=(12, 6), subplot_kw=dict(aspect='equal'))
             wedges, texts, auto_texts = ax.pie(tv_data, autopct=lambda pct: format_data(pct, tv_data),
-                                               shadow=True, colors=colors, textprops=dict(color='black'))
+                                               shadow=True, colors=colors, textprops=dict(color='black'),
+                                               pctdistance=1.2, labeldistance=1.0)
 
             ax.legend(wedges, labels,
                       title='RESOLUTIONS',
-                      loc='center left',
+                      loc='center right',
                       bbox_to_anchor=(1, 0, 0.5, 1))
 
-            plt.setp(auto_texts, size=9, weight='bold')
+            plt.setp(auto_texts, size=8, weight='bold')
             ax.set_title('TV_SHOW_RESOLUTION_RESULTS')
             plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_RESOLUTION_RESULTS_'.format(user_name) +
                                           date_string + '.png')
