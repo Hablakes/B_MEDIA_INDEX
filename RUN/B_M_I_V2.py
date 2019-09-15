@@ -14,6 +14,8 @@ import pymediainfo
 import matplotlib.pylab as plt
 
 from ascii_graph import Pyasciigraph
+from ascii_graph.colors import *
+from ascii_graph.colordata import vcolor
 from datetime import datetime
 from tkinter import filedialog, Tk
 
@@ -431,6 +433,8 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
         tv_data = [float(len(tv_1080_found_list)), float(len(tv_720_found_list)),
                    float(len(tv_640_found_list)), float(len(tv_4k_found_list))]
 
+        graph_color_pattern = [IBlu, BCya, Blu, Pur]
+
         def format_data(percent, all_values):
             absolute = int(percent / 100. * numpy.sum(all_values))
             return '{:.1f}%\n({:d})'.format(percent, absolute)
@@ -459,8 +463,9 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
             plt.show()
 
         elif terminal_graph_options_int == 5:
+            color_movies_graph_terminal_results = vcolor(movies_graph_terminal_results, graph_color_pattern)
             graph = Pyasciigraph()
-            for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES: ', movies_graph_terminal_results):
+            for line in graph.graph('MOVIES: RESOLUTION PERCENTAGES: ', color_movies_graph_terminal_results):
                 print('\n', line)
             separator_3()
 
@@ -485,8 +490,9 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
             plt.show()
 
         elif terminal_graph_options_int == 6:
+            color_tv_shows_graph_terminal_results = vcolor(tv_shows_graph_terminal_results, graph_color_pattern)
             graph = Pyasciigraph()
-            for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES: ', tv_shows_graph_terminal_results):
+            for line in graph.graph('TV SHOWS: RESOLUTION PERCENTAGES: ', color_tv_shows_graph_terminal_results):
                 print('\n', line)
             separator_3()
 
@@ -500,6 +506,8 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
     movie_decades_totals_dict = {}
     tv_year_totals_dict = {}
     tv_decades_totals_dict = {}
+
+    graph_color_pattern = [IBlu, BCya, Blu, Pur]
 
     with open(os.path.expanduser((index_folder + '/MEDIA_TITLE_INDEX.csv').format(user_name)), encoding='UTF-8') as f:
         media_index_list = list(csv.reader(f))
@@ -550,9 +558,11 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
             for key, value in movie_data:
                 movie_years_terminal_graph_list.append((str(key), value))
+
+            color_movie_years_terminal_graph_list = vcolor(movie_years_terminal_graph_list, graph_color_pattern)
             graph = Pyasciigraph()
 
-            for line in graph.graph('MOVIES: YEAR AMOUNTS: ', movie_years_terminal_graph_list):
+            for line in graph.graph('MOVIES: YEAR AMOUNTS: ', color_movie_years_terminal_graph_list):
                 print('\n', line)
             separator_3()
 
@@ -578,9 +588,11 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
             for key, value in tv_data:
                 tv_years_terminal_graph_list.append((str(key), value))
+
+            color_tv_years_terminal_graph_list = vcolor(tv_years_terminal_graph_list, graph_color_pattern)
             graph = Pyasciigraph()
 
-            for line in graph.graph('TV SHOWS: YEAR AMOUNTS: ', tv_years_terminal_graph_list):
+            for line in graph.graph('TV SHOWS: YEAR AMOUNTS: ', color_tv_years_terminal_graph_list):
                 print('\n', line)
             separator_3()
 
@@ -605,9 +617,11 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
             for key, value in movie_decades_totals_dict.items():
                 movie_decades_terminal_graph_list.append((str(key), value))
+
+            color_movie_decades_terminal_graph_list = vcolor(movie_decades_terminal_graph_list, graph_color_pattern)
             graph = Pyasciigraph()
 
-            for line in graph.graph('MOVIES: DECADE AMOUNTS: ', movie_decades_terminal_graph_list):
+            for line in graph.graph('MOVIES: DECADE AMOUNTS: ', color_movie_decades_terminal_graph_list):
                 print('\n', line)
             separator_3()
 
@@ -632,9 +646,11 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
             for key, value in tv_decades_totals_dict.items():
                 tv_decades_terminal_graph_list.append((str(key), value))
+
+            color_tv_decades_terminal_graph_list = vcolor(tv_decades_terminal_graph_list, graph_color_pattern)
             graph = Pyasciigraph()
 
-            for line in graph.graph('TV SHOWS: DECADE AMOUNTS: ', tv_decades_terminal_graph_list):
+            for line in graph.graph('TV SHOWS: DECADE AMOUNTS: ', color_tv_decades_terminal_graph_list):
                 print('\n', line)
             separator_3()
 
@@ -994,6 +1010,8 @@ def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_
     tv_extensions_dictionary = {}
     tv_extensions_totals = {}
 
+    graph_color_pattern = [IBlu, BCya, Blu, Pur]
+
     with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(user_name)),
               encoding='UTF-8') as f:
         movie_files_results_list = list(csv.reader(f))
@@ -1032,9 +1050,12 @@ def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_
 
             for key, value in movie_extensions_totals.items():
                 file_type_totals_terminal_graph_list.append((str(key), value))
+
+            color_file_type_totals_terminal_graph_list = vcolor(file_type_totals_terminal_graph_list,
+                                                                graph_color_pattern)
             graph = Pyasciigraph()
 
-            for line in graph.graph('MOVIES: FILE-TYPE AMOUNTS: ', file_type_totals_terminal_graph_list):
+            for line in graph.graph('MOVIES: FILE-TYPE AMOUNTS: ', color_file_type_totals_terminal_graph_list):
                 print('\n', line)
             separator_3()
 
@@ -1069,9 +1090,12 @@ def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_
 
             for key, value in tv_extensions_totals.items():
                 file_type_totals_terminal_graph_list.append((str(key), value))
+
+            color_file_type_totals_terminal_graph_list = vcolor(file_type_totals_terminal_graph_list,
+                                                                graph_color_pattern)
             graph = Pyasciigraph()
 
-            for line in graph.graph('TV SHOWS: FILE-TYPE AMOUNTS: ', file_type_totals_terminal_graph_list):
+            for line in graph.graph('TV SHOWS: FILE-TYPE AMOUNTS: ', color_file_type_totals_terminal_graph_list):
                 print('\n', line)
             separator_3()
 
