@@ -98,6 +98,7 @@ def create_movie_information_index():
                         continue
 
                     for track in test.tracks:
+
                         if track.track_type == 'General':
                             duration = track.other_duration
                             movie_results_list[movie_title_key]['RUN-TIME'] = duration[0]
@@ -129,7 +130,7 @@ def create_movie_information_index():
                         continue
 
             except (OSError, TypeError, ValueError) as e:
-                print('INPUT ERROR: ', e, '\n', 'FILE: ', movie_file[0])
+                print('INPUT ERROR: ', e, '\n', 'MOVIE FILE(S): ', movie_file[0])
                 print('-' * 100)
                 continue
 
@@ -142,8 +143,8 @@ def create_movie_information_index():
             csv_writer.writerow(movie_row)
 
     movie_scan_end = time.time()
-    print('TIME ELAPSED: ', movie_scan_end - movie_scan_start)
-    separator_2()
+    print('MOVIE INFORMATION SCAN - TIME ELAPSED: ', movie_scan_end - movie_scan_start)
+    separator_3()
 
 
 def create_tv_information_index():
@@ -241,7 +242,7 @@ def create_tv_information_index():
                             continue
 
             except (OSError, TypeError, ValueError) as e:
-                print('INPUT ERROR: ', e, '\n', 'FILE: ', tv_file[0])
+                print('INPUT ERROR: ', e, '\n', 'TV-SHOW FILE(S): ', tv_file[0])
                 print('-' * 100)
                 continue
 
@@ -259,8 +260,8 @@ def create_tv_information_index():
             csv_writer.writerow(tv_row)
 
     tv_scan_end = time.time()
-    print('TIME ELAPSED: ', tv_scan_end - tv_scan_start)
-    separator_2()
+    print('TV-SHOWS INFORMATION SCAN - TIME ELAPSED: ', tv_scan_end - tv_scan_start)
+    separator_3()
 
 
 def directory_selection():
@@ -1379,7 +1380,7 @@ def scrape_media_folders_for_csv():
         separator_3()
 
     naming_scan_end = time.time()
-    print('TIME ELAPSED: ', naming_scan_end - naming_scan_start)
+    print('MEDIA TITLES SCAN - TIME ELAPSED: ', naming_scan_end - naming_scan_start)
     separator_2()
 
 
@@ -1893,7 +1894,7 @@ def walk_directories_and_create_indices():
             csv_writer.writerow(tv_row)
 
     path_scan_end = time.time()
-    print('TIME ELAPSED: ', path_scan_end - path_scan_start)
+    print('MEDIA PATH(S) SCAN - TIME ELAPSED: ', path_scan_end - path_scan_start)
     separator_2()
 
 
