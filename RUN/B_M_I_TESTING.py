@@ -83,7 +83,16 @@ def create_movie_information_index():
 
                     try:
 
-                        title = guessit.guessit(movie_filename_key, options={'type': 'movie'})
+                        movie_file_size = os.path.getsize(movie_file[0])
+                        movie_results_list[movie_title_key]['FILE-SIZE'] = movie_file_size
+
+                    except OSError as e:
+                        print('OS ERROR / FILE-SIZE: ', e)
+                        continue
+
+                    try:
+
+                        movie_title = guessit.guessit(movie_filename_key, options={'type': 'movie'})
 
                     except OSError as e:
                         print('OS ERROR / GUESSIT: ', e)
@@ -91,13 +100,13 @@ def create_movie_information_index():
 
                     try:
 
-                        test = pymediainfo.MediaInfo.parse(movie_file[0])
+                        movie_media_info = pymediainfo.MediaInfo.parse(movie_file[0])
 
                     except OSError as e:
                         print('OS ERROR / PY_MEDIA_INFO: ', e)
                         continue
 
-                    for track in test.tracks:
+                    for track in movie_media_info.tracks:
 
                         if track.track_type == 'General':
                             duration = track.other_duration
@@ -105,12 +114,12 @@ def create_movie_information_index():
 
                         elif track.track_type == 'Video':
                             movie_results_list[movie_title_key]['DIRECTORY'] = movie_title_key
-                            movie_results_list[movie_title_key]['TITLE'] = title.get('title')
-                            movie_results_list[movie_title_key]['YEAR'] = title.get('year')
+                            movie_results_list[movie_title_key]['TITLE'] = movie_title.get('title')
+                            movie_results_list[movie_title_key]['YEAR'] = movie_title.get('year')
                             movie_results_list[movie_title_key]['RESOLUTION'] = str(
                                 track.width) + 'x' + str(track.height)
-                            movie_results_list[movie_title_key]['FILE-TYPE'] = title.get('container')
-                            movie_results_list[movie_title_key]['FILENAME'] = movie_filename_key
+                            movie_results_list[movie_title_key]['FILE-TYPE'] = movie_title.get('container')
+                            movie_results_list[movie_title_key]['FILE-NAME'] = movie_filename_key
 
                 elif movie_filename_key.lower().endswith('.nfo'):
 
@@ -138,7 +147,8 @@ def create_movie_information_index():
               encoding='UTF-8', newline='') as f:
 
         csv_writer = csv.DictWriter(f, ['DIRECTORY', 'TITLE', 'YEAR', 'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING',
-                                        'RUN-TIME', 'FILENAME'])
+                                        'RUN-TIME', 'FILE-SIZE', 'FILE-NAME'])
+
         for movie_row in movie_results_list.values():
             csv_writer.writerow(movie_row)
 
@@ -188,7 +198,16 @@ def create_tv_information_index():
 
                     try:
 
-                        title = guessit.guessit(tv_filename_key, options={'type': 'episode'})
+                        tv_show_file_size = os.path.getsize(tv_file[0])
+                        tv_results_list[tv_title_key]['FILE-SIZE'] = tv_show_file_size
+
+                    except OSError as e:
+                        print('OS ERROR / FILE-SIZE: ', e)
+                        continue
+
+                    try:
+
+                        tv_show_title = guessit.guessit(tv_filename_key, options={'type': 'episode'})
 
                     except OSError as e:
                         print('OS ERROR / GUESSIT: ', e)
@@ -196,13 +215,13 @@ def create_tv_information_index():
 
                     try:
 
-                        test = pymediainfo.MediaInfo.parse(tv_file[0])
+                        tv_show_media_info = pymediainfo.MediaInfo.parse(tv_file[0])
 
                     except OSError as e:
                         print('OS ERROR / PY_MEDIA_INFO: ', e)
                         continue
 
-                    for track in test.tracks:
+                    for track in tv_show_media_info.tracks:
 
                         if track.track_type == 'General':
                             duration = track.other_duration
@@ -210,14 +229,14 @@ def create_tv_information_index():
 
                         elif track.track_type == 'Video':
                             tv_results_list[tv_title_key]['DIRECTORY'] = tv_folder_title
-                            tv_results_list[tv_title_key]['TITLE'] = title.get('title')
+                            tv_results_list[tv_title_key]['TITLE'] = tv_show_title.get('title')
                             tv_results_list[tv_title_key]['YEAR'] = tv_folder_year
-                            tv_results_list[tv_title_key]['EPISODE TITLE'] = title.get('episode_title')
-                            tv_results_list[tv_title_key]['SEASON'] = title.get('season')
-                            tv_results_list[tv_title_key]['EPISODE NUMBER'] = title.get('episode')
+                            tv_results_list[tv_title_key]['EPISODE TITLE'] = tv_show_title.get('episode_title')
+                            tv_results_list[tv_title_key]['SEASON'] = tv_show_title.get('season')
+                            tv_results_list[tv_title_key]['EPISODE NUMBER'] = tv_show_title.get('episode')
                             tv_results_list[tv_title_key]['RESOLUTION'] = str(track.width) + 'x' + str(track.height)
-                            tv_results_list[tv_title_key]['FILE-TYPE'] = title.get('container')
-                            tv_results_list[tv_title_key]['FILENAME'] = tv_filename_key
+                            tv_results_list[tv_title_key]['FILE-TYPE'] = tv_show_title.get('container')
+                            tv_results_list[tv_title_key]['FILE-NAME'] = tv_filename_key
 
                 elif tv_filename_key.lower().endswith('.nfo'):
 
@@ -249,7 +268,9 @@ def create_tv_information_index():
     with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)), 'w',
               encoding='UTF-8', newline='') as f:
         csv_writer = csv.DictWriter(f, ['DIRECTORY', 'TITLE', 'YEAR', 'EPISODE TITLE', 'SEASON', 'EPISODE NUMBER',
-                                        'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING', 'RUN-TIME', 'FILENAME'])
+                                        'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING', 'RUN-TIME', 'FILE-SIZE',
+                                        'FILE-NAME'])
+
         for tv_row in tv_results_list.values():
             csv_writer.writerow(tv_row)
 
