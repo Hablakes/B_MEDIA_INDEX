@@ -143,7 +143,7 @@ def create_movie_information_index():
             csv_writer.writerow(movie_row)
 
     movie_scan_end = time.time()
-    print('MOVIE INFORMATION SCAN - TIME ELAPSED: ', movie_scan_end - movie_scan_start)
+    print('MOVIE INFORMATION SCAN COMPLETE - TIME ELAPSED: ', movie_scan_end - movie_scan_start)
     separator_3()
 
 
@@ -260,7 +260,7 @@ def create_tv_information_index():
             csv_writer.writerow(tv_row)
 
     tv_scan_end = time.time()
-    print('TV-SHOWS INFORMATION SCAN - TIME ELAPSED: ', tv_scan_end - tv_scan_start)
+    print('TV-SHOWS INFORMATION SCAN COMPLETE - TIME ELAPSED: ', tv_scan_end - tv_scan_start)
     separator_3()
 
 
@@ -1380,7 +1380,7 @@ def scrape_media_folders_for_csv():
         separator_3()
 
     naming_scan_end = time.time()
-    print('MEDIA TITLES SCAN - TIME ELAPSED: ', naming_scan_end - naming_scan_start)
+    print('MEDIA TITLES SCAN COMPLETE - TIME ELAPSED: ', naming_scan_end - naming_scan_start)
     separator_2()
 
 
@@ -1894,7 +1894,7 @@ def walk_directories_and_create_indices():
             csv_writer.writerow(tv_row)
 
     path_scan_end = time.time()
-    print('MEDIA PATH(S) SCAN - TIME ELAPSED: ', path_scan_end - path_scan_start)
+    print('MEDIA PATHS SCAN COMPLETE - TIME ELAPSED: ', path_scan_end - path_scan_start)
     separator_2()
 
 
