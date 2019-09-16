@@ -94,7 +94,7 @@ def create_movie_information_index():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    movie_hash = str(str(movie_filename_key) + str(movie_file_size))
+                    movie_hash = str(str(movie_filename_key) + '_' + str(movie_file_size))
 
                     try:
 
@@ -115,8 +115,10 @@ def create_movie_information_index():
                     for track in movie_media_info.tracks:
 
                         if track.track_type == 'General':
-                            duration = track.other_duration
-                            movie_results_list[movie_title_key]['RUN-TIME'] = duration[0]
+                            duration_readable = track.other_duration
+                            duration_integer = track.duration
+                            movie_results_list[movie_title_key]['DURATION'] = duration_integer
+                            movie_results_list[movie_title_key]['RUN-TIME'] = duration_readable[0]
 
                         elif track.track_type == 'Video':
                             movie_results_list[movie_title_key]['DIRECTORY'] = movie_title_key
@@ -154,7 +156,7 @@ def create_movie_information_index():
               encoding='UTF-8', newline='') as f:
 
         csv_writer = csv.DictWriter(f, ['DIRECTORY', 'TITLE', 'YEAR', 'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING',
-                                        'RUN-TIME', 'FILE-SIZE', 'FILE-NAME', 'FILE-HASH'])
+                                        'RUN-TIME', 'FILE-SIZE', 'DURATION', 'FILE-NAME', 'FILE-HASH'])
 
         for movie_row in movie_results_list.values():
             csv_writer.writerow(movie_row)
@@ -214,7 +216,7 @@ def create_tv_information_index():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    tv_hash = str(str(tv_filename_key) + str(tv_show_file_size))
+                    tv_hash = str(str(tv_filename_key) + '_' + str(tv_show_file_size))
 
                     try:
 
@@ -235,8 +237,10 @@ def create_tv_information_index():
                     for track in tv_show_media_info.tracks:
 
                         if track.track_type == 'General':
-                            duration = track.other_duration
-                            tv_results_list[tv_title_key]['RUN-TIME'] = duration[0]
+                            duration_readable = track.other_duration
+                            duration_integer = track.duration
+                            tv_results_list[tv_title_key]['DURATION'] = duration_integer
+                            tv_results_list[tv_title_key]['RUN-TIME'] = duration_readable[0]
 
                         elif track.track_type == 'Video':
                             tv_results_list[tv_title_key]['DIRECTORY'] = tv_folder_title
@@ -281,7 +285,7 @@ def create_tv_information_index():
               encoding='UTF-8', newline='') as f:
         csv_writer = csv.DictWriter(f, ['DIRECTORY', 'TITLE', 'YEAR', 'EPISODE TITLE', 'SEASON', 'EPISODE NUMBER',
                                         'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING', 'RUN-TIME', 'FILE-SIZE',
-                                        'FILE-NAME', 'FILE-HASH'])
+                                        'DURATION', 'FILE-NAME', 'FILE-HASH'])
 
         for tv_row in tv_results_list.values():
             csv_writer.writerow(tv_row)
