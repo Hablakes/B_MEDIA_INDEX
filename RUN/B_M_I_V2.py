@@ -94,6 +94,8 @@ def create_movie_information_index():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
+                    movie_hash = str(str(movie_filename_key) + str(movie_file_size))
+
                     try:
 
                         movie_title = guessit.guessit(movie_filename_key, options={'type': 'movie'})
@@ -124,6 +126,7 @@ def create_movie_information_index():
                                 track.width) + 'x' + str(track.height)
                             movie_results_list[movie_title_key]['FILE-TYPE'] = movie_title.get('container')
                             movie_results_list[movie_title_key]['FILE-NAME'] = movie_filename_key
+                            movie_results_list[movie_title_key]['FILE-HASH'] = movie_hash
 
                 elif movie_filename_key.lower().endswith('.nfo'):
 
@@ -151,7 +154,7 @@ def create_movie_information_index():
               encoding='UTF-8', newline='') as f:
 
         csv_writer = csv.DictWriter(f, ['DIRECTORY', 'TITLE', 'YEAR', 'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING',
-                                        'RUN-TIME', 'FILE-SIZE', 'FILE-NAME'])
+                                        'RUN-TIME', 'FILE-SIZE', 'FILE-NAME', 'FILE-HASH'])
 
         for movie_row in movie_results_list.values():
             csv_writer.writerow(movie_row)
@@ -211,6 +214,8 @@ def create_tv_information_index():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
+                    tv_hash = str(str(tv_filename_key) + str(tv_show_file_size))
+
                     try:
 
                         tv_show_title = guessit.guessit(tv_filename_key, options={'type': 'episode'})
@@ -243,6 +248,7 @@ def create_tv_information_index():
                             tv_results_list[tv_title_key]['RESOLUTION'] = str(track.width) + 'x' + str(track.height)
                             tv_results_list[tv_title_key]['FILE-TYPE'] = tv_show_title.get('container')
                             tv_results_list[tv_title_key]['FILE-NAME'] = tv_filename_key
+                            tv_results_list[tv_title_key]['FILE-HASH'] = tv_hash
 
                 elif tv_filename_key.lower().endswith('.nfo'):
 
@@ -275,7 +281,7 @@ def create_tv_information_index():
               encoding='UTF-8', newline='') as f:
         csv_writer = csv.DictWriter(f, ['DIRECTORY', 'TITLE', 'YEAR', 'EPISODE TITLE', 'SEASON', 'EPISODE NUMBER',
                                         'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING', 'RUN-TIME', 'FILE-SIZE',
-                                        'FILE-NAME'])
+                                        'FILE-NAME', 'FILE-HASH'])
 
         for tv_row in tv_results_list.values():
             csv_writer.writerow(tv_row)
