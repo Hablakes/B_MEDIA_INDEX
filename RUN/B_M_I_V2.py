@@ -725,7 +725,7 @@ def media_index_home():
     print('5) COMPARE TWO USERS INFORMATION INDICES         6) DISPLAY LIBRARY TOTALS', '\n')
     print('7) MEDIA INFORMATION QUERIES                     8) SORT OPTIONS', '\n')
     print('9) PICTURE GRAPH OPTIONS                         10) TERMINAL GRAPH OPTIONS', '\n')
-    print('11) SAVED SEARCHES')
+    print('11) TIME INFORMATION QUERIES                     12) SAVED SEARCHES')
     separator_2()
     print('0) EXIT MEDIA-INDEX')
     separator_3()
@@ -866,6 +866,9 @@ def media_index_home():
             terminal_graph_options_sub_menu()
 
         elif lmi_input_action == 11:
+            time_queries_sub_menu()
+
+        elif lmi_input_action == 12:
             saved_searches()
 
     except (TypeError, ValueError) as e:
@@ -885,7 +888,7 @@ def media_queries_sub_menu():
     separator_2()
     print('                                                 6) SEARCH PLOTS FOR KEYWORD(S)')
     separator_2()
-    print('                                                 7) QUERY TOTAL NUMBER (#) OF EPISODES IN A TV SHOW')
+    print('                                                 7) TOTAL NUMBER (#) OF EPISODES IN A TV SHOW')
     separator_2()
     print('0) MAIN MENU')
     separator_3()
@@ -968,6 +971,9 @@ def media_queries_sub_menu():
 
         elif title_search_type == 7:
             total_tv_episodes_in_show_title()
+
+        elif title_search_type == 8:
+            time_queries_sub_menu()
 
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -1820,6 +1826,134 @@ def terminal_graph_options_sub_menu():
         elif 7 <= terminal_graph_options_int <= 8:
             query_file_type_totals(username, picture_graph_options_int='',
                                    terminal_graph_options_int=terminal_graph_options_int)
+
+    except (TypeError, ValueError) as e:
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        separator_3()
+
+
+def time_queries_sub_menu():
+    print(pyfiglet.figlet_format('TIME_QUERIES', font='cybermedium'))
+    separator_3()
+
+    movie_times_list = []
+    tv_times_list = []
+    all_media_times_list = []
+    time_queries_input_list = []
+
+    try:
+
+        print('                                                 1) QUERY DURATION INFORMATION FOR MOVIES', '\n')
+        print('                                                 2) QUERY DURATION INFORMATION FOR TV SHOWS')
+        separator_2()
+        print('                                                 3) QUERY DURATION INFORMATION FOR ALL MEDIA')
+        separator_2()
+        print('0) MAIN MENU')
+        separator_3()
+
+        time_queries_input = input('ENTER #: ')
+        separator_3()
+        time_queries_input_int = int(time_queries_input)
+        time_queries_input_list.append(time_queries_input_int)
+
+    except (TypeError, ValueError) as e:
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        separator_3()
+
+    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as f:
+        movie_files_results_list = csv.reader(f)
+
+        for movie_times in movie_files_results_list:
+            movie_times_list.append(movie_times[9])
+            all_media_times_list.append(movie_times[9])
+
+    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as f:
+        tv_files_results_list = csv.reader(f)
+
+        for tv_show_times in tv_files_results_list:
+            tv_times_list.append(tv_show_times[12])
+            all_media_times_list.append(tv_show_times[12])
+
+    try:
+
+        if int(time_queries_input_list[0]) == 0:
+            media_index_home()
+
+        elif int(time_queries_input_list[0]) == 1:
+            movie_times_total = 0
+
+            for found_movie_times in movie_times_list:
+                movie_times_total = movie_times_total + int(found_movie_times)
+            movie_times_total_readable_seconds = int(movie_times_total) // 1000
+            movie_times_total_readable_minutes = int(movie_times_total_readable_seconds) // 60
+            movie_times_total_readable_hours = int(movie_times_total_readable_minutes) // 60
+
+            print('TOTAL DURATION FOR ALL MOVIES (IN SECONDS): ', movie_times_total_readable_seconds)
+            separator_1()
+            print('TOTAL DURATION FOR ALL MOVIES (IN MINUTES): ', movie_times_total_readable_minutes)
+            separator_1()
+            print('TOTAL DURATION FOR ALL MOVIES (IN HOURS): ', movie_times_total_readable_hours)
+            separator_3()
+
+        elif int(time_queries_input_list[0]) == 2:
+            tv_times_total = 0
+
+            for found_tv_times in tv_times_list:
+                tv_times_total = tv_times_total + int(found_tv_times)
+            tv_times_total_readable_seconds = int(tv_times_total) // 1000
+            tv_times_total_readable_minutes = int(tv_times_total_readable_seconds) // 60
+            tv_times_total_readable_hours = int(tv_times_total_readable_minutes) // 60
+
+            print('TOTAL DURATION FOR ALL TV SHOWS (IN SECONDS): ', tv_times_total_readable_seconds)
+            separator_1()
+            print('TOTAL DURATION FOR ALL TV SHOWS (IN MINUTES): ', tv_times_total_readable_minutes)
+            separator_1()
+            print('TOTAL DURATION FOR ALL TV SHOWS (IN HOURS): ', tv_times_total_readable_hours)
+            separator_3()
+
+        elif int(time_queries_input_list[0]) == 3:
+            movie_times_total = 0
+            tv_times_total = 0
+
+            for found_movie_times in movie_times_list:
+                movie_times_total = movie_times_total + int(found_movie_times)
+
+            movie_times_total_readable_seconds = int(movie_times_total) // 1000
+            movie_times_total_readable_minutes = int(movie_times_total_readable_seconds) // 60
+            movie_times_total_readable_hours = int(movie_times_total_readable_minutes) // 60
+
+            for found_tv_times in tv_times_list:
+                tv_times_total = tv_times_total + int(found_tv_times)
+
+            tv_times_total_readable_seconds = int(tv_times_total) // 1000
+            tv_times_total_readable_minutes = int(tv_times_total_readable_seconds) // 60
+            tv_times_total_readable_hours = int(tv_times_total_readable_minutes) // 60
+
+            all_media_times_total = int(movie_times_total) + int(tv_times_total)
+            all_times_total_readable_seconds = int(all_media_times_total) // 1000
+            all_times_total_readable_minutes = int(all_times_total_readable_seconds) // 60
+            all_times_total_readable_hours = int(all_times_total_readable_minutes) // 60
+
+            print('TOTAL DURATION FOR ALL MOVIES (IN SECONDS): ', movie_times_total_readable_seconds)
+            separator_1()
+            print('TOTAL DURATION FOR ALL MOVIES (IN MINUTES): ', movie_times_total_readable_minutes)
+            separator_1()
+            print('TOTAL DURATION FOR ALL MOVIES (IN HOURS): ', movie_times_total_readable_hours)
+            separator_3()
+            print('TOTAL DURATION FOR ALL TV SHOWS (IN SECONDS): ', tv_times_total_readable_seconds)
+            separator_1()
+            print('TOTAL DURATION FOR ALL TV SHOWS (IN MINUTES): ', tv_times_total_readable_minutes)
+            separator_1()
+            print('TOTAL DURATION FOR ALL TV SHOWS (IN HOURS): ', tv_times_total_readable_hours)
+            separator_3()
+            print('TOTAL DURATION FOR ALL MEDIA (IN SECONDS): ', all_times_total_readable_seconds)
+            separator_1()
+            print('TOTAL DURATION FOR ALL MEDIA (IN MINUTES): ', all_times_total_readable_minutes)
+            separator_1()
+            print('TOTAL DURATION FOR ALL MEDIA (IN HOURS): ', all_times_total_readable_hours)
+            separator_3()
 
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
