@@ -1893,7 +1893,8 @@ def time_queries_sub_menu():
             movie_times_total_readable_seconds = int(movie_times_total) // 1000
             movie_times_total_readable_minutes = int(movie_times_total_readable_seconds) // 60
             movie_times_total_readable_hours = int(movie_times_total_readable_minutes) // 60
-            movie_times_total_readable_years = float(int(movie_times_total_readable_hours) // 8760)
+            movie_times_total_readable_years = int(movie_times_total_readable_hours) / 8760
+            rounded_movie_times_total_readable_years = round(movie_times_total_readable_years, 2)
 
             print('TOTAL DURATION FOR ALL MOVIES (IN SECONDS): ', movie_times_total_readable_seconds)
             separator_1()
@@ -1901,7 +1902,7 @@ def time_queries_sub_menu():
             separator_1()
             print('TOTAL DURATION FOR ALL MOVIES (IN HOURS): ', movie_times_total_readable_hours)
             separator_2()
-            print('TOTAL DURATION FOR ALL MOVIES (IN YEARS): ', movie_times_total_readable_years)
+            print('TOTAL DURATION FOR ALL MOVIES (IN YEARS): ', rounded_movie_times_total_readable_years)
             separator_3()
 
         elif int(time_queries_input_list[0]) == 2:
@@ -1916,7 +1917,8 @@ def time_queries_sub_menu():
             tv_times_total_readable_seconds = int(tv_times_total) // 1000
             tv_times_total_readable_minutes = int(tv_times_total_readable_seconds) // 60
             tv_times_total_readable_hours = int(tv_times_total_readable_minutes) // 60
-            tv_times_total_readable_years = float(int(tv_times_total_readable_hours) // 8760)
+            tv_times_total_readable_years = float(int(tv_times_total_readable_hours) / 8760)
+            rounded_tv_times_total_readable_years = round(tv_times_total_readable_years, 2)
 
             print('TOTAL DURATION FOR ALL TV SHOWS (IN SECONDS): ', tv_times_total_readable_seconds)
             separator_1()
@@ -1924,7 +1926,7 @@ def time_queries_sub_menu():
             separator_1()
             print('TOTAL DURATION FOR ALL TV SHOWS (IN HOURS): ', tv_times_total_readable_hours)
             separator_2()
-            print('TOTAL DURATION FOR ALL TV SHOWS (IN YEARS): ', tv_times_total_readable_years)
+            print('TOTAL DURATION FOR ALL TV SHOWS (IN YEARS): ', rounded_tv_times_total_readable_years)
             separator_3()
 
         elif int(time_queries_input_list[0]) == 3:
@@ -1940,7 +1942,8 @@ def time_queries_sub_menu():
             movie_times_total_readable_seconds = int(movie_times_total) // 1000
             movie_times_total_readable_minutes = int(movie_times_total_readable_seconds) // 60
             movie_times_total_readable_hours = int(movie_times_total_readable_minutes) // 60
-            movie_times_total_readable_years = float(int(movie_times_total_readable_hours) // 8760)
+            movie_times_total_readable_years = int(movie_times_total_readable_hours) / 8760
+            rounded_movie_times_total_readable_years = round(movie_times_total_readable_years, 2)
 
             for found_tv_times in tv_times_list:
                 stripped_tv_time = found_tv_times.rsplit('.')[-1]
@@ -1951,13 +1954,15 @@ def time_queries_sub_menu():
             tv_times_total_readable_seconds = int(tv_times_total) // 1000
             tv_times_total_readable_minutes = int(tv_times_total_readable_seconds) // 60
             tv_times_total_readable_hours = int(tv_times_total_readable_minutes) // 60
-            tv_times_total_readable_years = float(int(tv_times_total_readable_hours) // 8760)
+            tv_times_total_readable_years = int(tv_times_total_readable_hours) / 8760
+            rounded_tv_times_total_readable_years = round(tv_times_total_readable_years, 2)
 
             all_media_times_total = int(movie_times_total) + int(tv_times_total)
             all_times_total_readable_seconds = int(all_media_times_total) // 1000
             all_times_total_readable_minutes = int(all_times_total_readable_seconds) // 60
             all_times_total_readable_hours = int(all_times_total_readable_minutes) // 60
-            all_times_total_readable_years = float(int(all_times_total_readable_hours) // 8760)
+            all_times_total_readable_years = int(all_times_total_readable_hours) / 8760
+            rounded_all_times_total_readable_years = round(all_times_total_readable_years, 2)
 
             print('TOTAL DURATION FOR ALL MOVIES (IN SECONDS): ', movie_times_total_readable_seconds)
             separator_1()
@@ -1965,7 +1970,7 @@ def time_queries_sub_menu():
             separator_1()
             print('TOTAL DURATION FOR ALL MOVIES (IN HOURS): ', movie_times_total_readable_hours)
             separator_2()
-            print('TOTAL DURATION FOR ALL MOVIES (IN YEARS): ', movie_times_total_readable_years)
+            print('TOTAL DURATION FOR ALL MOVIES (IN YEARS): ', rounded_movie_times_total_readable_years)
             separator_3()
             print('TOTAL DURATION FOR ALL TV SHOWS (IN SECONDS): ', tv_times_total_readable_seconds)
             separator_1()
@@ -1973,7 +1978,7 @@ def time_queries_sub_menu():
             separator_1()
             print('TOTAL DURATION FOR ALL TV SHOWS (IN HOURS): ', tv_times_total_readable_hours)
             separator_2()
-            print('TOTAL DURATION FOR ALL TV SHOWS (IN YEARS): ', tv_times_total_readable_years)
+            print('TOTAL DURATION FOR ALL TV SHOWS (IN YEARS): ', rounded_tv_times_total_readable_years)
             separator_3()
             print('TOTAL DURATION FOR ALL MEDIA (IN SECONDS): ', all_times_total_readable_seconds)
             separator_1()
@@ -1981,7 +1986,7 @@ def time_queries_sub_menu():
             separator_1()
             print('TOTAL DURATION FOR ALL MEDIA (IN HOURS): ', all_times_total_readable_hours)
             separator_2()
-            print('TOTAL DURATION FOR ALL MEDIA (IN YEARS): ', all_times_total_readable_years)
+            print('TOTAL DURATION FOR ALL MEDIA (IN YEARS): ', rounded_all_times_total_readable_years)
             separator_3()
 
     except (TypeError, ValueError) as e:
