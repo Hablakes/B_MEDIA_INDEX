@@ -371,7 +371,7 @@ def directory_selection():
         separator_3()
 
 
-def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_options_int):
+def graph_options_advanced(picture_graph_options_int, terminal_graph_options_int):
     m_4k_found_list = []
     m_1080_found_list = []
     m_720_found_list = []
@@ -386,10 +386,10 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
     tv_empty_response_list = []
     tv_total_list = []
 
-    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(user_name)),
+    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as f:
         movie_files_results_list = list(csv.reader(f))
-    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(user_name)),
+    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as f:
         tv_files_results_list = list(csv.reader(f))
 
@@ -465,7 +465,7 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
 
             plt.setp(auto_texts, size=8, weight='bold')
             ax.set_title('MOVIE_RESOLUTION_RESULTS')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_RESOLUTION_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_RESOLUTION_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -492,7 +492,7 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
 
             plt.setp(auto_texts, size=8, weight='bold')
             ax.set_title('TV_SHOW_RESOLUTION_RESULTS')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_RESOLUTION_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_RESOLUTION_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -507,7 +507,7 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
             separator_3()
 
 
-def graph_options_base(user_name, picture_graph_options_int, terminal_graph_options_int):
+def graph_options_base(picture_graph_options_int, terminal_graph_options_int):
     movie_years_dict = {}
     movie_decades_dict = {}
     tv_years_dict = {}
@@ -519,7 +519,7 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
     graph_color_pattern = [IBlu, BCya, Blu, Pur]
 
-    with open(os.path.expanduser((index_folder + '/MEDIA_TITLE_INDEX.csv').format(user_name)), encoding='UTF-8') as f:
+    with open(os.path.expanduser((index_folder + '/MEDIA_TITLE_INDEX.csv').format(username)), encoding='UTF-8') as f:
         media_index_list = list(csv.reader(f))
 
         for title_item in media_index_list:
@@ -553,7 +553,7 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
             plt.figure(figsize=[12, 6])
             plt.bar(x, y, color='#A569BD')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_YEAR_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_YEAR_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -583,7 +583,7 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
             plt.figure(figsize=[12, 6])
             plt.bar(x, y, color='#A569BD')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_YEAR_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_YEAR_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -613,7 +613,7 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
             plt.figure(figsize=[12, 6])
             plt.bar(x, y, width=5, color='#A569BD')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_DECADE_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_DECADE_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -642,7 +642,7 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
             plt.figure(figsize=[12, 6])
             plt.bar(x, y, width=5, color='#A569BD')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_DECADE_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_DECADE_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -1004,15 +1004,15 @@ def picture_graph_options_sub_menu():
             media_index_home()
 
         elif 1 <= picture_graph_options_int <= 4:
-            graph_options_base(username, picture_graph_options_int=picture_graph_options_int,
+            graph_options_base(picture_graph_options_int=picture_graph_options_int,
                                terminal_graph_options_int='')
 
         elif 5 <= picture_graph_options_int <= 6:
-            graph_options_advanced(username, picture_graph_options_int=picture_graph_options_int,
+            graph_options_advanced(picture_graph_options_int=picture_graph_options_int,
                                    terminal_graph_options_int='')
 
         elif 7 <= picture_graph_options_int <= 8:
-            query_file_type_totals(username, picture_graph_options_int=picture_graph_options_int,
+            query_file_type_totals(picture_graph_options_int=picture_graph_options_int,
                                    terminal_graph_options_int='')
 
     except (TypeError, ValueError) as e:
@@ -1020,7 +1020,7 @@ def picture_graph_options_sub_menu():
         separator_3()
 
 
-def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_options_int):
+def query_file_type_totals(picture_graph_options_int, terminal_graph_options_int):
     movie_extensions_dictionary = {}
     movie_extensions_totals = {}
     tv_extensions_dictionary = {}
@@ -1028,10 +1028,10 @@ def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_
 
     graph_color_pattern = [IBlu, BCya, Blu, Pur]
 
-    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(user_name)),
+    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as f:
         movie_files_results_list = list(csv.reader(f))
-    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(user_name)),
+    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as f:
         tv_files_results_list = list(csv.reader(f))
 
@@ -1051,7 +1051,7 @@ def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_
 
             plt.figure(figsize=[12, 6])
             plt.bar(x, y, width=0.3, color='#A569BD')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_FILETYPE_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_FILETYPE_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -1091,7 +1091,7 @@ def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_
             plt.figure(figsize=[12, 6])
             plt.bar(x, y, width=0.3, color='#A569BD')
 
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_FILETYPE_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_FILETYPE_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -1816,15 +1816,15 @@ def terminal_graph_options_sub_menu():
             media_index_home()
 
         elif 1 <= terminal_graph_options_int <= 4:
-            graph_options_base(username, picture_graph_options_int='',
+            graph_options_base(picture_graph_options_int='',
                                terminal_graph_options_int=terminal_graph_options_int)
 
         elif 5 <= terminal_graph_options_int <= 6:
-            graph_options_advanced(username, picture_graph_options_int='',
+            graph_options_advanced(picture_graph_options_int='',
                                    terminal_graph_options_int=terminal_graph_options_int)
 
         elif 7 <= terminal_graph_options_int <= 8:
-            query_file_type_totals(username, picture_graph_options_int='',
+            query_file_type_totals(picture_graph_options_int='',
                                    terminal_graph_options_int=terminal_graph_options_int)
 
     except (TypeError, ValueError) as e:
