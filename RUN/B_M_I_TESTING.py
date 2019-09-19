@@ -371,7 +371,7 @@ def directory_selection():
         separator_3()
 
 
-def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_options_int):
+def graph_options_advanced(picture_graph_options_int, terminal_graph_options_int):
     m_4k_found_list = []
     m_1080_found_list = []
     m_720_found_list = []
@@ -386,10 +386,10 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
     tv_empty_response_list = []
     tv_total_list = []
 
-    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(user_name)),
+    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as f:
         movie_files_results_list = list(csv.reader(f))
-    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(user_name)),
+    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as f:
         tv_files_results_list = list(csv.reader(f))
 
@@ -465,7 +465,7 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
 
             plt.setp(auto_texts, size=8, weight='bold')
             ax.set_title('MOVIE_RESOLUTION_RESULTS')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_RESOLUTION_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_RESOLUTION_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -492,7 +492,7 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
 
             plt.setp(auto_texts, size=8, weight='bold')
             ax.set_title('TV_SHOW_RESOLUTION_RESULTS')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_RESOLUTION_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_RESOLUTION_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -507,7 +507,7 @@ def graph_options_advanced(user_name, picture_graph_options_int, terminal_graph_
             separator_3()
 
 
-def graph_options_base(user_name, picture_graph_options_int, terminal_graph_options_int):
+def graph_options_base(picture_graph_options_int, terminal_graph_options_int):
     movie_years_dict = {}
     movie_decades_dict = {}
     tv_years_dict = {}
@@ -519,7 +519,7 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
     graph_color_pattern = [IBlu, BCya, Blu, Pur]
 
-    with open(os.path.expanduser((index_folder + '/MEDIA_TITLE_INDEX.csv').format(user_name)), encoding='UTF-8') as f:
+    with open(os.path.expanduser((index_folder + '/MEDIA_TITLE_INDEX.csv').format(username)), encoding='UTF-8') as f:
         media_index_list = list(csv.reader(f))
 
         for title_item in media_index_list:
@@ -553,7 +553,7 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
             plt.figure(figsize=[12, 6])
             plt.bar(x, y, color='#A569BD')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_YEAR_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_YEAR_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -583,7 +583,7 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
             plt.figure(figsize=[12, 6])
             plt.bar(x, y, color='#A569BD')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_YEAR_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_YEAR_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -613,7 +613,7 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
             plt.figure(figsize=[12, 6])
             plt.bar(x, y, width=5, color='#A569BD')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_DECADE_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_DECADE_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -642,7 +642,7 @@ def graph_options_base(user_name, picture_graph_options_int, terminal_graph_opti
 
             plt.figure(figsize=[12, 6])
             plt.bar(x, y, width=5, color='#A569BD')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_DECADE_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_DECADE_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -722,10 +722,11 @@ def media_index_home():
 
     print('1) CHANGE DATABASE DIRECTORIES                   2) CREATE PATH INDICES', '\n')
     print('3) CREATE TITLE INDEX                            4) CREATE MEDIA INFORMATION INDICES', '\n')
-    print('5) COMPARE TWO USERS INFORMATION INDICES         6) DISPLAY LIBRARY TOTALS', '\n')
-    print('7) MEDIA INFORMATION QUERIES                     8) SORT OPTIONS', '\n')
-    print('9) PICTURE GRAPH OPTIONS                         10) TERMINAL GRAPH OPTIONS', '\n')
-    print('11) TIME INFORMATION QUERIES                     12) SAVED SEARCHES')
+    print('5) UPDATE MEDIA INFORMATION INDICES              6) COMPARE TWO USERS INFORMATION INDICES', '\n')
+    print('7) DISPLAY LIBRARY TOTALS                        8) MEDIA INFORMATION QUERIES', '\n')
+    print('9) SORT OPTIONS                                  10) PICTURE GRAPH OPTIONS', '\n')
+    print('11) TERMINAL GRAPH OPTIONS                       12) TIME INFORMATION QUERIES', '\n')
+    print('13) SAVED SEARCHES')
     separator_2()
     print('0) EXIT MEDIA-INDEX')
     separator_3()
@@ -747,13 +748,13 @@ def media_index_home():
                 separator_1()
                 print('1) CHANGE DATABASE DIRECTORIES                   0) MAIN MENU')
                 separator_3()
-                scan_sub_input = int(input('ENTER #: '))
+                db_scan_sub_input = int(input('ENTER #: '))
                 separator_3()
 
-                if scan_sub_input == 0:
+                if db_scan_sub_input == 0:
                     media_index_home()
 
-                elif scan_sub_input == 1:
+                elif db_scan_sub_input == 1:
                     change_directory_selection()
 
             except (TypeError, ValueError) as e:
@@ -770,13 +771,13 @@ def media_index_home():
                 separator_2()
                 print('1) CONTINUE WITH MEDIA PATH(S) SCAN              0) MAIN MENU')
                 separator_3()
-                scan_sub_input = int(input('ENTER #: '))
+                path_scan_sub_input = int(input('ENTER #: '))
                 separator_3()
 
-                if scan_sub_input == 0:
+                if path_scan_sub_input == 0:
                     media_index_home()
 
-                elif scan_sub_input == 1:
+                elif path_scan_sub_input == 1:
                     walk_directories_and_create_indices()
 
             except (TypeError, ValueError) as e:
@@ -793,13 +794,13 @@ def media_index_home():
                 separator_2()
                 print('1) CONTINUE BUILDING TITLE INDEX                 0) MAIN MENU')
                 separator_3()
-                scan_sub_input = int(input('ENTER #: '))
+                title_scan_sub_input = int(input('ENTER #: '))
                 separator_3()
 
-                if scan_sub_input == 0:
+                if title_scan_sub_input == 0:
                     media_index_home()
 
-                elif scan_sub_input == 1:
+                elif title_scan_sub_input == 1:
                     scrape_media_folders_for_csv()
 
             except (TypeError, ValueError) as e:
@@ -816,13 +817,13 @@ def media_index_home():
                 separator_2()
                 print('1) CONTINUE WITH MEDIA INFORMATION SCAN          0) MAIN MENU')
                 separator_3()
-                scan_sub_input = int(input('ENTER #: '))
+                information_scan_sub_input = int(input('ENTER #: '))
                 separator_3()
 
-                if scan_sub_input == 0:
+                if information_scan_sub_input == 0:
                     media_index_home()
 
-                elif scan_sub_input == 1:
+                elif information_scan_sub_input == 1:
                     create_media_information_indices()
 
             except (TypeError, ValueError) as e:
@@ -830,6 +831,28 @@ def media_index_home():
                 separator_3()
 
         elif lmi_input_action == 5:
+            try:
+
+                print('CONFIRM: ')
+                separator_1()
+                print('THIS OPERATION CAN TAKE A LONG TIME (SEVERAL HOURS FOR LARGE LIBRARIES)')
+                separator_2()
+                print('1) CONTINUE WITH MEDIA INFORMATION SCAN          0) MAIN MENU')
+                separator_3()
+                update_information_scan_sub_input = int(input('ENTER #: '))
+                separator_3()
+
+                if update_information_scan_sub_input == 0:
+                    media_index_home()
+
+                elif update_information_scan_sub_input == 1:
+                    update_indices_scan()
+
+            except (TypeError, ValueError) as e:
+                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                separator_3()
+
+        elif lmi_input_action == 6:
 
             try:
 
@@ -837,38 +860,38 @@ def media_index_home():
                 separator_1()
                 print('1) COMPARE USER(S) INFORMATION INDICES           0) MAIN MENU')
                 separator_3()
-                scan_sub_input = int(input('ENTER #: '))
+                comparison_scan_sub_input = int(input('ENTER #: '))
                 separator_3()
 
-                if scan_sub_input == 0:
+                if comparison_scan_sub_input == 0:
                     media_index_home()
 
-                elif scan_sub_input == 1:
+                elif comparison_scan_sub_input == 1:
                     select_users_indices_to_compare()
 
             except (TypeError, ValueError) as e:
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
 
-        elif lmi_input_action == 6:
+        elif lmi_input_action == 7:
             library_total_amount()
 
-        elif lmi_input_action == 7:
+        elif lmi_input_action == 8:
             media_queries_sub_menu()
 
-        elif lmi_input_action == 8:
+        elif lmi_input_action == 9:
             sort_options_sub_menu()
 
-        elif lmi_input_action == 9:
+        elif lmi_input_action == 10:
             picture_graph_options_sub_menu()
 
-        elif lmi_input_action == 10:
+        elif lmi_input_action == 11:
             terminal_graph_options_sub_menu()
 
-        elif lmi_input_action == 11:
+        elif lmi_input_action == 12:
             time_queries_sub_menu()
 
-        elif lmi_input_action == 12:
+        elif lmi_input_action == 13:
             saved_searches()
 
     except (TypeError, ValueError) as e:
@@ -1004,15 +1027,15 @@ def picture_graph_options_sub_menu():
             media_index_home()
 
         elif 1 <= picture_graph_options_int <= 4:
-            graph_options_base(username, picture_graph_options_int=picture_graph_options_int,
+            graph_options_base(picture_graph_options_int=picture_graph_options_int,
                                terminal_graph_options_int='')
 
         elif 5 <= picture_graph_options_int <= 6:
-            graph_options_advanced(username, picture_graph_options_int=picture_graph_options_int,
+            graph_options_advanced(picture_graph_options_int=picture_graph_options_int,
                                    terminal_graph_options_int='')
 
         elif 7 <= picture_graph_options_int <= 8:
-            query_file_type_totals(username, picture_graph_options_int=picture_graph_options_int,
+            query_file_type_totals(picture_graph_options_int=picture_graph_options_int,
                                    terminal_graph_options_int='')
 
     except (TypeError, ValueError) as e:
@@ -1020,7 +1043,7 @@ def picture_graph_options_sub_menu():
         separator_3()
 
 
-def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_options_int):
+def query_file_type_totals(picture_graph_options_int, terminal_graph_options_int):
     movie_extensions_dictionary = {}
     movie_extensions_totals = {}
     tv_extensions_dictionary = {}
@@ -1028,10 +1051,10 @@ def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_
 
     graph_color_pattern = [IBlu, BCya, Blu, Pur]
 
-    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(user_name)),
+    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as f:
         movie_files_results_list = list(csv.reader(f))
-    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(user_name)),
+    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as f:
         tv_files_results_list = list(csv.reader(f))
 
@@ -1051,7 +1074,7 @@ def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_
 
             plt.figure(figsize=[12, 6])
             plt.bar(x, y, width=0.3, color='#A569BD')
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_FILETYPE_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/MOVIE_FILETYPE_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -1091,7 +1114,7 @@ def query_file_type_totals(user_name, picture_graph_options_int, terminal_graph_
             plt.figure(figsize=[12, 6])
             plt.bar(x, y, width=0.3, color='#A569BD')
 
-            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_FILETYPE_RESULTS_'.format(user_name) +
+            plt_path = os.path.expanduser('~/{0}_MEDIA_INDEX/GRAPHS/TV_FILETYPE_RESULTS_'.format(username) +
                                           date_string + '.png')
             plt.savefig(plt_path)
             print('GRAPH SAVED: ', plt_path)
@@ -1816,15 +1839,15 @@ def terminal_graph_options_sub_menu():
             media_index_home()
 
         elif 1 <= terminal_graph_options_int <= 4:
-            graph_options_base(username, picture_graph_options_int='',
+            graph_options_base(picture_graph_options_int='',
                                terminal_graph_options_int=terminal_graph_options_int)
 
         elif 5 <= terminal_graph_options_int <= 6:
-            graph_options_advanced(username, picture_graph_options_int='',
+            graph_options_advanced(picture_graph_options_int='',
                                    terminal_graph_options_int=terminal_graph_options_int)
 
         elif 7 <= terminal_graph_options_int <= 8:
-            query_file_type_totals(username, picture_graph_options_int='',
+            query_file_type_totals(picture_graph_options_int='',
                                    terminal_graph_options_int=terminal_graph_options_int)
 
     except (TypeError, ValueError) as e:
@@ -2059,6 +2082,26 @@ def tv_episodes_sort_function(sort_options_int):
             for item in sorted_by_value_a:
                 print('\n', item)
             separator_3()
+
+
+def update_indices_scan():
+    current_movie_db_list = []
+    current_tv_db_list = []
+    update_movie_db_list = []
+    update_tv_db_list = []
+
+    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as f:
+        movie_files_results_list = list(csv.reader(f))
+    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as f:
+        tv_files_results_list = list(csv.reader(f))
+
+    for movie_hashes in movie_files_results_list:
+        '''print(movie_hashes[11])'''
+
+    for tv_hashes in tv_files_results_list:
+        '''print(tv_hashes[14])'''
 
 
 def username_check_and_folder_creation():
