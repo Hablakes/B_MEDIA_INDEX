@@ -45,18 +45,19 @@ def change_directory_selection():
     directory_selection()
 
 
-def compare_results(results_user, results_other):
-    output = []
+def compare_results(results_one, results_two):
+    output_one = []
+    output_two = []
 
-    for line in results_user:
-        if line not in results_other:
-            output.append('HAVE: ' + line)
+    for line in results_one:
+        if line not in results_two:
+            output_one.append('REMOVALS: ' + line)
 
-    for line in results_other:
-        if line not in results_user:
-            output.append('DO NOT HAVE: ' + line)
+    for line in results_two:
+        if line not in results_one:
+            output_two.append('ADDITIONS: ' + line)
 
-    return output
+    return output_one, output_two
 
 
 def create_media_information_indices():
@@ -2103,6 +2104,18 @@ def update_indices_scan():
             try:
 
                 movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
+                movie_title_key = movie_file[0].rsplit('/')[-2]
+
+                if str('part 2').lower() in movie_filename_key.lower():
+                    print('Part 2 Found: ', movie_file[0])
+
+            except (OSError, TypeError, ValueError) as e:
+                print('INPUT ERROR: ', e, '\n', 'MOVIE FILE(S): ', movie_file[0])
+                print('-' * 100)
+                continue
+
+
+"""
 
                 if not movie_filename_key.lower().endswith('.nfo'):
 
@@ -2121,6 +2134,14 @@ def update_indices_scan():
                 print('INPUT ERROR: ', e, '\n', 'MOVIE FILE(S): ', movie_file[0])
                 print('-' * 100)
                 continue
+
+    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as f:
+        movie_files_results_list = list(csv.reader(f))
+
+        for movie_hashes in movie_files_results_list:
+
+            current_movie_db_hashes_list.append(movie_hashes[11])
 
     with open(os.path.expanduser((index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username)),
               encoding='UTF-8') as f:
@@ -2150,14 +2171,6 @@ def update_indices_scan():
                 print('-' * 100)
                 continue
 
-    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
-              encoding='UTF-8') as f:
-        movie_files_results_list = list(csv.reader(f))
-
-        for movie_hashes in movie_files_results_list:
-
-            current_movie_db_hashes_list.append(movie_hashes[11])
-
     with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as f:
         tv_files_results_list = list(csv.reader(f))
@@ -2165,10 +2178,8 @@ def update_indices_scan():
         for tv_hashes in tv_files_results_list:
 
             current_tv_db_hashes_list.append(tv_hashes[14])
-
-    print(current_movie_db_hashes_list, '\n', current_tv_db_hashes_list, '\n', update_movie_db_hashes_list, '\n',
-          update_tv_db_hashes_list)
-    separator_3()
+            
+"""
 
 
 def username_check_and_folder_creation():
