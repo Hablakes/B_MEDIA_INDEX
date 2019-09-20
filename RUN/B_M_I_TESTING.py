@@ -411,13 +411,13 @@ def graph_options_advanced(picture_graph_options_int, terminal_graph_options_int
                 m_empty_response_list.append(+1)
             movies_total_list.append(+1)
 
-        movies_graph_terminal_results = [('1080p', float(len(m_1080_found_list))),
+        movies_graph_terminal_results = [('4k', float(len(m_4k_found_list))),
+                                         ('1080p', float(len(m_1080_found_list))),
                                          ('720p', float(len(m_720_found_list))),
-                                         ('640p', float(len(m_640_found_list))),
-                                         ('4k', float(len(m_4k_found_list)))]
+                                         ('640p', float(len(m_640_found_list)))]
 
-        movie_data = [float(len(m_1080_found_list)), float(len(m_720_found_list)),
-                      float(len(m_640_found_list)), float(len(m_4k_found_list))]
+        movie_data = [float(len(m_4k_found_list)), float(len(m_1080_found_list)),
+                      float(len(m_720_found_list)), float(len(m_640_found_list))]
 
         for res in tv_files_results_list:
             if re.findall(r'[2-9]\d{3}x', res[6]):
@@ -436,13 +436,13 @@ def graph_options_advanced(picture_graph_options_int, terminal_graph_options_int
                 tv_empty_response_list.append(+1)
             tv_total_list.append(+1)
 
-        tv_shows_graph_terminal_results = [('1080p', float(len(tv_1080_found_list))),
+        tv_shows_graph_terminal_results = [('4k', float(len(tv_4k_found_list))),
+                                           ('1080p', float(len(tv_1080_found_list))),
                                            ('720p', float(len(tv_720_found_list))),
-                                           ('640p', float(len(tv_640_found_list))),
-                                           ('4k', float(len(tv_4k_found_list)))]
+                                           ('640p', float(len(tv_640_found_list)))]
 
-        tv_data = [float(len(tv_1080_found_list)), float(len(tv_720_found_list)),
-                   float(len(tv_640_found_list)), float(len(tv_4k_found_list))]
+        tv_data = [float(len(tv_4k_found_list)), float(len(tv_1080_found_list)),
+                   float(len(tv_720_found_list)), float(len(tv_640_found_list))]
 
         graph_color_pattern = [IBlu, BCya, Blu, Pur]
 
@@ -450,8 +450,8 @@ def graph_options_advanced(picture_graph_options_int, terminal_graph_options_int
             absolute = int(percent / 100. * numpy.sum(all_values))
             return '{:.1f}%\n({:d})'.format(percent, absolute)
 
-        labels = ['1080p', '720p', '640p', '4k']
-        colors = ['#5C68FC', '#85C1E9', '#A569BD', '#808B96']
+        labels = ['4k', '1080p', '720p', '640p']
+        colors = ['#808B96', '#5C68FC', '#85C1E9', '#A569BD']
 
         if picture_graph_options_int == 5:
             fig, ax = plt.subplots(figsize=(12, 6), subplot_kw=dict(aspect='equal'))
@@ -2113,6 +2113,8 @@ def update_indices_scan():
                 print('INPUT ERROR: ', e, '\n', 'MOVIE FILE(S): ', movie_file[0])
                 print('-' * 100)
                 continue
+
+        separator_3()
 
 
 """
