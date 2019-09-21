@@ -45,6 +45,7 @@ def change_directory_selection():
     directory_selection()
 
 
+# TESTING FUNCTION
 def compare_results(results_one, results_two):
     output_one = []
 
@@ -59,6 +60,7 @@ def compare_results(results_one, results_two):
     return output_one
 
 
+# TESTING FUNCTION
 def create_media_information_indices_and_hashes():
     movie_results_list = {}
     movie_scan_start = time.time()
@@ -95,7 +97,7 @@ def create_media_information_indices_and_hashes():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    movie_hash = str(str(movie_title_key) + '_' + str(movie_file_size) + '_' + str(movie_filename_key))
+                    movie_hash = str(str(movie_filename_key) + '_' + str(movie_file_size) + '_' + str(movie_title_key))
                     movie_hash_list.append(movie_hash)
 
                     with open(os.path.expanduser((index_folder + '/MOVIE_HASHES.csv').format(username)), 'w',
@@ -217,7 +219,7 @@ def create_media_information_indices_and_hashes():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    tv_hash = str(str(tv_title_key) + '_' + str(tv_show_file_size) + '_' + str(tv_filename_key))
+                    tv_hash = str(str(tv_filename_key) + '_' + str(tv_show_file_size) + '_' + str(tv_title_key))
                     tv_hash_list.append(tv_hash)
 
                     with open(os.path.expanduser((index_folder + '/TV_SHOW_HASHES.csv').format(username)), 'w',
@@ -1686,6 +1688,7 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                 separator_3()
 
 
+# TESTING FUNCTION
 def select_users_indices_to_compare():
     try:
 
@@ -1747,6 +1750,7 @@ def separator_3():
         print(items)
 
 
+# TESTING FUNCTION
 def sort_function_base(sort_options_int):
     movie_info_list = []
     tv_info_list = []
@@ -1951,6 +1955,7 @@ def terminal_graph_options_sub_menu():
         separator_3()
 
 
+# TESTING FUNCTION
 def time_queries_sub_menu():
     print(pyfiglet.figlet_format('TIME_QUERIES', font='cybermedium'))
     separator_3()
@@ -2182,6 +2187,7 @@ def tv_episodes_sort_function(sort_options_int):
             separator_3()
 
 
+# TESTING FUNCTION
 def update_indices_scan():
     print('UPDATING PATH INDICES:')
     separator_3()
@@ -2213,7 +2219,7 @@ def update_indices_scan():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    movie_hash = str(str(movie_title_key) + '_' + str(movie_file_size) + '_' + str(movie_filename_key))
+                    movie_hash = str(str(movie_filename_key) + '_' + str(movie_file_size) + '_' + str(movie_title_key))
                     update_movie_db_hashes_list.append(movie_hash)
 
             except (OSError, TypeError, ValueError) as e:
@@ -2250,7 +2256,7 @@ def update_indices_scan():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    tv_hash = str(str(tv_title_key) + '_' + str(tv_show_file_size) + '_' + str(tv_filename_key))
+                    tv_hash = str(str(tv_filename_key) + '_' + str(tv_show_file_size) + '_' + str(tv_title_key))
                     update_tv_db_hashes_list.append(tv_hash)
 
             except (OSError, TypeError, ValueError) as e:

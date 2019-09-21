@@ -97,7 +97,7 @@ def create_media_information_indices_and_hashes():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    movie_hash = str(str(movie_title_key) + '_' + str(movie_file_size) + '_' + str(movie_filename_key))
+                    movie_hash = str(str(movie_filename_key) + '_' + str(movie_file_size) + '_' + str(movie_title_key))
                     movie_hash_list.append(movie_hash)
 
                     with open(os.path.expanduser((index_folder + '/MOVIE_HASHES.csv').format(username)), 'w',
@@ -219,7 +219,7 @@ def create_media_information_indices_and_hashes():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    tv_hash = str(str(tv_title_key) + '_' + str(tv_show_file_size) + '_' + str(tv_filename_key))
+                    tv_hash = str(str(tv_filename_key) + '_' + str(tv_show_file_size) + '_' + str(tv_title_key))
                     tv_hash_list.append(tv_hash)
 
                     with open(os.path.expanduser((index_folder + '/TV_SHOW_HASHES.csv').format(username)), 'w',
@@ -2224,7 +2224,7 @@ def update_indices_scan():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    movie_hash = str(str(movie_title_key) + '_' + str(movie_file_size) + '_' + str(movie_filename_key))
+                    movie_hash = str(str(movie_filename_key) + '_' + str(movie_file_size) + '_' + str(movie_title_key))
                     update_movie_db_hashes_list.append(movie_hash)
 
             except (OSError, TypeError, ValueError) as e:
@@ -2261,7 +2261,7 @@ def update_indices_scan():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    tv_hash = str(str(tv_title_key) + '_' + str(tv_show_file_size) + '_' + str(tv_filename_key))
+                    tv_hash = str(str(tv_filename_key) + '_' + str(tv_show_file_size) + '_' + str(tv_title_key))
                     update_tv_db_hashes_list.append(tv_hash)
 
             except (OSError, TypeError, ValueError) as e:
