@@ -77,8 +77,8 @@ def create_movie_information_index():
 
             try:
 
-                movie_title_key = movie_file[0].rsplit('/')[-2]
                 movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
+                movie_title_key = movie_file[0].rsplit('/')[-2]
 
                 if not movie_filename_key.lower().endswith('.nfo'):
                     if movie_title_key not in movie_results_list:
@@ -179,10 +179,10 @@ def create_tv_information_index():
 
             try:
 
-                tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
+                tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
                 tv_folder_title = tv_file[0].rsplit('/')[-2]
                 tv_folder_year = tv_folder_title.rsplit('(')[-1][:-1]
-                tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
+                tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
 
                 if str(tv_filename_key.lower()) == str('tvshow.nfo'):
                     tv_show_plots_dictionary[tv_folder_title] = {}
@@ -2086,7 +2086,88 @@ def tv_episodes_sort_function(sort_options_int):
 
 
 def update_indices_scan():
-    pass
+    print('UPDATING PATH INDICES:')
+    separator_3()
+    '''walk_directories_and_create_indices()'''
+
+    current_movie_db_hashes_list = []
+    current_tv_db_hashes_list = []
+    update_movie_db_hashes_list = []
+    update_tv_db_hashes_list = []
+
+    with open(os.path.expanduser((index_folder + '/MOVIE_VIDEO_FILES_PATHS.csv').format(username)),
+              encoding='UTF-8') as f:
+        movie_index = csv.reader(f)
+
+        for movie_file in sorted(movie_index):
+
+            try:
+
+                movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
+                movie_title_key = movie_file[0].rsplit('/')[-2]
+
+                if not movie_filename_key.lower().endswith('.nfo'):
+
+                    try:
+
+                        movie_file_size = os.path.getsize(movie_file[0])
+
+                    except OSError as e:
+                        print('OS ERROR / FILE-SIZE: ', e)
+                        continue
+
+                    movie_hash = str(str(movie_filename_key) + '_' + str(movie_file_size))
+                    update_movie_db_hashes_list.append(movie_hash)
+
+            except (OSError, TypeError, ValueError) as e:
+                print('INPUT ERROR: ', e, '\n', 'MOVIE FILE(S): ', movie_file[0])
+                print('-' * 100)
+                continue
+
+    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as f:
+        movie_files_results_list = list(csv.reader(f))
+
+        for movie_hashes in movie_files_results_list:
+
+            current_movie_db_hashes_list.append(movie_hashes[11])
+
+    with open(os.path.expanduser((index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username)),
+              encoding='UTF-8') as f:
+        tv_index = csv.reader(f)
+
+        for tv_file in sorted(tv_index):
+
+            try:
+
+                tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
+                tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
+
+                if not tv_filename_key.lower().endswith('.nfo'):
+
+                    try:
+
+                        tv_show_file_size = os.path.getsize(tv_file[0])
+
+                    except OSError as e:
+                        print('OS ERROR / FILE-SIZE: ', e)
+                        continue
+
+                    tv_hash = str(str(tv_filename_key) + '_' + str(tv_show_file_size))
+                    update_tv_db_hashes_list.append(tv_hash)
+
+            except (OSError, TypeError, ValueError) as e:
+                print('INPUT ERROR: ', e, '\n', 'TV-SHOW FILE(S): ', tv_file[0])
+                print('-' * 100)
+                continue
+
+    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as f:
+        tv_files_results_list = list(csv.reader(f))
+
+        for tv_hashes in tv_files_results_list:
+
+            current_tv_db_hashes_list.append(tv_hashes[14])
 
 
 def username_check_and_folder_creation():
