@@ -45,6 +45,7 @@ def change_directory_selection():
     directory_selection()
 
 
+# TESTING FUNCTION
 def compare_results(results_one, results_two):
     output_one = []
 
@@ -59,6 +60,7 @@ def compare_results(results_one, results_two):
     return output_one
 
 
+# TESTING FUNCTION
 def create_media_information_indices_and_hashes():
     movie_results_list = {}
     movie_scan_start = time.time()
@@ -162,7 +164,7 @@ def create_media_information_indices_and_hashes():
               encoding='UTF-8', newline='') as m_i_i:
 
         csv_writer = csv.DictWriter(m_i_i, ['DIRECTORY', 'TITLE', 'YEAR', 'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING',
-                                            'RUN-TIME', 'FILE-SIZE', 'DURATION', 'FILE-NAME'])
+                                            'RUN-TIME', 'DURATION', 'FILE-SIZE', 'FILE-NAME'])
 
         for movie_row in movie_results_list.values():
             csv_writer.writerow(movie_row)
@@ -290,8 +292,8 @@ def create_media_information_indices_and_hashes():
     with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)), 'w',
               encoding='UTF-8', newline='') as t_i_i:
         csv_writer = csv.DictWriter(t_i_i, ['DIRECTORY', 'TITLE', 'YEAR', 'EPISODE TITLE', 'SEASON', 'EPISODE NUMBER',
-                                            'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING', 'RUN-TIME', 'FILE-SIZE',
-                                            'DURATION', 'FILE-NAME'])
+                                            'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING', 'RUN-TIME', 'DURATION',
+                                            'FILE-SIZE', 'FILE-NAME'])
 
         for tv_row in tv_results_list.values():
             csv_writer.writerow(tv_row)
@@ -1158,7 +1160,7 @@ def query_movie_information_index(movie_query):
                     print('MOVIE FILE-TYPE: ', '\n', movie_file[4])
                     separator_2()
 
-                    if int(len(movie_file[8])) != 0:
+                    if int(len(movie_file[9])) != 0:
                         print('FILE-SIZE: ', '\n', movie_file[8], 'MB')
                         separator_2()
 
@@ -1222,7 +1224,7 @@ def query_tv_information_index(tv_episode_query):
                     separator_2()
 
                     if int(len(tv_file[11])) != 0:
-                        print('FILE-SIZE: ', '\n', tv_file[11], 'MB')
+                        print('FILE-SIZE: ', '\n', tv_file[12], 'MB')
                         separator_2()
 
                     if int(len(tv_file[10])) != 0:
@@ -1691,6 +1693,7 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                 separator_3()
 
 
+# TESTING FUNCTION
 def select_users_indices_to_compare():
     try:
 
@@ -1752,7 +1755,102 @@ def separator_3():
         print(items)
 
 
+# TESTING FUNCTION
 def sort_function_base(sort_options_int):
+    movie_info_list = []
+    tv_info_list = []
+
+    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as m_i_i:
+        movie_files_results_list = list(csv.reader(m_i_i))
+
+    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as t_i_i:
+        tv_files_results_list = list(csv.reader(t_i_i))
+
+        for movie_info in movie_files_results_list:
+            movie_title = movie_info[0]
+            movie_size = movie_info[9]
+            movie_time = movie_info[8].split('.')[-1]
+
+            if movie_title == '':
+                movie_title = 'MEDIA_INDEX - NO MOVIE TITLE'
+            if movie_size == '':
+                movie_size = '0'
+            if movie_time == '':
+                movie_time = '0'
+
+            movie_time_total_readable_seconds = int(movie_time) // 1000
+            movie_time_total_readable_minutes = int(movie_time_total_readable_seconds) // 60
+            movie_info_list.append([movie_title, movie_size, movie_time_total_readable_minutes])
+
+        for tv_show_info in tv_files_results_list:
+            tv_show_title = tv_show_info[0]
+            episode_size = tv_show_info[12]
+            episode_title = tv_show_info[3]
+            episode_time = tv_show_info[11].split('.')[-1]
+
+            if tv_show_title == '':
+                tv_show_title = 'MEDIA_INDEX - NO TV SHOW TITLE'
+            if episode_size == '':
+                episode_size = '0'
+            if episode_title == '':
+                episode_title = 'MEDIA_INDEX - NO TV EPISODE TITLE'
+            if episode_time == '':
+                episode_time = '0'
+
+            tv_time_total_readable_seconds = int(episode_time) // 1000
+            tv_time_total_readable_minutes = int(tv_time_total_readable_seconds) // 60
+            tv_info_list.append([tv_show_title, episode_title, episode_size, tv_time_total_readable_minutes])
+
+        if sort_options_int == 1:
+
+            for movie_run_times in movie_info_list:
+                print(movie_run_times)
+            separator_3()
+
+        elif sort_options_int == 2:
+
+            for movie_run_times in movie_info_list:
+                print(movie_run_times)
+            separator_3()
+
+        elif sort_options_int == 3:
+
+            for movie_sizes in tv_info_list:
+                print(movie_sizes)
+            separator_3()
+
+        elif sort_options_int == 4:
+
+            for movie_sizes in tv_info_list:
+                print(movie_sizes)
+            separator_3()
+
+        elif sort_options_int == 5:
+
+            for episode_run_times in movie_info_list:
+                print(episode_run_times)
+            separator_3()
+
+        elif sort_options_int == 6:
+
+            for episode_run_times in movie_info_list:
+                print(episode_run_times)
+            separator_3()
+
+        elif sort_options_int == 7:
+
+            for episode_sizes in tv_info_list:
+                print(episode_sizes)
+            separator_3()
+
+        elif sort_options_int == 8:
+
+            for episode_sizes in tv_info_list:
+                print(episode_sizes)
+            separator_3()
+
     with open(os.path.expanduser((index_folder + '/MEDIA_TITLE_INDEX.csv').format(username)),
               encoding='UTF-8') as m_t_i:
         media_index = list(csv.reader(m_t_i))
@@ -1762,76 +1860,24 @@ def sort_function_base(sort_options_int):
         sorted_year = sorted(media_index, key=lambda x: (x[0], x[2]))
         sorted_year_r = sorted(media_index, key=lambda x: (x[0], x[2]), reverse=True)
 
-        if sort_options_int == 1:
+        if sort_options_int == 9:
             for title_item in sorted_title:
                 print('\n', title_item)
             separator_3()
 
-        elif sort_options_int == 2:
+        elif sort_options_int == 10:
             for title_item in sorted_title_r:
                 print('\n', title_item)
             separator_3()
 
-        elif sort_options_int == 3:
+        elif sort_options_int == 11:
             for title_item in sorted_year:
                 print('\n', title_item)
             separator_3()
 
-        elif sort_options_int == 4:
+        elif sort_options_int == 12:
             for title_item in sorted_year_r:
                 print('\n', title_item)
-            separator_3()
-
-        elif sort_options_int == 5:
-
-            with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
-                      encoding='UTF-8') as m_i_i:
-                movie_files_results_list = list(csv.reader(m_i_i))
-
-                for movie_info in movie_files_results_list:
-                    movie_title = movie_info[0]
-                    movie_time = movie_info[9].split('.')[-1]
-
-                    if movie_title == '':
-                        movie_title = 'MEDIA_INDEX - NO MOVIE TITLE'
-
-                    if movie_time == '':
-                        movie_time = '0'
-
-                    movie_time_total_readable_seconds = int(movie_time) // 1000
-                    movie_time_total_readable_minutes = int(movie_time_total_readable_seconds) // 60
-
-                    movie_times_list = movie_title, movie_time_total_readable_minutes
-                    print(movie_times_list)
-
-            separator_3()
-
-        elif sort_options_int == 6:
-
-            with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
-                      encoding='UTF-8') as t_i_i:
-                tv_files_results_list = list(csv.reader(t_i_i))
-
-                for tv_show_info in tv_files_results_list:
-                    tv_title = tv_show_info[0]
-                    episode_title = tv_show_info[3]
-                    time_time = tv_show_info[12].split('.')[-1]
-
-                    if tv_title == '':
-                        tv_title = 'MEDIA_INDEX - NO TV SHOW TITLE'
-
-                    if episode_title == '':
-                        episode_title = 'MEDIA_INDEX - NO TV EPISODE TITLE'
-
-                    if time_time == '':
-                        time_time = '0'
-
-                    tv_time_total_readable_seconds = int(time_time) // 1000
-                    tv_time_total_readable_minutes = int(tv_time_total_readable_seconds) // 60
-
-                    tv_times_list = tv_title, episode_title, tv_time_total_readable_minutes
-                    print(tv_times_list)
-
             separator_3()
 
 
@@ -1839,12 +1885,17 @@ def sort_options_sub_menu():
     print(pyfiglet.figlet_format('SORT_OPTIONS', font='cybermedium'))
     separator_3()
 
-    print('SORT MOVIE & TV SHOWS BY:            TITLES:     1) ASCENDING    2) DESCENDING', '\n')
-    print('                                     YEARS:      3) ASCENDING    4) DESCENDING', '\n')
-    print('                                     TIMES:      5) ASCENDING    6) DESCENDING')
+    print('SORT MOVIES BY:                      TIMES:      1) ASCENDING    2) DESCENDING', '\n')
+    print('                                     SIZES:      3) ASCENDING    4) DESCENDING')
     separator_2()
-    print('SORT NUMBER (#) OF TV EPISODES BY:   TITLES:     7) ASCENDING    8) DESCENDING', '\n')
-    print('                                     AMOUNT:     9) ASCENDING    10) DESCENDING')
+    print('SORT TV SHOWS BY:                    TIMES:      5) ASCENDING    6) DESCENDING', '\n')
+    print('                                     SIZES:      7) ASCENDING    8) DESCENDING')
+    separator_2()
+    print('SORT MOVIE & TV SHOWS BY:            TITLES:     9) ASCENDING    10) DESCENDING', '\n')
+    print('                                     YEARS:      11) ASCENDING   12) DESCENDING')
+    separator_2()
+    print('SORT NUMBER (#) OF TV EPISODES BY:   TITLES:     13) ASCENDING   14) DESCENDING', '\n')
+    print('                                     AMOUNT:     15) ASCENDING   16) DESCENDING')
     separator_2()
     print('0) MAIN MENU')
     separator_3()
@@ -1858,10 +1909,10 @@ def sort_options_sub_menu():
         if sort_options_int == 0:
             media_index_home()
 
-        elif 1 <= sort_options_int <= 6:
+        elif 1 <= sort_options_int <= 12:
             sort_function_base(sort_options_int=sort_options_int)
 
-        elif 7 <= sort_options_int <= 10:
+        elif 13 <= sort_options_int <= 16:
             tv_episodes_sort_function(sort_options_int=sort_options_int)
 
     except (TypeError, ValueError) as e:
@@ -1909,6 +1960,7 @@ def terminal_graph_options_sub_menu():
         separator_3()
 
 
+# TESTING FUNCTION
 def time_queries_sub_menu():
     print(pyfiglet.figlet_format('TIME_QUERIES', font='cybermedium'))
     separator_3()
@@ -1942,16 +1994,16 @@ def time_queries_sub_menu():
         movie_files_results_list = csv.reader(m_i_i)
 
         for movie_times in movie_files_results_list:
-            movie_times_list.append(movie_times[9])
-            all_media_times_list.append(movie_times[9])
+            movie_times_list.append(movie_times[8])
+            all_media_times_list.append(movie_times[8])
 
     with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as t_i_i:
         tv_files_results_list = csv.reader(t_i_i)
 
         for tv_show_times in tv_files_results_list:
-            tv_times_list.append(tv_show_times[12])
-            all_media_times_list.append(tv_show_times[12])
+            tv_times_list.append(tv_show_times[11])
+            all_media_times_list.append(tv_show_times[11])
 
     movie_times_total = 0
     tv_times_total = 0
@@ -2119,27 +2171,28 @@ def tv_episodes_sort_function(sort_options_int):
         sorted_by_value_d = sorted(tv_show_found.items(), key=lambda kv: kv[1])
         sorted_by_value_a = sorted(tv_show_found.items(), key=lambda kv: kv[1], reverse=True)
 
-        if sort_options_int == 7:
+        if sort_options_int == 13:
             for item in sorted_by_key_d:
                 print('\n', item)
             separator_3()
 
-        elif sort_options_int == 8:
+        elif sort_options_int == 14:
             for item in sorted_by_key_a:
                 print('\n', item)
             separator_3()
 
-        elif sort_options_int == 9:
+        elif sort_options_int == 15:
             for item in sorted_by_value_d:
                 print('\n', item)
             separator_3()
 
-        elif sort_options_int == 10:
+        elif sort_options_int == 16:
             for item in sorted_by_value_a:
                 print('\n', item)
             separator_3()
 
 
+# TESTING FUNCTION
 def update_indices_scan():
     print('UPDATING PATH INDICES:')
     separator_3()
