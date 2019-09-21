@@ -1154,7 +1154,7 @@ def query_movie_information_index(movie_query):
                     separator_2()
 
                     if int(len(movie_file[9])) != 0:
-                        print('FILE-SIZE: ', '\n', movie_file[8], 'MB')
+                        print('FILE-SIZE: ', '\n', movie_file[9], 'MB')
                         separator_2()
 
                     if int(len(movie_file[7])) != 0:
@@ -1216,7 +1216,7 @@ def query_tv_information_index(tv_episode_query):
                     print('FILE-TYPE: ', '\n', tv_file[7])
                     separator_2()
 
-                    if int(len(tv_file[11])) != 0:
+                    if int(len(tv_file[12])) != 0:
                         print('FILE-SIZE: ', '\n', tv_file[12], 'MB')
                         separator_2()
 
