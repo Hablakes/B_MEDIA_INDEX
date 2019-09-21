@@ -2099,7 +2099,7 @@ def tv_episodes_sort_function(sort_options_int):
 def update_indices_scan():
     print('UPDATING PATH INDICES:')
     separator_3()
-    '''walk_directories_and_create_indices()'''
+    walk_directories_and_create_indices()
 
     current_movie_db_hashes_list = []
     current_tv_db_hashes_list = []
@@ -2141,7 +2141,7 @@ def update_indices_scan():
 
         for movie_hashes in movie_files_results_list:
 
-            current_movie_db_hashes_list.append(movie_hashes)
+            current_movie_db_hashes_list.append(movie_hashes[0])
 
     with open(os.path.expanduser((index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username)),
               encoding='UTF-8') as f:
@@ -2178,7 +2178,14 @@ def update_indices_scan():
 
         for tv_hashes in tv_files_results_list:
 
-            current_tv_db_hashes_list.append(tv_hashes)
+            current_tv_db_hashes_list.append(tv_hashes[0])
+
+    print(current_movie_db_hashes_list)
+    separator_3()
+    print(update_movie_db_hashes_list)
+    separator_3()
+    print(compare_results(current_movie_db_hashes_list, update_movie_db_hashes_list))
+    separator_3()
 
 
 def username_check_and_folder_creation():
