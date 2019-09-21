@@ -290,8 +290,8 @@ def create_media_information_indices_and_hashes():
     with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)), 'w',
               encoding='UTF-8', newline='') as t_i_i:
         csv_writer = csv.DictWriter(t_i_i, ['DIRECTORY', 'TITLE', 'YEAR', 'EPISODE TITLE', 'SEASON', 'EPISODE NUMBER',
-                                        'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING', 'RUN-TIME', 'FILE-SIZE',
-                                        'DURATION', 'FILE-NAME'])
+                                            'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING', 'RUN-TIME', 'FILE-SIZE',
+                                            'DURATION', 'FILE-NAME'])
 
         for tv_row in tv_results_list.values():
             csv_writer.writerow(tv_row)
