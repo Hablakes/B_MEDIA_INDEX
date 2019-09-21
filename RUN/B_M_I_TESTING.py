@@ -1519,7 +1519,7 @@ def scrape_media_folders_for_csv():
 
     naming_scan_end = time.time()
     print('MEDIA TITLES SCAN COMPLETE - TIME ELAPSED: ', naming_scan_end - naming_scan_start)
-    separator_2()
+    separator_3()
 
 
 def search_plots(plot_search_type, plot_search_keywords):
@@ -2262,7 +2262,7 @@ def walk_directories_and_create_indices():
 
     path_scan_end = time.time()
     print('MEDIA PATHS SCAN COMPLETE - TIME ELAPSED: ', path_scan_end - path_scan_start)
-    separator_2()
+    separator_3()
 
 
 if __name__ == '__main__':
