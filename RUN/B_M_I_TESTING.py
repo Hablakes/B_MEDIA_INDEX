@@ -50,16 +50,16 @@ def compare_results(results_one, results_two):
 
     for line in results_one:
         if line not in results_two:
-            output_one.append('R: ' + line)
+            output_one.append('REMOVAL: ' + line)
 
     for line in results_two:
         if line not in results_one:
-            output_one.append('A: ' + line)
+            output_one.append('ADDITION: ' + line)
 
     return output_one
 
 
-def create_media_information_indices():
+def create_media_information_indices_and_hashes():
     movie_results_list = {}
     movie_scan_start = time.time()
     movie_hash_list = []
@@ -317,10 +317,12 @@ def directory_selection():
         movie_dir_input = tk_gui_file_browser_window()
         print('\n', str(movie_dir_input))
         separator_3()
+
         print('ENTER PATH OF TV DIRECTORY, IF NONE HIT CANCEL: ')
         tv_dir_input = tk_gui_file_browser_window()
         print('\n', str(tv_dir_input))
         separator_3()
+
         print('ALTERNATE DIRECTORIES? - Y/N: ')
         separator_3()
         alternate_directory_prompt = input('ENTER: Y or N: ').lower()
@@ -702,11 +704,11 @@ def library_total_amount():
         tv_index_list = list(csv.reader(f))
 
         for counted_movie_title in media_index_list:
-            if str('MOVIE') in counted_movie_title:
+            if 'MOVIE' in counted_movie_title:
                 movie_amounts_list.append(counted_movie_title)
 
         for counted_tv_title in media_index_list:
-            if str('TV') in counted_tv_title:
+            if 'TV' in counted_tv_title:
                 tv_amounts_list.append(counted_tv_title)
 
         for episodes in tv_index_list:
@@ -833,7 +835,7 @@ def media_index_home():
                     media_index_home()
 
                 elif information_scan_sub_input == 1:
-                    create_media_information_indices()
+                    create_media_information_indices_and_hashes()
 
             except (TypeError, ValueError) as e:
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
