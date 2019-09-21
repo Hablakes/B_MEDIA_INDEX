@@ -100,11 +100,6 @@ def create_media_information_indices_and_hashes():
                     movie_hash = str(str(movie_filename_key) + '_' + str(movie_file_size) + '_' + str(movie_title_key))
                     movie_hash_list.append(movie_hash)
 
-                    with open(os.path.expanduser((index_folder + '/MOVIE_HASHES.csv').format(username)), 'w',
-                              encoding='UTF-8', newline='') as mhf:
-                        for movie_hashes in movie_hash_list:
-                            mhf.write("%s\n" % movie_hashes)
-
                     try:
 
                         movie_title = guessit.guessit(movie_filename_key, options={'type': 'movie'})
@@ -159,6 +154,11 @@ def create_media_information_indices_and_hashes():
                 print('INPUT ERROR: ', e, '\n', 'MOVIE FILE(S): ', movie_file[0])
                 print('-' * 100)
                 continue
+
+    with open(os.path.expanduser((index_folder + '/MOVIE_HASHES.csv').format(username)), 'w',
+              encoding='UTF-8', newline='') as mhf:
+        for movie_hashes in movie_hash_list:
+            mhf.write("%s\n" % movie_hashes)
 
     with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)), 'w',
               encoding='UTF-8', newline='') as m_i_i:
@@ -222,11 +222,6 @@ def create_media_information_indices_and_hashes():
                     tv_hash = str(str(tv_filename_key) + '_' + str(tv_show_file_size) + '_' + str(tv_title_key))
                     tv_hash_list.append(tv_hash)
 
-                    with open(os.path.expanduser((index_folder + '/TV_SHOW_HASHES.csv').format(username)), 'w',
-                              encoding='UTF-8', newline='') as thf:
-                        for tv_hashes in tv_hash_list:
-                            thf.write("%s\n" % tv_hashes)
-
                     try:
 
                         tv_show_title = guessit.guessit(tv_filename_key, options={'type': 'episode'})
@@ -288,6 +283,11 @@ def create_media_information_indices_and_hashes():
                 print('INPUT ERROR: ', e, '\n', 'TV-SHOW FILE(S): ', tv_file[0])
                 print('-' * 100)
                 continue
+
+    with open(os.path.expanduser((index_folder + '/TV_SHOW_HASHES.csv').format(username)), 'w',
+              encoding='UTF-8', newline='') as thf:
+        for tv_hashes in tv_hash_list:
+            thf.write("%s\n" % tv_hashes)
 
     with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)), 'w',
               encoding='UTF-8', newline='') as t_i_i:
@@ -737,7 +737,7 @@ def media_index_home():
     print(pyfiglet.figlet_format('MEDIA_INDEX', font='cybermedium'))
     separator_3()
 
-    print('1) CHANGE DATABASE DIRECTORIES                   2) CREATE PATH INDICES', '\n')
+    print('1) ADD / CHANGE DATABASE DIRECTORIES             2) CREATE PATH INDICES', '\n')
     print('3) CREATE TITLE INDEX                            4) CREATE / UPDATE MEDIA INFORMATION INDICES', '\n')
     print('5) COMPARE TWO USERS INFORMATION INDICES         6) DISPLAY LIBRARY TOTALS', '\n')
     print('7) MEDIA INFORMATION QUERIES                     8) SORT OPTIONS   ', '\n')
