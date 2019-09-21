@@ -47,17 +47,16 @@ def change_directory_selection():
 
 def compare_results(results_one, results_two):
     output_one = []
-    output_two = []
 
     for line in results_one:
         if line not in results_two:
-            output_one.append('REMOVALS: ' + line)
+            output_one.append('R: ' + line)
 
     for line in results_two:
         if line not in results_one:
-            output_two.append('ADDITIONS: ' + line)
+            output_one.append('A: ' + line)
 
-    return output_one, output_two
+    return output_one
 
 
 def create_media_information_indices():
@@ -68,6 +67,7 @@ def create_media_information_indices():
 def create_movie_information_index():
     movie_results_list = {}
     movie_scan_start = time.time()
+    movie_hash_list = []
 
     with open(os.path.expanduser((index_folder + '/MOVIE_VIDEO_FILES_PATHS.csv').format(username)),
               encoding='UTF-8') as f:
@@ -95,7 +95,13 @@ def create_movie_information_index():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    movie_hash = str(str(movie_filename_key) + '_' + str(movie_file_size))
+                    movie_hash = str(str(movie_title_key) + '_' + str(movie_file_size) + '_' + str(movie_filename_key))
+                    movie_hash_list.append(movie_hash)
+
+                    with open(os.path.expanduser((index_folder + '/MOVIE_HASHES.csv').format(username)), 'w',
+                              encoding='UTF-8', newline='') as mhf:
+                        for movie_hashes in movie_hash_list:
+                            mhf.write("%s\n" % movie_hashes)
 
                     try:
 
@@ -129,7 +135,6 @@ def create_movie_information_index():
                                 track.width) + 'x' + str(track.height)
                             movie_results_list[movie_title_key]['FILE-TYPE'] = movie_title.get('container')
                             movie_results_list[movie_title_key]['FILE-NAME'] = movie_filename_key
-                            movie_results_list[movie_title_key]['FILE-HASH'] = movie_hash
 
                 elif movie_filename_key.lower().endswith('.nfo'):
 
@@ -157,7 +162,7 @@ def create_movie_information_index():
               encoding='UTF-8', newline='') as f:
 
         csv_writer = csv.DictWriter(f, ['DIRECTORY', 'TITLE', 'YEAR', 'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING',
-                                        'RUN-TIME', 'FILE-SIZE', 'DURATION', 'FILE-NAME', 'FILE-HASH'])
+                                        'RUN-TIME', 'FILE-SIZE', 'DURATION', 'FILE-NAME'])
 
         for movie_row in movie_results_list.values():
             csv_writer.writerow(movie_row)
@@ -171,6 +176,7 @@ def create_tv_information_index():
     tv_results_list = {}
     tv_show_plots_dictionary = {}
     tv_scan_start = time.time()
+    tv_hash_list = []
 
     with open(os.path.expanduser((index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username)), encoding='UTF-8') as f:
         tv_index = csv.reader(f)
@@ -217,7 +223,13 @@ def create_tv_information_index():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    tv_hash = str(str(tv_filename_key) + '_' + str(tv_show_file_size))
+                    tv_hash = str(str(tv_title_key) + '_' + str(tv_show_file_size) + '_' + str(tv_filename_key))
+                    tv_hash_list.append(tv_hash)
+
+                    with open(os.path.expanduser((index_folder + '/TV_SHOW_HASHES.csv').format(username)), 'w',
+                              encoding='UTF-8', newline='') as thf:
+                        for tv_hashes in tv_hash_list:
+                            thf.write("%s\n" % tv_hashes)
 
                     try:
 
@@ -253,7 +265,6 @@ def create_tv_information_index():
                             tv_results_list[tv_title_key]['RESOLUTION'] = str(track.width) + 'x' + str(track.height)
                             tv_results_list[tv_title_key]['FILE-TYPE'] = tv_show_title.get('container')
                             tv_results_list[tv_title_key]['FILE-NAME'] = tv_filename_key
-                            tv_results_list[tv_title_key]['FILE-HASH'] = tv_hash
 
                 elif tv_filename_key.lower().endswith('.nfo'):
 
@@ -286,7 +297,7 @@ def create_tv_information_index():
               encoding='UTF-8', newline='') as f:
         csv_writer = csv.DictWriter(f, ['DIRECTORY', 'TITLE', 'YEAR', 'EPISODE TITLE', 'SEASON', 'EPISODE NUMBER',
                                         'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING', 'RUN-TIME', 'FILE-SIZE',
-                                        'DURATION', 'FILE-NAME', 'FILE-HASH'])
+                                        'DURATION', 'FILE-NAME'])
 
         for tv_row in tv_results_list.values():
             csv_writer.writerow(tv_row)
@@ -2116,7 +2127,7 @@ def update_indices_scan():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    movie_hash = str(str(movie_filename_key) + '_' + str(movie_file_size))
+                    movie_hash = str(str(movie_title_key) + '_' + str(movie_file_size) + '_' + str(movie_filename_key))
                     update_movie_db_hashes_list.append(movie_hash)
 
             except (OSError, TypeError, ValueError) as e:
@@ -2124,13 +2135,13 @@ def update_indices_scan():
                 print('-' * 100)
                 continue
 
-    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
+    with open(os.path.expanduser((index_folder + '/MOVIE_HASHES.csv').format(username)),
               encoding='UTF-8') as f:
         movie_files_results_list = list(csv.reader(f))
 
         for movie_hashes in movie_files_results_list:
 
-            current_movie_db_hashes_list.append(movie_hashes[11])
+            current_movie_db_hashes_list.append(movie_hashes)
 
     with open(os.path.expanduser((index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username)),
               encoding='UTF-8') as f:
@@ -2153,7 +2164,7 @@ def update_indices_scan():
                         print('OS ERROR / FILE-SIZE: ', e)
                         continue
 
-                    tv_hash = str(str(tv_filename_key) + '_' + str(tv_show_file_size))
+                    tv_hash = str(str(tv_title_key) + '_' + str(tv_show_file_size) + '_' + str(tv_filename_key))
                     update_tv_db_hashes_list.append(tv_hash)
 
             except (OSError, TypeError, ValueError) as e:
@@ -2161,13 +2172,13 @@ def update_indices_scan():
                 print('-' * 100)
                 continue
 
-    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
+    with open(os.path.expanduser((index_folder + '/TV_SHOW_HASHES.csv').format(username)),
               encoding='UTF-8') as f:
         tv_files_results_list = list(csv.reader(f))
 
         for tv_hashes in tv_files_results_list:
 
-            current_tv_db_hashes_list.append(tv_hashes[14])
+            current_tv_db_hashes_list.append(tv_hashes)
 
 
 def username_check_and_folder_creation():
