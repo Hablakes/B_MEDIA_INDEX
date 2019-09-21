@@ -2180,11 +2180,9 @@ def update_indices_scan():
 
             current_tv_db_hashes_list.append(tv_hashes[0])
 
-    print(current_movie_db_hashes_list)
-    separator_3()
-    print(update_movie_db_hashes_list)
-    separator_3()
     print(compare_results(current_movie_db_hashes_list, update_movie_db_hashes_list))
+    separator_3()
+    print(compare_results(current_tv_db_hashes_list, update_tv_db_hashes_list))
     separator_3()
 
 
