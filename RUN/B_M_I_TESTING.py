@@ -1897,49 +1897,49 @@ def sort_function_base(sort_options_int):
 
             movies_sorted_by_size = sorted(movie_info_list, key=lambda x: x[1])
             for movie_sizes in movies_sorted_by_size:
-                print(movie_sizes[0], '-', movie_sizes[1], 'MB')
+                print('\n', movie_sizes[0], '-', movie_sizes[1], 'MB')
             separator_3()
 
         elif sort_options_int == 2:
             movies_sorted_by_size_r = sorted(movie_info_list, key=lambda x: x[1], reverse=True)
             for movie_sizes in movies_sorted_by_size_r:
-                print(movie_sizes[0], '-', movie_sizes[1], 'MB')
+                print('\n', movie_sizes[0], '-', movie_sizes[1], 'MB')
             separator_3()
 
         elif sort_options_int == 3:
             movies_sorted_by_time = sorted(movie_info_list, key=lambda x: x[2])
             for movie_run_times in movies_sorted_by_time:
-                print(movie_run_times[0], '-', movie_run_times[2], 'Minutes')
+                print('\n', movie_run_times[0], '-', movie_run_times[2], 'Minutes')
             separator_3()
 
         elif sort_options_int == 4:
             movies_sorted_by_time = sorted(movie_info_list, key=lambda x: x[2], reverse=True)
             for movie_run_times in movies_sorted_by_time:
-                print(movie_run_times[0], '-', movie_run_times[2], 'Minutes')
+                print('\n', movie_run_times[0], '-', movie_run_times[2], 'Minutes')
             separator_3()
 
         elif sort_options_int == 5:
             tv_shows_sorted_by_size = sorted(tv_info_list, key=lambda x: x[2])
             for episode_sizes in tv_shows_sorted_by_size:
-                print(episode_sizes[0], '-', episode_sizes[1], '-', episode_sizes[2], 'MB')
+                print('\n', episode_sizes[0], '-', episode_sizes[1], '-', episode_sizes[2], 'MB')
             separator_3()
 
         elif sort_options_int == 6:
             tv_shows_sorted_by_size_r = sorted(tv_info_list, key=lambda x: x[2], reverse=True)
             for episode_sizes in tv_shows_sorted_by_size_r:
-                print(episode_sizes[0], '-', episode_sizes[1], '-', episode_sizes[2], 'MB')
+                print('\n', episode_sizes[0], '-', episode_sizes[1], '-', episode_sizes[2], 'MB')
             separator_3()
 
         elif sort_options_int == 7:
             movies_sorted_by_time = sorted(tv_info_list, key=lambda x: x[3])
             for episode_run_times in movies_sorted_by_time:
-                print(episode_run_times[0], '-', episode_run_times[1], '-', episode_run_times[3], 'Minutes')
+                print('\n', episode_run_times[0], '-', episode_run_times[1], '-', episode_run_times[3], 'Minutes')
             separator_3()
 
         elif sort_options_int == 8:
             movies_sorted_by_time_r = sorted(tv_info_list, key=lambda x: x[3], reverse=True)
             for episode_run_times in movies_sorted_by_time_r:
-                print(episode_run_times[0], '-', episode_run_times[1], '-', episode_run_times[3], 'Minutes')
+                print('\n', episode_run_times[0], '-', episode_run_times[1], '-', episode_run_times[3], 'Minutes')
             separator_3()
 
     with open(os.path.expanduser((index_folder + '/MEDIA_TITLE_INDEX.csv').format(username)),
@@ -1969,6 +1969,48 @@ def sort_function_base(sort_options_int):
         elif sort_options_int == 12:
             for title_item in sorted_year_r:
                 print('\n', title_item)
+            separator_3()
+
+
+def sort_function_for_tv_episodes(sort_options_int):
+    tv_amounts = []
+    tv_show_episodes_found = []
+    tv_show_found = {}
+
+    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as t_i_i:
+        tv_results_list = list(csv.reader(t_i_i))
+
+        for tv_title in tv_results_list:
+            tv_amounts.append(tv_title[0])
+
+        for found_tv_title in tv_amounts:
+            tv_show_episodes_found.append(found_tv_title)
+            tv_show_found[found_tv_title] = tv_show_episodes_found.count(found_tv_title)
+
+        sorted_by_key_d = sorted(tv_show_found.items(), key=lambda kv: kv[0])
+        sorted_by_key_a = sorted(tv_show_found.items(), key=lambda kv: kv[0], reverse=True)
+        sorted_by_value_d = sorted(tv_show_found.items(), key=lambda kv: kv[1])
+        sorted_by_value_a = sorted(tv_show_found.items(), key=lambda kv: kv[1], reverse=True)
+
+        if sort_options_int == 13:
+            for item in sorted_by_key_d:
+                print('\n', item)
+            separator_3()
+
+        elif sort_options_int == 14:
+            for item in sorted_by_key_a:
+                print('\n', item)
+            separator_3()
+
+        elif sort_options_int == 15:
+            for item in sorted_by_value_d:
+                print('\n', item)
+            separator_3()
+
+        elif sort_options_int == 16:
+            for item in sorted_by_value_a:
+                print('\n', item)
             separator_3()
 
 
@@ -2004,7 +2046,7 @@ def sort_options_sub_menu():
             sort_function_base(sort_options_int=sort_options_int)
 
         elif 13 <= sort_options_int <= 16:
-            tv_episodes_sort_function(sort_options_int=sort_options_int)
+            sort_function_for_tv_episodes(sort_options_int=sort_options_int)
 
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -2239,48 +2281,6 @@ def total_tv_episodes_in_show_title():
             separator_3()
         print('NUMBER (#) OF EPISODES TOTAL: ', sum(tv_show_found.values()))
         separator_3()
-
-
-def tv_episodes_sort_function(sort_options_int):
-    tv_amounts = []
-    tv_show_episodes_found = []
-    tv_show_found = {}
-
-    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
-              encoding='UTF-8') as t_i_i:
-        tv_results_list = list(csv.reader(t_i_i))
-
-        for tv_title in tv_results_list:
-            tv_amounts.append(tv_title[0])
-
-        for found_tv_title in tv_amounts:
-            tv_show_episodes_found.append(found_tv_title)
-            tv_show_found[found_tv_title] = tv_show_episodes_found.count(found_tv_title)
-
-        sorted_by_key_d = sorted(tv_show_found.items(), key=lambda kv: kv[0])
-        sorted_by_key_a = sorted(tv_show_found.items(), key=lambda kv: kv[0], reverse=True)
-        sorted_by_value_d = sorted(tv_show_found.items(), key=lambda kv: kv[1])
-        sorted_by_value_a = sorted(tv_show_found.items(), key=lambda kv: kv[1], reverse=True)
-
-        if sort_options_int == 13:
-            for item in sorted_by_key_d:
-                print('\n', item)
-            separator_3()
-
-        elif sort_options_int == 14:
-            for item in sorted_by_key_a:
-                print('\n', item)
-            separator_3()
-
-        elif sort_options_int == 15:
-            for item in sorted_by_value_d:
-                print('\n', item)
-            separator_3()
-
-        elif sort_options_int == 16:
-            for item in sorted_by_value_a:
-                print('\n', item)
-            separator_3()
 
 
 # TESTING FUNCTION
