@@ -1953,22 +1953,22 @@ def sort_function_base(sort_options_int):
 
         if sort_options_int == 9:
             for title_item in sorted_title:
-                print('\n', title_item)
+                print('\n', title_item[0], ': Title -', title_item[1], ': Year -', title_item[2])
             separator_3()
 
         elif sort_options_int == 10:
             for title_item in sorted_title_r:
-                print('\n', title_item)
+                print('\n', title_item[0], ': Title -', title_item[1], ': Year -', title_item[2])
             separator_3()
 
         elif sort_options_int == 11:
             for title_item in sorted_year:
-                print('\n', title_item)
+                print('\n', title_item[0], ': Title -', title_item[1], ': Year -', title_item[2])
             separator_3()
 
         elif sort_options_int == 12:
             for title_item in sorted_year_r:
-                print('\n', title_item)
+                print('\n', title_item[0], ': Title -', title_item[1], ': Year -', title_item[2])
             separator_3()
 
 
@@ -1995,22 +1995,22 @@ def sort_function_for_tv_episodes(sort_options_int):
 
         if sort_options_int == 13:
             for item in sorted_by_key_d:
-                print('\n', item)
+                print('\n', item[0], '-', item[1], 'Episodes')
             separator_3()
 
         elif sort_options_int == 14:
             for item in sorted_by_key_a:
-                print('\n', item)
+                print('\n', item[0], '-', item[1], 'Episodes')
             separator_3()
 
         elif sort_options_int == 15:
             for item in sorted_by_value_d:
-                print('\n', item)
+                print('\n', item[0], '-', item[1], 'Episodes')
             separator_3()
 
         elif sort_options_int == 16:
             for item in sorted_by_value_a:
-                print('\n', item)
+                print('\n', item[0], '-', item[1], 'Episodes')
             separator_3()
 
 
