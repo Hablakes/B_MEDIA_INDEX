@@ -1885,50 +1885,51 @@ def sort_function_base(sort_options_int):
 
         if sort_options_int == 1:
 
-            for movie_run_times in movie_info_list:
-                print(movie_run_times)
+            movies_sorted_by_size = sorted(movie_info_list, key=lambda x: x[1])
+            for movie_sizes in movies_sorted_by_size:
+                print(movie_sizes[0], '-', movie_sizes[1], 'MB')
             separator_3()
 
         elif sort_options_int == 2:
-
-            for movie_run_times in movie_info_list:
-                print(movie_run_times)
+            movies_sorted_by_size_r = sorted(movie_info_list, key=lambda x: x[1], reverse=True)
+            for movie_sizes in movies_sorted_by_size_r:
+                print(movie_sizes[0], '-', movie_sizes[1], 'MB')
             separator_3()
 
         elif sort_options_int == 3:
-
-            for movie_sizes in tv_info_list:
-                print(movie_sizes)
+            movies_sorted_by_time = sorted(movie_info_list, key=lambda x: x[2])
+            for movie_run_times in movies_sorted_by_time:
+                print(movie_run_times[0], '-', movie_run_times[2], 'Minutes')
             separator_3()
 
         elif sort_options_int == 4:
-
-            for movie_sizes in tv_info_list:
-                print(movie_sizes)
+            movies_sorted_by_time = sorted(movie_info_list, key=lambda x: x[2], reverse=True)
+            for movie_run_times in movies_sorted_by_time:
+                print(movie_run_times[0], '-', movie_run_times[2], 'Minutes')
             separator_3()
 
         elif sort_options_int == 5:
-
-            for episode_run_times in movie_info_list:
-                print(episode_run_times)
+            tv_shows_sorted_by_size = sorted(tv_info_list, key=lambda x: x[2])
+            for episode_sizes in tv_shows_sorted_by_size:
+                print(episode_sizes[0], '-', episode_sizes[1], '-', episode_sizes[2], 'MB')
             separator_3()
 
         elif sort_options_int == 6:
-
-            for episode_run_times in movie_info_list:
-                print(episode_run_times)
+            tv_shows_sorted_by_size_r = sorted(tv_info_list, key=lambda x: x[2], reverse=True)
+            for episode_sizes in tv_shows_sorted_by_size_r:
+                print(episode_sizes[0], '-', episode_sizes[1], '-', episode_sizes[2], 'MB')
             separator_3()
 
         elif sort_options_int == 7:
-
-            for episode_sizes in tv_info_list:
-                print(episode_sizes)
+            movies_sorted_by_time = sorted(tv_info_list, key=lambda x: x[3])
+            for episode_run_times in movies_sorted_by_time:
+                print(episode_run_times[0], '-', episode_run_times[1], '-', episode_run_times[3], 'Minutes')
             separator_3()
 
         elif sort_options_int == 8:
-
-            for episode_sizes in tv_info_list:
-                print(episode_sizes)
+            movies_sorted_by_time_r = sorted(tv_info_list, key=lambda x: x[3], reverse=True)
+            for episode_run_times in movies_sorted_by_time_r:
+                print(episode_run_times[0], '-', episode_run_times[1], '-', episode_run_times[3], 'Minutes')
             separator_3()
 
     with open(os.path.expanduser((index_folder + '/MEDIA_TITLE_INDEX.csv').format(username)),
@@ -1965,11 +1966,11 @@ def sort_options_sub_menu():
     print(pyfiglet.figlet_format('SORT_OPTIONS', font='cybermedium'))
     separator_3()
 
-    print('SORT MOVIES BY:                      TIMES:      1) ASCENDING    2) DESCENDING', '\n')
-    print('                                     SIZES:      3) ASCENDING    4) DESCENDING')
+    print('SORT MOVIES BY:                      SIZES:      1) ASCENDING    2) DESCENDING', '\n')
+    print('                                     TIMES:      3) ASCENDING    4) DESCENDING')
     separator_2()
-    print('SORT TV SHOWS BY:                    TIMES:      5) ASCENDING    6) DESCENDING', '\n')
-    print('                                     SIZES:      7) ASCENDING    8) DESCENDING')
+    print('SORT TV SHOWS BY:                    SIZES:      5) ASCENDING    6) DESCENDING', '\n')
+    print('                                     TIMES:      7) ASCENDING    8) DESCENDING')
     separator_2()
     print('SORT MOVIE & TV SHOWS BY:            TITLES:     9) ASCENDING    10) DESCENDING', '\n')
     print('                                     YEARS:      11) ASCENDING   12) DESCENDING')
