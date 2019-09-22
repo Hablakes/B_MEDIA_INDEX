@@ -1951,47 +1951,60 @@ def sort_function_base(sort_options_int):
         sorted_year = sorted(media_index, key=lambda x: (x[0], x[2]))
         sorted_year_r = sorted(media_index, key=lambda x: (x[0], x[2]), reverse=True)
 
-        if sort_options_int == 9:
+        if sort_options_int == 17:
             for title_item in sorted_title:
                 print('\n', title_item[0], ': Title -', title_item[1], ': Year -', title_item[2])
             separator_3()
 
-        elif sort_options_int == 10:
+        elif sort_options_int == 18:
             for title_item in sorted_title_r:
                 print('\n', title_item[0], ': Title -', title_item[1], ': Year -', title_item[2])
             separator_3()
 
-        elif sort_options_int == 11:
+        elif sort_options_int == 19:
             for title_item in sorted_year:
                 print('\n', title_item[0], ': Title -', title_item[1], ': Year -', title_item[2])
             separator_3()
 
-        elif sort_options_int == 12:
+        elif sort_options_int == 20:
             for title_item in sorted_year_r:
                 print('\n', title_item[0], ': Title -', title_item[1], ': Year -', title_item[2])
             separator_3()
 
 
+# TESTING FUNCTION
 def sort_function_for_tv_episodes(sort_options_int):
-    tv_amounts = []
-    tv_show_episodes_found = []
-    tv_show_found = {}
+    tv_amounts_list = []
+    tv_show_episodes_found_list = []
+    tv_shows_found_dict = {}
+    tv_show_count_found_dict = {}
 
     with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as t_i_i:
         tv_results_list = list(csv.reader(t_i_i))
 
         for tv_title in tv_results_list:
-            tv_amounts.append(tv_title[0])
+            tv_amounts_list.append(tv_title[0])
+            if tv_title[0] not in tv_shows_found_dict:
+                tv_shows_found_dict[tv_title[0]] = {}
+                tv_shows_found_dict[tv_title[0]]['RUN-TIMES'] = []
+                tv_shows_found_dict[tv_title[0]]['FILE-SIZES'] = []
 
-        for found_tv_title in tv_amounts:
-            tv_show_episodes_found.append(found_tv_title)
-            tv_show_found[found_tv_title] = tv_show_episodes_found.count(found_tv_title)
+            tv_shows_found_dict[tv_title[0]]['RUN-TIMES'].append(tv_title[11])
+            tv_shows_found_dict[tv_title[0]]['FILE-SIZES'].append(tv_title[12])
 
-        sorted_by_key_d = sorted(tv_show_found.items(), key=lambda kv: kv[0])
-        sorted_by_key_a = sorted(tv_show_found.items(), key=lambda kv: kv[0], reverse=True)
-        sorted_by_value_d = sorted(tv_show_found.items(), key=lambda kv: kv[1])
-        sorted_by_value_a = sorted(tv_show_found.items(), key=lambda kv: kv[1], reverse=True)
+        for tv_show_keys, tv_show_values in tv_shows_found_dict.items():
+            tv_show_run_times = tv_show_values['RUN-TIMES']
+            tv_show_file_sizes = tv_show_values['FILE-SIZES']
+
+        for found_tv_title in tv_amounts_list:
+            tv_show_episodes_found_list.append(found_tv_title)
+            tv_show_count_found_dict[found_tv_title] = tv_show_episodes_found_list.count(found_tv_title)
+
+        sorted_by_key_d = sorted(tv_show_count_found_dict.items(), key=lambda kv: kv[0])
+        sorted_by_key_a = sorted(tv_show_count_found_dict.items(), key=lambda kv: kv[0], reverse=True)
+        sorted_by_value_d = sorted(tv_show_count_found_dict.items(), key=lambda kv: kv[1])
+        sorted_by_value_a = sorted(tv_show_count_found_dict.items(), key=lambda kv: kv[1], reverse=True)
 
         if sort_options_int == 13:
             for item in sorted_by_key_d:
@@ -2021,15 +2034,19 @@ def sort_options_sub_menu():
     print('SORT MOVIES BY:                      SIZES:      1) ASCENDING    2) DESCENDING', '\n')
     print('                                     TIMES:      3) ASCENDING    4) DESCENDING')
     separator_2()
-    print('SORT TV SHOWS BY:                    SIZES:      5) ASCENDING    6) DESCENDING', '\n')
+    print('SORT ALL TV EPISODES BY:             SIZES:      5) ASCENDING    6) DESCENDING', '\n')
     print('                                     TIMES:      7) ASCENDING    8) DESCENDING')
     separator_2()
-    print('SORT MOVIE & TV SHOWS BY:            TITLES:     9) ASCENDING    10) DESCENDING', '\n')
-    print('                                     YEARS:      11) ASCENDING   12) DESCENDING')
+    print('SORT TV SHOW TOTALS BY:              SIZES:      9) ASCENDING    10) DESCENDING', '\n')
+    print('                                     TIMES:      11) ASCENDING   12) DESCENDING')
     separator_2()
     print('SORT NUMBER (#) OF TV EPISODES BY:   TITLES:     13) ASCENDING   14) DESCENDING', '\n')
     print('                                     AMOUNT:     15) ASCENDING   16) DESCENDING')
     separator_2()
+    print('SORT MOVIE & TV SHOWS TOTALS BY:     TITLES:     17) ASCENDING   18) DESCENDING', '\n')
+    print('                                     YEARS:      19) ASCENDING   20) DESCENDING')
+    separator_2()
+
     print('0) MAIN MENU')
     separator_3()
 
