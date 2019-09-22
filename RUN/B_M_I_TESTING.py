@@ -111,7 +111,6 @@ def create_media_hash_files():
 
                 tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
                 tv_folder_title = tv_file[0].rsplit('/')[-2]
-                tv_folder_year = tv_folder_title.rsplit('(')[-1][:-1]
                 tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
 
                 if not tv_filename_key.lower().endswith('.nfo'):
@@ -152,14 +151,14 @@ def create_media_hash_files():
     separator_3()
 
 
-# TESTING FUNCTION
 def create_media_information_indices():
-    movie_results_list = {}
-    tv_results_list = {}
-    tv_show_plots_dictionary = {}
+    create_movie_information_index()
+    create_tv_information_index()
 
+
+def create_movie_information_index():
+    movie_results_list = {}
     movie_scan_start = time.time()
-    tv_scan_start = time.time()
 
     with open(os.path.expanduser((index_folder + '/MOVIE_VIDEO_FILES_PATHS.csv').format(username)),
               encoding='UTF-8') as m_f_p:
@@ -174,14 +173,14 @@ def create_media_information_indices():
 
                 if not movie_filename_key.lower().endswith('.nfo'):
                     if movie_title_key not in movie_results_list:
-                        movie_results_list[movie_filename_key] = {}
+                        movie_results_list[movie_title_key] = {}
 
                     try:
 
                         movie_file_size = os.path.getsize(movie_file[0])
                         movie_file_size_in_mb = (int(movie_file_size) / 1048576)
                         movie_file_size_in_mb_rounded = str(round(movie_file_size_in_mb, 2))
-                        movie_results_list[movie_filename_key]['FILE-SIZE'] = movie_file_size_in_mb_rounded
+                        movie_results_list[movie_title_key]['FILE-SIZE'] = movie_file_size_in_mb_rounded
 
                     except OSError as e:
                         print('OS ERROR / FILE-SIZE: ', e)
@@ -208,17 +207,17 @@ def create_media_information_indices():
                         if track.track_type == 'General':
                             duration_readable = track.other_duration
                             duration_integer = track.duration
-                            movie_results_list[movie_filename_key]['DURATION'] = duration_integer
-                            movie_results_list[movie_filename_key]['RUN-TIME'] = duration_readable[0]
+                            movie_results_list[movie_title_key]['DURATION'] = duration_integer
+                            movie_results_list[movie_title_key]['RUN-TIME'] = duration_readable[0]
 
                         elif track.track_type == 'Video':
-                            movie_results_list[movie_filename_key]['DIRECTORY'] = movie_title_key
-                            movie_results_list[movie_filename_key]['TITLE'] = movie_title.get('title')
-                            movie_results_list[movie_filename_key]['YEAR'] = movie_title.get('year')
-                            movie_results_list[movie_filename_key]['RESOLUTION'] = str(
+                            movie_results_list[movie_title_key]['DIRECTORY'] = movie_title_key
+                            movie_results_list[movie_title_key]['TITLE'] = movie_title.get('title')
+                            movie_results_list[movie_title_key]['YEAR'] = movie_title.get('year')
+                            movie_results_list[movie_title_key]['RESOLUTION'] = str(
                                 track.width) + 'x' + str(track.height)
-                            movie_results_list[movie_filename_key]['FILE-TYPE'] = movie_title.get('container')
-                            movie_results_list[movie_filename_key]['FILE-NAME'] = movie_filename_key
+                            movie_results_list[movie_title_key]['FILE-TYPE'] = movie_title.get('container')
+                            movie_results_list[movie_title_key]['FILE-NAME'] = movie_filename_key
 
                 elif movie_filename_key.lower().endswith('.nfo'):
 
@@ -228,9 +227,9 @@ def create_media_information_indices():
 
                             for line_item in o_f.readlines():
                                 if '<plot>' in line_item:
-                                    movie_results_list[movie_filename_key]['PLOT'] = line_item
+                                    movie_results_list[movie_title_key]['PLOT'] = line_item
                                 elif '<rating>' in line_item:
-                                    movie_results_list[movie_filename_key]['RATING'] = line_item
+                                    movie_results_list[movie_title_key]['RATING'] = line_item
 
                     except Exception as e:
                         print('NFO ERROR: ', e, '\n', 'FILE: ', movie_file[0])
@@ -255,6 +254,12 @@ def create_media_information_indices():
     print('MOVIE INFORMATION SCAN COMPLETE - TIME ELAPSED: ', movie_scan_end - movie_scan_start)
     separator_3()
 
+
+def create_tv_information_index():
+    tv_results_list = {}
+    tv_show_plots_dictionary = {}
+    tv_scan_start = time.time()
+
     with open(os.path.expanduser((index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username)),
               encoding='UTF-8') as t_f_p:
         tv_index = csv.reader(t_f_p)
@@ -268,7 +273,7 @@ def create_media_information_indices():
                 tv_folder_year = tv_folder_title.rsplit('(')[-1][:-1]
                 tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
 
-                if str(tv_filename_key.lower()) == 'tvshow.nfo':
+                if str(tv_filename_key.lower()) == str('tvshow.nfo'):
                     tv_show_plots_dictionary[tv_folder_title] = {}
                     tv_show_plots_dictionary[tv_folder_title]['SHOW'] = tv_folder_title
 
@@ -288,14 +293,14 @@ def create_media_information_indices():
                 elif not tv_filename_key.lower().endswith('.nfo'):
 
                     if tv_title_key not in tv_results_list:
-                        tv_results_list[tv_filename_key] = {}
+                        tv_results_list[tv_title_key] = {}
 
                     try:
 
                         tv_show_file_size = os.path.getsize(tv_file[0])
                         tv_show_file_size_in_mb = (int(tv_show_file_size) / 1048576)
                         tv_show_file_size_in_mb_rounded = str(round(tv_show_file_size_in_mb, 2))
-                        tv_results_list[tv_filename_key]['FILE-SIZE'] = tv_show_file_size_in_mb_rounded
+                        tv_results_list[tv_title_key]['FILE-SIZE'] = tv_show_file_size_in_mb_rounded
 
                     except OSError as e:
                         print('OS ERROR / FILE-SIZE: ', e)
@@ -322,26 +327,26 @@ def create_media_information_indices():
                         if track.track_type == 'General':
                             duration_readable = track.other_duration
                             duration_integer = track.duration
-                            tv_results_list[tv_filename_key]['DURATION'] = duration_integer
-                            tv_results_list[tv_filename_key]['RUN-TIME'] = duration_readable[0]
+                            tv_results_list[tv_title_key]['DURATION'] = duration_integer
+                            tv_results_list[tv_title_key]['RUN-TIME'] = duration_readable[0]
 
                         elif track.track_type == 'Video':
-                            tv_results_list[tv_filename_key]['DIRECTORY'] = tv_folder_title
-                            tv_results_list[tv_filename_key]['TITLE'] = tv_show_title.get('title')
-                            tv_results_list[tv_filename_key]['YEAR'] = tv_folder_year
-                            tv_results_list[tv_filename_key]['EPISODE TITLE'] = tv_show_title.get('episode_title')
-                            tv_results_list[tv_filename_key]['SEASON'] = tv_show_title.get('season')
-                            tv_results_list[tv_filename_key]['EPISODE NUMBER'] = tv_show_title.get('episode')
-                            tv_results_list[tv_filename_key]['RESOLUTION'] = str(track.width) + 'x' + str(track.height)
-                            tv_results_list[tv_filename_key]['FILE-TYPE'] = tv_show_title.get('container')
-                            tv_results_list[tv_filename_key]['FILE-NAME'] = tv_filename_key
+                            tv_results_list[tv_title_key]['DIRECTORY'] = tv_folder_title
+                            tv_results_list[tv_title_key]['TITLE'] = tv_show_title.get('title')
+                            tv_results_list[tv_title_key]['YEAR'] = tv_folder_year
+                            tv_results_list[tv_title_key]['EPISODE TITLE'] = tv_show_title.get('episode_title')
+                            tv_results_list[tv_title_key]['SEASON'] = tv_show_title.get('season')
+                            tv_results_list[tv_title_key]['EPISODE NUMBER'] = tv_show_title.get('episode')
+                            tv_results_list[tv_title_key]['RESOLUTION'] = str(track.width) + 'x' + str(track.height)
+                            tv_results_list[tv_title_key]['FILE-TYPE'] = tv_show_title.get('container')
+                            tv_results_list[tv_title_key]['FILE-NAME'] = tv_filename_key
 
                 elif tv_filename_key.lower().endswith('.nfo'):
 
                     if tv_title_key not in tv_results_list:
                         tv_results_list[tv_title_key] = {}
 
-                    if str(tv_filename_key.lower()) != 'tvshow.nfo':
+                    if str(tv_filename_key.lower()) != str('tvshow.nfo'):
 
                         try:
 
@@ -349,9 +354,9 @@ def create_media_information_indices():
 
                                 for line in o_f.readlines():
                                     if '<plot>' in line:
-                                        tv_results_list[tv_filename_key]['PLOT'] = line
+                                        tv_results_list[tv_title_key]['PLOT'] = line
                                     elif '<rating>' in line:
-                                        tv_results_list[tv_filename_key]['RATING'] = line
+                                        tv_results_list[tv_title_key]['RATING'] = line
 
                         except Exception as e:
                             print('NFO ERROR: ', e, '\n', 'FILE: ', tv_file[0])
@@ -838,7 +843,7 @@ def media_index_home():
 
                 print('CONFIRM: ')
                 separator_1()
-                print('1) CHANGE DATABASE DIRECTORIES                   0) MAIN MENU')
+                print('1) CHANGE DATABASE DIRECTORIES                       0) MAIN MENU')
                 separator_3()
                 db_scan_sub_input = int(input('ENTER #: '))
                 separator_3()
@@ -861,7 +866,7 @@ def media_index_home():
                 separator_1()
                 print('THIS OPERATION MAY TAKE A LONG TIME (SEVERAL MINUTES FOR LARGE LIBRARIES)')
                 separator_2()
-                print('1) CONTINUE WITH MEDIA PATH(S) SCAN              0) MAIN MENU')
+                print('1) CONTINUE WITH MEDIA PATH(S) SCAN                  0) MAIN MENU')
                 separator_3()
                 path_scan_sub_input = int(input('ENTER #: '))
                 separator_3()
@@ -884,7 +889,7 @@ def media_index_home():
                 separator_1()
                 print('THIS OPERATION CAN TAKE A LONG TIME (SEVERAL MINUTES FOR LARGE LIBRARIES)')
                 separator_2()
-                print('1) CONTINUE BUILDING TITLE INDEX                 0) MAIN MENU')
+                print('1) CONTINUE BUILDING HASH FILE(S) & TITLE INDEX      0) MAIN MENU')
                 separator_3()
                 title_scan_sub_input = int(input('ENTER #: '))
                 separator_3()
@@ -908,7 +913,7 @@ def media_index_home():
                 separator_1()
                 print('THIS OPERATION CAN TAKE A LONG TIME (SEVERAL HOURS FOR LARGE LIBRARIES)')
                 separator_2()
-                print('1) CONTINUE WITH MEDIA INFORMATION SCAN          0) MAIN MENU')
+                print('1) CONTINUE WITH MEDIA INFORMATION SCAN              0) MAIN MENU')
                 separator_3()
                 information_scan_sub_input = int(input('ENTER #: '))
                 separator_3()
@@ -929,7 +934,7 @@ def media_index_home():
 
                 print('CONFIRM: ')
                 separator_1()
-                print('1) COMPARE USER(S) INFORMATION INDICES           0) MAIN MENU')
+                print('1) COMPARE USER(S) INFORMATION INDICES               0) MAIN MENU')
                 separator_3()
                 comparison_scan_sub_input = int(input('ENTER #: '))
                 separator_3()
