@@ -112,7 +112,6 @@ def create_media_hash_files():
             try:
 
                 tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
-                tv_folder_title = tv_file[0].rsplit('/')[-2]
                 tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
 
                 if not tv_filename_key.lower().endswith('.nfo'):
@@ -150,7 +149,8 @@ def create_media_hash_files():
             thf.write("%s\n" % tv_hashes)
 
     hash_scan_end = time.time()
-    print('MEDIA HASH SCAN COMPLETE - TIME ELAPSED: ', hash_scan_end - hash_scan_start)
+    readable_hash_time = round(hash_scan_end - hash_scan_start, 2)
+    print('MEDIA HASH SCAN COMPLETE - TIME ELAPSED: ', readable_hash_time, 'Seconds')
     separator_3()
 
 
@@ -161,6 +161,7 @@ def create_media_information_indices():
 
 def create_movie_information_index():
     movie_results_list = {}
+
     movie_scan_start = time.time()
 
     with open(os.path.expanduser((index_folder + '/MOVIE_VIDEO_FILES_PATHS.csv').format(username)),
@@ -254,13 +255,15 @@ def create_movie_information_index():
             csv_writer.writerow(movie_row)
 
     movie_scan_end = time.time()
-    print('MOVIE INFORMATION SCAN COMPLETE - TIME ELAPSED: ', movie_scan_end - movie_scan_start)
+    readable_movie_scan_time = round(movie_scan_end - movie_scan_start, 2)
+    print('MOVIE INFORMATION SCAN COMPLETE - TIME ELAPSED: ', readable_movie_scan_time, 'Seconds')
     separator_3()
 
 
 def create_tv_information_index():
     tv_results_list = {}
     tv_show_plots_dictionary = {}
+
     tv_scan_start = time.time()
 
     with open(os.path.expanduser((index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username)),
@@ -387,7 +390,8 @@ def create_tv_information_index():
             csv_writer.writerow(tv_row)
 
     tv_scan_end = time.time()
-    print('TV-SHOWS INFORMATION SCAN COMPLETE - TIME ELAPSED: ', tv_scan_end - tv_scan_start)
+    readable_tv_scan_time = round(tv_scan_end - tv_scan_start, 2)
+    print('TV-SHOWS INFORMATION SCAN COMPLETE - TIME ELAPSED: ', readable_tv_scan_time, 'Seconds')
     separator_3()
 
 
@@ -1514,6 +1518,7 @@ def saved_searches():
 def scrape_media_folders_for_csv():
     movie_title_items = []
     tv_title_items = []
+
     naming_scan_start = time.time()
 
     try:
@@ -1584,7 +1589,8 @@ def scrape_media_folders_for_csv():
         separator_3()
 
     naming_scan_end = time.time()
-    print('MEDIA TITLES SCAN COMPLETE - TIME ELAPSED: ', naming_scan_end - naming_scan_start)
+    readable_naming_scan_time = round(naming_scan_end - naming_scan_start, 2)
+    print('MEDIA TITLES SCAN COMPLETE - TIME ELAPSED: ', readable_naming_scan_time, 'Seconds')
     separator_3()
 
 
@@ -2395,6 +2401,7 @@ def username_check_and_folder_creation():
 
 def walk_directories_and_create_indices():
     movie_video_files_results = []
+
     path_scan_start = time.time()
 
     if movie_dir_input != '':
@@ -2438,7 +2445,8 @@ def walk_directories_and_create_indices():
             csv_writer.writerow(tv_row)
 
     path_scan_end = time.time()
-    print('MEDIA PATHS SCAN COMPLETE - TIME ELAPSED: ', path_scan_end - path_scan_start)
+    readable_path_scan_time = round(path_scan_end - path_scan_start, 2)
+    print('MEDIA PATHS SCAN COMPLETE - TIME ELAPSED: ', readable_path_scan_time, 'Seconds')
     separator_3()
 
 
