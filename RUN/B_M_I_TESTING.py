@@ -424,7 +424,6 @@ def directory_selection():
             movie_alt_dir_input = tk_gui_file_browser_window()
 
             while movie_alt_dir_input != '':
-
                 movie_alt_directories_list.append(movie_alt_dir_input)
                 movie_alt_dir_input = tk_gui_file_browser_window()
 
@@ -436,7 +435,6 @@ def directory_selection():
             tv_alt_dir_input = tk_gui_file_browser_window()
 
             while tv_alt_dir_input != '':
-
                 tv_alt_directories_list.append(tv_alt_dir_input)
                 tv_alt_dir_input = tk_gui_file_browser_window()
 
@@ -774,6 +772,11 @@ def launch_media_index():
 
         global username
         username = input('ENTER YOUR USERNAME (CASE-SENSITIVE): ')
+        if username == '':
+            separator_3()
+            print('USERNAME CANNOT BE LEFT BLANK: ')
+            separator_3()
+            launch_media_index()
         separator_3()
         username_check_and_folder_creation()
 
@@ -1997,6 +2000,8 @@ def sort_function_for_tv_episodes(sort_options_int):
             tv_show_run_times = tv_show_values['RUN-TIMES']
             tv_show_file_sizes = tv_show_values['FILE-SIZES']
 
+        print(tv_shows_found_dict)
+
         for found_tv_title in tv_amounts_list:
             tv_show_episodes_found_list.append(found_tv_title)
             tv_show_count_found_dict[found_tv_title] = tv_show_episodes_found_list.count(found_tv_title)
@@ -2059,11 +2064,14 @@ def sort_options_sub_menu():
         if sort_options_int == 0:
             media_index_home()
 
-        elif 1 <= sort_options_int <= 12:
+        elif 1 <= sort_options_int <= 8:
             sort_function_base(sort_options_int=sort_options_int)
 
-        elif 13 <= sort_options_int <= 16:
+        elif 9 <= sort_options_int <= 16:
             sort_function_for_tv_episodes(sort_options_int=sort_options_int)
+
+        elif 17 <= sort_options_int <= 20:
+            sort_function_base(sort_options_int=sort_options_int)
 
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -2345,7 +2353,6 @@ def update_indices_scan():
         movie_files_results_list = list(csv.reader(m_h))
 
         for movie_hashes in movie_files_results_list:
-
             current_movie_db_hashes_list.append(movie_hashes[0])
 
     with open(os.path.expanduser((index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username)),
@@ -2382,7 +2389,6 @@ def update_indices_scan():
         tv_files_results_list = list(csv.reader(t_h))
 
         for tv_hashes in tv_files_results_list:
-
             current_tv_db_hashes_list.append(tv_hashes[0])
 
     for movie_changes in compare_results(current_movie_db_hashes_list, update_movie_db_hashes_list):
