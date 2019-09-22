@@ -67,6 +67,8 @@ def create_media_hash_files():
     tv_hash_list = []
     tv_results_list = {}
 
+    hash_scan_start = time.time()
+
     with open(os.path.expanduser((index_folder + '/MOVIE_VIDEO_FILES_PATHS.csv').format(username)),
               encoding='UTF-8') as m_f_p:
         movie_index = csv.reader(m_f_p)
@@ -147,7 +149,8 @@ def create_media_hash_files():
         for tv_hashes in tv_hash_list:
             thf.write("%s\n" % tv_hashes)
 
-    print('HASH FILE(S) CREATED: ')
+    hash_scan_end = time.time()
+    print('MEDIA HASH SCAN COMPLETE - TIME ELAPSED: ', hash_scan_end - hash_scan_start)
     separator_3()
 
 
