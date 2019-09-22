@@ -1862,7 +1862,7 @@ def sort_function_base(sort_options_int):
 
             movie_time_total_readable_seconds = int(movie_time) // 1000
             movie_time_total_readable_minutes = int(movie_time_total_readable_seconds) // 60
-            movie_info_list.append([movie_title, movie_size, movie_time_total_readable_minutes])
+            movie_info_list.append([movie_title, float(movie_size), float(movie_time_total_readable_minutes)])
 
         for tv_show_info in tv_files_results_list:
             tv_show_title = tv_show_info[0]
@@ -1881,7 +1881,8 @@ def sort_function_base(sort_options_int):
 
             tv_time_total_readable_seconds = int(episode_time) // 1000
             tv_time_total_readable_minutes = int(tv_time_total_readable_seconds) // 60
-            tv_info_list.append([tv_show_title, episode_title, episode_size, tv_time_total_readable_minutes])
+            tv_info_list.append([tv_show_title, episode_title, float(episode_size),
+                                 float(tv_time_total_readable_minutes)])
 
         if sort_options_int == 1:
 
