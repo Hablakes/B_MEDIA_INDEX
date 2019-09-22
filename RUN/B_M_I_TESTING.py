@@ -974,7 +974,8 @@ def media_index_home():
             saved_searches()
 
         elif lmi_input_action == 13:
-            update_indices_scan()
+            pass
+            '''update_indices_scan()'''
 
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')

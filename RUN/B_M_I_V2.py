@@ -826,8 +826,6 @@ def media_index_home():
     print('9) PICTURE GRAPH OPTIONS                         10) TERMINAL GRAPH OPTIONS', '\n')
     print('11) TIME INFORMATION QUERIES                     12) SAVED SEARCHES')
     separator_2()
-    print('13) TESTING BRANCH')
-    separator_2()
     print('0) EXIT MEDIA-INDEX')
     separator_3()
 
@@ -972,9 +970,6 @@ def media_index_home():
 
         elif lmi_input_action == 12:
             saved_searches()
-
-        elif lmi_input_action == 13:
-            update_indices_scan()
 
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
