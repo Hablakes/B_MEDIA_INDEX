@@ -45,7 +45,6 @@ def change_directory_selection():
     directory_selection()
 
 
-# TESTING FUNCTION
 def compare_results(results_one, results_two):
     output_one = []
 
@@ -60,7 +59,6 @@ def compare_results(results_one, results_two):
     return output_one
 
 
-# TESTING FUNCTION
 def create_media_hash_files():
     movie_results_list = {}
     movie_hash_list = []
@@ -1780,7 +1778,6 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                 separator_3()
 
 
-# TESTING FUNCTION
 def select_users_indices_to_compare():
     try:
 
@@ -1842,7 +1839,6 @@ def separator_3():
         print(items)
 
 
-# TESTING FUNCTION
 def sort_function_base(sort_options_int):
     movie_info_list = []
     tv_info_list = []
@@ -1891,52 +1887,52 @@ def sort_function_base(sort_options_int):
             tv_info_list.append([tv_show_title, episode_title, float(episode_size),
                                  float(tv_time_total_readable_minutes)])
 
-        if sort_options_int == 1:
+        movies_sorted_by_size = sorted(movie_info_list, key=lambda x: x[1])
+        movies_sorted_by_size_r = sorted(movie_info_list, key=lambda x: x[1], reverse=True)
+        movies_sorted_by_time = sorted(movie_info_list, key=lambda x: x[2])
+        movies_sorted_by_time_r = sorted(movie_info_list, key=lambda x: x[2], reverse=True)
+        tv_shows_sorted_by_size = sorted(tv_info_list, key=lambda x: x[2])
+        tv_shows_sorted_by_size_r = sorted(tv_info_list, key=lambda x: x[2], reverse=True)
+        tv_shows_sorted_by_time = sorted(tv_info_list, key=lambda x: x[3])
+        tv_shows_sorted_by_time_r = sorted(tv_info_list, key=lambda x: x[3], reverse=True)
 
-            movies_sorted_by_size = sorted(movie_info_list, key=lambda x: x[1])
+        if sort_options_int == 1:
             for movie_sizes in movies_sorted_by_size:
                 print('\n', movie_sizes[0], '-', movie_sizes[1], ': MB')
             separator_3()
 
         elif sort_options_int == 2:
-            movies_sorted_by_size_r = sorted(movie_info_list, key=lambda x: x[1], reverse=True)
             for movie_sizes in movies_sorted_by_size_r:
                 print('\n', movie_sizes[0], '-', movie_sizes[1], ': MB')
             separator_3()
 
         elif sort_options_int == 3:
-            movies_sorted_by_time = sorted(movie_info_list, key=lambda x: x[2])
             for movie_run_times in movies_sorted_by_time:
                 print('\n', movie_run_times[0], '-', movie_run_times[2], ': Minutes')
             separator_3()
 
         elif sort_options_int == 4:
-            movies_sorted_by_time = sorted(movie_info_list, key=lambda x: x[2], reverse=True)
-            for movie_run_times in movies_sorted_by_time:
+            for movie_run_times in movies_sorted_by_time_r:
                 print('\n', movie_run_times[0], '-', movie_run_times[2], ': Minutes')
             separator_3()
 
         elif sort_options_int == 5:
-            tv_shows_sorted_by_size = sorted(tv_info_list, key=lambda x: x[2])
             for episode_sizes in tv_shows_sorted_by_size:
                 print('\n', episode_sizes[0], '-', episode_sizes[1], '-', episode_sizes[2], ': MB')
             separator_3()
 
         elif sort_options_int == 6:
-            tv_shows_sorted_by_size_r = sorted(tv_info_list, key=lambda x: x[2], reverse=True)
             for episode_sizes in tv_shows_sorted_by_size_r:
                 print('\n', episode_sizes[0], '-', episode_sizes[1], '-', episode_sizes[2], ': MB')
             separator_3()
 
         elif sort_options_int == 7:
-            movies_sorted_by_time = sorted(tv_info_list, key=lambda x: x[3])
-            for episode_run_times in movies_sorted_by_time:
+            for episode_run_times in tv_shows_sorted_by_time:
                 print('\n', episode_run_times[0], '-', episode_run_times[1], '-', episode_run_times[3], ': Minutes')
             separator_3()
 
         elif sort_options_int == 8:
-            movies_sorted_by_time_r = sorted(tv_info_list, key=lambda x: x[3], reverse=True)
-            for episode_run_times in movies_sorted_by_time_r:
+            for episode_run_times in tv_shows_sorted_by_time_r:
                 print('\n', episode_run_times[0], '-', episode_run_times[1], '-', episode_run_times[3], ': Minutes')
             separator_3()
 
@@ -1944,33 +1940,32 @@ def sort_function_base(sort_options_int):
               encoding='UTF-8') as m_t_i:
         media_index = list(csv.reader(m_t_i))
 
-        sorted_title = sorted(media_index, key=lambda x: (x[0], x[1]))
-        sorted_title_r = sorted(media_index, key=lambda x: (x[0], x[1]), reverse=True)
-        sorted_year = sorted(media_index, key=lambda x: (x[0], x[2]))
-        sorted_year_r = sorted(media_index, key=lambda x: (x[0], x[2]), reverse=True)
+        sorted_titles = sorted(media_index, key=lambda x: (x[0], x[1]))
+        sorted_titles_r = sorted(media_index, key=lambda x: (x[0], x[1]), reverse=True)
+        sorted_years = sorted(media_index, key=lambda x: (x[0], x[2]))
+        sorted_years_r = sorted(media_index, key=lambda x: (x[0], x[2]), reverse=True)
 
         if sort_options_int == 17:
-            for title_item in sorted_title:
+            for title_item in sorted_titles:
                 print('\n', title_item[0], ': Title -', title_item[1], ': Year -', title_item[2])
             separator_3()
 
         elif sort_options_int == 18:
-            for title_item in sorted_title_r:
+            for title_item in sorted_titles_r:
                 print('\n', title_item[0], ': Title -', title_item[1], ': Year -', title_item[2])
             separator_3()
 
         elif sort_options_int == 19:
-            for title_item in sorted_year:
+            for title_item in sorted_years:
                 print('\n', title_item[0], ': Title -', title_item[1], ': Year -', title_item[2])
             separator_3()
 
         elif sort_options_int == 20:
-            for title_item in sorted_year_r:
+            for title_item in sorted_years_r:
                 print('\n', title_item[0], ': Title -', title_item[1], ': Year -', title_item[2])
             separator_3()
 
 
-# TESTING FUNCTION
 def sort_function_for_tv_episodes(sort_options_int):
     tv_amounts_list = []
     tv_show_episodes_found_list = []
@@ -2151,7 +2146,6 @@ def terminal_graph_options_sub_menu():
         separator_3()
 
 
-# TESTING FUNCTION
 def time_queries_sub_menu():
     print(pyfiglet.figlet_format('TIME_QUERIES', font='cybermedium'))
     separator_3()
@@ -2341,7 +2335,6 @@ def total_tv_episodes_in_show_title():
         separator_3()
 
 
-# TESTING FUNCTION
 def update_indices_scan():
     print('UPDATING PATH INDICES:')
     separator_3()
