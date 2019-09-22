@@ -1974,8 +1974,10 @@ def sort_function_base(sort_options_int):
 def sort_function_for_tv_episodes(sort_options_int):
     tv_amounts_list = []
     tv_show_episodes_found_list = []
-    tv_shows_found_dict = {}
+    tv_show_found_dict = {}
     tv_show_count_found_dict = {}
+    tv_show_run_times_total_list = []
+    tv_show_file_sizes_total_list = []
 
     with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as t_i_i:
@@ -1983,46 +1985,82 @@ def sort_function_for_tv_episodes(sort_options_int):
 
         for tv_title in tv_results_list:
             tv_amounts_list.append(tv_title[0])
-            if tv_title[0] not in tv_shows_found_dict:
-                tv_shows_found_dict[tv_title[0]] = {}
-                tv_shows_found_dict[tv_title[0]]['RUN-TIMES'] = []
-                tv_shows_found_dict[tv_title[0]]['FILE-SIZES'] = []
+            if tv_title[0] not in tv_show_found_dict:
+                tv_show_found_dict[tv_title[0]] = {}
+                tv_show_found_dict[tv_title[0]]['RUN-TIMES'] = []
+                tv_show_found_dict[tv_title[0]]['FILE-SIZES'] = []
 
-            tv_shows_found_dict[tv_title[0]]['RUN-TIMES'].append(tv_title[11])
-            tv_shows_found_dict[tv_title[0]]['FILE-SIZES'].append(tv_title[12])
+            tv_run_times = tv_title[11]
+            tv_file_sizes = tv_title[12]
 
-        for tv_show_keys, tv_show_values in tv_shows_found_dict.items():
-            tv_show_run_times = tv_show_values['RUN-TIMES']
-            tv_show_file_sizes = tv_show_values['FILE-SIZES']
+            if tv_run_times == '':
+                tv_run_times = 0
+            if tv_file_sizes == '':
+                tv_file_sizes = 0
 
-        print(tv_shows_found_dict)
+            tv_show_found_dict[tv_title[0]]['RUN-TIMES'].append(float(tv_run_times))
+            tv_show_found_dict[tv_title[0]]['FILE-SIZES'].append(float(tv_file_sizes))
 
         for found_tv_title in tv_amounts_list:
             tv_show_episodes_found_list.append(found_tv_title)
             tv_show_count_found_dict[found_tv_title] = tv_show_episodes_found_list.count(found_tv_title)
 
-        sorted_by_key_d = sorted(tv_show_count_found_dict.items(), key=lambda kv: kv[0])
-        sorted_by_key_a = sorted(tv_show_count_found_dict.items(), key=lambda kv: kv[0], reverse=True)
-        sorted_by_value_d = sorted(tv_show_count_found_dict.items(), key=lambda kv: kv[1])
-        sorted_by_value_a = sorted(tv_show_count_found_dict.items(), key=lambda kv: kv[1], reverse=True)
+        for tv_show_keys, tv_show_values in tv_show_found_dict.items():
+            show_run_time_total = sum(tv_show_values['RUN-TIMES'])
+            show_run_time_total_seconds = show_run_time_total / 1000
+            show_run_time_total_minutes = round(show_run_time_total_seconds / 60, 2)
+            tv_show_run_times_total_list.append([tv_show_keys, show_run_time_total_minutes])
 
-        if sort_options_int == 13:
-            for item in sorted_by_key_d:
+        for tv_show_keys, tv_show_values in tv_show_found_dict.items():
+            show_file_size_total = sum(tv_show_values['FILE-SIZES'])
+            tv_show_file_sizes_total_list.append([tv_show_keys, round(show_file_size_total, 2)])
+
+        episode_titles_a = sorted(tv_show_count_found_dict.items(), key=lambda kv: kv[0])
+        episode_titles_d = sorted(tv_show_count_found_dict.items(), key=lambda kv: kv[0], reverse=True)
+        episode_amount_a = sorted(tv_show_count_found_dict.items(), key=lambda kv: kv[1])
+        episode_amount_d = sorted(tv_show_count_found_dict.items(), key=lambda kv: kv[1], reverse=True)
+        episode_times_a = sorted(tv_show_run_times_total_list, key=lambda x: x[1])
+        episode_times_d = sorted(tv_show_run_times_total_list, key=lambda x: x[1], reverse=True)
+        episode_sizes_a = sorted(tv_show_file_sizes_total_list, key=lambda x: x[1])
+        episode_sizes_d = sorted(tv_show_file_sizes_total_list, key=lambda x: x[1], reverse=True)
+
+        if sort_options_int == 9:
+            for item in episode_times_a:
+                print('\n', item[0], '-', item[1], ': Minutes Total')
+            separator_3()
+
+        elif sort_options_int == 10:
+            for item in episode_times_d:
+                print('\n', item[0], '-', item[1], ': Minutes Total')
+            separator_3()
+
+        elif sort_options_int == 11:
+            for item in episode_sizes_a:
+                print('\n', item[0], '-', item[1], ': MB Total')
+            separator_3()
+
+        elif sort_options_int == 12:
+            for item in episode_sizes_d:
+                print('\n', item[0], '-', item[1], ': MB Total')
+            separator_3()
+
+        elif sort_options_int == 13:
+            for item in episode_titles_a:
                 print('\n', item[0], '-', item[1], 'Episodes')
             separator_3()
 
         elif sort_options_int == 14:
-            for item in sorted_by_key_a:
+            for item in episode_titles_d:
                 print('\n', item[0], '-', item[1], 'Episodes')
             separator_3()
 
         elif sort_options_int == 15:
-            for item in sorted_by_value_d:
+            for item in episode_amount_a:
                 print('\n', item[0], '-', item[1], 'Episodes')
             separator_3()
 
         elif sort_options_int == 16:
-            for item in sorted_by_value_a:
+            for item in episode_amount_d:
                 print('\n', item[0], '-', item[1], 'Episodes')
             separator_3()
 
