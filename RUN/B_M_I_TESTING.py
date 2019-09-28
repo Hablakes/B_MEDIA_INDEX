@@ -59,102 +59,9 @@ def compare_results(results_one, results_two):
     return output_one
 
 
-def create_media_hash_files():
-    movie_results_list = {}
-    movie_hash_list = []
-    tv_hash_list = []
-    tv_results_list = {}
-
-    hash_scan_start = time.time()
-
-    with open(os.path.expanduser((index_folder + '/MOVIE_VIDEO_FILES_PATHS.csv').format(username)),
-              encoding='UTF-8') as m_f_p:
-        movie_index = csv.reader(m_f_p)
-
-        for movie_file in sorted(movie_index):
-
-            try:
-
-                movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
-                movie_title_key = movie_file[0].rsplit('/')[-2]
-
-                if not movie_filename_key.lower().endswith('.nfo'):
-                    if movie_title_key not in movie_results_list:
-                        movie_results_list[movie_filename_key] = {}
-
-                    try:
-
-                        movie_file_size = os.path.getsize(movie_file[0])
-                        movie_file_size_in_mb = (int(movie_file_size) / 1048576)
-                        movie_file_size_in_mb_rounded = str(round(movie_file_size_in_mb, 2))
-                        movie_results_list[movie_filename_key]['FILE-SIZE'] = movie_file_size_in_mb_rounded
-
-                    except OSError as e:
-                        print('OS ERROR / FILE-SIZE: ', e)
-                        continue
-
-                    movie_hash = str(str(movie_filename_key) + '_' + str(movie_file_size) + '_' + str(movie_title_key))
-                    movie_hash_list.append(movie_hash)
-
-            except (OSError, TypeError, ValueError) as e:
-                print('INPUT ERROR: ', e, '\n', 'MOVIE FILE(S): ', movie_file[0])
-                print('-' * 100)
-                continue
-
-    with open(os.path.expanduser((index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username)),
-              encoding='UTF-8') as t_f_p:
-        tv_index = csv.reader(t_f_p)
-
-        for tv_file in sorted(tv_index):
-
-            try:
-
-                tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
-                tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
-
-                if not tv_filename_key.lower().endswith('.nfo'):
-
-                    if tv_title_key not in tv_results_list:
-                        tv_results_list[tv_filename_key] = {}
-
-                    try:
-
-                        tv_show_file_size = os.path.getsize(tv_file[0])
-                        tv_show_file_size_in_mb = (int(tv_show_file_size) / 1048576)
-                        tv_show_file_size_in_mb_rounded = str(round(tv_show_file_size_in_mb, 2))
-                        tv_results_list[tv_filename_key]['FILE-SIZE'] = tv_show_file_size_in_mb_rounded
-
-                    except OSError as e:
-                        print('OS ERROR / FILE-SIZE: ', e)
-                        continue
-
-                    tv_hash = str(str(tv_filename_key) + '_' + str(tv_show_file_size) + '_' + str(tv_title_key))
-                    tv_hash_list.append(tv_hash)
-
-            except (OSError, TypeError, ValueError) as e:
-                print('INPUT ERROR: ', e, '\n', 'TV SHOW FILE(S): ', tv_file[0])
-                print('-' * 100)
-                continue
-
-    with open(os.path.expanduser((index_folder + '/MOVIE_HASHES.csv').format(username)), 'w',
-              encoding='UTF-8', newline='') as mhf:
-        for movie_hashes in movie_hash_list:
-            mhf.write("%s\n" % movie_hashes)
-
-    with open(os.path.expanduser((index_folder + '/TV_SHOW_HASHES.csv').format(username)), 'w',
-              encoding='UTF-8', newline='') as thf:
-        for tv_hashes in tv_hash_list:
-            thf.write("%s\n" % tv_hashes)
-
-    hash_scan_end = time.time()
-    readable_hash_time = round(hash_scan_end - hash_scan_start, 2)
-    print('MEDIA HASH SCAN COMPLETE - TIME ELAPSED: ', readable_hash_time, 'Seconds')
-    separator_3()
-
-
 def create_media_information_indices():
     create_movie_information_index()
-    create_tv_information_index()
+    # create_tv_information_index()
 
 
 def create_movie_information_index():
@@ -166,16 +73,43 @@ def create_movie_information_index():
               encoding='UTF-8') as m_f_p:
         movie_index = csv.reader(m_f_p)
 
+        movie_string = str('MOVIE')
+
         for movie_file in sorted(movie_index):
+
+            media_path = movie_file[0]
 
             try:
 
                 movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
                 movie_title_key = movie_file[0].rsplit('/')[-2]
 
-                if not movie_filename_key.lower().endswith('.nfo'):
+                movie_hash = str(str(movie_file_size) + '_' + str(movie_title_key))
+                movie_results_list[movie_title_key]['MOVIE-HASH'] = movie_hash
+
+                if movie_filename_key.lower().endswith('.nfo'):
+
+                    try:
+
+                        with open(str(movie_file[0])) as o_f:
+
+                            for line_item in o_f.readlines():
+                                if '<plot>' in line_item:
+                                    movie_results_list[movie_title_key]['PLOT'] = line_item
+                                elif '<rating>' in line_item:
+                                    movie_results_list[movie_title_key]['RATING'] = line_item
+
+                    except Exception as e:
+                        print('NFO ERROR: ', e, '\n', 'FILE: ', movie_file[0])
+                        print('-' * 100)
+                        continue
+
+                elif not movie_filename_key.lower().endswith('.nfo'):
                     if movie_title_key not in movie_results_list:
                         movie_results_list[movie_title_key] = {}
+
+                    movie_results_list[movie_title_key]['MEDIA-PATH'] = media_path
+                    movie_results_list[movie_title_key]['MEDIA-TYPE'] = movie_string
 
                     try:
 
@@ -221,23 +155,6 @@ def create_movie_information_index():
                             movie_results_list[movie_title_key]['FILE-TYPE'] = movie_title.get('container')
                             movie_results_list[movie_title_key]['FILE-NAME'] = movie_filename_key
 
-                elif movie_filename_key.lower().endswith('.nfo'):
-
-                    try:
-
-                        with open(str(movie_file[0])) as o_f:
-
-                            for line_item in o_f.readlines():
-                                if '<plot>' in line_item:
-                                    movie_results_list[movie_title_key]['PLOT'] = line_item
-                                elif '<rating>' in line_item:
-                                    movie_results_list[movie_title_key]['RATING'] = line_item
-
-                    except Exception as e:
-                        print('NFO ERROR: ', e, '\n', 'FILE: ', movie_file[0])
-                        print('-' * 100)
-                        continue
-
             except (OSError, TypeError, ValueError) as e:
                 print('INPUT ERROR: ', e, '\n', 'MOVIE FILE(S): ', movie_file[0])
                 print('-' * 100)
@@ -246,8 +163,9 @@ def create_movie_information_index():
     with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)), 'w',
               encoding='UTF-8', newline='') as m_i_i:
 
-        csv_writer = csv.DictWriter(m_i_i, ['DIRECTORY', 'TITLE', 'YEAR', 'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING',
-                                            'RUN-TIME', 'DURATION', 'FILE-SIZE', 'FILE-NAME'])
+        csv_writer = csv.DictWriter(m_i_i, ['MEDIA-PATH', 'MEDIA-TYPE', 'DIRECTORY', 'TITLE', 'YEAR', 'RESOLUTION',
+                                            'FILE-TYPE', 'PLOT', 'RATING', 'RUN-TIME', 'DURATION', 'FILE-SIZE',
+                                            'FILE-NAME', 'MOVIE-HASH'])
 
         for movie_row in movie_results_list.values():
             csv_writer.writerow(movie_row)
@@ -268,7 +186,11 @@ def create_tv_information_index():
               encoding='UTF-8') as t_f_p:
         tv_index = csv.reader(t_f_p)
 
+        tv_string = str('TV')
+
         for tv_file in sorted(tv_index):
+
+            media_path = tv_file[0]
 
             try:
 
@@ -276,6 +198,9 @@ def create_tv_information_index():
                 tv_folder_title = tv_file[0].rsplit('/')[-2]
                 tv_folder_year = tv_folder_title.rsplit('(')[-1][:-1]
                 tv_title_key = tv_file[0].rsplit('/', 1)[-1][:-4]
+
+                tv_hash = str(str(tv_show_file_size) + '_' + str(tv_title_key))
+                tv_results_list[tv_title_key]['TV-SHOW-HASH'] = tv_hash
 
                 if str(tv_filename_key.lower()) == str('tvshow.nfo'):
                     tv_show_plots_dictionary[tv_folder_title] = {}
@@ -294,10 +219,35 @@ def create_tv_information_index():
                         print('-' * 100)
                         continue
 
+                elif tv_filename_key.lower().endswith('.nfo'):
+
+                    if tv_title_key not in tv_results_list:
+                        tv_results_list[tv_title_key] = {}
+
+                    if str(tv_filename_key.lower()) != str('tvshow.nfo'):
+
+                        try:
+
+                            with open(tv_file[0]) as o_f:
+
+                                for line in o_f.readlines():
+                                    if '<plot>' in line:
+                                        tv_results_list[tv_title_key]['PLOT'] = line
+                                    elif '<rating>' in line:
+                                        tv_results_list[tv_title_key]['RATING'] = line
+
+                        except Exception as e:
+                            print('NFO ERROR: ', e, '\n', 'FILE: ', tv_file[0])
+                            print('-' * 100)
+                            continue
+
                 elif not tv_filename_key.lower().endswith('.nfo'):
 
                     if tv_title_key not in tv_results_list:
                         tv_results_list[tv_title_key] = {}
+
+                    tv_results_list[tv_title_key]['MEDIA-PATH'] = media_path
+                    tv_results_list[tv_title_key]['MEDIA-TYPE'] = tv_string
 
                     try:
 
@@ -345,28 +295,6 @@ def create_tv_information_index():
                             tv_results_list[tv_title_key]['FILE-TYPE'] = tv_show_title.get('container')
                             tv_results_list[tv_title_key]['FILE-NAME'] = tv_filename_key
 
-                elif tv_filename_key.lower().endswith('.nfo'):
-
-                    if tv_title_key not in tv_results_list:
-                        tv_results_list[tv_title_key] = {}
-
-                    if str(tv_filename_key.lower()) != str('tvshow.nfo'):
-
-                        try:
-
-                            with open(tv_file[0]) as o_f:
-
-                                for line in o_f.readlines():
-                                    if '<plot>' in line:
-                                        tv_results_list[tv_title_key]['PLOT'] = line
-                                    elif '<rating>' in line:
-                                        tv_results_list[tv_title_key]['RATING'] = line
-
-                        except Exception as e:
-                            print('NFO ERROR: ', e, '\n', 'FILE: ', tv_file[0])
-                            print('-' * 100)
-                            continue
-
             except (OSError, TypeError, ValueError) as e:
                 print('INPUT ERROR: ', e, '\n', 'TV-SHOW FILE(S): ', tv_file[0])
                 print('-' * 100)
@@ -374,9 +302,9 @@ def create_tv_information_index():
 
     with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)), 'w',
               encoding='UTF-8', newline='') as t_i_i:
-        csv_writer = csv.DictWriter(t_i_i, ['DIRECTORY', 'TITLE', 'YEAR', 'EPISODE TITLE', 'SEASON', 'EPISODE NUMBER',
-                                            'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING', 'RUN-TIME', 'DURATION',
-                                            'FILE-SIZE', 'FILE-NAME'])
+        csv_writer = csv.DictWriter(t_i_i, ['MEDIA-PATH', 'MEDIA-TYPE', 'DIRECTORY', 'TITLE', 'YEAR', 'EPISODE TITLE',
+                                            'SEASON', 'EPISODE NUMBER', 'RESOLUTION', 'FILE-TYPE', 'PLOT', 'RATING',
+                                            'RUN-TIME', 'DURATION', 'FILE-SIZE', 'FILE-NAME', 'TV-SHOW-HASH'])
 
         for tv_row in tv_results_list.values():
             csv_writer.writerow(tv_row)
@@ -825,11 +753,11 @@ def media_index_home():
     separator_3()
 
     print('1) ADD / CHANGE DATABASE DIRECTORIES             2) CREATE PATH INDICES', '\n')
-    print('3) CREATE HASH FILES & TITLE INDEX               4) CREATE / UPDATE MEDIA INFORMATION INDICES', '\n')
-    print('5) COMPARE TWO USERS INFORMATION INDICES         6) DISPLAY LIBRARY TOTALS', '\n')
-    print('7) MEDIA INFORMATION QUERIES                     8) SORT OPTIONS   ', '\n')
-    print('9) PICTURE GRAPH OPTIONS                         10) TERMINAL GRAPH OPTIONS', '\n')
-    print('11) TIME INFORMATION QUERIES                     12) SAVED SEARCHES')
+    print('3) CREATE / UPDATE MEDIA INFORMATION INDICES     4) COMPARE TWO USERS INFORMATION INDICES', '\n')
+    print('5) DISPLAY LIBRARY TOTALS                        6) MEDIA INFORMATION QUERIES', '\n')
+    print('7) SORT OPTIONS                                  8) PICTURE GRAPH OPTIONS', '\n')
+    print('9) TERMINAL GRAPH OPTIONS                        10) TIME INFORMATION QUERIES', '\n')
+    print('11) SAVED SEARCHES')
     separator_2()
     print('0) EXIT MEDIA-INDEX')
     separator_3()
@@ -893,30 +821,6 @@ def media_index_home():
 
                 print('CONFIRM: ')
                 separator_1()
-                print('THIS OPERATION CAN TAKE A LONG TIME (SEVERAL MINUTES FOR LARGE LIBRARIES)')
-                separator_2()
-                print('1) CONTINUE BUILDING HASH FILE(S) & TITLE INDEX      0) MAIN MENU')
-                separator_3()
-                title_scan_sub_input = int(input('ENTER #: '))
-                separator_3()
-
-                if title_scan_sub_input == 0:
-                    media_index_home()
-
-                elif title_scan_sub_input == 1:
-                    scrape_media_folders_for_csv()
-                    create_media_hash_files()
-
-            except (TypeError, ValueError) as e:
-                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
-                separator_3()
-
-        elif lmi_input_action == 4:
-
-            try:
-
-                print('CONFIRM: ')
-                separator_1()
                 print('THIS OPERATION CAN TAKE A LONG TIME (SEVERAL HOURS FOR LARGE LIBRARIES)')
                 separator_2()
                 print('1) CONTINUE WITH MEDIA INFORMATION SCAN              0) MAIN MENU')
@@ -934,7 +838,7 @@ def media_index_home():
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
 
-        elif lmi_input_action == 5:
+        elif lmi_input_action == 4:
 
             try:
 
@@ -955,25 +859,25 @@ def media_index_home():
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
 
-        elif lmi_input_action == 6:
+        elif lmi_input_action == 5:
             library_total_amount()
 
-        elif lmi_input_action == 7:
+        elif lmi_input_action == 6:
             media_queries_sub_menu()
 
-        elif lmi_input_action == 8:
+        elif lmi_input_action == 7:
             sort_options_sub_menu()
 
-        elif lmi_input_action == 9:
+        elif lmi_input_action == 8:
             picture_graph_options_sub_menu()
 
-        elif lmi_input_action == 10:
+        elif lmi_input_action == 9:
             terminal_graph_options_sub_menu()
 
-        elif lmi_input_action == 11:
+        elif lmi_input_action == 10:
             time_queries_sub_menu()
 
-        elif lmi_input_action == 12:
+        elif lmi_input_action == 11:
             saved_searches()
 
     except (TypeError, ValueError) as e:
@@ -1514,85 +1418,6 @@ def saved_searches():
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
         separator_3()
-
-
-def scrape_media_folders_for_csv():
-    movie_title_items = []
-    tv_title_items = []
-
-    naming_scan_start = time.time()
-
-    try:
-
-        if movie_dir_input != '':
-            movie_dir_list = os.listdir(movie_dir_input)
-            for movie_found in sorted(movie_dir_list):
-                movie_scrape_info = guessit.guessit(movie_found)
-                title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
-
-                if ',' in title_item_check[2]:
-                    title_item_check.append(title_item_check[2][-5:-1])
-                    title_item_check.remove(title_item_check[2])
-                movie_title_items.append(title_item_check)
-
-        if movie_alt_dir_input != '':
-            found_alt_movie_directories_list = []
-            for alternate_movie_directories in movie_alt_dir_input:
-                movie_alt_dir_list = os.listdir(alternate_movie_directories)
-                for found_alt_movie_directories in movie_alt_dir_list:
-                    found_alt_movie_directories_list.append(found_alt_movie_directories)
-                for movie_found in sorted(found_alt_movie_directories_list):
-                    movie_scrape_info = guessit.guessit(movie_found)
-                    title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
-
-                    if ',' in title_item_check[2]:
-                        title_item_check.append(title_item_check[2][-5:-1])
-                        title_item_check.remove(title_item_check[2])
-                    movie_title_items.append(title_item_check)
-
-        if tv_dir_input != '':
-            tv_dir_list = os.listdir(tv_dir_input)
-            for tv_found in sorted(tv_dir_list):
-                tv_scrape_info = guessit.guessit(tv_found)
-                title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
-
-                if ',' in title_item_check[2]:
-                    title_item_check.append(title_item_check[2][-5:-1])
-                    title_item_check.remove(title_item_check[2])
-                tv_title_items.append(title_item_check)
-
-        if tv_alt_dir_input != '':
-            found_alt_tv_directories_list = []
-            for alternate_tv_directories in tv_alt_dir_input:
-                tv_alt_dir_list = os.listdir(alternate_tv_directories)
-                for found_alt_tv_directories in tv_alt_dir_list:
-                    found_alt_tv_directories_list.append(found_alt_tv_directories)
-                for tv_found in sorted(found_alt_tv_directories_list):
-                    tv_scrape_info = guessit.guessit(tv_found)
-                    title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
-
-                    if ',' in title_item_check[2]:
-                        title_item_check.append(title_item_check[2][-5:-1])
-                        title_item_check.remove(title_item_check[2])
-                    tv_title_items.append(title_item_check)
-
-        with open(os.path.expanduser((index_folder + '/MEDIA_TITLE_INDEX.csv').format(username)), 'w',
-                  encoding='UTF-8', newline='') as m_t_i:
-            csv_writer = csv.writer(m_t_i)
-            for file_row in movie_title_items:
-                csv_writer.writerow(file_row)
-
-            for file_row in tv_title_items:
-                csv_writer.writerow(file_row)
-
-    except (OSError, TypeError, ValueError) as e:
-        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INCORRECT DIRECTORY INPUT(S), PLEASE RETRY')
-        separator_3()
-
-    naming_scan_end = time.time()
-    readable_naming_scan_time = round(naming_scan_end - naming_scan_start, 2)
-    print('MEDIA TITLES SCAN COMPLETE - TIME ELAPSED: ', readable_naming_scan_time, 'Seconds')
-    separator_3()
 
 
 def search_plots(plot_search_type, plot_search_keywords):
