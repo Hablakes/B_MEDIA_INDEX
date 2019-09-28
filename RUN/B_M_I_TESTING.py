@@ -17,6 +17,7 @@ from ascii_graph import Pyasciigraph
 from ascii_graph.colors import *
 from ascii_graph.colordata import vcolor
 from datetime import datetime
+from imdb import IMDb
 from tkinter import filedialog, Tk
 
 date_string = str(datetime.today().strftime('%Y_%m_%d'))
@@ -59,9 +60,7 @@ def create_movie_information_index():
         movie_index = csv.reader(m_f_p)
 
         for movie_file in sorted(movie_index):
-
             try:
-
                 movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
                 movie_title_key = movie_file[0].rsplit('/')[-2]
 
@@ -101,14 +100,11 @@ def create_movie_information_index():
                     continue
 
                 for track in movie_media_info.tracks:
-
                     if track.track_type == 'General':
                         duration_integer = track.duration
                         movie_results_list[movie_file[0]]['DURATION'] = duration_integer
-
                     elif track.track_type == 'Video':
                         movie_results_list[movie_file[0]]['RESOLUTION'] = str(track.width) + 'x' + str(track.height)
-
             except (OSError, TypeError, ValueError) as e:
                 print('INPUT ERROR: ', e, '\n', 'MOVIE FILE(S): ', movie_file[0])
                 print('-' * 100)
@@ -118,8 +114,7 @@ def create_movie_information_index():
               encoding='UTF-8', newline='') as m_i_i:
 
         csv_writer = csv.DictWriter(m_i_i, ['MEDIA-PATH', 'MEDIA-TYPE', 'DIRECTORY', 'TITLE', 'YEAR', 'RESOLUTION',
-                                            'DURATION', 'FILE-SIZE', 'FILE-TYPE', 'FILE-NAME', 'GENRES', 'PLOT',
-                                            'RATING', 'MOVIE-HASH'])
+                                            'DURATION', 'FILE-SIZE', 'FILE-TYPE', 'FILE-NAME', 'MOVIE-HASH'])
 
         for movie_row in movie_results_list.values():
             csv_writer.writerow(movie_row)
