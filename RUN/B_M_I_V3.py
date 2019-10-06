@@ -2295,7 +2295,7 @@ def total_tv_episodes_in_show_title():
             print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
 
         for tv_title in tv_results_list:
-            tv_amounts.append(tv_title[0])
+            tv_amounts.append(tv_title[9])
 
         for found_tv_title in tv_amounts:
             if total_query_action_list[0] in found_tv_title.lower():
