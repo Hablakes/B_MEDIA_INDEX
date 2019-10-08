@@ -1878,11 +1878,11 @@ def sort_function_base(sort_options_int):
             movie_time = movie_info[13]
 
             if movie_title == '[]':
-                movie_title = 'NO MOVIE TITLE'
+                movie_title = str('NO MOVIE TITLE')
             if movie_size == '[]':
-                movie_size = '0'
+                movie_size = str('0')
             if movie_time == '[]':
-                movie_time = '0'
+                movie_time = str('0')
 
             movie_time_total_readable_minutes = round(int(movie_time) // 60000, 2)
             movie_info_list.append([movie_title, float(movie_size), float(movie_time_total_readable_minutes)])
@@ -1894,13 +1894,13 @@ def sort_function_base(sort_options_int):
             episode_time = tv_show_info[16]
 
             if tv_show_title == '[]':
-                tv_show_title = 'NO TV SHOW TITLE'
+                tv_show_title = str('NO TV SHOW TITLE')
             if episode_size == '':
-                episode_size = '0'
+                episode_size = str('0')
             if episode_title == '[]':
-                episode_title = 'NO TV EPISODE TITLE'
+                episode_title = str('NO TV EPISODE TITLE')
             if episode_time == '[]':
-                episode_time = '0'
+                episode_time = str('0')
 
             tv_time_total_readable_minutes = round(int(episode_time) / 60000, 2)
             tv_info_list.append([tv_show_title, episode_title, float(episode_size),
@@ -1917,41 +1917,65 @@ def sort_function_base(sort_options_int):
 
         if sort_options_int == 1:
             for movie_sizes in movies_sorted_by_size:
+                if movie_sizes[0] == '':
+                    movie_sizes[0] = str('NO MOVIE TITLE')
                 print('\n', movie_sizes[0], '-', movie_sizes[1], ': MB')
             separator_3()
 
         elif sort_options_int == 2:
             for movie_sizes in movies_sorted_by_size_r:
+                if movie_sizes[0] == '':
+                    movie_sizes[0] = str('NO MOVIE TITLE')
                 print('\n', movie_sizes[0], '-', movie_sizes[1], ': MB')
             separator_3()
 
         elif sort_options_int == 3:
             for movie_run_times in movies_sorted_by_time:
+                if movie_run_times[0] == '':
+                    movie_run_times[0] = str('NO MOVIE TITLE')
                 print('\n', movie_run_times[0], '-', movie_run_times[2], ': Minutes')
             separator_3()
 
         elif sort_options_int == 4:
             for movie_run_times in movies_sorted_by_time_r:
+                if movie_run_times[0] == '':
+                    movie_run_times[0] = str('NO MOVIE TITLE')
                 print('\n', movie_run_times[0], '-', movie_run_times[2], ': Minutes')
             separator_3()
 
         elif sort_options_int == 5:
             for episode_sizes in tv_shows_sorted_by_size:
+                if episode_sizes[0] == '':
+                    episode_sizes[0] = str('NO TV SHOW TITLE')
+                if episode_sizes[1] == '':
+                    episode_sizes[1] = str('NO TV EPISODE TITLE')
                 print('\n', episode_sizes[0], '-', episode_sizes[1], '-', episode_sizes[2], ': MB')
             separator_3()
 
         elif sort_options_int == 6:
             for episode_sizes in tv_shows_sorted_by_size_r:
+                if episode_sizes[0] == '':
+                    episode_sizes[0] = str('NO TV SHOW TITLE')
+                if episode_sizes[1] == '':
+                    episode_sizes[1] = str('NO TV EPISODE TITLE')
                 print('\n', episode_sizes[0], '-', episode_sizes[1], '-', episode_sizes[2], ': MB')
             separator_3()
 
         elif sort_options_int == 7:
             for episode_run_times in tv_shows_sorted_by_time:
+                if episode_run_times[0] == '':
+                    episode_run_times[0] = str('NO TV SHOW TITLE')
+                if episode_run_times[1] == '':
+                    episode_run_times[1] = str('NO TV EPISODE TITLE')
                 print('\n', episode_run_times[0], '-', episode_run_times[1], '-', episode_run_times[3], ': Minutes')
             separator_3()
 
         elif sort_options_int == 8:
             for episode_run_times in tv_shows_sorted_by_time_r:
+                if episode_run_times[0] == '':
+                    episode_run_times[0] = str('NO TV SHOW TITLE')
+                if episode_run_times[1] == '':
+                    episode_run_times[1] = str('NO TV EPISODE TITLE')
                 print('\n', episode_run_times[0], '-', episode_run_times[1], '-', episode_run_times[3], ': Minutes')
             separator_3()
 
@@ -1970,7 +1994,7 @@ def sort_function_for_tv_episodes(sort_options_int):
 
         for tv_title in tv_results_list:
             tv_show_title = tv_title[9]
-            if tv_show_title == '[]':
+            if tv_show_title == '[]' or tv_show_title == '':
                 tv_show_title = str('NO TV SHOW TITLE')
             tv_amounts_list.append(tv_show_title)
             if tv_show_title not in tv_show_found_dict:
