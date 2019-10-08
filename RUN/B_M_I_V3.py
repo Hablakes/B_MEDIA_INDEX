@@ -908,9 +908,9 @@ def library_total_amount():
     episode_amounts_list = []
     movie_amounts_list = []
 
-    with open(os.path.expanduser((index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username)),
-              encoding='UTF-8') as t_f_p:
-        movie_title_list = list(csv.reader(t_f_p))
+    with open(os.path.expanduser((index_folder + '/MOVIE_VIDEO_FILES_PATHS.csv').format(username)),
+              encoding='UTF-8') as m_f_p:
+        movie_title_list = list(csv.reader(m_f_p))
     with open(os.path.expanduser((index_folder + '/TV_VIDEO_FILES_PATHS.csv').format(username)),
               encoding='UTF-8') as t_f_p:
         tv_episode_list = list(csv.reader(t_f_p))
