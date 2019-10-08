@@ -735,7 +735,7 @@ def graph_options_base(picture_graph_options_int, terminal_graph_options_int):
 
         for movie_title_item in movie_files_results_list:
             movie_title_item_year = movie_title_item[10]
-            if movie_title_item_year == '[]':
+            if movie_title_item_year == '[]' or movie_title_item_year == '':
                 movie_title_item_year = '0'
             movie_title_item_decade_int = int(str(movie_title_item_year)[:-1] + '0')
 
@@ -750,7 +750,7 @@ def graph_options_base(picture_graph_options_int, terminal_graph_options_int):
 
         for tv_title_item in tv_files_results_list:
             tv_title_item_year = tv_title_item[13]
-            if tv_title_item_year == '[]':
+            if tv_title_item_year == '[]' or tv_title_item_year == '':
                 tv_title_item_year = '0'
             tv_title_item_decade_int = int(str(tv_title_item_year)[:-1] + '0')
 
