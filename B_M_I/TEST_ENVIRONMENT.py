@@ -27,7 +27,7 @@ def create_test_folders():
     directory_selected_in_function = [get_directory_to_scan()]
 
     for items in os.listdir(directory_selected_in_function[0]):
-        os.makedirs('/home/bx/Videos/CHASE/TEMP/' + items, exist_ok=True)
+        os.makedirs('/home/bx/Videos/TEMP/' + items, exist_ok=True)
 
 
 def separator_1():
