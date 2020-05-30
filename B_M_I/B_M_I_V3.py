@@ -90,7 +90,7 @@ def create_media_title_index():
 
             for movie_found in sorted(movie_dir_list):
                 movie_scrape_info = guessit.guessit(movie_found)
-                title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
+                title_item_check = ['MOVIE', str(movie_scrape_info.get('title')), str(movie_scrape_info.get('year'))]
 
                 if ',' in title_item_check[2]:
                     title_item_check.append(title_item_check[2][-5:-1])
@@ -107,7 +107,8 @@ def create_media_title_index():
                     found_alt_movie_directories_list.append(found_alt_movie_directories)
                 for movie_found in sorted(found_alt_movie_directories_list):
                     movie_scrape_info = guessit.guessit(movie_found)
-                    title_item_check = ['MOVIE', movie_scrape_info.get('title'), str(movie_scrape_info.get('year'))]
+                    title_item_check = ['MOVIE', str(movie_scrape_info.get('title')),
+                                        str(movie_scrape_info.get('year'))]
 
                     if ',' in title_item_check[2]:
                         title_item_check.append(title_item_check[2][-5:-1])
@@ -119,7 +120,7 @@ def create_media_title_index():
 
             for tv_found in sorted(tv_dir_list):
                 tv_scrape_info = guessit.guessit(tv_found)
-                title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
+                title_item_check = ['TV', str(tv_scrape_info.get('title')), str(tv_scrape_info.get('year'))]
 
                 if ',' in title_item_check[2]:
                     title_item_check.append(title_item_check[2][-5:-1])
@@ -136,7 +137,7 @@ def create_media_title_index():
                     found_alt_tv_directories_list.append(found_alt_tv_directories)
                 for tv_found in sorted(found_alt_tv_directories_list):
                     tv_scrape_info = guessit.guessit(tv_found)
-                    title_item_check = ['TV', tv_scrape_info.get('title'), str(tv_scrape_info.get('year'))]
+                    title_item_check = ['TV', str(tv_scrape_info.get('title')), str(tv_scrape_info.get('year'))]
 
                     if ',' in title_item_check[2]:
                         title_item_check.append(title_item_check[2][-5:-1])
@@ -1178,10 +1179,7 @@ def media_index_home():
                     select_users_indices_to_compare()
 
                 elif comparison_scan_sub_input == 2:
-                    directory_selection_for_new_media()
-                    create_new_information_index_movies()
-                    create_new_information_index_tv()
-                    compare_individual_files()
+                    pass
 
             except (TypeError, ValueError) as e:
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -1516,7 +1514,7 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
                     found_tv_episode_name_key = found_episodes[1]
                     episode_information_search_list.append([(str(enumeration_number) + ') '),
                                                             (str(found_tv_folder_key) + ' - '),
-                                                            found_tv_episode_name_key])
+                                                            str(found_tv_episode_name_key)])
                 print('TV SHOWS FOUND: ')
                 separator_1()
 
