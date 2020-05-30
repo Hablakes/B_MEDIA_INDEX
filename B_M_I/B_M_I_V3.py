@@ -59,7 +59,16 @@ def compare_completed_results(results_one, results_two):
 
 
 def compare_individual_files():
-    pass
+    movie_info_list = []
+    tv_info_list = []
+
+    with open(os.path.expanduser((index_folder + '/FILES/NEW_MOVIE_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as m_i_i:
+        movie_files_results_list = list(csv.reader(m_i_i))
+
+    with open(os.path.expanduser((index_folder + '/FILES/NEW_TV_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as t_i_i:
+        tv_files_results_list = list(csv.reader(t_i_i))
 
 
 def create_media_information_indices():
@@ -209,12 +218,12 @@ def create_information_index_movies():
                         else:
                             movie_results_list[movie_file[0]]['YEAR'] = title_folder_year
 
-                        movie_results_list[movie_file[0]]['FILE-TYPE'] = movie_title.get('container')
-
                     except OSError as e:
                         print('GUESSIT ERROR: ', e)
                         print('-' * 100, '\n')
                         continue
+
+                    movie_results_list[movie_file[0]]['FILE-TYPE'] = movie_file[0].rsplit('.')[-1]
 
                     try:
 
@@ -231,6 +240,7 @@ def create_information_index_movies():
 
                             if track.track_type == 'General':
                                 movie_results_list[movie_file[0]]['RUN-TIME'] = track.duration
+                                track_duration = str(round(track.duration, 2))
 
                                 if track.count_of_text_streams:
                                     movie_results_list[movie_file[0]]['SUBTITLE-TRACKS'] = track.count_of_text_streams
@@ -256,9 +266,17 @@ def create_information_index_movies():
                         print('-' * 100, '\n')
                         continue
 
-                    movie_hash = str(str(movie_filename_key) + '_' + str(movie_file_size))
+                    try:
 
-                    movie_results_list[movie_file[0]]['MOVIE-HASH-CODE'] = movie_hash
+                        movie_hash = str(str(movie_file_size) + '_' + str(movie_filename_key) + '_' +
+                                         str(track_duration))
+
+                        movie_results_list[movie_file[0]]['MOVIE-HASH-CODE'] = movie_hash
+
+                    except (KeyError, OSError, TypeError, ValueError) as e:
+                        print('MEDIA FILE HASH CODE ERROR: ', e)
+                        print('-' * 100, '\n')
+                        continue
 
             except (IOError, KeyError, TypeError, ValueError) as e:
                 print('INPUT ERROR: ', e, '\n', 'MOVIE FILE(S): ', movie_file[0])
@@ -347,12 +365,12 @@ def create_information_index_tv():
 
                         tv_results_list[tv_file[0]]['EPISODE-TITLE'] = tv_episode_name
 
-                        tv_results_list[tv_file[0]]['FILE-TYPE'] = tv_title.get('container')
-
                     except OSError as e:
                         print('GUESSIT ERROR: ', e)
                         print('-' * 100, '\n')
                         continue
+
+                    tv_results_list[tv_file[0]]['FILE-TYPE'] = tv_file[0].rsplit('.')[-1]
 
                     try:
 
@@ -369,6 +387,7 @@ def create_information_index_tv():
 
                             if track.track_type == 'General':
                                 tv_results_list[tv_file[0]]['RUN-TIME'] = track.duration
+                                track_duration = str(round(track.duration, 2))
 
                                 if track.count_of_text_streams:
                                     tv_results_list[tv_file[0]]['SUBTITLE-TRACKS'] = track.count_of_text_streams
@@ -393,9 +412,16 @@ def create_information_index_tv():
                         print('-' * 100, '\n')
                         continue
 
-                    tv_hash = str(str(tv_filename_key) + '_' + str(tv_file_size))
+                    try:
 
-                    tv_results_list[tv_file[0]]['TV-HASH-CODE'] = tv_hash
+                        tv_hash = str(str(tv_file_size) + '_' + str(tv_filename_key) + '_' + str(track_duration))
+
+                        tv_results_list[tv_file[0]]['TV-HASH-CODE'] = tv_hash
+
+                    except (KeyError, OSError, TypeError, ValueError) as e:
+                        print('MEDIA FILE HASH CODE ERROR: ', e)
+                        print('-' * 100, '\n')
+                        continue
 
             except (IOError, KeyError, TypeError, ValueError) as e:
                 print('INPUT ERROR: ', e, '\n', 'TV SHOW FILE(S): ', tv_file[0])
@@ -475,12 +501,12 @@ def create_new_information_index_movies():
                         else:
                             movie_results_list[movie_file[0]]['YEAR'] = title_folder_year
 
-                        movie_results_list[movie_file[0]]['FILE-TYPE'] = movie_title.get('container')
-
                     except OSError as e:
                         print('GUESSIT ERROR: ', e)
                         print('-' * 100, '\n')
                         continue
+
+                    movie_results_list[movie_file[0]]['FILE-TYPE'] = movie_file[0].rsplit('.')[-1]
 
                     try:
 
@@ -497,6 +523,7 @@ def create_new_information_index_movies():
 
                             if track.track_type == 'General':
                                 movie_results_list[movie_file[0]]['RUN-TIME'] = track.duration
+                                track_duration = str(round(track.duration, 2))
 
                                 if track.count_of_text_streams:
                                     movie_results_list[movie_file[0]]['SUBTITLE-TRACKS'] = track.count_of_text_streams
@@ -522,9 +549,17 @@ def create_new_information_index_movies():
                         print('-' * 100, '\n')
                         continue
 
-                    movie_hash = str(str(movie_filename_key) + '_' + str(movie_file_size))
+                    try:
 
-                    movie_results_list[movie_file[0]]['MOVIE-HASH-CODE'] = movie_hash
+                        movie_hash = str(str(movie_file_size) + '_' + str(movie_filename_key) + '_' +
+                                         str(track_duration))
+
+                        movie_results_list[movie_file[0]]['MOVIE-HASH-CODE'] = movie_hash
+
+                    except (KeyError, OSError, TypeError, ValueError) as e:
+                        print('MEDIA FILE HASH CODE ERROR: ', e)
+                        print('-' * 100, '\n')
+                        continue
 
             except (IOError, KeyError, TypeError, ValueError) as e:
                 print('INPUT ERROR: ', e, '\n', 'MOVIE FILE(S): ', movie_file[0])
@@ -613,12 +648,12 @@ def create_new_information_index_tv():
 
                         tv_results_list[tv_file[0]]['EPISODE-TITLE'] = tv_episode_name
 
-                        tv_results_list[tv_file[0]]['FILE-TYPE'] = tv_title.get('container')
-
                     except OSError as e:
                         print('GUESSIT ERROR: ', e)
                         print('-' * 100, '\n')
                         continue
+
+                    tv_results_list[tv_file[0]]['FILE-TYPE'] = tv_file[0].rsplit('.')[-1]
 
                     try:
 
@@ -635,6 +670,7 @@ def create_new_information_index_tv():
 
                             if track.track_type == 'General':
                                 tv_results_list[tv_file[0]]['RUN-TIME'] = track.duration
+                                track_duration = str(round(track.duration, 2))
 
                                 if track.count_of_text_streams:
                                     tv_results_list[tv_file[0]]['SUBTITLE-TRACKS'] = track.count_of_text_streams
@@ -659,9 +695,16 @@ def create_new_information_index_tv():
                         print('-' * 100, '\n')
                         continue
 
-                    tv_hash = str(str(tv_filename_key) + '_' + str(tv_file_size))
+                    try:
 
-                    tv_results_list[tv_file[0]]['TV-HASH-CODE'] = tv_hash
+                        tv_hash = str(str(tv_file_size) + '_' + str(tv_filename_key) + '_' + str(track_duration))
+
+                        tv_results_list[tv_file[0]]['TV-HASH-CODE'] = tv_hash
+
+                    except (KeyError, OSError, TypeError, ValueError) as e:
+                        print('MEDIA FILE HASH CODE ERROR: ', e)
+                        print('-' * 100, '\n')
+                        continue
 
             except (IOError, KeyError, TypeError, ValueError) as e:
                 print('INPUT ERROR: ', e, '\n', 'TV SHOW FILE(S): ', tv_file[0])
