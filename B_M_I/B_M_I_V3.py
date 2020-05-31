@@ -59,28 +59,7 @@ def compare_completed_results(results_one, results_two):
 
 
 def compare_individual_files():
-    movie_info_list = []
-    tv_info_list = []
-
-    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
-              encoding='UTF-8') as m_i_i:
-        movie_files_results_list = list(csv.reader(m_i_i))
-
-    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
-              encoding='UTF-8') as t_i_i:
-        tv_files_results_list = list(csv.reader(t_i_i))
-
-    with open(os.path.expanduser((index_folder + '/FILES/NEW_MOVIE_INFORMATION_INDEX.csv').format(username)),
-              encoding='UTF-8') as n_m_i:
-        new_movie_files_results_list = list(csv.reader(n_m_i))
-
-    with open(os.path.expanduser((index_folder + '/FILES/NEW_TV_INFORMATION_INDEX.csv').format(username)),
-              encoding='UTF-8') as n_t_i:
-        new_tv_files_results_list = list(csv.reader(n_t_i))
-
-    print(compare_completed_results(movie_files_results_list, new_movie_files_results_list))
-    print(compare_completed_results(tv_files_results_list, new_tv_files_results_list))
-    separator_3()
+    pass
 
 
 def create_media_information_indices():
@@ -1188,13 +1167,10 @@ def media_index_home():
                     media_index_home()
 
                 elif comparison_scan_sub_input == 1:
-                    select_users_indices_to_compare()
+                    pass
 
                 elif comparison_scan_sub_input == 2:
-                    directory_selection_for_new_media()
-                    create_new_information_index_movies()
-                    create_new_information_index_tv()
-                    compare_individual_files()
+                    pass
 
             except (TypeError, ValueError) as e:
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -1583,16 +1559,16 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
 def select_users_indices_to_compare():
     try:
 
-        print('\n', 'SELECT THE MOVIE_INFORMATION_INDICES TO COMPARE: ')
+        print('\n', 'SELECT THE INFORMATION INDICES TO COMPARE: ')
         separator_3()
 
-        print('SELECT USER MOVIE INFORMATION INDEX: ')
+        print('SELECT USER MOVIE INFORMATION INDEX: ', '\n')
         m_0 = tk_gui_file_selection_window()
-        print('SELECT COMPARISON MOVIE INFORMATION INDEX: ')
+        print('SELECT COMPARISON MOVIE INFORMATION INDEX: ', '\n')
         m_1 = tk_gui_file_selection_window()
-        print('SELECT USER TV INFORMATION INDEX: ')
+        print('SELECT USER TV INFORMATION INDEX: ', '\n')
         t_0 = tk_gui_file_selection_window()
-        print('SELECT COMPARISON TV INFORMATION INDEX: ')
+        print('SELECT COMPARISON TV INFORMATION INDEX: ', '\n')
         t_1 = tk_gui_file_selection_window()
         separator_3()
 
@@ -1601,7 +1577,7 @@ def select_users_indices_to_compare():
             comparison_movie_results = movies_1.readlines()
 
             with open(os.path.expanduser(
-                    (index_folder + '/FILES/MOVIE_COMPARISON_INDEX.csv').format(username)),
+                    (index_folder + '/RESULTS/MOVIE_COMPARISON_INDEX.csv').format(username)),
                     'w', encoding='UTF-8', newline='') as outFile_m:
                 for line in compare_completed_results(user_movie_results, comparison_movie_results):
                     outFile_m.write(line)
@@ -1611,7 +1587,7 @@ def select_users_indices_to_compare():
             comparison_tv_results = tv_1.readlines()
 
             with open(os.path.expanduser(
-                    (index_folder + '/FILES/TV_COMPARISON_INDEX.csv').format(username)),
+                    (index_folder + '/RESULTS/TV_COMPARISON_INDEX.csv').format(username)),
                     'w', encoding='UTF-8', newline='') as outFile_t:
                 for line in compare_completed_results(user_tv_results, comparison_tv_results):
                     outFile_t.write(line)
@@ -1620,7 +1596,7 @@ def select_users_indices_to_compare():
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
         separator_3()
 
-    print('COMPLETE: COMPARISON FILE(S) CAN BE FOUND IN THE USER MEDIA-INDEX FOLDER, "FILES" SUB-FOLDER')
+    print('COMPLETE: COMPARISON FILE(S) CAN BE FOUND IN THE USER MEDIA-INDEX FOLDER, "RESULTS" SUB-FOLDER')
     separator_3()
 
 
@@ -2187,6 +2163,7 @@ def username_check_and_folder_creation():
             os.makedirs(os.path.expanduser((index_folder + '/').format(username)), exist_ok=True)
             os.makedirs(os.path.expanduser((index_folder + '/FILES').format(username)), exist_ok=True)
             os.makedirs(os.path.expanduser((index_folder + '/GRAPHS').format(username)), exist_ok=True)
+            os.makedirs(os.path.expanduser((index_folder + '/RESULTS').format(username)), exist_ok=True)
             os.makedirs(os.path.expanduser((index_folder + '/SEARCH').format(username)), exist_ok=True)
             directory_selection()
 
