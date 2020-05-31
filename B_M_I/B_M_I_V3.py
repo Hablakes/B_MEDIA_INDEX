@@ -62,13 +62,21 @@ def compare_individual_files():
     movie_info_list = []
     tv_info_list = []
 
-    with open(os.path.expanduser((index_folder + '/FILES/NEW_MOVIE_INFORMATION_INDEX.csv').format(username)),
+    with open(os.path.expanduser((index_folder + '/MOVIE_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as m_i_i:
         movie_files_results_list = list(csv.reader(m_i_i))
 
-    with open(os.path.expanduser((index_folder + '/FILES/NEW_TV_INFORMATION_INDEX.csv').format(username)),
+    with open(os.path.expanduser((index_folder + '/TV_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as t_i_i:
         tv_files_results_list = list(csv.reader(t_i_i))
+
+    with open(os.path.expanduser((index_folder + '/FILES/NEW_MOVIE_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as n_m_i:
+        new_movie_files_results_list = list(csv.reader(m_i_i))
+
+    with open(os.path.expanduser((index_folder + '/FILES/NEW_TV_INFORMATION_INDEX.csv').format(username)),
+              encoding='UTF-8') as n_t_i:
+        new_tv_files_results_list = list(csv.reader(t_i_i))
 
 
 def create_media_information_indices():
