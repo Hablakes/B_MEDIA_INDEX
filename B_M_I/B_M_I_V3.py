@@ -72,11 +72,15 @@ def compare_individual_files():
 
     with open(os.path.expanduser((index_folder + '/FILES/NEW_MOVIE_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as n_m_i:
-        new_movie_files_results_list = list(csv.reader(m_i_i))
+        new_movie_files_results_list = list(csv.reader(n_m_i))
 
     with open(os.path.expanduser((index_folder + '/FILES/NEW_TV_INFORMATION_INDEX.csv').format(username)),
               encoding='UTF-8') as n_t_i:
-        new_tv_files_results_list = list(csv.reader(t_i_i))
+        new_tv_files_results_list = list(csv.reader(n_t_i))
+
+    print(compare_completed_results(movie_files_results_list, new_movie_files_results_list))
+    print(compare_completed_results(tv_files_results_list, new_tv_files_results_list))
+    separator_3()
 
 
 def create_media_information_indices():
@@ -1187,7 +1191,10 @@ def media_index_home():
                     select_users_indices_to_compare()
 
                 elif comparison_scan_sub_input == 2:
-                    pass
+                    directory_selection_for_new_media()
+                    create_new_information_index_movies()
+                    create_new_information_index_tv()
+                    compare_individual_files()
 
             except (TypeError, ValueError) as e:
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
