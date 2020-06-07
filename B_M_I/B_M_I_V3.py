@@ -739,7 +739,7 @@ def media_index_home():
     separator_3()
 
     print('1) ADD / CHANGE DATABASE DIRECTORIES                 2) CREATE PATH INDICES', '\n')
-    print('3) CREATE / UPDATE MEDIA INFORMATION INDICES         4) COMPARISON OPTIONS')
+    print('3) CREATE MEDIA INFORMATION INDICES                  4) COMPARISON OPTIONS')
     separator_3()
     print('5) MEDIA LIBRARY TOTALS                              6) QUERY DETAILED MEDIA INFORMATION', '\n')
     print('7) TERMINAL GRAPH OPTIONS                            8) TIME INFORMATION QUERIES', '\n')
