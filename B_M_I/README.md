@@ -26,6 +26,7 @@ PYTHON 3 - PIP DEPENDENCIES:
 
 - ascii_graph
 - guessit
+- imdbpy
 - pyfiglet
 - pymediainfo
 - tkinter
@@ -61,5 +62,19 @@ MEDIA-INDEX USAGE(S):
 2) Enter Username
 
 3) MAIN MENU
+
+
+-------------------------------------------------------------------------------------------------
+** OPTIONAL EXTRA FEATURES: **
+-------------------------------------------------------------------------------------------------
+
+
+1) COMPARE TWO USERS' INDICES
+
+2) COMPARE NEW FILES AGAINST EXISTING DATABASE (e.g. with conflicts, which Files are "Better" 
+                                                and either should or should not be replaced, 
+                                                if Files are new to the Database or not, etc.)
+                                                
+3) PLOT(S) SCANNING and SEARCH FEATURES
 
 -------------------------------------------------------------------------------------------------
