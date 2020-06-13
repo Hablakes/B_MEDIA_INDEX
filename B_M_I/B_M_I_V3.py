@@ -33,7 +33,12 @@ results_folder = '~/{0}_MEDIA_INDEX/RESULTS/'
 
 movies_comparison = 'MOVIE_COMPARISON_INDEX.csv'
 tv_comparison = 'TV_COMPARISON_INDEX.csv'
+
 titles_index = 'MEDIA_TITLE_INDEX.csv'
+
+movie_plots_index = 'MOVIE_PLOTS_INDEX.csv'
+tv_episode_plots_index = 'TV_EPISODE_PLOTS_INDEX.csv'
+tv_show_plots_index = 'TV_SHOW_PLOTS_INDEX.csv'
 
 new_user_movies_dirs = 'FILES/NEW_MOVIE_VIDEO_FILES_PATHS.csv'
 new_user_tv_dirs = 'FILES/NEW_TV_VIDEO_FILES_PATHS.csv'
@@ -458,6 +463,123 @@ def create_information_index_tv(user_type):
     separator_3()
 
 
+def create_plots_indices():
+    movie_plot_results_dict = {}
+    tv_episode_plot_results_dict = {}
+    tv_show_plot_results_dict = {}
+
+    plot_scan_start = time.time()
+
+    with open(os.path.expanduser((index_folder + user_movies_dirs).format(username)),
+              encoding='UTF-8') as u_m_d:
+        movie_path_file = csv.reader(u_m_d)
+
+        for movie_file in sorted(movie_path_file):
+
+            movie_filename_key = movie_file[0].rsplit('/', 1)[-1]
+            movie_title_key = movie_file[0].rsplit('/')[-2]
+            movie_plot_results_dict[movie_title_key] = {}
+            movie_plot_results_dict[movie_title_key]['MOVIE'] = movie_title_key
+
+            try:
+
+                if movie_filename_key.lower().endswith('.nfo'):
+
+                    try:
+
+                        with open(str(movie_file[0])) as o_f:
+
+                            for line_item in o_f.readlines():
+                                if '<plot>' in line_item:
+                                    movie_plot_results_dict[movie_title_key]['PLOT'] = line_item
+
+                    except Exception as e:
+                        print('NFO ERROR: ', e, '\n', 'FILE: ', movie_file[0])
+                        print('-' * 100)
+                        continue
+
+            except (IOError, KeyError, TypeError, ValueError) as e:
+                print('INPUT ERROR: ', e, '\n', 'MOVIE FILE(S): ', movie_file[0])
+                print('-' * 100, '\n')
+                continue
+
+    with open(os.path.expanduser((index_folder + user_tv_dirs).format(username)),
+              encoding='UTF-8') as u_t_d:
+        tv_path_file = csv.reader(u_t_d)
+
+        for tv_file in sorted(tv_path_file):
+
+            try:
+
+                tv_filename_key = tv_file[0].rsplit('/', 1)[-1]
+                tv_title_key = tv_file[0].rsplit('/')[-2]
+
+                if tv_filename_key.lower().endswith('.nfo') and str(tv_filename_key.lower()) != str('tvshow.nfo'):
+
+                    if tv_filename_key not in tv_episode_plot_results_dict:
+                        tv_episode_plot_results_dict[tv_filename_key] = {}
+                        tv_episode_plot_results_dict[tv_filename_key]['SHOW'] = tv_title_key
+                        tv_episode_plot_results_dict[tv_filename_key]['EPISODE'] = tv_filename_key
+
+                        try:
+
+                            with open(tv_file[0]) as o_f:
+
+                                for line in o_f.readlines():
+                                    if '<plot>' in line:
+                                        tv_episode_plot_results_dict[tv_filename_key]['PLOT'] = line
+
+                        except Exception as e:
+                            print('NFO ERROR: ', e, '\n', 'FILE: ', tv_file[0])
+                            print('-' * 100)
+                            continue
+
+                if str(tv_filename_key.lower()) == str('tvshow.nfo'):
+                    tv_show_plot_results_dict[tv_title_key] = {}
+                    tv_show_plot_results_dict[tv_title_key]['SHOW'] = tv_title_key
+
+                    try:
+
+                        with open(tv_file[0]) as o_f:
+
+                            for line in o_f.readlines():
+                                if '<plot>' in line:
+                                    tv_show_plot_results_dict[tv_title_key]['PLOT'] = line
+
+                    except Exception as e:
+                        print('NFO ERROR: ', e, '\n', 'FILE: ', tv_file[0])
+                        print('-' * 100)
+                        continue
+
+            except (IOError, KeyError, TypeError, ValueError) as e:
+                print('INPUT ERROR: ', e, '\n', 'TV SHOW(S) FILE(S): ', tv_file[0])
+                print('-' * 100, '\n')
+                continue
+
+    with open(os.path.expanduser((index_folder + movie_plots_index).format(username)), 'w',
+              encoding='UTF-8', newline='') as m_p_i:
+        csv_writer = csv.DictWriter(m_p_i, ['MOVIE', 'PLOT'])
+        for movie_row in movie_plot_results_dict.values():
+            csv_writer.writerow(movie_row)
+
+    with open(os.path.expanduser((index_folder + tv_show_plots_index).format(username)), 'w',
+              encoding='UTF-8', newline='') as t_p_i:
+        csv_writer = csv.DictWriter(t_p_i, ['SHOW', 'PLOT'])
+        for tv_row in tv_show_plot_results_dict.values():
+            csv_writer.writerow(tv_row)
+
+    with open(os.path.expanduser((index_folder + tv_episode_plots_index).format(username)), 'w',
+              encoding='UTF-8', newline='') as t_e_i:
+        csv_writer = csv.DictWriter(t_e_i, ['SHOW', 'EPISODE', 'PLOT'])
+        for episode_row in tv_episode_plot_results_dict.values():
+            csv_writer.writerow(episode_row)
+
+    plot_scan_end = time.time()
+    readable_plot_scan_time = round(plot_scan_end - plot_scan_start, 2)
+    print('MEDIA PLOT(S) SCAN COMPLETE - TIME ELAPSED: ', readable_plot_scan_time, 'Seconds')
+    separator_3()
+
+
 def directory_selection():
     try:
 
@@ -739,11 +861,12 @@ def media_index_home():
     separator_3()
 
     print('1) ADD / CHANGE DATABASE DIRECTORIES                 2) CREATE PATH INDICES', '\n')
-    print('3) CREATE MEDIA INFORMATION INDICES                  4) COMPARISON OPTIONS')
+    print('3) CREATE MEDIA INFORMATION INDICES                  4) CREATE PLOT(S) INDICES (OPTIONAL)')
     separator_3()
-    print('5) MEDIA LIBRARY TOTALS                              6) QUERY DETAILED MEDIA INFORMATION', '\n')
-    print('7) TERMINAL GRAPH OPTIONS                            8) TIME INFORMATION QUERIES', '\n')
-    print('9) SORTING OPTIONS')
+    print('5) COMPARISON OPTIONS                                6) MEDIA LIBRARY TOTALS', '\n')
+    print('7) QUERY DETAILED MEDIA INFORMATION                  8) TERMINAL GRAPH OPTIONS', '\n')
+    print('9) TIME INFORMATION QUERIES                          10) SORTING OPTIONS', '\n')
+    print('11) PLOT SEARCH OPTIONS (IF PLOT(S) INDICES ARE PRESENT)')
     separator_2()
     print('0) EXIT MEDIA-INDEX')
     separator_3()
@@ -825,6 +948,28 @@ def media_index_home():
                 separator_3()
 
         elif lmi_input_action == 4:
+            try:
+
+                print('CONFIRM: ')
+                separator_1()
+                print('THIS OPERATION CAN TAKE A LONG TIME (SEVERAL HOURS FOR LARGE LIBRARIES)')
+                separator_2()
+                print('1) CONTINUE WITH MEDIA PLOT(S) SCAN                  0) MAIN MENU')
+                separator_3()
+                plot_scan_sub_input = int(input('ENTER #: '))
+                separator_3()
+
+                if plot_scan_sub_input == 0:
+                    media_index_home()
+
+                elif plot_scan_sub_input == 1:
+                    create_plots_indices()
+
+            except (TypeError, ValueError) as e:
+                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                separator_3()
+
+        elif lmi_input_action == 5:
 
             try:
 
@@ -850,20 +995,59 @@ def media_index_home():
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
 
-        elif lmi_input_action == 5:
+        elif lmi_input_action == 6:
             total_media_library_amount()
 
-        elif lmi_input_action == 6:
+        elif lmi_input_action == 7:
             media_queries_sub_menu()
 
-        elif lmi_input_action == 7:
+        elif lmi_input_action == 8:
             terminal_graph_options_sub_menu()
 
-        elif lmi_input_action == 8:
+        elif lmi_input_action == 9:
             time_queries_sub_menu()
 
-        elif lmi_input_action == 9:
+        elif lmi_input_action == 10:
             sort_options_sub_menu()
+
+        elif lmi_input_action == 11:
+            plot_search_list = []
+
+            try:
+
+                print('SEARCH PLOTS OF:                             1) MOVIES       2) TV SHOW EPISODES', '\n')
+                print('                                             3) MOVIES AND TV SHOW EPISODES')
+                separator_2()
+                print('                                             4) TV SHOW GENERAL OVERVIEWS')
+                separator_2()
+                print('0) MAIN MENU')
+                separator_3()
+
+                plot_search_int = int(input('ENTER #: '))
+                plot_search_list.append(plot_search_int)
+                separator_3()
+                plot_search_type_input = plot_search_list[0]
+
+                if int(plot_search_list[0]) == 0:
+                    media_index_home()
+
+                else:
+
+                    try:
+
+                        plot_search = input('KEYWORD(S): ')
+                        plot_search_list.append(plot_search.lower())
+                        separator_3()
+
+                    except (OSError, TypeError, ValueError) as e:
+                        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
+                        separator_3()
+                plot_search_keywords_input = plot_search_list[1]
+                search_plots(plot_search_type=plot_search_type_input, plot_search_keywords=plot_search_keywords_input)
+
+            except (TypeError, ValueError) as e:
+                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                separator_3()
 
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -1097,6 +1281,59 @@ def query_tv_information_index(tv_episode_query):
 
         except (TypeError, ValueError) as e:
             print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID QUERY, PLEASE RETRY')
+            separator_3()
+
+
+def search_plots(plot_search_type, plot_search_keywords):
+    plots_list = []
+
+    with open(os.path.expanduser(
+            (index_folder + movie_plots_index).format(username)), encoding='UTF-8') as m_p_i:
+        movie_files_results_list = list(csv.reader(m_p_i))
+    with open(os.path.expanduser(
+            (index_folder + tv_episode_plots_index).format(username)), encoding='UTF-8') as t_e_p:
+        tv_episodes_results_list = list(csv.reader(t_e_p))
+    with open(os.path.expanduser(
+            (index_folder + tv_show_plots_index).format(username)), encoding='UTF-8') as t_s_p:
+        tv_show_plots_list = list(csv.reader(t_s_p))
+
+        if int(plot_search_type) == 1:
+            for plot in movie_files_results_list:
+                plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[1])
+
+            for items in plots_list:
+                if plot_search_keywords.lower() in items.lower():
+                    print('\n', textwrap.fill(items, 100))
+            separator_3()
+
+        elif int(plot_search_type) == 2:
+            for plot in tv_episodes_results_list:
+                plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1] + ' - ' + plot[2])
+
+            for items in plots_list:
+                if plot_search_keywords.lower() in items.lower():
+                    print('\n', textwrap.fill(items, 100))
+            separator_3()
+
+        elif int(plot_search_type) == 3:
+            for plot in movie_files_results_list:
+                plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[1])
+
+            for plot in tv_episodes_results_list:
+                plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1] + ' - ' + plot[2])
+
+            for items in plots_list:
+                if plot_search_keywords.lower() in items.lower():
+                    print('\n', textwrap.fill(items, 100))
+            separator_3()
+
+        elif int(plot_search_type) == 4:
+            for plot in tv_show_plots_list:
+                plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1])
+
+            for items in plots_list:
+                if plot_search_keywords.lower() in items.lower():
+                    print('\n', textwrap.fill(items, 100))
             separator_3()
 
 
@@ -1867,11 +2104,15 @@ def walk_directories_and_create_indices(user_type):
         if movie_dirs_input != '':
             for listed_movie_directories in movie_dirs_input:
                 for root, dirs, files in os.walk(listed_movie_directories):
-                    directory = str(pathlib.Path(root).as_posix())
-                    if '/featurettes' not in directory.lower():
-                        for alt_movie_file in sorted(files):
-                            if alt_movie_file.lower().endswith(extensions):
-                                movie_video_files_results.append([(pathlib.Path(root) / alt_movie_file).as_posix()])
+                    directory = str(pathlib.Path(root).as_posix()).lower()
+                    if '/extras' not in directory:
+                        if '/deleted scenes' not in directory:
+                            if '/featurettes' not in directory:
+                                if '/special features' not in directory:
+                                    for movie_file in sorted(files):
+                                        if movie_file.lower().endswith(extensions):
+                                            movie_video_files_results.append([(pathlib.Path(root) / movie_file).
+                                                                             as_posix()])
 
         with open(os.path.expanduser((index_folder + movies_paths).format(username)), 'w',
                   encoding='UTF-8', newline='') as m_f_p:
@@ -1882,11 +2123,15 @@ def walk_directories_and_create_indices(user_type):
         if tv_dirs_input != '':
             for listed_tv_directories in tv_dirs_input:
                 for root, dirs, files in os.walk(listed_tv_directories):
-                    directory = str(pathlib.Path(root).as_posix())
-                    if '/featurettes' not in directory.lower():
-                        for alt_tv_file in sorted(files):
-                            if alt_tv_file.lower().endswith(extensions):
-                                tv_show_video_files_results.append([(pathlib.Path(root) / alt_tv_file).as_posix()])
+                    directory = str(pathlib.Path(root).as_posix()).lower()
+                    if '/extras' not in directory:
+                        if '/deleted scenes' not in directory:
+                            if '/featurettes' not in directory:
+                                if '/special features' not in directory:
+                                    for tv_file in sorted(files):
+                                        if tv_file.lower().endswith(extensions):
+                                            tv_show_video_files_results.append([(pathlib.Path(root) / tv_file).
+                                                                               as_posix()])
 
         with open(os.path.expanduser((index_folder + tv_paths).format(username)), 'w',
                   encoding='UTF-8', newline='') as t_f_p:
