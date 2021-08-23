@@ -83,10 +83,6 @@ def compare_completed_results(results_one, results_two):
     return output_one
 
 
-def compare_individual_files():
-    pass
-
-
 def create_media_information_indices(user_type):
     create_media_title_index()
     create_information_index_movies(user_type)
@@ -974,14 +970,11 @@ def media_index_home():
 
             try:
 
-                print('CONFIRM: ')
-                separator_1()
                 print('1) COMPARE USER(S) INFORMATION INDICES               2) COMPARE NEW FILE(S) AGAINST DB')
                 separator_2()
                 print('0) MAIN MENU')
                 separator_3()
                 comparison_scan_sub_input = int(input('ENTER #: '))
-                separator_3()
 
                 if comparison_scan_sub_input == 0:
                     media_index_home()
@@ -990,7 +983,7 @@ def media_index_home():
                     select_users_indices_to_compare()
 
                 elif comparison_scan_sub_input == 2:
-                    directory_selection_for_new_media_to_compare()
+                    scan_and_compare_directories()
 
             except (TypeError, ValueError) as e:
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -1285,6 +1278,65 @@ def query_tv_information_index(tv_episode_query):
             separator_3()
 
 
+def scan_and_compare_directories():
+    separator_3()
+    print('1) DISPLAY MEDIA IF ALREADY IN DATABASE              2) DISPLAY MEDIA IF NOT ALREADY IN DATABASE ')
+    separator_2()
+    print('0) MAIN MENU')
+
+    separator_3()
+    user_input = input('ENTER #: ')
+    separator_3()
+
+    directory_one_found_items = []
+    directory_two_found_items = []
+
+    try:
+
+        if int(user_input) == 0:
+            media_index_home()
+
+        elif int(user_input) == 1:
+
+            print('SELECT FIRST DIRECTORY (USER DIRECTORY): ', '\n')
+            first_directory_selected = [tk_gui_file_browser_window()]
+            separator_3()
+            print('SELECT SECOND DIRECTORY (CURRENT DIRECTORY): ', '\n')
+            second_directory_selected = [tk_gui_file_browser_window()]
+            separator_3()
+
+            for items in os.listdir(first_directory_selected[0]):
+                if items in os.listdir(second_directory_selected[0]):
+                    directory_one_found_items.append(items)
+
+            print('DUPLICATES FOUND: ', '\n', '\n')
+            for items in directory_one_found_items:
+                print(items)
+            separator_3()
+
+        elif int(user_input) == 2:
+
+            print('SELECT FIRST DIRECTORY (USER DIRECTORY): ', '\n')
+            first_directory_selected = [tk_gui_file_browser_window()]
+            separator_3()
+            print('SELECT SECOND DIRECTORY (CURRENT DIRECTORY): ', '\n')
+            second_directory_selected = [tk_gui_file_browser_window()]
+            separator_3()
+
+            for items in os.listdir(first_directory_selected[0]):
+                if items not in os.listdir(second_directory_selected[0]):
+                    directory_two_found_items.append(items)
+
+            print('NEW MEDIA FOUND: ', '\n', '\n')
+            for items in directory_two_found_items:
+                print(items)
+            separator_3()
+
+    except (TypeError, ValueError, UnicodeDecodeError, ZeroDivisionError) as e:
+        print(e, '\n', ('-' * 100), '\n', 'INPUT ERROR, PLEASE RETRY SELECTION USING NUMBER KEYS: ')
+        return
+
+
 def search_plots(plot_search_type, plot_search_keywords):
     plots_list = []
 
@@ -1484,46 +1536,64 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
 
 def select_users_indices_to_compare():
     try:
-
-        print('\n', 'SELECT THE INFORMATION INDICES TO COMPARE: ')
+        separator_3()
+        print('CONFIRM: ')
+        separator_1()
+        print('1) SELECT DATABASE SCAN FILES                        0) MAIN MENU')
+        separator_3()
+        db_scan_sub_input = int(input('ENTER #: '))
         separator_3()
 
-        print('SELECT USER MOVIE INFORMATION INDEX: ', '\n')
-        m_0 = tk_gui_file_selection_window()
-        print('SELECT COMPARISON MOVIE INFORMATION INDEX: ', '\n')
-        m_1 = tk_gui_file_selection_window()
-        print('SELECT USER TV INFORMATION INDEX: ', '\n')
-        t_0 = tk_gui_file_selection_window()
-        print('SELECT COMPARISON TV INFORMATION INDEX: ', '\n')
-        t_1 = tk_gui_file_selection_window()
+        if db_scan_sub_input == 0:
+            media_index_home()
+
+        elif db_scan_sub_input == 1:
+            try:
+
+                separator_3()
+                print('SELECT THE INFORMATION INDICES TO COMPARE: ')
+                separator_3()
+
+                print('SELECT USER MOVIE INFORMATION INDEX: ', '\n')
+                m_0 = tk_gui_file_selection_window()
+                print('SELECT COMPARISON MOVIE INFORMATION INDEX: ', '\n')
+                m_1 = tk_gui_file_selection_window()
+                print('SELECT USER TV INFORMATION INDEX: ', '\n')
+                t_0 = tk_gui_file_selection_window()
+                print('SELECT COMPARISON TV INFORMATION INDEX: ', '\n')
+                t_1 = tk_gui_file_selection_window()
+                separator_3()
+
+                with open(m_0, 'r', encoding='UTF-8') as movies_0, open(m_1, 'r', encoding='UTF-8') as movies_1:
+                    user_movie_results = movies_0.readlines()
+                    comparison_movie_results = movies_1.readlines()
+
+                    with open(os.path.expanduser(
+                            (results_folder + movies_comparison).format(username)),
+                            'w', encoding='UTF-8', newline='') as outFile_m:
+                        for line in compare_completed_results(user_movie_results, comparison_movie_results):
+                            outFile_m.write(line)
+
+                with open(t_0, 'r', encoding='UTF-8') as tv_0, open(t_1, 'r', encoding='UTF-8') as tv_1:
+                    user_tv_results = tv_0.readlines()
+                    comparison_tv_results = tv_1.readlines()
+
+                    with open(os.path.expanduser(
+                            (results_folder + tv_comparison).format(username)),
+                            'w', encoding='UTF-8', newline='') as outFile_t:
+                        for line in compare_completed_results(user_tv_results, comparison_tv_results):
+                            outFile_t.write(line)
+
+            except (OSError, TypeError, ValueError) as e:
+                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
+                separator_3()
+
+            print('COMPLETE: COMPARISON FILE(S) CAN BE FOUND IN THE USER MEDIA-INDEX FOLDER, "RESULTS" SUB-FOLDER')
+            separator_3()
+
+    except (TypeError, ValueError) as e:
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
         separator_3()
-
-        with open(m_0, 'r', encoding='UTF-8') as movies_0, open(m_1, 'r', encoding='UTF-8') as movies_1:
-            user_movie_results = movies_0.readlines()
-            comparison_movie_results = movies_1.readlines()
-
-            with open(os.path.expanduser(
-                    (results_folder + movies_comparison).format(username)),
-                    'w', encoding='UTF-8', newline='') as outFile_m:
-                for line in compare_completed_results(user_movie_results, comparison_movie_results):
-                    outFile_m.write(line)
-
-        with open(t_0, 'r', encoding='UTF-8') as tv_0, open(t_1, 'r', encoding='UTF-8') as tv_1:
-            user_tv_results = tv_0.readlines()
-            comparison_tv_results = tv_1.readlines()
-
-            with open(os.path.expanduser(
-                    (results_folder + tv_comparison).format(username)),
-                    'w', encoding='UTF-8', newline='') as outFile_t:
-                for line in compare_completed_results(user_tv_results, comparison_tv_results):
-                    outFile_t.write(line)
-
-    except (OSError, TypeError, ValueError) as e:
-        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
-        separator_3()
-
-    print('COMPLETE: COMPARISON FILE(S) CAN BE FOUND IN THE USER MEDIA-INDEX FOLDER, "RESULTS" SUB-FOLDER')
-    separator_3()
 
 
 def separator_1():
