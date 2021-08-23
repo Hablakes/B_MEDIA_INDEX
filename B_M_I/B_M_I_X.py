@@ -1029,14 +1029,14 @@ def media_index_home():
 
                     try:
 
-                        plot_search = input('KEYWORD(S): ')
+                        plot_search = input('KEYWORD(S): (THIS WILL MATCH EXACT INSTANCES ONLY): ')
                         plot_search_list.append(plot_search.lower())
                         separator_3()
 
                     except (OSError, TypeError, ValueError) as e:
                         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
                         separator_3()
-                plot_search_keywords_input = plot_search_list[1]
+                plot_search_keywords_input = r'\W' + plot_search_list[1].lower() + r'\W'
                 search_plots(plot_search_type=plot_search_type_input, plot_search_keywords=plot_search_keywords_input)
 
             except (TypeError, ValueError) as e:
@@ -1357,7 +1357,7 @@ def search_plots(plot_search_type, plot_search_keywords):
                     plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[1])
 
                 for items in plots_list:
-                    if plot_search_keywords.lower() in items.lower():
+                    if re.search(plot_search_keywords, items.lower()):
                         p1 = ''.join(items.split('<plot>'))
                         p2 = ''.join(p1.split('</plot>'))
                         print('\n', textwrap.fill(p2, 100))
@@ -1368,7 +1368,7 @@ def search_plots(plot_search_type, plot_search_keywords):
                     plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1] + ' - ' + plot[2])
 
                 for items in plots_list:
-                    if plot_search_keywords.lower() in items.lower():
+                    if re.search(plot_search_keywords, items.lower()):
                         p1 = ''.join(items.split('<plot>'))
                         p2 = ''.join(p1.split('</plot>'))
                         print('\n', textwrap.fill(p2, 100))
@@ -1382,7 +1382,7 @@ def search_plots(plot_search_type, plot_search_keywords):
                     plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1] + ' - ' + plot[2])
 
                 for items in plots_list:
-                    if plot_search_keywords.lower() in items.lower():
+                    if re.search(plot_search_keywords, items.lower()):
                         p1 = ''.join(items.split('<plot>'))
                         p2 = ''.join(p1.split('</plot>'))
                         print('\n', textwrap.fill(p2, 100))
@@ -1393,7 +1393,7 @@ def search_plots(plot_search_type, plot_search_keywords):
                     plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1])
 
                 for items in plots_list:
-                    if plot_search_keywords.lower() in items.lower():
+                    if re.search(plot_search_keywords, items.lower()):
                         p1 = ''.join(items.split('<plot>'))
                         p2 = ''.join(p1.split('</plot>'))
                         print('\n', textwrap.fill(p2, 100))
