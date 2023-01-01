@@ -867,7 +867,7 @@ def media_index_home():
     print('5) COMPARISON OPTIONS                                6) MEDIA LIBRARY TOTALS', '\n')
     print('7) QUERY DETAILED MEDIA INFORMATION                  8) TERMINAL GRAPH OPTIONS', '\n')
     print('9) TIME INFORMATION QUERIES                          10) SORTING OPTIONS', '\n')
-    print('11) PLOT SEARCH OPTIONS (IF PLOT(S) INDICES ARE PRESENT)')
+    print('11) PLOT SEARCH OPTIONS (IF PLOT(S) INDICES ARE PRESENT)', '\n')
     print('12) SAVED SEARCHES')
     separator_2()
     print('0) EXIT MEDIA-INDEX')
@@ -1359,11 +1359,10 @@ def saved_searches():
                             words = words.strip()
                             search_keywords_list.append(words)
 
-                        for found_search_terms in search_keywords_list:
-                            separator_3()
-                            print('QUERYING INFORMATION FOR SELECTED KEYWORD(S): ', found_search_terms)
-                            separator_3()
-                            search_plots(plot_search_type=3, plot_search_keywords=found_search_terms)
+                        separator_3()
+                        print('QUERYING INFORMATION FOR SELECTED KEYWORD(S): ', search_keywords_list)
+                        separator_3()
+                        search_plots(plot_search_type=5, plot_search_keywords=search_keywords_list)
                         saved_searches()
 
                 except (TypeError, ValueError) as i_e:
@@ -1466,6 +1465,8 @@ def saved_searches():
 
 def search_plots(plot_search_type, plot_search_keywords):
     plots_list = []
+    multiple_search_terms_list = []
+    results_list = []
 
     try:
 
@@ -1524,6 +1525,26 @@ def search_plots(plot_search_type, plot_search_keywords):
                         p1 = ''.join(items.split('<plot>'))
                         p2 = ''.join(p1.split('</plot>'))
                         print('\n', textwrap.fill(p2, 100))
+                separator_3()
+
+            elif int(plot_search_type) == 5:
+                for plot in movie_files_results_list:
+                    plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[1])
+
+                for plot in tv_show_plots_list:
+                    plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1])
+
+                for items in plots_list:
+                    if str(plot_search_keywords[0]).lower() in items.lower():
+                        multiple_search_terms_list.append(items)
+
+                for secondary_items in multiple_search_terms_list:
+                    if str(plot_search_keywords[1]).lower() in secondary_items.lower():
+                        p1 = ''.join(secondary_items.split('<plot>'))
+                        results_list.append(''.join(p1.split('</plot>')))
+
+                for items in results_list:
+                    print('\n', textwrap.fill(items, 100))
                 separator_3()
 
     except (FileNotFoundError, TypeError, ValueError) as e:

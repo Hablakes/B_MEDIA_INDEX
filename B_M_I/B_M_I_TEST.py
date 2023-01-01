@@ -69,6 +69,9 @@ with open(os.path.expanduser(
     for plot in movie_files_results_list:
         plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[1])
 
+    for plot in tv_show_plots_list:
+        plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1])
+
     for items in plots_list:
         if search_term_1.lower() in items.lower():
             multiple_search_terms_list.append(items)
