@@ -83,6 +83,10 @@ def compare_completed_results(results_one, results_two):
     return output_one
 
 
+def compare_individual_files():
+    pass
+
+
 def create_media_information_indices(user_type):
     create_media_title_index()
     create_information_index_movies(user_type)
@@ -864,6 +868,7 @@ def media_index_home():
     print('7) QUERY DETAILED MEDIA INFORMATION                  8) TERMINAL GRAPH OPTIONS', '\n')
     print('9) TIME INFORMATION QUERIES                          10) SORTING OPTIONS', '\n')
     print('11) PLOT SEARCH OPTIONS (IF PLOT(S) INDICES ARE PRESENT)')
+    print('12) SAVED SEARCHES')
     separator_2()
     print('0) EXIT MEDIA-INDEX')
     separator_3()
@@ -970,11 +975,14 @@ def media_index_home():
 
             try:
 
+                print('CONFIRM: ')
+                separator_1()
                 print('1) COMPARE USER(S) INFORMATION INDICES               2) COMPARE NEW FILE(S) AGAINST DB')
                 separator_2()
                 print('0) MAIN MENU')
                 separator_3()
                 comparison_scan_sub_input = int(input('ENTER #: '))
+                separator_3()
 
                 if comparison_scan_sub_input == 0:
                     media_index_home()
@@ -983,7 +991,7 @@ def media_index_home():
                     select_users_indices_to_compare()
 
                 elif comparison_scan_sub_input == 2:
-                    scan_and_compare_directories()
+                    directory_selection_for_new_media_to_compare()
 
             except (TypeError, ValueError) as e:
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -1029,19 +1037,22 @@ def media_index_home():
 
                     try:
 
-                        plot_search = input('KEYWORD(S): (THIS WILL MATCH EXACT INSTANCES ONLY): ')
+                        plot_search = input('KEYWORD(S): ')
                         plot_search_list.append(plot_search.lower())
                         separator_3()
 
                     except (OSError, TypeError, ValueError) as e:
                         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
                         separator_3()
-                plot_search_keywords_input = r'\W' + plot_search_list[1].lower() + r'\W'
+                plot_search_keywords_input = plot_search_list[1]
                 search_plots(plot_search_type=plot_search_type_input, plot_search_keywords=plot_search_keywords_input)
 
             except (TypeError, ValueError) as e:
                 print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
                 separator_3()
+
+        elif lmi_input_action == 12:
+            saved_searches()
 
     except (TypeError, ValueError) as e:
         print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
@@ -1278,63 +1289,179 @@ def query_tv_information_index(tv_episode_query):
             separator_3()
 
 
-def scan_and_compare_directories():
+def saved_searches():
+    print(pyfiglet.figlet_format('SAVED_SEARCHES', font='cybermedium'))
     separator_3()
-    print('1) DISPLAY MEDIA IF ALREADY IN DATABASE              2) DISPLAY MEDIA IF NOT ALREADY IN DATABASE ')
+
+    saved_searches_file = os.path.expanduser((index_folder + '/SEARCH/SAVED_SEARCHES.csv').format(username))
+    saved_search_inputs_list = []
+    saved_searches_list = []
+    search_keywords_list = []
+
+    print('1) VIEW SAVED SEARCH TERMS (GENRE(S), KEYWORD(S))')
+    separator_2()
+    print('2) ADD A NEW SEARCH TERM')
+    separator_2()
+    print('3) REMOVE A SEARCH TERM')
     separator_2()
     print('0) MAIN MENU')
-
-    separator_3()
-    user_input = input('ENTER #: ')
     separator_3()
 
-    directory_one_found_items = []
-    directory_two_found_items = []
+    saved_search_type_input = int(input('ENTER #: '))
+    saved_search_inputs_list.append(saved_search_type_input)
+    separator_3()
 
     try:
 
-        if int(user_input) == 0:
+        if saved_search_inputs_list[0] == 0:
             media_index_home()
 
-        elif int(user_input) == 1:
+        elif saved_search_inputs_list[0] == 1:
+            if os.path.isfile(saved_searches_file):
 
-            print('SELECT FIRST DIRECTORY (USER DIRECTORY): ', '\n')
-            first_directory_selected = [tk_gui_file_browser_window()]
+                with open(saved_searches_file, 'r', encoding='UTF-8', newline='') as s_s_f:
+                    search_rows = list(csv.reader(s_s_f))
+
+                if int(len(search_rows)) == 0:
+                    print('NO SAVED SEARCH TERMS: ')
+                    separator_3()
+                    saved_searches()
+
+                for enumeration_number, search_terms in enumerate(search_rows):
+                    genres = search_terms[0]
+                    keywords = search_terms[1]
+                    saved_searches_list.append([genres, keywords])
+                    print(str(enumeration_number) + ') ', '\n', '\n',
+                          'GENRE: ', genres, '\n', 'KEYWORD(S): ', keywords, '\n')
+
+                separator_3()
+                print('1) QUERY DATABASE WITH SAVED SEARCH TERM(S): ')
+                separator_2()
+                print('0) MAIN MENU')
+                separator_3()
+
+                saved_search_sub_query_type_input = int(input('ENTER #: '))
+                saved_search_inputs_list.append(saved_search_sub_query_type_input)
+                separator_3()
+
+                try:
+
+                    if saved_search_inputs_list[1] == 0:
+                        media_index_home()
+
+                    elif saved_search_inputs_list[1] == 1:
+                        print('SELECT NUMBER (#) FOR GENRE, KEYWORD(S) TO SEARCH: ')
+                        separator_3()
+                        saved_search_sub_query_input = int(input('ENTER #: '))
+                        search_term = saved_searches_list[saved_search_sub_query_input]
+
+                        for words in search_term[1].split(' '):
+                            words = words.strip()
+                            search_keywords_list.append(words)
+
+                        for found_search_terms in search_keywords_list:
+                            separator_3()
+                            print('QUERYING INFORMATION FOR SELECTED KEYWORD(S): ', found_search_terms)
+                            separator_3()
+                            search_plots(plot_search_type=3, plot_search_keywords=found_search_terms)
+                        saved_searches()
+
+                except (TypeError, ValueError) as i_e:
+                    print('\n', 'INPUT ERROR: ', i_e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+                    separator_3()
+
+            else:
+
+                with open(saved_searches_file, 'w', encoding='UTF-8', newline='') as _:
+                    pass
+
+                print('NO SAVED SEARCH TERMS: ')
+                separator_3()
+                saved_searches()
+
+        elif saved_search_inputs_list[0] == 2:
+            print('1) ADD SEARCH TERM: ')
+            separator_2()
+            print('0) MAIN MENU')
             separator_3()
-            print('SELECT SECOND DIRECTORY (CURRENT DIRECTORY): ', '\n')
-            second_directory_selected = [tk_gui_file_browser_window()]
+            addition_confirmation_number = int(input('ENTER #: '))
             separator_3()
 
-            for items in os.listdir(first_directory_selected[0]):
-                if items in os.listdir(second_directory_selected[0]):
-                    directory_one_found_items.append(items)
+            if addition_confirmation_number == 1:
+                print('SELECT TITLE FOR GENRE, ADD KEYWORD(S) FOR SEARCH TERM(S))')
+                separator_2()
 
-            print('DUPLICATES FOUND: ', '\n', '\n')
-            for items in directory_one_found_items:
-                print(items)
-            separator_3()
+                new_genre = str(input('ENTER TITLE FOR NEW GENRE: '))
+                separator_2()
+                new_search_term = str(input('ENTER KEYWORD(S) (SEPARATE KEYWORD(S) BY SPACES, NOT COMMAS): ')).lower()
+                separator_3()
 
-        elif int(user_input) == 2:
+                saved_searches_list.append([new_genre, new_search_term])
 
-            print('SELECT FIRST DIRECTORY (USER DIRECTORY): ', '\n')
-            first_directory_selected = [tk_gui_file_browser_window()]
-            separator_3()
-            print('SELECT SECOND DIRECTORY (CURRENT DIRECTORY): ', '\n')
-            second_directory_selected = [tk_gui_file_browser_window()]
-            separator_3()
+                with open(saved_searches_file, 'a', encoding='UTF-8', newline='') as s_s_f:
+                    csv_writer = csv.writer(s_s_f)
+                    for user_data in saved_searches_list:
+                        csv_writer.writerow(user_data)
 
-            for items in os.listdir(first_directory_selected[0]):
-                if items not in os.listdir(second_directory_selected[0]):
-                    directory_two_found_items.append(items)
+                saved_searches()
 
-            print('NEW MEDIA FOUND: ', '\n', '\n')
-            for items in directory_two_found_items:
-                print(items)
-            separator_3()
+            else:
+                saved_searches()
 
-    except (TypeError, ValueError, UnicodeDecodeError, ZeroDivisionError) as e:
-        print(e, '\n', ('-' * 100), '\n', 'INPUT ERROR, PLEASE RETRY SELECTION USING NUMBER KEYS: ')
-        return
+        elif saved_search_inputs_list[0] == 3:
+            if os.path.isfile(saved_searches_file):
+
+                with open(saved_searches_file, 'r', encoding='UTF-8', newline='') as s_s_f:
+                    search_rows = list(csv.reader(s_s_f))
+
+                if int(len(search_rows)) == 0:
+                    print('NO SAVED SEARCH TERMS: ')
+                    separator_3()
+                    saved_searches()
+
+                for enumeration_number, search_terms in enumerate(search_rows):
+                    genres = search_terms[0]
+                    keywords = search_terms[1]
+                    saved_searches_list.append([genres, keywords])
+                    print(str(enumeration_number) + ') ', '\n', '\n',
+                          'GENRE: ', genres, '\n', 'KEYWORD(S): ', keywords, '\n')
+                separator_3()
+
+                print('1) REMOVE SEARCH TERM: ')
+                separator_2()
+                print('0) MAIN MENU')
+                separator_3()
+                removal_confirmation_number = int(input('ENTER #: '))
+                separator_3()
+
+                if removal_confirmation_number == 1:
+                    separator_3()
+                    print('SELECT NUMBER OF SEARCH TERM TO REMOVE: ', '\n')
+                    search_term_to_remove_number = int(input('ENTER #: '))
+                    separator_3()
+                    print('SEARCH TERM REMOVED: ')
+                    separator_3()
+                    saved_searches_list.remove(saved_searches_list[search_term_to_remove_number])
+
+                    with open(saved_searches_file, 'w', encoding='UTF-8', newline='') as s_s_f:
+                        csv_writer = csv.writer(s_s_f)
+                        for user_data in saved_searches_list:
+                            csv_writer.writerow(user_data)
+
+                else:
+                    saved_searches()
+
+            else:
+                with open(saved_searches_file, 'w', encoding='UTF-8', newline='') as _:
+                    pass
+
+                print('NO SAVED SEARCH TERMS: ')
+                separator_3()
+                saved_searches()
+
+    except (TypeError, ValueError) as e:
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        separator_3()
 
 
 def search_plots(plot_search_type, plot_search_keywords):
@@ -1357,7 +1484,7 @@ def search_plots(plot_search_type, plot_search_keywords):
                     plots_list.append('MOVIE' + ' - ' + plot[0] + ' - ' + plot[1])
 
                 for items in plots_list:
-                    if re.search(plot_search_keywords, items.lower()):
+                    if plot_search_keywords.lower() in items.lower():
                         p1 = ''.join(items.split('<plot>'))
                         p2 = ''.join(p1.split('</plot>'))
                         print('\n', textwrap.fill(p2, 100))
@@ -1368,7 +1495,7 @@ def search_plots(plot_search_type, plot_search_keywords):
                     plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1] + ' - ' + plot[2])
 
                 for items in plots_list:
-                    if re.search(plot_search_keywords, items.lower()):
+                    if plot_search_keywords.lower() in items.lower():
                         p1 = ''.join(items.split('<plot>'))
                         p2 = ''.join(p1.split('</plot>'))
                         print('\n', textwrap.fill(p2, 100))
@@ -1382,7 +1509,7 @@ def search_plots(plot_search_type, plot_search_keywords):
                     plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1] + ' - ' + plot[2])
 
                 for items in plots_list:
-                    if re.search(plot_search_keywords, items.lower()):
+                    if plot_search_keywords.lower() in items.lower():
                         p1 = ''.join(items.split('<plot>'))
                         p2 = ''.join(p1.split('</plot>'))
                         print('\n', textwrap.fill(p2, 100))
@@ -1393,7 +1520,7 @@ def search_plots(plot_search_type, plot_search_keywords):
                     plots_list.append('TV SHOW' + ' - ' + plot[0] + ' - ' + plot[1])
 
                 for items in plots_list:
-                    if re.search(plot_search_keywords, items.lower()):
+                    if plot_search_keywords.lower() in items.lower():
                         p1 = ''.join(items.split('<plot>'))
                         p2 = ''.join(p1.split('</plot>'))
                         print('\n', textwrap.fill(p2, 100))
@@ -1536,64 +1663,46 @@ def search_titles(title_search_type, movie_title_query, tv_show_query):
 
 def select_users_indices_to_compare():
     try:
-        separator_3()
-        print('CONFIRM: ')
-        separator_1()
-        print('1) SELECT DATABASE SCAN FILES                        0) MAIN MENU')
-        separator_3()
-        db_scan_sub_input = int(input('ENTER #: '))
+
+        print('\n', 'SELECT THE INFORMATION INDICES TO COMPARE: ')
         separator_3()
 
-        if db_scan_sub_input == 0:
-            media_index_home()
-
-        elif db_scan_sub_input == 1:
-            try:
-
-                separator_3()
-                print('SELECT THE INFORMATION INDICES TO COMPARE: ')
-                separator_3()
-
-                print('SELECT USER MOVIE INFORMATION INDEX: ', '\n')
-                m_0 = tk_gui_file_selection_window()
-                print('SELECT COMPARISON MOVIE INFORMATION INDEX: ', '\n')
-                m_1 = tk_gui_file_selection_window()
-                print('SELECT USER TV INFORMATION INDEX: ', '\n')
-                t_0 = tk_gui_file_selection_window()
-                print('SELECT COMPARISON TV INFORMATION INDEX: ', '\n')
-                t_1 = tk_gui_file_selection_window()
-                separator_3()
-
-                with open(m_0, 'r', encoding='UTF-8') as movies_0, open(m_1, 'r', encoding='UTF-8') as movies_1:
-                    user_movie_results = movies_0.readlines()
-                    comparison_movie_results = movies_1.readlines()
-
-                    with open(os.path.expanduser(
-                            (results_folder + movies_comparison).format(username)),
-                            'w', encoding='UTF-8', newline='') as outFile_m:
-                        for line in compare_completed_results(user_movie_results, comparison_movie_results):
-                            outFile_m.write(line)
-
-                with open(t_0, 'r', encoding='UTF-8') as tv_0, open(t_1, 'r', encoding='UTF-8') as tv_1:
-                    user_tv_results = tv_0.readlines()
-                    comparison_tv_results = tv_1.readlines()
-
-                    with open(os.path.expanduser(
-                            (results_folder + tv_comparison).format(username)),
-                            'w', encoding='UTF-8', newline='') as outFile_t:
-                        for line in compare_completed_results(user_tv_results, comparison_tv_results):
-                            outFile_t.write(line)
-
-            except (OSError, TypeError, ValueError) as e:
-                print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
-                separator_3()
-
-            print('COMPLETE: COMPARISON FILE(S) CAN BE FOUND IN THE USER MEDIA-INDEX FOLDER, "RESULTS" SUB-FOLDER')
-            separator_3()
-
-    except (TypeError, ValueError) as e:
-        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'PLEASE RETRY YOUR SELECTION USING THE NUMBER KEYS')
+        print('SELECT USER MOVIE INFORMATION INDEX: ', '\n')
+        m_0 = tk_gui_file_selection_window()
+        print('SELECT COMPARISON MOVIE INFORMATION INDEX: ', '\n')
+        m_1 = tk_gui_file_selection_window()
+        print('SELECT USER TV INFORMATION INDEX: ', '\n')
+        t_0 = tk_gui_file_selection_window()
+        print('SELECT COMPARISON TV INFORMATION INDEX: ', '\n')
+        t_1 = tk_gui_file_selection_window()
         separator_3()
+
+        with open(m_0, 'r', encoding='UTF-8') as movies_0, open(m_1, 'r', encoding='UTF-8') as movies_1:
+            user_movie_results = movies_0.readlines()
+            comparison_movie_results = movies_1.readlines()
+
+            with open(os.path.expanduser(
+                    (results_folder + movies_comparison).format(username)),
+                    'w', encoding='UTF-8', newline='') as outFile_m:
+                for line in compare_completed_results(user_movie_results, comparison_movie_results):
+                    outFile_m.write(line)
+
+        with open(t_0, 'r', encoding='UTF-8') as tv_0, open(t_1, 'r', encoding='UTF-8') as tv_1:
+            user_tv_results = tv_0.readlines()
+            comparison_tv_results = tv_1.readlines()
+
+            with open(os.path.expanduser(
+                    (results_folder + tv_comparison).format(username)),
+                    'w', encoding='UTF-8', newline='') as outFile_t:
+                for line in compare_completed_results(user_tv_results, comparison_tv_results):
+                    outFile_t.write(line)
+
+    except (OSError, TypeError, ValueError) as e:
+        print('\n', 'INPUT ERROR: ', e, '\n', '\n', 'INVALID INPUT, PLEASE RETRY')
+        separator_3()
+
+    print('COMPLETE: COMPARISON FILE(S) CAN BE FOUND IN THE USER MEDIA-INDEX FOLDER, "RESULTS" SUB-FOLDER')
+    separator_3()
 
 
 def separator_1():
